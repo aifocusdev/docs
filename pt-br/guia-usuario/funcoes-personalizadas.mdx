@@ -1,0 +1,389 @@
+---
+title: Funções Personalizadas (Custom Roles)
+description: Crie funções com permissões específicas para sua equipe
+sidebarTitle: Funções Personalizadas
+---
+
+# 👤 Funções Personalizadas (Custom Roles)
+
+Crie funções sob medida com permissões específicas para diferentes necessidades da equipe.
+
+---
+
+## 📋 O que são Funções Personalizadas?
+
+**Custom Roles** permitem controle granular de acesso:
+
+**Funções Padrão:**
+```
+├─ Administrador: Acesso total
+├─ Agente: Apenas conversas
+└─ [Limitado]
+```
+
+**Com Custom Roles:**
+```
+├─ Administrador
+├─ Supervisor
+├─ Agente Senior
+├─ Agente
+├─ Agente Junior
+├─ Analista de Dados
+├─ Visualizador
+└─ [Você define!]
+```
+
+---
+
+## 🎯 Casos de Uso
+
+<CardGroup cols={2}>
+  <Card title="Analista de Dados" icon="chart-line">
+    Apenas relatórios, sem atender
+  </Card>
+  <Card title="Supervisor" icon="eye">
+    Vê tudo, edita pouco
+  </Card>
+  <Card title="Agente Junior" icon="user">
+    Atende com restrições
+  </Card>
+  <Card title="QA" icon="check-double">
+    Audita qualidade
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Função Personalizada
+
+1. **Admin** → **Funções Personalizadas**
+2. **"Nova Função"**
+3. Configure:
+
+### Exemplo 1: Analista de Dados
+
+**Nome:** `Analista de Dados`  
+**Descrição:** Acesso apenas a relatórios e exportações
+
+**Permissões:**
+```
+📊 Conversas:
+├─ [✓] Visualizar todas
+├─ [✗] Responder
+├─ [✗] Atribuir
+├─ [✗] Deletar
+└─ [✓] Exportar
+
+👥 Contatos:
+├─ [✓] Visualizar
+├─ [✗] Editar
+├─ [✗] Deletar
+└─ [✓] Exportar
+
+📈 Relatórios:
+├─ [✓] Visualizar todos
+├─ [✓] Exportar
+├─ [✗] Configurar dashboards
+└─ [✓] Agendar relatórios
+
+⚙️ Configurações:
+└─ [✗] Sem acesso
+
+🔐 Segurança:
+└─ [✗] Sem acesso a auditoria
+```
+
+### Exemplo 2: Supervisor
+
+**Nome:** `Supervisor de Equipe`  
+**Descrição:** Gerencia equipe mas não altera configurações
+
+**Permissões:**
+```
+📊 Conversas:
+├─ [✓] Visualizar todas
+├─ [✓] Responder qualquer
+├─ [✓] Atribuir/reatribuir
+├─ [✗] Deletar
+└─ [✓] Exportar
+
+👥 Contatos:
+├─ [✓] Visualizar
+├─ [✓] Editar
+├─ [✗] Deletar
+└─ [✓] Exportar
+
+👨‍👩‍👧‍👦 Times:
+├─ [✓] Visualizar todos
+├─ [✓] Gerenciar membros do seu time
+├─ [✗] Criar/deletar times
+└─ [✓] Ver relatórios de times
+
+📈 Relatórios:
+├─ [✓] Visualizar todos
+├─ [✓] Exportar
+└─ [✓] Configurar dashboards
+
+⚙️ Configurações:
+├─ [✗] Configurações globais
+├─ [✓] Automações (apenas do seu time)
+├─ [✓] Macros (criar/editar)
+└─ [✓] Respostas rápidas
+
+🔐 Segurança:
+└─ [✓] Ver logs de auditoria (apenas seu time)
+```
+
+### Exemplo 3: Agente Junior
+
+**Nome:** `Agente Júnior`  
+**Descrição:** Agente em treinamento com restrições
+
+**Permissões:**
+```
+📊 Conversas:
+├─ [✓] Visualizar atribuídas a ele
+├─ [✓] Responder atribuídas a ele
+├─ [✗] Atribuir/reatribuir
+├─ [✗] Resolver (precisa aprovação)
+└─ [✗] Exportar
+
+👥 Contatos:
+├─ [✓] Visualizar das suas conversas
+├─ [✗] Editar
+├─ [✗] Deletar
+└─ [✗] Exportar
+
+⚡ Ações:
+├─ [✓] Usar macros pré-aprovadas
+├─ [✓] Usar respostas rápidas
+├─ [✗] Criar macros/respostas
+└─ [✗] Aplicar descontos
+
+📈 Relatórios:
+├─ [✓] Ver próprios relatórios
+├─ [✗] Ver de outros agentes
+└─ [✗] Exportar
+
+⚙️ Configurações:
+└─ [✗] Sem acesso
+```
+
+### Exemplo 4: QA (Quality Assurance)
+
+**Nome:** `Analista de Qualidade`  
+**Descrição:** Audita e avalia qualidade do atendimento
+
+**Permissões:**
+```
+📊 Conversas:
+├─ [✓] Visualizar todas (somente leitura)
+├─ [✗] Responder
+├─ [✗] Atribuir
+├─ [✓] Adicionar notas internas (avaliação)
+└─ [✓] Exportar para análise
+
+👥 Contatos:
+├─ [✓] Visualizar
+└─ [✗] Editar
+
+⭐ Avaliações:
+├─ [✓] Avaliar conversas
+├─ [✓] Ver CSAT
+├─ [✓] Deixar feedback para agentes
+└─ [✓] Criar relatórios de qualidade
+
+📈 Relatórios:
+├─ [✓] Visualizar todos
+├─ [✓] Relatórios de CSAT
+├─ [✓] Performance por agente
+└─ [✓] Exportar
+
+⚙️ Configurações:
+└─ [✗] Sem acesso
+```
+
+---
+
+## 🔐 Matriz de Permissões
+
+### Conversas
+
+| Ação | Admin | Supervisor | Agente | Junior | Analista | QA |
+|------|-------|------------|---------|--------|----------|-----|
+| **Ver todas** | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| **Ver atribuídas** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Responder** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| **Atribuir** | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| **Resolver** | ✅ | ✅ | ✅ | ❌* | ❌ | ❌ |
+| **Deletar** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Exportar** | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+
+*Junior precisa aprovação
+
+### Contatos
+
+| Ação | Admin | Supervisor | Agente | Junior | Analista | QA |
+|------|-------|------------|---------|--------|----------|-----|
+| **Ver todos** | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| **Editar** | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| **Deletar** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Exportar** | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ |
+| **Importar** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+### Relatórios
+
+| Ação | Admin | Supervisor | Agente | Junior | Analista | QA |
+|------|-------|------------|---------|--------|----------|-----|
+| **Ver todos** | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| **Ver próprios** | ✅ | ✅ | ✅ | ✅ | - | - |
+| **Exportar** | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| **Configurar** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+### Configurações
+
+| Ação | Admin | Supervisor | Agente | Junior | Analista | QA |
+|------|-------|------------|---------|--------|----------|-----|
+| **Globais** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Automações** | ✅ | ✅* | ❌ | ❌ | ❌ | ❌ |
+| **Macros** | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| **Respostas Rápidas** | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+
+*Supervisor: Apenas do seu time
+
+---
+
+## 🎨 Configurar Permissões Granulares
+
+### Conversas - Nível Avançado
+
+```
+Permissões de Conversas:
+
+Visualização:
+├─ [○] Nenhuma
+├─ [○] Apenas atribuídas a mim
+├─ [○] Do meu time
+├─ [●] Todas
+└─ [  ] Exceto com label: #confidencial
+
+Edição:
+├─ [✓] Responder
+├─ [✓] Adicionar nota interna
+├─ [✗] Editar mensagens (não recomendado)
+└─ [✓] Adicionar anexos
+
+Status:
+├─ [✓] Abrir
+├─ [✓] Marcar como pendente
+├─ [○] Resolver (precisa aprovação do supervisor)
+└─ [✗] Fechar permanentemente
+
+Atribuição:
+├─ [✓] Atribuir para mim
+├─ [✓] Atribuir para meu time
+├─ [✗] Atribuir para outros times
+└─ [✗] Remover atribuição
+
+Labels:
+├─ [✓] Adicionar labels
+├─ [✓] Remover labels
+└─ Labels permitidas: #vendas, #suporte (exceto #vip)
+```
+
+### Relatórios - Nível Avançado
+
+```
+Permissões de Relatórios:
+
+Visualização:
+├─ [✓] Próprios relatórios
+├─ [✓] Relatórios do time
+├─ [✗] Relatórios de outros times
+└─ [✓] Dashboards globais (sem dados sensíveis)
+
+Métricas:
+├─ [✓] CSAT
+├─ [✓] Tempo de resposta
+├─ [✓] Volume de conversas
+├─ [✗] Dados de receita
+└─ [✗] Dados de salary/custos
+
+Exportação:
+├─ [✓] Relatórios agregados (sem dados pessoais)
+├─ [✗] Dados de contatos
+└─ [✗] Conversas completas
+
+Período:
+├─ [✓] Últimos 30 dias
+├─ [✗] Histórico completo
+└─ Máximo: 90 dias
+```
+
+---
+
+## 📊 Exemplo Prático: E-commerce
+
+### Estrutura da Equipe
+
+```
+Time E-commerce (15 pessoas):
+
+1 Gerente (Admin) - admin@empresa.com
+├─ Acesso total
+└─ Responsável: Configurações e estratégia
+
+2 Supervisores (Supervisor) - sup1, sup2
+├─ Gerenciam 6 agentes cada
+└─ Responsável: Operação e performance
+
+10 Agentes (Agente)
+├─ Atendimento direto
+└─ 5 Senior (podem resolver tudo)
+    5 Junior (precisam aprovação para resolver)
+
+1 Analista de Dados (Custom: Analista)
+├─ Apenas relatórios
+└─ Responsável: Métricas e insights
+
+1 QA (Custom: QA)
+├─ Audita qualidade
+└─ Responsável: Treinamento e melhoria
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Design de Funções
+
+✅ **Princípio do menor privilégio**: Apenas o necessário  
+✅ **Roles claros**: Nome e descrição óbvios  
+✅ **Progressão**: Junior → Agente → Senior → Supervisor  
+✅ **Revisão trimestral**: Permissões ainda fazem sentido?
+
+### Implementação
+
+✅ **Comece simples**: 3-4 funções inicialmente  
+✅ **Teste antes**: Crie usuário de teste  
+✅ **Documente**: O que cada função pode fazer  
+✅ **Treine**: Agentes sabem seus limites
+
+### Segurança
+
+✅ **Admins limitados**: Apenas 2-3 pessoas  
+✅ **Auditoria**: Monitore mudanças em funções  
+✅ **Separação de deveres**: Quem cria ≠ quem aprova  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Segurança" icon="shield" href="/pt-br/guia-usuario/seguranca">
+    Melhore segurança com controle de acesso
+  </Card>
+  <Card title="Auditoria" icon="clipboard-check" href="/pt-br/guia-usuario/auditoria">
+    Monitore uso de permissões
+  </Card>
+</CardGroup>

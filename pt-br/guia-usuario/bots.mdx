@@ -1,0 +1,416 @@
+---
+title: Robôs (Bots)
+description: Configure chatbots para automatizar conversas complexas
+sidebarTitle: Robôs
+---
+
+# 🤖 Robôs (Chatbots)
+
+Configure chatbots inteligentes para atender clientes 24/7, qualificar leads e automatizar fluxos de conversa.
+
+---
+
+## 📋 O que são Bots?
+
+**Bots** são assistentes virtuais que conduzem conversas automatizadas:
+
+**Diferença de Automações:**
+- 🤖 **Automações**: 1 ação por trigger
+- 💬 **Bots**: Conversa completa com múltiplas interações
+
+**Exemplo:**
+```
+Bot de Qualificação:
+
+1. Bot: "Olá! Como posso ajudar?"
+2. Cliente: "Quero comprar"
+3. Bot: "Ótimo! Qual produto interessa?"
+4. Cliente: "Plano Premium"
+5. Bot: "Para quantos usuários?"
+6. Cliente: "50"
+7. Bot: "Perfeito! Transferindo para vendedor..."
+   [Transfere com contexto coletado]
+```
+
+---
+
+## ✨ Tipos de Bots
+
+<CardGroup cols={2}>
+  <Card title="Bot de Saudação" icon="hand-wave">
+    Primeira mensagem automática
+  </Card>
+  <Card title="Bot de Qualificação" icon="clipboard-question">
+    Coleta informações do lead
+  </Card>
+  <Card title="Bot de FAQ" icon="circle-question">
+    Responde perguntas frequentes
+  </Card>
+  <Card title="Bot de Agendamento" icon="calendar">
+    Marca reuniões/demos
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Bot
+
+1. **"Configurações"** → **"Integrações"** → **"Bots"**
+2. **"Criar Bot"**
+3. Escolha tipo:
+   - **Dialogflow** (Google)
+   - **Lex** (Amazon)
+   - **CSML** (Custom Bot Language)
+   - **Webhook** (Seu próprio bot)
+
+---
+
+## 🎯 Bot de Saudação
+
+Bot simples que dá boas-vindas:
+
+**Configuração:**
+```yaml
+name: "Saudação"
+trigger: "Conversa criada"
+active_hours: "24/7" ou "9h-18h"
+
+flow:
+  - message: |
+      Olá! Bem-vindo(a) à {{empresa}}! 👋
+      
+      Estou aqui para ajudar.
+      Escolha uma opção:
+      
+      1️⃣ Vendas
+      2️⃣ Suporte
+      3️⃣ Financeiro
+      4️⃣ Falar com humano
+      
+  - wait_for_response
+  
+  - if response == "1" or "vendas":
+      transfer_to: "Time Vendas"
+      message: "Conectando com vendas..."
+      
+  - if response == "2" or "suporte":
+      transfer_to: "Time Suporte"
+      message: "Conectando com suporte..."
+      
+  - if response == "4" or "humano":
+      transfer_to: "Próximo agente disponível"
+      message: "Transferindo para atendente..."
+```
+
+---
+
+## 📋 Bot de Qualificação de Leads
+
+Coleta informações antes de passar para vendedor:
+
+**Fluxo:**
+```
+Bot: Olá! Vamos conhecer você melhor.
+     Qual seu nome completo?
+     
+Cliente: João Silva
+
+Bot: Prazer, João! E qual o nome da sua empresa?
+
+Cliente: Acme Corp
+
+Bot: Quantos funcionários na Acme Corp?
+
+Cliente: Cerca de 50
+
+Bot: Entendi! Qual seu principal interesse?
+     1️⃣ Plano Basic
+     2️⃣ Plano Premium  
+     3️⃣ Plano Enterprise
+     
+Cliente: 3
+
+Bot: Excelente escolha! Qual seu orçamento mensal?
+
+Cliente: Até R$ 5.000
+
+Bot: Perfeito, João! Tenho todas informações.
+     Vou conectar você com {{agente_vendas}}
+     que vai preparar uma proposta personalizada.
+     
+     Resumo:
+     • Empresa: Acme Corp
+     • Funcionários: 50
+     • Interesse: Enterprise
+     • Orçamento: R$ 5.000/mês
+     
+     Um momento...
+     
+[Bot transfere para vendedor + passa todos dados coletados]
+```
+
+**Vantagens:**
+- Vendedor já tem contexto completo
+- Lead pré-qualificado
+- Economiza tempo de ambos
+
+---
+
+## ❓ Bot de FAQ
+
+Responde perguntas frequentes usando IA:
+
+**Como funciona:**
+
+```
+1. Cliente: "Qual o prazo de entrega?"
+
+2. Bot busca na base de conhecimento:
+   - Artigos da Central de Ajuda
+   - Respostas Rápidas cadastradas
+   - Conversas anteriores (aprendizado)
+   
+3. Bot responde:
+   "Nossos prazos de entrega são:
+    • Capitais: 2-3 dias úteis
+    • Interior: 5-7 dias úteis
+    
+    Mais detalhes: [link do artigo]
+    
+    Isso responde sua dúvida?"
+    
+4. Cliente: "Sim, obrigado!"
+
+5. Bot: "Fico feliz em ajudar! 😊
+        Algo mais?"
+        
+6. Cliente: "Não"
+
+7. Bot marca conversa como resolvida
+```
+
+**Quando transferir para humano:**
+- Bot não tem certeza da resposta
+- Cliente fica frustrado (detecta sentimento)
+- Cliente pede explicitamente
+- Depois de 3 tentativas sem resolver
+
+---
+
+## 📅 Bot de Agendamento
+
+Marca demos e reuniões automaticamente:
+
+**Fluxo:**
+```
+Cliente: "Quero agendar uma demo"
+
+Bot: Ótimo! Vou ajudar a agendar.
+     
+     Qual melhor dia para você?
+     🗓️ Terça 21/01
+     🗓️ Quarta 22/01
+     🗓️ Quinta 23/01
+     
+Cliente: Quarta
+
+Bot: Perfeito! Horários disponíveis na Quarta:
+     ⏰ 10:00
+     ⏰ 14:00
+     ⏰ 16:00
+     
+Cliente: 14:00
+
+Bot: Agendado! ✅
+     
+     📅 Demo - Quarta 22/01 às 14:00
+     ⏱️ Duração: 30 minutos
+     📧 Confirmação enviada para: {{cliente.email}}
+     
+     Link da reunião:
+     https://meet.empresa.com/demo-{{id}}
+     
+     Nos vemos lá! 👋
+     
+[Bot cria agendamento no calendário + envia email]
+```
+
+---
+
+## 🌙 Bot Fora do Horário
+
+Atende quando equipe está offline:
+
+**Configuração:**
+```yaml
+name: "Fora do Horário"
+active: Segunda-Sexta 18h-9h + Finais de semana
+
+flow:
+  - message: |
+      Olá! No momento estamos fora do horário.
+      ⏰ Retornamos: Segunda-Sexta 9h-18h
+      
+      Mas posso ajudar com:
+      
+      1️⃣ Rastreamento de pedido
+      2️⃣ Perguntas frequentes
+      3️⃣ Deixar mensagem (retornamos amanhã)
+      
+      O que prefere?
+      
+  - if "rastreamento":
+      ask: "Qual número do seu pedido?"
+      check_tracking_system()
+      return_tracking_info()
+      
+  - if "perguntas":
+      activate_faq_bot()
+      
+  - if "mensagem":
+      ask: "Deixe sua mensagem que retornamos às 9h:"
+      save_message()
+      create_ticket()
+      confirm: "Mensagem salva! ✅ Retornamos às 9h."
+```
+
+---
+
+## 🔗 Integrar Bot Externo
+
+### Dialogflow (Google)
+
+1. Crie bot no [Dialogflow](https://dialogflow.cloud.google.com)
+2. Treine intents (intenções)
+3. No Chatwoot:
+   - **"Integrações"** → **"Dialogflow"**
+   - Cole **Project ID**
+   - Upload **Credentials JSON**
+   - Ative para inboxes desejados
+
+### Webhook (Custom Bot)
+
+1. Desenvolva seu bot (Python, Node.js, etc.)
+2. Exponha endpoint:
+   ```
+   POST https://seu-bot.com/webhook
+   ```
+3. No Chatwoot:
+   - **"Bots"** → **"Webhook"**
+   - Cole URL do webhook
+   - Configure headers (autenticação)
+
+**Payload recebido:**
+```json
+{
+  "event": "message_created",
+  "conversation_id": 123,
+  "sender": {
+    "id": 456,
+    "name": "João Silva"
+  },
+  "message": {
+    "content": "Olá, preciso de ajuda"
+  }
+}
+```
+
+**Resposta esperada:**
+```json
+{
+  "action": "send_message",
+  "message": "Olá João! Como posso ajudar?"
+}
+```
+
+---
+
+## 📊 Métricas de Bot
+
+### Performance
+
+```
+📊 Bot de Qualificação - Janeiro:
+
+Conversas iniciadas: 450
+├─ Completou fluxo: 380 (84%)
+├─ Transferiu para humano: 320 (71%)
+├─ Abandonou: 70 (16%)
+
+Dados coletados:
+├─ Nome: 420 (93%)
+├─ Empresa: 400 (89%)
+├─ Orçamento: 350 (78%)
+
+Tempo médio: 2min 30s
+Taxa satisfação: 88%
+```
+
+### Economia
+
+```
+💰 Economia Mensal:
+
+Conversas atendidas por bot: 450
+├─ Resolvidas sem humano: 130 (29%)
+├─ Qualificadas antes de humano: 320 (71%)
+
+Tempo economizado:
+├─ 130 conversas × 5min = 10,8 horas
+├─ 320 conversas × 2min = 10,7 horas
+Total: 21,5 horas/mês economizadas!
+
+Valor: R$ 2.150 (considerando R$ 100/hora)
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Design de Conversa
+
+✅ **Seja breve**: Mensagens curtas e diretas  
+✅ **Opções claras**: Botões ou números  
+✅ **Escape hatch**: Sempre ofereça falar com humano  
+✅ **Confirme entendimento**: "Entendi que você quer X. Correto?"
+
+### Personalização
+
+✅ **Use nome**: "Olá {{nome}}"  
+✅ **Contexto**: "Vejo que você é cliente Premium"  
+✅ **Humanize**: Emojis e tom conversacional 😊
+
+### Handoff (Transferência)
+
+✅ **Momento certo**: Não force bot se cliente frustra  
+✅ **Passe contexto**: Agente vê o que bot coletou  
+✅ **Avise**: "Transferindo para {{agente}}..."  
+
+### Manutenção
+
+✅ **Monitore logs**: O que bot não entendeu?  
+✅ **Treine IA**: Adicione novos intents  
+✅ **Teste regularmente**: Fluxo ainda faz sentido?  
+✅ **A/B test**: Teste variações de mensagens
+
+---
+
+## ⚠️ Quando NÃO Usar Bot
+
+❌ **Problemas complexos**: Cliente bravo precisa de humano  
+❌ **Vendas high-ticket**: R$ 50k+ precisa toque humano  
+❌ **Má experiência anterior**: Cliente já frustrado com bot  
+❌ **Negociação**: Descontos e ajustes precisam humano
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Agentes de IA" icon="wand-magic" href="/pt-br/guia-usuario/agentes-ia">
+    IA avançada (Captain & Copilot)
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Combine bots com automações
+  </Card>
+</CardGroup>

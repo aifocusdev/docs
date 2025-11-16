@@ -1,0 +1,465 @@
+---
+title: Integrações
+description: Conecte Chatwoot com ferramentas externas - Webhooks, OpenAI, Dialogflow e mais
+sidebarTitle: Integrações
+---
+
+# 🔌 Integrações
+
+Conecte o Chatwoot com suas ferramentas favoritas para criar um ecossistema completo.
+
+---
+
+## 📋 Integrações Disponíveis
+
+<CardGroup cols={3}>
+  <Card title="Webhooks" icon="webhook">
+    Eventos em tempo real
+  </Card>
+  <Card title="OpenAI" icon="brain">
+    ChatGPT integrado
+  </Card>
+  <Card title="Dialogflow" icon="message-bot">
+    Google Chatbot
+  </Card>
+  <Card title="Slack" icon="slack">
+    Notificações no Slack
+  </Card>
+  <Card title="Linear" icon="list-check">
+    Gestão de issues
+  </Card>
+  <Card title="WooCommerce" icon="cart-shopping">
+    E-commerce
+  </Card>
+</CardGroup>
+
+---
+
+## 🎣 Webhooks
+
+**Webhooks** enviam dados do Chatwoot para seu sistema em tempo real.
+
+### Configurar Webhook
+
+1. **"Configurações"** → **"Integrações"** → **"Webhooks"**
+2. **"Novo Webhook"**
+3. Configure:
+
+**URL:**
+```
+https://seu-sistema.com/chatwoot-webhook
+```
+
+**Eventos:**
+Escolha quais eventos enviar:
+- ✅ Conversa criada
+- ✅ Mensagem criada
+- ✅ Conversa atualizada (status, atribuição)
+- ✅ Contato criado/atualizado
+
+4. **Salvar**
+
+### Payload Exemplo
+
+**Conversa criada:**
+```json
+{
+  "event": "conversation_created",
+  "id": 123,
+  "inbox_id": 5,
+  "contact": {
+    "id": 456,
+    "name": "João Silva",
+    "email": "joao@empresa.com",
+    "phone": "+5511987654321"
+  },
+  "messages": [],
+  "status": "open",
+  "created_at": "2025-01-17T10:30:00Z"
+}
+```
+
+**Mensagem criada:**
+```json
+{
+  "event": "message_created",
+  "conversation_id": 123,
+  "message": {
+    "id": 789,
+    "content": "Olá, preciso de ajuda",
+    "message_type": "incoming",
+    "sender": {
+      "id": 456,
+      "name": "João Silva"
+    },
+    "created_at": "2025-01-17T10:31:00Z"
+  }
+}
+```
+
+### Casos de Uso
+
+**1. CRM Sync:**
+```
+Webhook: Contato criado
+→ Criar/atualizar contato no Salesforce/HubSpot
+```
+
+**2. Notificação Custom:**
+```
+Webhook: Mensagem com palavra "urgente"
+→ Enviar SMS para gerente
+```
+
+**3. Analytics:**
+```
+Webhook: Conversa resolvida
+→ Registrar métrica no Google Analytics
+```
+
+**4. Backup:**
+```
+Webhook: Qualquer evento
+→ Salvar em banco de dados externo
+```
+
+---
+
+## 🧠 OpenAI (ChatGPT)
+
+Integre ChatGPT para respostas inteligentes.
+
+### Configurar
+
+1. Obtenha API Key em [platform.openai.com](https://platform.openai.com)
+2. **"Integrações"** → **"OpenAI"**
+3. Cole **API Key**
+4. Escolha **modelo**:
+   - `gpt-4` - Mais inteligente
+   - `gpt-3.5-turbo` - Mais rápido e barato
+5. Configure **prompt do sistema**:
+
+```
+Você é um assistente de atendimento da {{empresa}}.
+Seja educado, prestativo e profissional.
+
+Informações sobre a empresa:
+- Horário: Seg-Sex 9h-18h
+- Produtos: A, B, C
+- Política: [link]
+
+Se não souber algo, diga "Vou verificar com um especialista".
+```
+
+6. **Ativar**
+
+### Modos de Uso
+
+**Captain (Piloto Automático):**
+- IA responde diretamente o cliente
+- Use para: FAQ, qualificação, suporte simples
+
+**Copilot (Assistente):**
+- IA sugere respostas para agente
+- Agente decide se usa ou edita
+
+### Recursos
+
+✅ **Resposta automática** de perguntas  
+✅ **Resumo de conversas** longas  
+✅ **Tradução** automática  
+✅ **Análise de sentimento** do cliente  
+✅ **Sugestão de labels** automáticas
+
+---
+
+## 🤖 Dialogflow (Google)
+
+Crie chatbots avançados com Dialogflow.
+
+### Configurar
+
+1. Crie projeto no [Google Cloud](https://cloud.google.com)
+2. Ative **Dialogflow API**
+3. Crie **Service Account** e baixe JSON
+4. No Chatwoot:
+   - **"Integrações"** → **"Dialogflow"**
+   - **Project ID**: cole o ID
+   - **Credentials**: upload do JSON
+5. **Ativar** para inboxes desejados
+
+### Criar Intents
+
+**Intent 1: Saudação**
+```
+Training Phrases:
+- "Olá"
+- "Oi"
+- "Bom dia"
+
+Response:
+"Olá! Bem-vindo(a). Como posso ajudar?"
+```
+
+**Intent 2: Horário**
+```
+Training Phrases:
+- "Qual o horário?"
+- "Vocês abrem que horas?"
+- "Horário de funcionamento"
+
+Response:
+"Nosso horário: Segunda a Sexta, 9h às 18h."
+```
+
+### Handoff para Humano
+
+Configure quando bot deve transferir:
+
+```javascript
+// No fulfillment do Dialogflow
+if (intent === 'falar_com_humano') {
+  return {
+    action: 'handoff',
+    message: 'Transferindo para atendente...'
+  }
+}
+```
+
+---
+
+## 💬 Slack
+
+Receba notificações no Slack.
+
+### Configurar
+
+1. Crie **Slack App** em [api.slack.com](https://api.slack.com)
+2. Ative **Incoming Webhooks**
+3. Copie **Webhook URL**
+4. No Chatwoot:
+   - **"Integrações"** → **"Slack"**
+   - Cole **Webhook URL**
+   - Escolha eventos para notificar
+
+### Notificações
+
+```
+💬 Nova conversa - WhatsApp
+
+João Silva: "Preciso de ajuda urgente!"
+
+Inbox: WhatsApp Suporte
+Status: Aberto
+Label: #urgente
+
+[Ver conversa]
+```
+
+### Responder do Slack
+
+Configure **Slack Integration** avançada para:
+- ✅ Responder conversas do Slack
+- ✅ Atribuir conversas
+- ✅ Mudar status
+
+---
+
+## 📝 Linear
+
+Crie issues automaticamente a partir de conversas.
+
+### Configurar
+
+1. Gere **API Key** no [Linear](https://linear.app)
+2. **"Integrações"** → **"Linear"**
+3. Cole **API Key**
+4. Escolha **Team** padrão
+
+### Criar Issue
+
+```
+Na conversa:
+1. Cliente reporta bug
+2. Agente clica "Criar Issue no Linear"
+3. Preenche título e descrição
+4. Issue criada com link da conversa
+
+No Linear:
+📋 Bug: Login não funciona
+Descrição: Cliente João não consegue logar...
+Link: chatwoot.com/app/conversations/123
+Labels: bug, priority-high
+```
+
+### Automação
+
+```
+Regra de Automação:
+SE label = #bug
+ENTÃO criar issue no Linear automaticamente
+```
+
+---
+
+## 🛒 WooCommerce
+
+Integre sua loja WooCommerce.
+
+### Configurar
+
+1. No WordPress:
+   - Instale plugin **Chatwoot for WooCommerce**
+   - Ative e configure
+2. No Chatwoot:
+   - **"Integrações"** → **"WooCommerce"**
+   - Cole **Store URL** e **API Key**
+
+### Recursos
+
+**Dados do Cliente:**
+```
+Conversa com João Silva
+
+💰 Valor total de compras: R$ 2.500
+📦 Total de pedidos: 8
+🛒 Último pedido: #5432 (R$ 350)
+⭐ Produto favorito: Categoria X
+```
+
+**Ações Rápidas:**
+- 📦 Ver pedidos do cliente
+- 🔍 Rastrear pedido específico
+- 💰 Gerar cupom de desconto
+- 🛒 Ver carrinho abandonado
+
+---
+
+## 🌐 Tradutor do Google
+
+Traduza conversas em tempo real.
+
+### Configurar
+
+1. Ative **Google Translate API**
+2. Gere **API Key**
+3. **"Integrações"** → **"Google Translate"**
+4. Cole **API Key**
+
+### Usar
+
+**Automático:**
+```
+Cliente escreve em espanhol:
+"Hola, necesito ayuda"
+
+Agente vê traduzido:
+"Olá, preciso de ajuda"
+
+Agente responde em português:
+"Olá! Como posso ajudar?"
+
+Cliente recebe em espanhol:
+"¡Hola! ¿Cómo puedo ayudar?"
+```
+
+**Manual:**
+```
+Botão "Traduzir" na conversa
+→ Escolhe idioma de destino
+→ Mensagem traduzida
+```
+
+---
+
+## 🔗 Outras Integrações
+
+### Zapier/Make
+
+Conecte com 3000+ apps:
+
+```
+Trigger: Nova conversa no Chatwoot
+Action 1: Criar linha no Google Sheets
+Action 2: Enviar notificação no Telegram
+Action 3: Adicionar task no Asana
+```
+
+### API Personalizada
+
+Desenvolva suas próprias integrações:
+
+```bash
+# Criar conversa via API
+POST /api/v1/accounts/{account_id}/conversations
+{
+  "inbox_id": 1,
+  "contact_id": 123,
+  "message": {
+    "content": "Olá!",
+    "message_type": "outgoing"
+  }
+}
+```
+
+📖 **Docs completas:** [API Reference](/pt-br/api-reference/introducao)
+
+---
+
+## 📊 Painel de Aplicativos
+
+Gerencie todas integrações:
+
+```
+📱 Painel de Aplicativos
+
+Ativas (5):
+├─ ✅ OpenAI - 450 usos/mês
+├─ ✅ Webhooks - 2.3k eventos/mês
+├─ ✅ Slack - Notificações ativas
+├─ ✅ Linear - 23 issues criadas
+└─ ✅ WooCommerce - 120 clientes sincronizados
+
+Disponíveis para instalar (10+):
+├─ 📧 Gmail
+├─ 📊 Google Analytics
+├─ 🎫 Zendesk
+└─ [Ver todos]
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Segurança
+
+✅ **API Keys secretas**: Nunca exponha publicamente  
+✅ **HTTPS sempre**: Webhooks só em URLs seguras  
+✅ **Valide payloads**: Verifique assinatura de webhooks  
+✅ **Limites de rate**: Implemente rate limiting
+
+### Performance
+
+✅ **Cache**: Não faça mesma requisição sempre  
+✅ **Async**: Processe webhooks assincronamente  
+✅ **Retry**: Implemente retry com backoff  
+✅ **Monitor**: Acompanhe falhas e latência
+
+### Governança
+
+✅ **Documente**: O que cada integração faz  
+✅ **Teste staging**: Nunca direto em produção  
+✅ **Versionamento**: Mantenha controle de versões  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="code" href="/pt-br/api-reference/introducao">
+    Desenvolva integrações customizadas
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Combine integrações com automações
+  </Card>
+</CardGroup>

@@ -1,0 +1,438 @@
+---
+title: SLA (Service Level Agreement)
+description: Configure e monitore acordos de nível de serviço
+sidebarTitle: SLA
+---
+
+# ⏱️ SLA (Service Level Agreement)
+
+Defina e monitore prazos de atendimento para garantir qualidade de serviço.
+
+---
+
+## 📋 O que é SLA?
+
+**SLA** (Service Level Agreement) é o compromisso de tempo de resposta/resolução:
+
+**Exemplo:**
+```
+SLA Premium:
+├─ Primeira resposta: < 5 minutos
+├─ Resolução: < 2 horas
+└─ Disponibilidade: 24/7
+
+SLA Standard:
+├─ Primeira resposta: < 30 minutos
+├─ Resolução: < 24 horas
+└─ Disponibilidade: Seg-Sex 9h-18h
+```
+
+---
+
+## 🎯 Métricas de SLA
+
+<CardGroup cols={2}>
+  <Card title="FRT" icon="clock">
+    First Response Time  
+    Tempo até primeira resposta
+  </Card>
+  <Card title="NRT" icon="reply">
+    Next Response Time  
+    Tempo entre respostas
+  </Card>
+  <Card title="Resolution Time" icon="check">
+    Tempo total até resolver
+  </Card>
+  <Card title="Operating Hours" icon="calendar">
+    Horário considerado
+  </Card>
+</CardGroup>
+
+---
+
+## ⚙️ Configurar SLA
+
+1. **"Configurações"** → **"SLA"**
+2. **"Nova Política SLA"**
+3. Configure:
+
+**Nome:** `SLA VIP`
+
+**Aplicar quando:**
+```
+├─ Label: #vip OU
+├─ Contato.plano: Enterprise OU
+└─ Prioridade: Urgente
+```
+
+**Prazos:**
+```
+Primera resposta (FRT):
+├─ Horário comercial: 5 minutos
+└─ Fora do horário: 30 minutos
+
+Próxima resposta (NRT):
+├─ Horário comercial: 10 minutos
+└─ Fora do horário: 1 hora
+
+Resolução:
+├─ Prioridade alta: 4 horas
+├─ Prioridade média: 24 horas
+└─ Prioridade baixa: 72 horas
+```
+
+**Horário de operação:**
+```
+Segunda a Sexta: 8h - 20h
+Sábado: 9h - 13h
+Domingo/Feriados: Fechado
+(Pausar contagem de SLA fora desses horários)
+```
+
+4. **Salvar**
+
+---
+
+## 📊 Exemplo de SLAs por Segmento
+
+### SLA Enterprise (VIP)
+
+```yaml
+name: "Enterprise SLA"
+applies_to:
+  - label: #vip
+  - custom_attribute: plano = "Enterprise"
+
+targets:
+  first_response: 5 minutes
+  next_response: 10 minutes
+  resolution:
+    urgent: 2 hours
+    high: 4 hours
+    medium: 24 hours
+    low: 72 hours
+
+operating_hours:
+  monday-friday: "00:00-23:59"  # 24/7
+  saturday-sunday: "00:00-23:59"
+
+breach_actions:
+  - notify: gerente@empresa.com
+  - escalate_to: "Senior Team"
+  - label: #sla-breach
+```
+
+### SLA Standard
+
+```yaml
+name: "Standard SLA"
+applies_to:
+  - default: true  # Aplicar para todos sem SLA específico
+
+targets:
+  first_response: 30 minutes
+  next_response: 1 hour
+  resolution:
+    urgent: 8 hours
+    high: 24 hours
+    medium: 48 hours
+    low: 120 hours
+
+operating_hours:
+  monday-friday: "09:00-18:00"
+  saturday-sunday: closed
+
+breach_actions:
+  - notify: supervisor@empresa.com
+  - label: #sla-warning
+```
+
+### SLA Free Plan
+
+```yaml
+name: "Free SLA"
+applies_to:
+  - custom_attribute: plano = "Free"
+
+targets:
+  first_response: 4 hours
+  resolution:
+    any: 72 hours
+
+operating_hours:
+  monday-friday: "09:00-17:00"
+  saturday-sunday: closed
+
+breach_actions:
+  - label: #sla-breach
+```
+
+---
+
+## 🚨 Alertas de SLA
+
+### Tipos de Alertas
+
+**1. Aproximando (Warning):**
+```
+⚠️ SLA Warning - 80% do prazo
+
+Conversa #1234
+FRT Target: 5 minutos
+Decorrido: 4 minutos
+Restante: 1 minuto
+
+Ação: Atribuir para agente disponível
+```
+
+**2. Violado (Breach):**
+```
+🔴 SLA BREACH - Prazo estourado
+
+Conversa #1234
+FRT Target: 5 minutos
+Decorrido: 7 minutos
+Breach: +2 minutos
+
+Ação:
+├─ Notificado: gerente@empresa.com
+├─ Escalado para: Senior Team
+└─ Label aplicada: #sla-breach
+```
+
+### Notificações
+
+Configure quem recebe alertas:
+
+**80% do prazo:**
+- Desktop notification para agente atribuído
+- Email para supervisor (opcional)
+
+**100% (breach):**
+- Desktop + Email para agente
+- Email imediato para gerente
+- Slack/Teams notification
+- SMS para on-call (opcional)
+
+---
+
+## 📈 Dashboard de SLA
+
+### Visão Geral
+
+```
+📊 SLA Performance - Últimos 30 dias
+
+Compliance Geral: 94% ✅
+├─ FRT: 96% (Meta: 95%)
+├─ NRT: 93% (Meta: 90%)
+└─ Resolution: 92% (Meta: 90%)
+
+Breaches:
+├─ Total: 28 casos
+├─ Por tipo:
+│   ├─ FRT: 12
+│   ├─ NRT: 8
+│   └─ Resolution: 8
+└─ Por severidade:
+    ├─ < 10min: 15 (tolerável)
+    ├─ 10-30min: 8 (moderado)
+    └─ > 30min: 5 (crítico) ⚠️
+```
+
+### Por Política
+
+```
+Enterprise SLA:
+├─ Compliance: 97% ✅
+├─ FRT Médio: 3min 45s
+└─ Breaches: 3 (1%)
+
+Standard SLA:
+├─ Compliance: 93% ✅
+├─ FRT Médio: 18min 20s
+└─ Breaches: 22 (7%)
+
+Free SLA:
+├─ Compliance: 88% ⚠️
+├─ FRT Médio: 2h 15min
+└─ Breaches: 35 (12%)
+```
+
+### Por Agente
+
+```
+👤 Maria Silva:
+├─ Compliance: 98% 🏆
+├─ FRT Médio: 2min 30s
+└─ Breaches: 1
+
+👤 João Santos:
+├─ Compliance: 91%
+├─ FRT Médio: 22min
+└─ Breaches: 8 ⚠️
+
+Ação: Revisar carga de trabalho do João
+```
+
+---
+
+## 🎯 Melhorar Compliance de SLA
+
+### Estratégias
+
+**1. Priorização Inteligente:**
+```
+Automação:
+SE tempo restante < 20% do SLA
+ENTÃO prioridade = Urgente
+E notificar agente
+```
+
+**2. Distribuição Balanceada:**
+```
+Assignment:
+- Evitar sobrecarga de agentes
+- Round Robin considerando SLA
+- Agentes senior para SLAs apertados
+```
+
+**3. Automação de Respostas:**
+```
+Bot/IA:
+- Resposta inicial automática (cumpre FRT)
+- Coleta informações enquanto aguarda humano
+- Qualifica antes de passar para agente
+```
+
+**4. Recursos Adequados:**
+```
+Staffing:
+- Mais agentes nos horários de pico
+- On-call para SLAs 24/7
+- Especialistas para issues complexas
+```
+
+---
+
+## 📋 Relatório de SLA
+
+### Exportar Dados
+
+```csv
+Conversa,Cliente,Política,FRT Target,FRT Real,Status,Breach
+#1234,João Silva,Enterprise,5min,3m 20s,✅ OK,Não
+#1235,Maria Costa,Standard,30min,45min,❌ Breach,+15min
+#1236,Pedro Alves,Enterprise,5min,8min,❌ Breach,+3min
+```
+
+### Análise Mensal
+
+```
+📊 Relatório SLA - Janeiro 2025
+
+Resumo Executivo:
+├─ Compliance: 94% (Meta: 95%) ⚠️
+├─ Total conversas: 1.250
+├─ Breaches: 75 (6%)
+└─ Tendência: -2% vs Dezembro
+
+Top 3 Causas de Breach:
+1. Pico de demanda (40%)
+2. Agentes offline (30%)  
+3. Issues complexas (20%)
+
+Recomendações:
+1. Contratar +2 agentes
+2. Melhorar escalação automática
+3. Treinar equipe em issues complexas
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Definição
+
+✅ **Metas realistas**: Baseie em dados históricos  
+✅ **Diferentes tiers**: VIP vs Standard  
+✅ **Horário claro**: Quando SLA conta  
+✅ **Exceções documentadas**: Feriados, manutenções
+
+### Monitoramento
+
+✅ **Dashboard visível**: Equipe vê em tempo real  
+✅ **Alertas proativos**: 80% antes de 100%  
+✅ **Revisão semanal**: Análise de breaches  
+✅ **Ajustes trimestrais**: Metas evoluem
+
+### Cultura
+
+✅ **Não punitivo**: Foco em melhorar sistema  
+✅ **Celebre conquistas**: 95%+ é excelente!  
+✅ **Aprenda com falhas**: Por que breach aconteceu?  
+
+---
+
+## ⚠️ Armadilhas Comuns
+
+### SLA Muito Agressivo
+
+❌ **Problema:**
+```
+FRT: 1 minuto
+Equipe: Estressada, burnout
+Qualidade: Queda nas respostas (pressa)
+```
+
+✅ **Solução:**
+```
+FRT: 5 minutos (realista)
+Equipe: Feliz, sustentável
+Qualidade: Mantida
+```
+
+### SLA sem Recursos
+
+❌ **Problema:**
+```
+SLA: 24/7
+Equipe: Trabalha só 9h-18h
+Resultado: Breaches constantes fora do horário
+```
+
+✅ **Solução:**
+```
+Opção 1: Contratar turno noite
+Opção 2: SLA ajustado para horário disponível
+Opção 3: Bot para FRT fora horário
+```
+
+### Múltiplos SLAs Confusos
+
+❌ **Problema:**
+```
+10 políticas diferentes
+Agente não sabe qual aplicar
+Compliance: 75% ❌
+```
+
+✅ **Solução:**
+```
+3 políticas claras: VIP, Standard, Basic
+Aplicação automática por label
+Compliance: 95% ✅
+```
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Relatórios" icon="chart-line" href="/pt-br/guia-usuario/relatorios">
+    Monitore métricas de SLA
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Automatize escalação de SLA
+  </Card>
+</CardGroup>

@@ -1,0 +1,470 @@
+---
+title: Segurança e Privacidade
+description: Proteja seus dados e garanta conformidade com LGPD/GDPR
+sidebarTitle: Segurança
+---
+
+# 🔒 Segurança e Privacidade
+
+Proteja os dados dos seus clientes e mantenha sua operação em conformidade com leis de privacidade.
+
+---
+
+## 🛡️ Recursos de Segurança
+
+<CardGroup cols={2}>
+  <Card title="Autenticação" icon="key">
+    Senhas fortes + 2FA
+  </Card>
+  <Card title="Permissões" icon="shield-halved">
+    Controle de acesso por função
+  </Card>
+  <Card title="Criptografia" icon="lock">
+    Dados em trânsito e repouso
+  </Card>
+  <Card title="Auditoria" icon="clipboard-list">
+    Logs de todas ações
+  </Card>
+</CardGroup>
+
+---
+
+## 🔐 Autenticação
+
+### Senhas Fortes
+
+**Requisitos mínimos:**
+```
+✓ Mínimo 8 caracteres
+✓ Letra maiúscula
+✓ Letra minúscula
+✓ Número
+✓ Caractere especial
+
+Exemplo forte: "S3nh@F0rt3!2025"
+❌ Fraca: "senha123"
+```
+
+**Política de senhas:**
+```
+Configurações → Segurança → Política de Senhas
+
+├─ Comprimento mínimo: 8-16 caracteres
+├─ Expiração: 90 dias
+├─ Histórico: Não reusar últimas 5 senhas
+├─ Tentativas falhas: Bloquear após 5
+└─ Complexidade: Alta (padrão)
+```
+
+### Autenticação de Dois Fatores (2FA)
+
+**Ativar 2FA:**
+1. **Perfil** → **Segurança** → **Autenticação em Dois Fatores**
+2. Escanei QR Code com app authenticator:
+   - Google Authenticator
+   - Authy
+   - Microsoft Authenticator
+3. Digite código de verificação
+4. **Ativar**
+
+**Códigos de Backup:**
+```
+Guarde em local seguro:
+├─ 1234-5678
+├─ 9012-3456
+├─ 7890-1234
+└─ [Mais 7 códigos]
+
+Use se perder acesso ao app.
+```
+
+**Forçar 2FA para todos:**
+```
+Admin → Configurações → Segurança
+└─ [✓] Exigir 2FA para todos agentes
+```
+
+---
+
+## 👥 Controle de Acesso
+
+### Funções (Roles)
+
+**Administrador:**
+```
+Pode tudo:
+✓ Gerenciar agentes
+✓ Configurar sistema
+✓ Ver relatórios completos
+✓ Gerenciar integrações
+✓ Acessar auditoria
+
+Use para: Owners, CTOs
+```
+
+**Agente:**
+```
+Foco em atendimento:
+✓ Responder conversas atribuídas
+✓ Ver contatos
+✓ Ver próprios relatórios
+✗ Não pode adicionar agentes
+✗ Não pode alterar configurações
+
+Use para: Atendentes, Operadores
+```
+
+**Supervisor (Custom):**
+```
+Gerencia equipe:
+✓ Tudo que Agente pode
+✓ Ver relatórios de todos
+✓ Gerenciar times
+✗ Não altera configurações globais
+
+Use para: Coordenadores, Team Leads
+```
+
+### Permissões Granulares
+
+```
+Administrador → Funções Personalizadas
+
+Criar nova função: "Analista de Dados"
+
+Permissões:
+├─ Conversas:
+│   ├─ [✓] Visualizar todas
+│   ├─ [✗] Responder
+│   └─ [✗] Atribuir
+├─ Contatos:
+│   ├─ [✓] Visualizar
+│   ├─ [✓] Exportar
+│   └─ [✗] Editar
+├─ Relatórios:
+│   ├─ [✓] Ver todos
+│   ├─ [✓] Exportar
+│   └─ [✗] Configurar
+└─ Configurações:
+    └─ [✗] Sem acesso
+```
+
+---
+
+## 🔒 Criptografia
+
+### Em Trânsito (TLS/SSL)
+
+**Sempre use HTTPS:**
+```
+❌ http://chat.empresa.com
+✅ https://chat.empresa.com
+
+Chatwoot força HTTPS por padrão.
+```
+
+**Certificado SSL:**
+```
+Recomendado: Let's Encrypt (grátis)
+Renovação automática a cada 90 dias
+
+Verificar:
+├─ Certificado válido: ✓
+├─ Expira em: 89 dias
+└─ Emissor: Let's Encrypt
+```
+
+### Em Repouso
+
+**Dados criptografados:**
+```
+✓ Senhas (bcrypt, não reversível)
+✓ Tokens de API
+✓ Credenciais de integrações
+✓ Anexos de arquivos (opcional)
+```
+
+**Banco de Dados:**
+```
+PostgreSQL:
+├─ Encryption at rest (configurável)
+├─ Backups criptografados
+└─ Acesso restrito por IP
+```
+
+---
+
+## 📜 Conformidade LGPD/GDPR
+
+### Princípios
+
+**Consentimento:**
+```
+✓ Cliente deve consentir coleta de dados
+✓ Informar para quê serão usados
+✓ Opção de opt-out sempre disponível
+```
+
+**Minimização:**
+```
+✓ Colete apenas dados necessários
+✗ Não peça CPF se não precisa
+✓ Delete dados quando não mais necessário
+```
+
+**Transparência:**
+```
+✓ Política de Privacidade clara
+✓ Cliente sabe quem tem acesso aos dados
+✓ Notifique em caso de vazamento
+```
+
+### Recursos para Conformidade
+
+**1. Exportar Dados:**
+```
+Cliente pode solicitar todos seus dados:
+
+Contato → Ações → Exportar Dados
+
+Gera arquivo com:
+├─ Informações pessoais
+├─ Histórico de conversas
+├─ Atributos customizados
+└─ Anexos enviados/recebidos
+```
+
+**2. Deletar Dados (Right to be Forgotten):**
+```
+Contato → Ações → Deletar Contato
+
+Confirmação:
+⚠️ Esta ação é IRREVERSÍVEL
+   
+O que será deletado:
+├─ Dados pessoais
+├─ Histórico de conversas
+├─ Atributos
+├─ Anexos
+
+Escolha:
+[  ] Deletar permanentemente
+[✓] Anonimizar (recomendado para métricas)
+```
+
+**3. Anonimização:**
+```
+Conversas mantidas para métricas:
+
+Antes:
+Nome: João Silva
+Email: joao@empresa.com
+Mensagem: "Preciso de ajuda"
+
+Depois:
+Nome: [Removido]
+Email: [Removido]
+Mensagem: "Preciso de ajuda" (mantida)
+```
+
+**4. Retenção de Dados:**
+```
+Configurações → Segurança → Retenção
+
+Conversas resolvidas:
+├─ Manter por: 365 dias
+├─ Após isso: Arquivar
+└─ Após: 730 dias → Deletar
+
+Contatos inativos:
+├─ Sem interação há: 2 anos
+└─ Ação: Avisar cliente, depois deletar
+```
+
+---
+
+## 🔍 Auditoria e Logs
+
+### Logs de Atividades
+
+**O que é registrado:**
+```
+✓ Login/Logout de agentes
+✓ Mudanças em configurações
+✓ Criação/edição/exclusão de agentes
+✓ Exportação de dados
+✓ Acessos à API
+✓ Mudanças em permissões
+```
+
+**Ver logs:**
+```
+Admin → Auditoria → Logs de Atividade
+
+Filtrar por:
+├─ Usuário: maria@empresa.com
+├─ Ação: "Exportou contatos"
+├─ Data: 01/01/2025 - 31/01/2025
+└─ Tipo: Exportação de dados
+
+Resultados:
+17/01 10:30 - maria@empresa.com exportou 1.250 contatos
+15/01 14:20 - joao@empresa.com acessou configurações
+12/01 09:15 - admin@empresa.com criou novo agente
+```
+
+### Alertas de Segurança
+
+**Configurar alertas:**
+```
+Notificar quando:
+├─ Login de IP não reconhecido
+├─ Múltiplas tentativas de login falhas
+├─ Mudança em configurações críticas
+├─ Exportação em massa de dados
+└─ Acesso fora do horário de trabalho
+
+Enviar para: seguranca@empresa.com
+```
+
+---
+
+## 🌐 Segurança de API
+
+### API Tokens
+
+**Gerenciar tokens:**
+```
+Perfil → API Access Tokens
+
+Tokens ativos:
+├─ Token Produção (criado há 30 dias) [Revogar]
+├─ Token Dev (criado há 5 dias) [Revogar]
+└─ [+ Criar Novo Token]
+
+Ao criar:
+1. Nome: "Integração CRM"
+2. Expira em: 90 dias (recomendado)
+3. Permissões: Apenas leitura (se possível)
+```
+
+**Boas práticas:**
+```
+✓ Use tokens com tempo de expiração
+✓ Permissões mínimas necessárias
+✓ Revogue tokens não usados
+✓ Rotacione tokens trimestralmente
+✗ Nunca commite tokens no Git
+✗ Não compartilhe tokens
+```
+
+### Rate Limiting
+
+**Limites padrão:**
+```
+API Pública:
+├─ 100 requisições/minuto
+└─ 10.000 requisições/dia
+
+Se exceder:
+HTTP 429 - Too Many Requests
+Retry-After: 60 segundos
+```
+
+**IP Whitelist:**
+```
+Configurações → Segurança → API
+
+Permitir apenas IPs:
+├─ 203.0.113.10 (Servidor produção)
+├─ 203.0.113.11 (Servidor backup)
+└─ 198.51.100.0/24 (Rede escritório)
+
+Bloquear todos outros IPs.
+```
+
+---
+
+## 🚨 Resposta a Incidentes
+
+### Vazamento de Dados
+
+**Protocolo:**
+```
+1. Contér (imediato):
+   ├─ Desabilitar acesso comprometido
+   ├─ Revogar tokens expostos
+   └─ Mudar senhas afetadas
+
+2. Avaliar (em 24h):
+   ├─ Quantos dados foram expostos?
+   ├─ Quem foi afetado?
+   └─ Como aconteceu?
+
+3. Notificar (em 72h):
+   ├─ Clientes afetados
+   ├─ ANPD (Autoridade Nacional)
+   └─ Parceiros relevantes
+
+4. Remediar:
+   ├─ Corrigir vulnerabilidade
+   ├─ Melhorar processos
+   └─ Treinar equipe
+```
+
+### Conta Comprometida
+
+**Sinais:**
+```
+⚠️ Alertas:
+├─ Login de localização estranha
+├─ Mudanças não autorizadas
+├─ Exportação incomum de dados
+└─ Horários atípicos de acesso
+```
+
+**Ação imediata:**
+```
+1. Suspender conta
+2. Revogar todas sessões
+3. Forçar mudança de senha
+4. Revisar logs de atividade
+5. Notificar usuário legítimo
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Para Administradores
+
+✅ **Princípio do menor privilégio**: Apenas permissões necessárias  
+✅ **Revisão trimestral**: Acessos ainda fazem sentido?  
+✅ **Backup regular**: Teste restauração mensalmente  
+✅ **Atualizações**: Mantenha Chatwoot atualizado  
+
+### Para Agentes
+
+✅ **Senha única**: Não reuse em outros sites  
+✅ **2FA sempre**: Segurança extra vale a pena  
+✅ **Logout ao sair**: Não deixe sessão aberta  
+✅ **Cuidado com phishing**: Verifique URLs  
+
+### Para a Equipe
+
+✅ **Treinamento**: Segurança é responsabilidade de todos  
+✅ **Reporte**: Incidentes devem ser reportados imediatamente  
+✅ **Cultura**: Segurança > Conveniência  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Audit Logs" icon="clipboard-list" href="/pt-br/guia-usuario/auditoria">
+    Veja logs detalhados de atividades
+  </Card>
+  <Card title="Custom Roles" icon="user-shield" href="/pt-br/guia-usuario/funcoes-personalizadas">
+    Crie funções com permissões específicas
+  </Card>
+</CardGroup>

@@ -1,0 +1,422 @@
+---
+title: Auditoria e Logs
+description: Monitore e rastreie todas atividades no sistema
+sidebarTitle: Auditoria
+---
+
+# 📋 Auditoria e Logs
+
+Rastreie todas ações no sistema para segurança, conformidade e troubleshooting.
+
+---
+
+## 📊 O que é Auditoria?
+
+**Logs de Auditoria** registram TODAS ações importantes:
+
+```
+17/01/2025 14:32:18
+Usuário: maria@empresa.com
+Ação: Exportou lista de contatos
+Detalhes: 1.250 contatos exportados
+Filtros: Label = #vip
+IP: 203.0.113.45
+```
+
+---
+
+## 📝 O que é Registrado?
+
+<CardGroup cols={2}>
+  <Card title="Autenticação" icon="key">
+    Logins, logouts, falhas
+  </Card>
+  <Card title="Usuários" icon="user">
+    Criar, editar, deletar
+  </Card>
+  <Card title="Configurações" icon="gear">
+    Mudanças no sistema
+  </Card>
+  <Card title="Dados" icon="database">
+    Exportações, exclusões
+  </Card>
+</CardGroup>
+
+---
+
+## 🔍 Ver Logs de Auditoria
+
+**Acessar:**
+```
+Admin → Auditoria → Logs de Atividade
+```
+
+**Interface:**
+```
+┌─────────────────────────────────────────┐
+│ Logs de Auditoria       [Exportar CSV]  │
+├─────────────────────────────────────────┤
+│ Filtros:                                │
+│ Usuário: [Todos ▼]                      │
+│ Ação: [Todas ▼]                         │
+│ Data: [01/01 - 31/01]                   │
+│                                         │
+│ [🔍 Buscar]                             │
+├─────────────────────────────────────────┤
+│ 📊 543 eventos encontrados              │
+├─────────────────────────────────────────┤
+│ 17/01 14:32 maria@empresa.com          │
+│ ├─ Exportou 1.250 contatos             │
+│ └─ IP: 203.0.113.45                    │
+│                                         │
+│ 17/01 14:15 joao@empresa.com           │
+│ ├─ Alterou configuração de SLA         │
+│ └─ IP: 203.0.113.42                    │
+│                                         │
+│ 17/01 13:50 admin@empresa.com          │
+│ ├─ Criou novo agente: pedro@empresa    │
+│ └─ IP: 203.0.113.40                    │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## 📋 Tipos de Eventos
+
+### 1. Autenticação
+
+```
+Login bem-sucedido:
+├─ Usuário: maria@empresa.com
+├─ IP: 203.0.113.45
+├─ Localização: São Paulo, BR
+├─ Navegador: Chrome 120
+└─ Timestamp: 17/01 09:15:32
+
+Login falho:
+├─ Email tentado: maria@empresa.com
+├─ Motivo: Senha incorreta
+├─ Tentativa: 3/5
+├─ IP: 198.51.100.42
+└─ Ação: Bloqueado após 5 tentativas
+```
+
+### 2. Gerenciamento de Usuários
+
+```
+Agente criado:
+├─ Por: admin@empresa.com
+├─ Novo agente: pedro@empresa.com
+├─ Função: Agente
+└─ Times: Vendas, Suporte
+
+Agente editado:
+├─ Por: admin@empresa.com
+├─ Agente: maria@empresa.com
+├─ Mudança: Função: Agente → Supervisor
+└─ Times adicionados: Financeiro
+
+Agente desativado:
+├─ Por: admin@empresa.com
+├─ Agente: joao@empresa.com
+├─ Motivo: Desligamento
+└─ Conversas reatribuídas para: Time Suporte
+```
+
+### 3. Configurações
+
+```
+SLA alterado:
+├─ Por: supervisor@empresa.com
+├─ Política: Enterprise SLA
+├─ Mudança: FRT: 5min → 3min
+└─ Motivo: "Melhorar atendimento VIP"
+
+Inbox criado:
+├─ Por: admin@empresa.com
+├─ Nome: "WhatsApp Vendas"
+├─ Tipo: WhatsApp (Evolution API)
+└─ Agentes: Maria, João, Pedro
+
+Automação ativada:
+├─ Por: admin@empresa.com
+├─ Nome: "Fora do Horário"
+├─ Status: Inativo → Ativo
+└─ Aplicada a: Inbox WhatsApp Suporte
+```
+
+### 4. Dados
+
+```
+Contatos exportados:
+├─ Por: maria@empresa.com
+├─ Quantidade: 1.250 contatos
+├─ Filtros: Label = #vip
+├─ Formato: CSV
+└─ Download IP: 203.0.113.45
+
+Contato deletado:
+├─ Por: admin@empresa.com
+├─ Contato: João Silva (ID: 456)
+├─ Motivo: "Solicitação LGPD"
+├─ Método: Anonimizado
+└─ Conversas: Mantidas (anonimizadas)
+
+Conversas exportadas:
+├─ Por: joao@empresa.com
+├─ Quantidade: 350 conversas
+├─ Período: 01/01 - 31/01/2025
+├─ Formato: JSON
+└─ Tamanho: 45 MB
+```
+
+---
+
+## 🔍 Filtrar e Buscar
+
+### Por Usuário
+
+```
+Filtro: maria@empresa.com
+
+Mostra tudo que Maria fez:
+├─ 17/01 14:32 - Exportou contatos
+├─ 17/01 10:15 - Respondeu 45 conversas
+├─ 16/01 16:20 - Criou macro "Resolver VIP"
+└─ 15/01 09:00 - Login
+```
+
+### Por Ação
+
+```
+Filtro: Tipo = "Exportação"
+
+Todas exportações:
+├─ 17/01 14:32 - maria: 1.250 contatos
+├─ 15/01 11:20 - joao: 350 conversas
+├─ 12/01 16:45 - pedro: Relatório SLA
+└─ 10/01 09:30 - admin: Backup completo
+```
+
+### Por Data
+
+```
+Filtro: 15/01/2025 - 17/01/2025
+
+Todos eventos desse período:
+543 eventos encontrados
+```
+
+### Por IP
+
+```
+Filtro: IP = 198.51.100.42
+
+Atividades desse IP:
+├─ 17/01 22:30 - Tentativa login (falha)
+├─ 17/01 22:31 - Tentativa login (falha)
+├─ 17/01 22:32 - Tentativa login (bloqueado)
+└─ Status: IP suspeito ⚠️
+```
+
+---
+
+## 📊 Relatórios de Auditoria
+
+### Relatório Mensal
+
+```
+📊 Relatório de Auditoria - Janeiro 2025
+
+Resumo Executivo:
+├─ Total de eventos: 15.432
+├─ Eventos críticos: 23
+├─ Logins: 1.240
+├─ Exportações: 45
+└─ Configurações alteradas: 18
+
+Por Categoria:
+├─ Autenticação: 32%
+├─ Conversas: 45%
+├─ Configurações: 8%
+├─ Exportações: 3%
+└─ Outros: 12%
+
+Eventos Críticos:
+├─ 5 exportações em massa
+├─ 3 mudanças em SLA
+├─ 2 agentes desativados
+└─ 1 tentativa de acesso não autorizado
+
+Logins Suspeitos:
+├─ IP: 198.51.100.42 (5 tentativas falhas)
+└─ Ação tomada: IP bloqueado
+```
+
+### Relatório de Conformidade (LGPD)
+
+```
+📋 Relatório LGPD - Q1 2025
+
+Solicitações de Dados:
+├─ Exportações solicitadas: 12
+├─ Tempo médio resposta: 18 horas
+└─ Prazo legal: 72 horas ✅
+
+Exclusões (Right to be Forgotten):
+├─ Solicitações: 8
+├─ Processadas: 8 (100%)
+├─ Método: 6 anonimizadas, 2 deletadas
+└─ Tempo médio: 24 horas ✅
+
+Vazamentos/Incidentes:
+└─ Nenhum incidente reportado ✅
+
+Retenção de Dados:
+├─ Conversas arquivadas: 2.340
+├─ Contatos inativos removidos: 145
+└─ Conformidade: 100% ✅
+```
+
+---
+
+## 🚨 Alertas de Auditoria
+
+### Configurar Alertas
+
+```
+Admin → Auditoria → Alertas
+
+Criar Alerta:
+Nome: "Exportação em Massa"
+
+Condição:
+SE usuário exportar > 1.000 contatos
+ENTÃO notificar: admin@empresa.com
+
+Frequência: Imediato
+Severidade: Alta
+```
+
+### Alertas Comuns
+
+**1. Acesso Não Autorizado:**
+```
+⚠️ Alerta de Segurança
+
+Múltiplas tentativas de login falhas
+├─ Email: admin@empresa.com
+├─ Tentativas: 5
+├─ IP: 198.51.100.42
+├─ Localização: Rússia
+└─ Ação: Conta temporariamente bloqueada
+
+Revisar imediatamente: [Link]
+```
+
+**2. Mudança Crítica:**
+```
+⚠️ Configuração Crítica Alterada
+
+Política de SLA Enterprise modificada
+├─ Por: supervisor@empresa.com
+├─ Mudança: FRT 5min → 10min
+├─ Timestamp: 17/01 14:32
+└─ Ação: Revisar se intencional
+
+Ver detalhes: [Link]
+```
+
+**3. Exportação Incomum:**
+```
+ℹ️ Exportação de Dados
+
+maria@empresa.com exportou 2.500 contatos
+├─ Quantidade: Acima do normal (média: 100)
+├─ Hora: 22:45 (fora do horário)
+├─ IP: 203.0.113.45
+└─ Ação: Verificar se legítimo
+
+Ver log: [Link]
+```
+
+---
+
+## 📥 Exportar Logs
+
+### Formatos
+
+**CSV:**
+```csv
+Timestamp,Usuario,Acao,Detalhes,IP,Status
+2025-01-17 14:32:18,maria@empresa.com,Exportacao,1250 contatos,203.0.113.45,Sucesso
+2025-01-17 14:15:22,joao@empresa.com,Config,SLA alterado,203.0.113.42,Sucesso
+```
+
+**JSON:**
+```json
+[
+  {
+    "timestamp": "2025-01-17T14:32:18Z",
+    "user": "maria@empresa.com",
+    "action": "export_contacts",
+    "details": {
+      "count": 1250,
+      "filters": ["#vip"],
+      "format": "csv"
+    },
+    "ip": "203.0.113.45",
+    "status": "success"
+  }
+]
+```
+
+### Retenção
+
+**Configurar:**
+```
+Admin → Auditoria → Retenção de Logs
+
+Manter logs por:
+├─ Logs gerais: 365 dias
+├─ Logs de segurança: 730 dias (2 anos)
+├─ Logs de exportação: 1.095 dias (3 anos)
+└─ Após período: Arquivar em S3/Glacier
+
+Conformidade: LGPD exige 5 anos para alguns logs
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Monitoramento
+
+✅ **Revisão semanal**: Admin revisa logs críticos  
+✅ **Alertas proativos**: Configure para eventos importantes  
+✅ **Dashboard visível**: Métricas de segurança  
+
+### Resposta
+
+✅ **Protocolo claro**: O que fazer em cada alerta  
+✅ **Responsáveis definidos**: Quem investiga  
+✅ **SLA de resposta**: Eventos críticos < 1 hora  
+
+### Conformidade
+
+✅ **Retenção adequada**: Conforme lei aplicável  
+✅ **Backup de logs**: Logs em local seguro  
+✅ **Acesso restrito**: Apenas admins veem logs  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Segurança" icon="shield" href="/pt-br/guia-usuario/seguranca">
+    Melhore segurança do sistema
+  </Card>
+  <Card title="Custom Roles" icon="user-tag" href="/pt-br/guia-usuario/funcoes-personalizadas">
+    Controle acesso granular
+  </Card>
+</CardGroup>
