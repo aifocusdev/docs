@@ -1,0 +1,674 @@
+---
+title: WhatsApp Cloud API (Oficial)
+description: Configure WhatsApp usando a API oficial da Meta - Embedded Signup ou Manual
+sidebarTitle: WhatsApp Cloud API
+---
+
+# 📱 WhatsApp Cloud API - API Oficial da Meta
+
+Configure o **WhatsApp Business** usando a API oficial da Meta (Facebook). Duas formas de configuração: **rápida via Embedded Signup** ou **manual** com credenciais.
+
+---
+
+## 📋 Visão Geral
+
+**WhatsApp Cloud API** é a solução oficial da Meta para integrar WhatsApp Business:
+
+<CardGroup cols={2}>
+  <Card title="Embedded Signup" icon="bolt">
+    ⚡ Configuração automática via Meta  
+    ✅ Recomendado para iniciantes
+  </Card>
+  <Card title="Manual" icon="wrench">
+    🔧 Configuração com credenciais  
+    ✅ Mais controle técnico
+  </Card>
+</CardGroup>
+
+---
+
+## ✨ Recursos da API Oficial
+
+### Funcionalidades
+
+✅ **Mensagens de Texto** - Envio e recebimento  
+✅ **Mídia** - Imagens, vídeos, áudios, documentos  
+✅ **Localização** - Compartilhar/receber localização  
+✅ **Contatos** - Enviar vCard  
+✅ **Templates** - Mensagens pré-aprovadas pela Meta  
+✅ **Mensagens Interativas** - Botões e listas  
+✅ **Respostas** - Reply (responder mensagem específica)  
+✅ **Reações** - Emoji reactions  
+✅ **Indicadores** - Digitando, lido, entregue
+
+### Limitações
+
+⚠️ **Janela de 24 horas**: Após 24h da última mensagem do cliente, só pode enviar templates aprovados  
+⚠️ **Templates**: Precisam aprovação da Meta (leva 1-24h)  
+⚠️ **Limites de mensagem**: Baseado na qualidade da conta
+
+---
+
+## 🚀 Método 1: Embedded Signup (Recomendado)
+
+**Configuração automática em 3 cliques!**
+
+### Pré-requisitos
+
+- Conta Facebook Business
+- Ser **administrador** do Facebook Business Manager
+- Navegador moderno (Chrome, Edge, Firefox)
+
+### Passo a Passo
+
+<Steps>
+  <Step title="Acessar Criar Inbox">
+    1. Vá em **"Configurações"** → **"Inboxes"**
+    2. Clique em **"Adicionar Inbox"**
+    3. Escolha **"WhatsApp"**
+  </Step>
+
+  <Step title="Escolher Embedded Signup">
+    1. Na lista de provedores, selecione:
+       **"WhatsApp Business - Configuração rápida com Meta"**
+    2. Clique em **"Continuar"**
+  </Step>
+
+  <Step title="Conectar com Meta">
+    1. Clique em **"Conecte-se com WhatsApp Business"**
+    2. Uma janela pop-up da Meta abrirá
+    3. Faça login na sua conta Facebook Business
+  </Step>
+
+  <Step title="Autorizar Acesso">
+    1. **Selecione WhatsApp Business Account** ou crie novo
+    2. **Escolha número de telefone** ou adicione novo
+    3. **Autorize permissões**:
+       - Gerenciar mensagens
+       - Enviar mensagens
+       - Gerenciar templates
+    4. Clique em **"Continuar"**
+  </Step>
+
+  <Step title="Configuração Automática">
+    O Chatwoot automaticamente:
+    - ✅ Obtém credenciais da API
+    - ✅ Configura webhook
+    - ✅ Registra número de telefone
+    - ✅ Sincroniza templates
+    
+    Aguarde ~30 segundos...
+  </Step>
+
+  <Step title="Pronto!">
+    ✅ Inbox criado com sucesso!
+    
+    Agora você pode:
+    - Adicionar agentes ao inbox
+    - Começar a receber mensagens
+    - Enviar templates aprovados
+  </Step>
+</Steps>
+
+### Vantagens do Embedded Signup
+
+✅ **Zero configuração manual**: Tudo automático  
+✅ **Seguro**: OAuth2 via Meta  
+✅ **Rápido**: Pronto em 2 minutos  
+✅ **Sem erros**: Credenciais corretas garantidas  
+✅ **Webhooks automáticos**: Já configurado
+
+---
+
+## 🔧 Método 2: Configuração Manual
+
+Para quem prefere controle total ou usa sistemas customizados.
+
+### Pré-requisitos
+
+- Conta **Meta for Developers**
+- WhatsApp Business App criado
+- Número de telefone verificado
+
+### Obter Credenciais na Meta
+
+<Steps>
+  <Step title="Acessar Meta for Developers">
+    1. Acesse [developers.facebook.com](https://developers.facebook.com)
+    2. Faça login com sua conta Facebook Business
+    3. Clique em **"Meus Apps"**
+  </Step>
+
+  <Step title="Criar/Selecionar App">
+    **Criar novo:**
+    1. Clique em **"Criar App"**
+    2. Tipo: **"Business"**
+    3. Nome do app: "Chatwoot WhatsApp"
+    4. Email de contato
+    5. **"Criar App"**
+
+    **Ou selecione app existente**
+  </Step>
+
+  <Step title="Adicionar Produto WhatsApp">
+    1. No dashboard do app, procure **"WhatsApp"**
+    2. Clique em **"Configurar"**
+    3. Siga wizard de configuração da Meta
+  </Step>
+
+  <Step title="Obter Phone Number ID">
+    1. No menu lateral: **"WhatsApp"** → **"Começar"**
+    2. Na seção **"Send and receive messages"**
+    3. Copie o **Phone Number ID**
+    
+    ```
+    Exemplo: 123456789012345
+    ```
+  </Step>
+
+  <Step title="Obter Business Account ID (WABA ID)">
+    1. Ainda na página do WhatsApp
+    2. Procure por **"WhatsApp Business Account ID"**
+    3. Ou vá em **"WhatsApp"** → **"API Setup"**
+    4. Copie o **Business Account ID**
+    
+    ```
+    Exemplo: 987654321098765
+    ```
+  </Step>
+
+  <Step title="Gerar Access Token (API Key)">
+    1. Vá em **"WhatsApp"** → **"API Setup"**
+    2. Seção **"Temporary access token"**:
+       - Clique em **"Generate token"**
+       - **⚠️ Token expira em 24h - apenas para teste!**
+    
+    **Para Produção (Token Permanente):**
+    1. Crie **System User** no Business Manager
+    2. Gere token permanente com permissões:
+       - `whatsapp_business_management`
+       - `whatsapp_business_messaging`
+    3. Guarde o token com segurança!
+    
+    ```
+    Exemplo: EAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+  </Step>
+
+  <Step title="Adicionar Número de Telefone">
+    1. Vá em **"WhatsApp"** → **"API Setup"**
+    2. Clique em **"Add phone number"**
+    3. Escolha número:
+       - Usar número de teste da Meta (limitado)
+       - Adicionar seu próprio número
+    4. Verifique número via SMS/Call
+  </Step>
+</Steps>
+
+### Configurar no Chatwoot
+
+<Steps>
+  <Step title="Criar Inbox">
+    1. **"Configurações"** → **"Inboxes"** → **"Adicionar Inbox"**
+    2. Escolha **"WhatsApp"**
+    3. Provedor: **"Cloud do WhatsApp - Configuração rápida via Meta"**
+  </Step>
+
+  <Step title="Preencher Credenciais">
+    **Formulário:**
+    
+    **Nome da Inbox:**
+    ```
+    Ex: WhatsApp Vendas
+    ```
+    
+    **Número de Telefone** (formato E.164):
+    ```
+    Ex: +5511987654321
+    ```
+    
+    **Phone Number ID:**
+    ```
+    Cole o ID obtido no passo 4
+    Ex: 123456789012345
+    ```
+    
+    **Business Account ID:**
+    ```
+    Cole o WABA ID obtido no passo 5
+    Ex: 987654321098765
+    ```
+    
+    **API Key** (Access Token):
+    ```
+    Cole o token obtido no passo 6
+    Ex: EAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+  </Step>
+
+  <Step title="Criar Inbox">
+    1. Clique em **"Criar canal do WhatsApp"**
+    2. Aguarde validação das credenciais
+    3. ✅ Inbox criado!
+  </Step>
+</Steps>
+
+### Configurar Webhook na Meta
+
+**Importante**: Sem webhook, você NÃO receberá mensagens!
+
+<Steps>
+  <Step title="Obter URL e Token do Chatwoot">
+    1. No Chatwoot, vá no inbox criado
+    2. **"Configurações"** → Aba **"Configuração"**
+    3. Veja a seção **"URL de callback"**:
+    
+    ```
+    Webhook URL:
+    https://seu-chatwoot.com/webhooks/whatsapp/+5511987654321
+    
+    Token de verificação:
+    abc123xyz456 (gerado automaticamente)
+    ```
+    
+    **Copie ambos!**
+  </Step>
+
+  <Step title="Configurar na Meta">
+    1. Volte ao **Meta for Developers**
+    2. Seu app → **"WhatsApp"** → **"Configuration"**
+    3. Seção **"Webhook"**
+    4. Clique em **"Edit"**
+  </Step>
+
+  <Step title="Adicionar URL">
+    **Callback URL:**
+    ```
+    https://seu-chatwoot.com/webhooks/whatsapp/+5511987654321
+    ```
+    
+    **Verify Token:**
+    ```
+    abc123xyz456
+    ```
+    
+    Clique em **"Verify and save"**
+    
+    ✅ Deve aparecer "Verified" em verde
+  </Step>
+
+  <Step title="Inscrever em Eventos">
+    Na seção **"Webhook fields"**, marque:
+    
+    ✅ **messages** - Mensagens recebidas  
+    ✅ **message_template_status_update** - Status dos templates  
+    ⚠️ **account_alerts** - Alertas importantes  
+    ⚠️ **phone_number_quality_update** - Qualidade do número
+    
+    Clique em **"Subscribe"**
+  </Step>
+
+  <Step title="Testar Webhook">
+    1. Ainda na configuração de Webhook
+    2. Clique em **"Test"**
+    3. Escolha **"messages"**
+    4. Clique em **"Send"**
+    
+    ✅ Deve retornar status 200 OK
+  </Step>
+</Steps>
+
+---
+
+## 📝 Criar Templates de Mensagem
+
+Templates são mensagens pré-aprovadas para enviar fora da janela de 24h.
+
+### Criar Template na Meta
+
+<Steps>
+  <Step title="Acessar WhatsApp Manager">
+    1. Vá em [business.facebook.com](https://business.facebook.com)
+    2. Selecione seu **WhatsApp Business Account**
+    3. Menu lateral: **"Ferramentas de mensagens"** → **"Templates de mensagem"**
+  </Step>
+
+  <Step title="Criar Novo Template">
+    1. Clique em **"Criar template"**
+    2. **Categoria**:
+       - **Marketing**: Promoções, ofertas
+       - **Utility**: Atualizações de pedido, lembretes
+       - **Authentication**: Códigos OTP
+    3. **Nome**: `saudacao_inicial` (sem espaços, use _)
+    4. **Idioma**: Portuguese (BR)
+  </Step>
+
+  <Step title="Compor Mensagem">
+    **Header (Opcional):**
+    ```
+    Texto, Imagem, Vídeo ou Documento
+    Ex: Bem-vindo à Acme!
+    ```
+    
+    **Body (Obrigatório):**
+    ```
+    Olá {{1}}! 👋
+    
+    Obrigado por entrar em contato com a Acme.
+    Como podemos ajudar hoje?
+    
+    Horário: Seg-Sex 9h-18h
+    ```
+    
+    **Footer (Opcional):**
+    ```
+    Equipe Acme
+    ```
+    
+    **Buttons (Opcional):**
+    - Call to Action (URL, Phone)
+    - Quick Reply
+  </Step>
+
+  <Step title="Enviar para Aprovação">
+    1. Revise o template
+    2. Clique em **"Enviar"**
+    3. Aguarde aprovação: **1-24 horas**
+    
+    Status:
+    - 🟡 **Pending**: Aguardando análise
+    - 🟢 **Approved**: Aprovado! Pode usar
+    - 🔴 **Rejected**: Rejeitado (veja motivo)
+  </Step>
+</Steps>
+
+### Usar Template no Chatwoot
+
+<Steps>
+  <Step title="Sincronizar Templates">
+    1. No Chatwoot, vá no inbox WhatsApp
+    2. **"Configurações"** → **"Templates"**
+    3. Clique em **"Sincronizar"**
+    4. Templates aprovados aparecem na lista
+  </Step>
+
+  <Step title="Enviar Template">
+    1. Abra conversa (pode estar > 24h inativa)
+    2. Na caixa de mensagem, clique em **"Templates"** (ícone ⚡)
+    3. Escolha template da lista
+    4. Preencha variáveis (ex: nome do cliente)
+    5. **"Enviar"**
+    
+    ✅ Mensagem enviada mesmo fora da janela!
+  </Step>
+</Steps>
+
+### Boas Práticas para Templates
+
+✅ **Seja claro**: Objetivo óbvio  
+✅ **Personalize**: Use variáveis como {{1}} para nome  
+✅ **Categorização correta**: Marketing ≠ Utility  
+✅ **Evite spam**: Não envie templates sem motivo  
+✅ **Teste antes**: Verifique formatação  
+❌ **Não abuse**: Pode baixar qualidade da conta  
+❌ **Não use para conversas**: Só para iniciar/reativar
+
+---
+
+## 🔍 Verificar Configuração
+
+### Checklist de Configuração
+
+```
+✅ Credenciais corretas:
+   - Phone Number ID válido
+   - Business Account ID válido  
+   - API Key ativo (não expirado)
+
+✅ Webhook configurado:
+   - URL: https://seu-chatwoot.com/webhooks/whatsapp/+5511...
+   - Token: Corresponde ao do Chatwoot
+   - Status: Verified ✓
+   - Campos inscritos: messages ✓
+
+✅ Templates sincronizados:
+   - Pelo menos 1 template aprovado
+   - Sincronização funcionando
+
+✅ Número verificado:
+   - Número tem marca verde na Meta
+   - Número não está em uso em outro lugar
+```
+
+### Testar Inbox
+
+**1. Enviar mensagem teste:**
+```
+1. Envie mensagem do seu celular para o número
+2. Deve aparecer no Chatwoot em ~5 segundos
+3. Responda no Chatwoot
+4. Deve chegar no seu celular
+```
+
+**2. Testar template:**
+```
+1. Espere > 24h sem conversa
+2. Tente enviar mensagem normal → Deve dar erro
+3. Envie template → Deve funcionar ✓
+```
+
+---
+
+## 🚨 Problemas Comuns
+
+### Não Recebe Mensagens
+
+**Causa 1: Webhook não configurado**
+```
+Solução:
+1. Verifique URL do webhook na Meta
+2. Teste webhook com botão "Test"
+3. Veja logs no Chatwoot: /logs
+```
+
+**Causa 2: Token expirado**
+```
+Solução:
+1. Gere novo Access Token permanente
+2. Atualize no Chatwoot:
+   Inbox → Configurações → Editar → API Key
+3. Salve
+```
+
+**Causa 3: Campos não inscritos**
+```
+Solução:
+1. Meta for Developers → Webhook → Fields
+2. Marque "messages" ✓
+3. Clique "Subscribe"
+```
+
+### Não Consegue Enviar
+
+**Causa 1: Fora da janela 24h**
+```
+Erro: "Message failed to send"
+
+Solução:
+Use template aprovado ao invés de mensagem normal
+```
+
+**Causa 2: Número inválido**
+```
+Erro: "Invalid phone number"
+
+Solução:
+Número deve estar em formato E.164:
+✅ +5511987654321
+❌ (11) 98765-4321
+```
+
+**Causa 3: Limite de mensagens**
+```
+Erro: "Rate limit exceeded"
+
+Solução:
+- Conta nova: Limite baixo (50-1000/dia)
+- Melhore qualidade da conta
+- Espere upgrade automático da Meta
+```
+
+### Templates não aparecem
+
+**Causa: Não sincronizado**
+```
+Solução:
+1. Inbox → Configurações → Templates
+2. Clique "Sincronizar"
+3. Aguarde ~30 segundos
+4. Recarregue página
+```
+
+---
+
+## 📊 Qualidade da Conta
+
+A Meta monitora qualidade das contas WhatsApp.
+
+### Status de Qualidade
+
+```
+🟢 Verde (Alta): Tudo OK
+   - Envie até limite máximo
+   - Pouquíssimas reclamações
+
+🟡 Amarelo (Média): Atenção
+   - Limite pode ser reduzido
+   - Revise mensagens
+
+🔴 Vermelho (Baixa): PERIGO
+   - Limite reduzido drasticamente
+   - Risco de suspensão
+```
+
+### Como Melhorar
+
+✅ **Responda rápido**: < 5 minutos  
+✅ **Mensagens relevantes**: Não envie spam  
+✅ **Use templates corretos**: Marketing só para marketing  
+✅ **Opt-in claro**: Cliente aceitou receber mensagens  
+✅ **Facilite opt-out**: Deixe cliente parar de receber  
+❌ **Evite bloqueios**: Se muitos bloqueiam, qualidade cai  
+❌ **Evite reports**: Mensagens reportadas prejudicam muito
+
+### Monitorar Qualidade
+
+```
+1. WhatsApp Manager → Insights → Qualidade
+2. Veja:
+   - Status (Verde/Amarelo/Vermelho)
+   - Limite atual de mensagens
+   - Taxa de entrega
+   - Taxa de leitura
+   - Bloqueios/Reports
+```
+
+---
+
+## 🔄 Migrar de Outro Provider
+
+Já usa Evolution/Baileys/360Dialog? Migre para Cloud API:
+
+### Antes de Migrar
+
+⚠️ **Importante:**
+- Mesmo número **NÃO** pode estar em 2 providers
+- Desconecte do provider antigo ANTES
+- Exporte histórico se necessário
+
+### Passos de Migração
+
+<Steps>
+  <Step title="Backup">
+    1. Exporte conversas:
+       Relatórios → Exportar Conversas
+    2. Salve dados importantes
+  </Step>
+
+  <Step title="Desconectar Provider Antigo">
+    1. Vá no inbox antigo
+    2. **"Excluir Inbox"**
+    3. Confirme exclusão
+    4. Aguarde 5 minutos
+  </Step>
+
+  <Step title="Criar Cloud API Inbox">
+    1. Siga passos do Embedded Signup
+    2. Use MESMO número de telefone
+    3. Configure webhook
+  </Step>
+
+  <Step title="Testar">
+    1. Envie mensagem teste
+    2. Confirme recebimento
+    3. Teste envio de resposta
+  </Step>
+
+  <Step title="Comunicar Equipe">
+    Avise agentes sobre novo inbox
+  </Step>
+</Steps>
+
+---
+
+## 💡 Melhores Práticas
+
+### Operação
+
+✅ **Monitore webhook**: Veja logs regularmente  
+✅ **Sincronize templates**: Semanalmente ou após criar novo  
+✅ **Qualidade da conta**: Verifique status mensalmente  
+✅ **Token permanente**: Use System User, não temporário  
+
+### Segurança
+
+✅ **API Key segura**: Não compartilhe, não commite no Git  
+✅ **Webhook HTTPS**: Sempre use URL segura  
+✅ **IP whitelist**: Configure na Meta se possível  
+✅ **Rotação de tokens**: Renove a cada 6-12 meses
+
+### Performance
+
+✅ **Templates para bulk**: Use para mensagens em massa  
+✅ **Rate limits**: Respeite limites da Meta  
+✅ **Retry logic**: Implemente retry em falhas temporárias  
+✅ **Queue**: Enfileire mensagens em picos de demanda
+
+---
+
+## 📞 Suporte
+
+### Meta/Facebook
+
+- 📖 **Docs oficiais**: [developers.facebook.com/docs/whatsapp](https://developers.facebook.com/docs/whatsapp)
+- 💬 **Suporte**: Via Facebook Business Manager
+- 🐛 **Bug reports**: Platform bugs
+
+### Chatwoot
+
+- 📧 **Email**: Seu provedor do Chatwoot
+- 💬 **Community**: [chatwoot.com/community](https://chatwoot.com/community)
+- 📖 **Docs**: Esta documentação
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Templates Avançados" icon="wand-magic-sparkles" href="/pt-br/guia-usuario/whatsapp-templates">
+    Crie templates com botões, mídia e variáveis
+  </Card>
+  <Card title="Campanhas WhatsApp" icon="bullhorn" href="/pt-br/guia-usuario/campanhas">
+    Envie mensagens em massa via templates
+  </Card>
+</CardGroup>

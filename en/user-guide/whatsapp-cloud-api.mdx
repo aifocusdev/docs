@@ -1,0 +1,494 @@
+---
+title: WhatsApp Cloud API (Official)
+description: Configure WhatsApp using Meta's official API - Embedded Signup or Manual
+sidebarTitle: WhatsApp Cloud API
+---
+
+# 📱 WhatsApp Cloud API - Meta's Official API
+
+Configure **WhatsApp Business** using Meta (Facebook) official API. Two configuration methods: **quick via Embedded Signup** or **manual** with credentials.
+
+---
+
+## 📋 Overview
+
+**WhatsApp Cloud API** is Meta's official solution for integrating WhatsApp Business:
+
+<CardGroup cols={2}>
+  <Card title="Embedded Signup" icon="bolt">
+    ⚡ Automatic setup via Meta  
+    ✅ Recommended for beginners
+  </Card>
+  <Card title="Manual" icon="wrench">
+    🔧 Credential-based setup  
+    ✅ More technical control
+  </Card>
+</CardGroup>
+
+---
+
+## ✨ Official API Features
+
+### Capabilities
+
+✅ **Text Messages** - Send and receive  
+✅ **Media** - Images, videos, audio, documents  
+✅ **Location** - Share/receive location  
+✅ **Contacts** - Send vCard  
+✅ **Templates** - Pre-approved messages by Meta  
+✅ **Interactive Messages** - Buttons and lists  
+✅ **Replies** - Reply to specific message  
+✅ **Reactions** - Emoji reactions  
+✅ **Indicators** - Typing, read, delivered
+
+### Limitations
+
+⚠️ **24-hour window**: After 24h of customer's last message, can only send approved templates  
+⚠️ **Templates**: Need Meta approval (takes 1-24h)  
+⚠️ **Message limits**: Based on account quality rating
+
+---
+
+## 🚀 Method 1: Embedded Signup (Recommended)
+
+**Automatic setup in 3 clicks!**
+
+### Prerequisites
+
+- Facebook Business account
+- Be **administrator** of Facebook Business Manager
+- Modern browser (Chrome, Edge, Firefox)
+
+### Step by Step
+
+<Steps>
+  <Step title="Access Create Inbox">
+    1. Go to **"Settings"** → **"Inboxes"**
+    2. Click **"Add Inbox"**
+    3. Choose **"WhatsApp"**
+  </Step>
+
+  <Step title="Choose Embedded Signup">
+    1. In provider list, select:
+       **"WhatsApp Business - Quick setup with Meta"**
+    2. Click **"Continue"**
+  </Step>
+
+  <Step title="Connect with Meta">
+    1. Click **"Connect with WhatsApp Business"**
+    2. A Meta pop-up window will open
+    3. Log in to your Facebook Business account
+  </Step>
+
+  <Step title="Authorize Access">
+    1. **Select WhatsApp Business Account** or create new
+    2. **Choose phone number** or add new
+    3. **Authorize permissions**:
+       - Manage messages
+       - Send messages
+       - Manage templates
+    4. Click **"Continue"**
+  </Step>
+
+  <Step title="Automatic Configuration">
+    Chatwoot automatically:
+    - ✅ Gets API credentials
+    - ✅ Configures webhook
+    - ✅ Registers phone number
+    - ✅ Syncs templates
+    
+    Wait ~30 seconds...
+  </Step>
+
+  <Step title="Done!">
+    ✅ Inbox created successfully!
+    
+    Now you can:
+    - Add agents to inbox
+    - Start receiving messages
+    - Send approved templates
+  </Step>
+</Steps>
+
+### Embedded Signup Advantages
+
+✅ **Zero manual config**: Everything automatic  
+✅ **Secure**: OAuth2 via Meta  
+✅ **Fast**: Ready in 2 minutes  
+✅ **Error-free**: Correct credentials guaranteed  
+✅ **Auto webhooks**: Already configured
+
+---
+
+## 🔧 Method 2: Manual Configuration
+
+For those who prefer full control or use custom systems.
+
+### Prerequisites
+
+- **Meta for Developers** account
+- WhatsApp Business App created
+- Verified phone number
+
+### Get Credentials from Meta
+
+<Steps>
+  <Step title="Access Meta for Developers">
+    1. Go to [developers.facebook.com](https://developers.facebook.com)
+    2. Login with your Facebook Business account
+    3. Click **"My Apps"**
+  </Step>
+
+  <Step title="Create/Select App">
+    **Create new:**
+    1. Click **"Create App"**
+    2. Type: **"Business"**
+    3. App name: "Chatwoot WhatsApp"
+    4. Contact email
+    5. **"Create App"**
+
+    **Or select existing app**
+  </Step>
+
+  <Step title="Add WhatsApp Product">
+    1. On app dashboard, search **"WhatsApp"**
+    2. Click **"Set up"**
+    3. Follow Meta's setup wizard
+  </Step>
+
+  <Step title="Get Phone Number ID">
+    1. On sidebar: **"WhatsApp"** → **"Getting Started"**
+    2. In **"Send and receive messages"** section
+    3. Copy the **Phone Number ID**
+    
+    ```
+    Example: 123456789012345
+    ```
+  </Step>
+
+  <Step title="Get Business Account ID (WABA ID)">
+    1. Still on WhatsApp page
+    2. Look for **"WhatsApp Business Account ID"**
+    3. Or go to **"WhatsApp"** → **"API Setup"**
+    4. Copy the **Business Account ID**
+    
+    ```
+    Example: 987654321098765
+    ```
+  </Step>
+
+  <Step title="Generate Access Token (API Key)">
+    1. Go to **"WhatsApp"** → **"API Setup"**
+    2. **"Temporary access token"** section:
+       - Click **"Generate token"**
+       - **⚠️ Token expires in 24h - for testing only!**
+    
+    **For Production (Permanent Token):**
+    1. Create **System User** in Business Manager
+    2. Generate permanent token with permissions:
+       - `whatsapp_business_management`
+       - `whatsapp_business_messaging`
+    3. Store token securely!
+    
+    ```
+    Example: EAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+  </Step>
+
+  <Step title="Add Phone Number">
+    1. Go to **"WhatsApp"** → **"API Setup"**
+    2. Click **"Add phone number"**
+    3. Choose number:
+       - Use Meta's test number (limited)
+       - Add your own number
+    4. Verify number via SMS/Call
+  </Step>
+</Steps>
+
+### Configure in Chatwoot
+
+<Steps>
+  <Step title="Create Inbox">
+    1. **"Settings"** → **"Inboxes"** → **"Add Inbox"**
+    2. Choose **"WhatsApp"**
+    3. Provider: **"WhatsApp Cloud - Quick setup via Meta"**
+  </Step>
+
+  <Step title="Fill Credentials">
+    **Form:**
+    
+    **Inbox Name:**
+    ```
+    Ex: WhatsApp Sales
+    ```
+    
+    **Phone Number** (E.164 format):
+    ```
+    Ex: +15551234567
+    ```
+    
+    **Phone Number ID:**
+    ```
+    Paste ID from step 4
+    Ex: 123456789012345
+    ```
+    
+    **Business Account ID:**
+    ```
+    Paste WABA ID from step 5
+    Ex: 987654321098765
+    ```
+    
+    **API Key** (Access Token):
+    ```
+    Paste token from step 6
+    Ex: EAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+  </Step>
+
+  <Step title="Create Inbox">
+    1. Click **"Create WhatsApp channel"**
+    2. Wait for credential validation
+    3. ✅ Inbox created!
+  </Step>
+</Steps>
+
+### Configure Webhook in Meta
+
+**Important**: Without webhook, you WON'T receive messages!
+
+<Steps>
+  <Step title="Get URL and Token from Chatwoot">
+    1. In Chatwoot, go to created inbox
+    2. **"Settings"** → **"Configuration"** tab
+    3. See **"Callback URL"** section:
+    
+    ```
+    Webhook URL:
+    https://your-chatwoot.com/webhooks/whatsapp/+15551234567
+    
+    Verify Token:
+    abc123xyz456 (auto-generated)
+    ```
+    
+    **Copy both!**
+  </Step>
+
+  <Step title="Configure in Meta">
+    1. Back to **Meta for Developers**
+    2. Your app → **"WhatsApp"** → **"Configuration"**
+    3. **"Webhook"** section
+    4. Click **"Edit"**
+  </Step>
+
+  <Step title="Add URL">
+    **Callback URL:**
+    ```
+    https://your-chatwoot.com/webhooks/whatsapp/+15551234567
+    ```
+    
+    **Verify Token:**
+    ```
+    abc123xyz456
+    ```
+    
+    Click **"Verify and save"**
+    
+    ✅ Should show "Verified" in green
+  </Step>
+
+  <Step title="Subscribe to Events">
+    In **"Webhook fields"** section, check:
+    
+    ✅ **messages** - Received messages  
+    ✅ **message_template_status_update** - Template status  
+    ⚠️ **account_alerts** - Important alerts  
+    ⚠️ **phone_number_quality_update** - Number quality
+    
+    Click **"Subscribe"**
+  </Step>
+
+  <Step title="Test Webhook">
+    1. Still in Webhook configuration
+    2. Click **"Test"**
+    3. Choose **"messages"**
+    4. Click **"Send"**
+    
+    ✅ Should return 200 OK status
+  </Step>
+</Steps>
+
+---
+
+## 📝 Create Message Templates
+
+Templates are pre-approved messages to send outside 24h window.
+
+### Create Template in Meta
+
+<Steps>
+  <Step title="Access WhatsApp Manager">
+    1. Go to [business.facebook.com](https://business.facebook.com)
+    2. Select your **WhatsApp Business Account**
+    3. Sidebar: **"Messaging tools"** → **"Message templates"**
+  </Step>
+
+  <Step title="Create New Template">
+    1. Click **"Create template"**
+    2. **Category**:
+       - **Marketing**: Promotions, offers
+       - **Utility**: Order updates, reminders
+       - **Authentication**: OTP codes
+    3. **Name**: `welcome_message` (no spaces, use _)
+    4. **Language**: English
+  </Step>
+
+  <Step title="Compose Message">
+    **Header (Optional):**
+    ```
+    Text, Image, Video or Document
+    Ex: Welcome to Acme!
+    ```
+    
+    **Body (Required):**
+    ```
+    Hello {{1}}! 👋
+    
+    Thank you for contacting Acme.
+    How can we help you today?
+    
+    Hours: Mon-Fri 9am-6pm
+    ```
+    
+    **Footer (Optional):**
+    ```
+    Acme Team
+    ```
+    
+    **Buttons (Optional):**
+    - Call to Action (URL, Phone)
+    - Quick Reply
+  </Step>
+
+  <Step title="Submit for Approval">
+    1. Review template
+    2. Click **"Submit"**
+    3. Wait for approval: **1-24 hours**
+    
+    Status:
+    - 🟡 **Pending**: Awaiting review
+    - 🟢 **Approved**: Can use now!
+    - 🔴 **Rejected**: See reason
+  </Step>
+</Steps>
+
+### Use Template in Chatwoot
+
+<Steps>
+  <Step title="Sync Templates">
+    1. In Chatwoot, go to WhatsApp inbox
+    2. **"Settings"** → **"Templates"**
+    3. Click **"Sync"**
+    4. Approved templates appear in list
+  </Step>
+
+  <Step title="Send Template">
+    1. Open conversation (can be > 24h inactive)
+    2. In message box, click **"Templates"** (⚡ icon)
+    3. Choose template from list
+    4. Fill variables (ex: customer name)
+    5. **"Send"**
+    
+    ✅ Message sent even outside window!
+  </Step>
+</Steps>
+
+---
+
+## 🔍 Verify Configuration
+
+### Configuration Checklist
+
+```
+✅ Correct credentials:
+   - Valid Phone Number ID
+   - Valid Business Account ID
+   - Active API Key (not expired)
+
+✅ Webhook configured:
+   - URL: https://your-chatwoot.com/webhooks/whatsapp/+155...
+   - Token: Matches Chatwoot
+   - Status: Verified ✓
+   - Subscribed fields: messages ✓
+
+✅ Templates synced:
+   - At least 1 approved template
+   - Sync working
+
+✅ Number verified:
+   - Number has green check in Meta
+   - Number not in use elsewhere
+```
+
+---
+
+## 🚨 Common Issues
+
+### Not Receiving Messages
+
+**Cause 1: Webhook not configured**
+```
+Solution:
+1. Check webhook URL in Meta
+2. Test webhook with "Test" button
+3. See logs in Chatwoot: /logs
+```
+
+**Cause 2: Expired token**
+```
+Solution:
+1. Generate new permanent Access Token
+2. Update in Chatwoot:
+   Inbox → Settings → Edit → API Key
+3. Save
+```
+
+### Cannot Send
+
+**Cause 1: Outside 24h window**
+```
+Error: "Message failed to send"
+
+Solution:
+Use approved template instead of normal message
+```
+
+---
+
+## 💡 Best Practices
+
+### Operations
+
+✅ **Monitor webhook**: Check logs regularly  
+✅ **Sync templates**: Weekly or after creating new  
+✅ **Account quality**: Check status monthly  
+✅ **Permanent token**: Use System User, not temporary  
+
+### Security
+
+✅ **Secure API Key**: Don't share, don't commit to Git  
+✅ **Webhook HTTPS**: Always use secure URL  
+✅ **IP whitelist**: Configure in Meta if possible  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Advanced Templates" icon="wand-magic-sparkles" href="/en/user-guide/whatsapp-templates">
+    Create templates with buttons, media and variables
+  </Card>
+  <Card title="WhatsApp Campaigns" icon="bullhorn" href="/en/user-guide/campaigns">
+    Send bulk messages via templates
+  </Card>
+</CardGroup>

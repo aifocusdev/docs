@@ -45,6 +45,7 @@
             "pages": [
               "pt-br/guia-usuario/primeiros-passos",
               "pt-br/guia-usuario/inboxes",
+              "pt-br/guia-usuario/whatsapp-cloud-api",
               "pt-br/guia-usuario/conversas",
               "pt-br/guia-usuario/contatos",
               "pt-br/guia-usuario/funis",
@@ -95,6 +96,7 @@
             "pages": [
               "en/user-guide/getting-started",
               "en/user-guide/inboxes",
+              "en/user-guide/whatsapp-cloud-api",
               "en/user-guide/conversations",
               "en/user-guide/contacts",
               "en/user-guide/funnels",
