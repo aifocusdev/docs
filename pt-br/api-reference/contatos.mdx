@@ -1,0 +1,760 @@
+---
+title: API de Contatos
+description: Documentação completa dos endpoints para gerenciar contatos (clientes)
+sidebarTitle: Contatos
+---
+
+# 👤 API de Contatos
+
+Endpoints para criar, listar, atualizar e gerenciar contatos (clientes).
+
+---
+
+## 🔐 Autenticação
+
+```http
+Header: api_access_token: SEU_TOKEN_AQUI
+```
+
+---
+
+## 📋 Listar Contatos
+
+Liste todos os contatos da conta com paginação.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/contacts
+```
+
+### Query Parameters
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `page` | integer | Número da página (padrão: 1) |
+| `sort` | string | Campo para ordenar: `name`, `email`, `created_at` |
+
+### Exemplo de Requisição
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts?page=1&sort=name' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "meta": {
+    "count": 150,
+    "current_page": 1,
+    "total_count": 150
+  },
+  "payload": [
+    {
+      "id": 45,
+      "name": "João Silva",
+      "email": "joao@empresa.com",
+      "phone_number": "+5511999999999",
+      "identifier": "customer_123",
+      "avatar_url": "https://...",
+      "custom_attributes": {
+        "cpf": "123.456.789-00",
+        "empresa": "Empresa XYZ",
+        "cargo": "CEO",
+        "cidade": "São Paulo"
+      },
+      "contact_inboxes": [
+        {
+          "inbox_id": 1,
+          "source_id": "5511999999999@c.us"
+        }
+      ],
+      "created_at": "2025-01-10T00:00:00Z",
+      "last_activity_at": "2025-01-16T10:30:00Z"
+    }
+  ]
+}
+```
+
+---
+
+## 🔍 Buscar Contato por ID
+
+Obtenha detalhes de um contato específico.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/contacts/{contact_id}
+```
+
+### Exemplo
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/45' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+### Resposta
+
+```json
+{
+  "id": 45,
+  "name": "João Silva",
+  "email": "joao@empresa.com",
+  "phone_number": "+5511999999999",
+  "identifier": "customer_123",
+  "avatar_url": "https://...",
+  "custom_attributes": {
+    "cpf": "123.456.789-00",
+    "empresa": "Empresa XYZ",
+    "cargo": "CEO",
+    "cidade": "São Paulo",
+    "orcamento": 50000
+  },
+  "conversations_count": 15,
+  "last_activity_at": "2025-01-16T10:30:00Z",
+  "created_at": "2025-01-10T00:00:00Z"
+}
+```
+
+---
+
+## ✨ Criar Contato
+
+Crie um novo contato.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/contacts
+```
+
+### Body Parameters
+
+| Campo | Tipo | Obrigatório | Descrição |
+|-------|------|-------------|-----------|
+| `name` | string | Não | Nome do contato |
+| `email` | string | Não* | Email do contato |
+| `phone_number` | string | Não* | Telefone no formato internacional |
+| `identifier` | string | Não | Identificador único externo |
+| `avatar_url` | string | Não | URL do avatar |
+| `custom_attributes` | object | Não | Atributos personalizados |
+
+*Pelo menos email OU phone_number é obrigatório
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Maria Santos",
+    "email": "maria@email.com",
+    "phone_number": "+5511888888888",
+    "identifier": "customer_456",
+    "custom_attributes": {
+      "cpf": "987.654.321-00",
+      "empresa": "Santos Corp",
+      "cargo": "Diretora",
+      "cidade": "Rio de Janeiro",
+      "orcamento": 75000,
+      "interesse": "Plano Enterprise"
+    }
+  }'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "id": 46,
+  "name": "Maria Santos",
+  "email": "maria@email.com",
+  "phone_number": "+5511888888888",
+  "identifier": "customer_456",
+  "custom_attributes": {
+    "cpf": "987.654.321-00",
+    "empresa": "Santos Corp",
+    "cargo": "Diretora",
+    "cidade": "Rio de Janeiro",
+    "orcamento": 75000,
+    "interesse": "Plano Enterprise"
+  },
+  "created_at": "2025-01-16T14:00:00Z"
+}
+```
+
+---
+
+## 🔄 Atualizar Contato
+
+Atualize informações de um contato existente.
+
+### Endpoint
+
+```http
+PATCH /api/v1/accounts/{account_id}/contacts/{contact_id}
+```
+
+### Body Parameters
+
+```json
+{
+  "name": "Maria Santos Silva",
+  "email": "maria.santos@email.com",
+  "phone_number": "+5511888888888",
+  "custom_attributes": {
+    "cargo": "CEO",
+    "orcamento": 100000
+  }
+}
+```
+
+### Exemplo
+
+```bash
+curl -X PATCH \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/46' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "custom_attributes": {
+      "cargo": "CEO",
+      "status": "cliente-ativo"
+    }
+  }'
+```
+
+---
+
+## 🗑️ Deletar Contato
+
+Remove um contato do sistema.
+
+### Endpoint
+
+```http
+DELETE /api/v1/accounts/{account_id}/contacts/{contact_id}
+```
+
+**⚠️ Atenção:** Isso também remove todas as conversas associadas!
+
+### Exemplo
+
+```bash
+curl -X DELETE \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/46' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+---
+
+## 🔍 Buscar Contatos
+
+Busque contatos por nome, email ou telefone.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/contacts/search
+```
+
+### Query Parameters
+
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|-----------|------|-------------|-----------|
+| `q` | string | Sim | Termo de busca |
+
+### Exemplo
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/search?q=joao' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+### Resposta
+
+```json
+{
+  "payload": [
+    {
+      "id": 45,
+      "name": "João Silva",
+      "email": "joao@empresa.com",
+      "phone_number": "+5511999999999"
+    },
+    {
+      "id": 47,
+      "name": "João Pedro",
+      "email": "joao.pedro@email.com",
+      "phone_number": "+5511777777777"
+    }
+  ]
+}
+```
+
+---
+
+## 🔍 Filtros Avançados
+
+Use filtros complexos para buscar contatos.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/contacts/filter
+```
+
+### Body Parameters
+
+```json
+{
+  "payload": [
+    {
+      "attribute_key": "email",
+      "filter_operator": "contains",
+      "values": ["@empresa.com"],
+      "query_operator": "and"
+    },
+    {
+      "attribute_key": "custom_attributes.cidade",
+      "filter_operator": "equal_to",
+      "values": ["São Paulo"]
+    }
+  ]
+}
+```
+
+### Exemplo
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/filter' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "payload": [
+      {
+        "attribute_key": "custom_attributes.orcamento",
+        "filter_operator": "is_greater_than",
+        "values": [50000]
+      }
+    ]
+  }'
+```
+
+---
+
+## 🏷️ Gerenciar Labels de Contatos
+
+### Listar Labels do Contato
+
+#### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/contacts/{contact_id}/labels
+```
+
+### Adicionar Label
+
+#### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/contacts/{contact_id}/labels
+```
+
+#### Body
+
+```json
+{
+  "labels": ["vip", "premium", "sao-paulo"]
+}
+```
+
+#### Exemplo
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/45/labels' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "labels": ["vip", "premium"]
+  }'
+```
+
+---
+
+## 📝 Notas de Contatos
+
+### Listar Notas
+
+#### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/contacts/{contact_id}/notes
+```
+
+### Criar Nota
+
+#### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/contacts/{contact_id}/notes
+```
+
+#### Body
+
+```json
+{
+  "content": "Cliente demonstrou interesse em upgrade para plano enterprise. Orçamento aprovado de R$ 100.000/ano."
+}
+```
+
+#### Exemplo
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/45/notes' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "content": "Cliente solicitou proposta customizada para 500 usuários."
+  }'
+```
+
+### Atualizar Nota
+
+#### Endpoint
+
+```http
+PATCH /api/v1/accounts/{account_id}/contacts/{contact_id}/notes/{note_id}
+```
+
+### Deletar Nota
+
+#### Endpoint
+
+```http
+DELETE /api/v1/accounts/{account_id}/contacts/{contact_id}/notes/{note_id}
+```
+
+---
+
+## 💬 Conversas do Contato
+
+Liste todas as conversas de um contato.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/contacts/{contact_id}/conversations
+```
+
+### Query Parameters
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `page` | integer | Número da página |
+
+### Exemplo
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/45/conversations?page=1' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+### Resposta
+
+```json
+{
+  "payload": [
+    {
+      "id": 123,
+      "inbox_id": 1,
+      "status": "resolved",
+      "created_at": "2025-01-15T10:00:00Z",
+      "messages_count": 12
+    },
+    {
+      "id": 124,
+      "inbox_id": 1,
+      "status": "open",
+      "created_at": "2025-01-16T09:00:00Z",
+      "messages_count": 3
+    }
+  ]
+}
+```
+
+---
+
+## 📧 Inboxes Contactable
+
+Liste quais inboxes podem contatar este cliente.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/contacts/{contact_id}/contactable_inboxes
+```
+
+### Resposta
+
+```json
+{
+  "payload": [
+    {
+      "inbox": {
+        "id": 1,
+        "name": "WhatsApp Principal",
+        "channel_type": "whatsapp"
+      },
+      "source_id": "5511999999999@c.us"
+    },
+    {
+      "inbox": {
+        "id": 2,
+        "name": "Email Suporte",
+        "channel_type": "email"
+      },
+      "source_id": "joao@empresa.com"
+    }
+  ]
+}
+```
+
+---
+
+## 🔄 Merge de Contatos
+
+Mescle dois contatos duplicados.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/actions/contact_merge
+```
+
+### Body
+
+```json
+{
+  "base_contact_id": 45,
+  "mergee_contact_id": 47
+}
+```
+
+**Resultado:**
+- Contato 47 é deletado
+- Todas conversas e dados são movidos para contato 45
+- Custom attributes são mesclados
+
+### Exemplo
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/actions/contact_merge' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "base_contact_id": 45,
+    "mergee_contact_id": 47
+  }'
+```
+
+---
+
+## 📤 Importar Contatos
+
+Importe múltiplos contatos de uma vez.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/contacts/import
+```
+
+### Body (multipart/form-data)
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/import' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -F 'file=@/path/to/contacts.csv'
+```
+
+### Formato CSV
+
+```csv
+name,email,phone_number,custom_attributes
+João Silva,joao@email.com,+5511999999999,{"cidade":"São Paulo","cargo":"CEO"}
+Maria Santos,maria@email.com,+5511888888888,{"cidade":"Rio","cargo":"CTO"}
+```
+
+---
+
+## 📥 Exportar Contatos
+
+Exporte todos os contatos para CSV.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/contacts/export
+```
+
+### Exemplo
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/contacts/export' \
+  -H 'api_access_token: SEU_TOKEN' \
+  --output contacts.csv
+```
+
+---
+
+## 💡 Exemplos Práticos
+
+### Criar Contato com Custom Attributes
+
+```javascript
+// Node.js
+const axios = require('axios');
+
+const API_URL = 'https://chat.seudominio.com/api/v1';
+const TOKEN = 'SEU_TOKEN';
+
+async function createContactWithAttributes() {
+  const response = await axios.post(
+    `${API_URL}/accounts/1/contacts`,
+    {
+      name: 'Pedro Costa',
+      email: 'pedro@empresa.com',
+      phone_number: '+5511777777777',
+      custom_attributes: {
+        cpf: '111.222.333-44',
+        empresa: 'Costa Enterprises',
+        cargo: 'CFO',
+        cidade: 'São Paulo',
+        segmento: 'Tecnologia',
+        orcamento: 200000,
+        funcionarios: 500,
+        interesse: ['Plano Enterprise', 'Suporte 24/7']
+      }
+    },
+    {
+      headers: {
+        'api_access_token': TOKEN,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  
+  return response.data;
+}
+```
+
+### Buscar Contatos VIP com Alto Orçamento
+
+```python
+# Python
+import requests
+
+API_URL = 'https://chat.seudominio.com/api/v1'
+TOKEN = 'SEU_TOKEN'
+
+def find_vip_contacts():
+    headers = {
+        'api_access_token': TOKEN,
+        'Content-Type': 'application/json'
+    }
+    
+    response = requests.post(
+        f'{API_URL}/accounts/1/contacts/filter',
+        json={
+            'payload': [
+                {
+                    'attribute_key': 'labels',
+                    'filter_operator': 'contains',
+                    'values': ['vip'],
+                    'query_operator': 'and'
+                },
+                {
+                    'attribute_key': 'custom_attributes.orcamento',
+                    'filter_operator': 'is_greater_than',
+                    'values': [100000]
+                }
+            ]
+        },
+        headers=headers
+    )
+    
+    return response.json()
+```
+
+---
+
+## ⚠️ Erros Comuns
+
+### 422 - Validação falhou
+
+```json
+{
+  "message": "Email or phone number must be present"
+}
+```
+
+**Solução:** Fornecer pelo menos email OU telefone
+
+### 409 - Contato já existe
+
+```json
+{
+  "message": "Contact with this email already exists",
+  "contact_id": 45
+}
+```
+
+**Solução:** Atualizar contato existente ao invés de criar novo
+
+### 404 - Contato não encontrado
+
+```json
+{
+  "error": "Contact not found"
+}
+```
+
+**Solução:** Verificar ID do contato
+
+---
+
+## 📚 Ver Também
+
+- [API de Conversas](/pt-br/api-reference/conversas)
+- [Custom Attributes](/pt-br/api-reference/custom-attributes)
+- [Labels](/pt-br/api-reference/labels)
+- [Webhooks](/pt-br/api-reference/webhooks)
+
+---
+
+<Tip>
+**Dica:** Use o campo `identifier` para sincronizar contatos com sistemas externos (CRM, ERP, etc).
+</Tip>
+
+<Warning>
+**Atenção:** Deletar um contato remove **todas** as conversas associadas. Use com cuidado!
+</Warning>
+

@@ -1,0 +1,734 @@
+---
+title: API de Funis (Kanban)
+description: Documentação completa da API de Funis - Feature exclusiva Ai Focus
+sidebarTitle: Funis (Kanban)
+---
+
+# 🎯 API de Funis (Kanban)
+
+API para gerenciar funis de vendas e pipeline de conversas. **Feature exclusiva da versão Ai Focus**.
+
+---
+
+## 🔐 Autenticação
+
+```http
+Header: api_access_token: SEU_TOKEN_AQUI
+```
+
+---
+
+## 📋 Listar Funis
+
+Liste todos os funis da conta.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/funnels
+```
+
+### Exemplo de Requisição
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/funnels' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json'
+```
+
+### Resposta de Sucesso
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Pipeline de Vendas B2B",
+    "description": "Funil principal para vendas corporativas",
+    "stages": [
+      {
+        "name": "Novo Lead",
+        "order": 0,
+        "color": "#3B82F6"
+      },
+      {
+        "name": "Qualificação",
+        "order": 1,
+        "color": "#8B5CF6"
+      },
+      {
+        "name": "Proposta",
+        "order": 2,
+        "color": "#F59E0B"
+      },
+      {
+        "name": "Fechado",
+        "order": 3,
+        "color": "#10B981"
+      }
+    ],
+    "conversations_count": 45,
+    "total_value": 125000.00,
+    "created_at": "2025-01-10T00:00:00Z"
+  }
+]
+```
+
+---
+
+## 🔍 Buscar Funil por ID
+
+Obtenha detalhes de um funil específico.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/funnels/{funnel_id}
+```
+
+### Resposta
+
+```json
+{
+  "id": 1,
+  "name": "Pipeline de Vendas B2B",
+  "description": "Funil principal para vendas corporativas",
+  "stages": [...],
+  "conversations_count": 45,
+  "total_value": 125000.00,
+  "metrics": {
+    "conversion_rate": 15.5,
+    "average_time_per_stage": {
+      "Novo Lead": 24,
+      "Qualificação": 48,
+      "Proposta": 120
+    }
+  }
+}
+```
+
+---
+
+## ✨ Criar Funil
+
+Crie um novo funil.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/funnels
+```
+
+### Body Parameters
+
+| Campo | Tipo | Obrigatório | Descrição |
+|-------|------|-------------|-----------|
+| `name` | string | Sim | Nome do funil |
+| `description` | string | Não | Descrição do funil |
+| `stages` | array | Sim | Lista de estágios |
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/funnels' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Pipeline de Vendas B2C",
+    "description": "Funil para vendas diretas ao consumidor",
+    "stages": [
+      {
+        "name": "Novo Lead",
+        "order": 0,
+        "color": "#3B82F6"
+      },
+      {
+        "name": "Contato",
+        "order": 1,
+        "color": "#8B5CF6"
+      },
+      {
+        "name": "Proposta",
+        "order": 2,
+        "color": "#F59E0B"
+      },
+      {
+        "name": "Fechado",
+        "order": 3,
+        "color": "#10B981"
+      },
+      {
+        "name": "Perdido",
+        "order": 4,
+        "color": "#EF4444"
+      }
+    ]
+  }'
+```
+
+---
+
+## 🔄 Atualizar Funil
+
+Atualize nome, descrição ou estágios.
+
+### Endpoint
+
+```http
+PATCH /api/v1/accounts/{account_id}/funnels/{funnel_id}
+```
+
+### Exemplo
+
+```bash
+curl -X PATCH \
+  'https://chat.seudominio.com/api/v1/accounts/1/funnels/1' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Pipeline B2B Atualizado",
+    "description": "Nova descrição"
+  }'
+```
+
+---
+
+## 🗑️ Deletar Funil
+
+**⚠️ Remove todas as conversas do funil!**
+
+### Endpoint
+
+```http
+DELETE /api/v1/accounts/{account_id}/funnels/{funnel_id}
+```
+
+---
+
+## 🎨 Templates de Funil
+
+Liste templates pré-configurados.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/funnels/templates
+```
+
+### Resposta
+
+```json
+{
+  "templates": [
+    {
+      "name": "Vendas B2B",
+      "description": "Template para vendas corporativas",
+      "stages": [...]
+    },
+    {
+      "name": "Vendas B2C",
+      "description": "Template para vendas diretas",
+      "stages": [...]
+    },
+    {
+      "name": "Suporte Técnico",
+      "description": "Template para tickets de suporte",
+      "stages": [...]
+    }
+  ]
+}
+```
+
+---
+
+## 📥 Criar Funil a Partir de Template
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/funnels/from_template
+```
+
+### Body
+
+```json
+{
+  "template_name": "Vendas B2B",
+  "name": "Meu Pipeline B2B"
+}
+```
+
+---
+
+## 📊 Kanban - Listar Conversas do Funil
+
+Liste todas as conversas organizadas por estágio.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/funnels/{funnel_id}/kanban/conversations
+```
+
+### Query Parameters
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `stage_name` | string | Filtrar por estágio específico |
+| `page` | integer | Página (padrão: 1) |
+| `per_page` | integer | Itens por página (padrão: 25) |
+
+### Exemplo de Requisição
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/funnels/1/kanban/conversations' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "stages": {
+    "Novo Lead": {
+      "count": 12,
+      "total_value": 45000.00,
+      "conversations": [
+        {
+          "id": 123,
+          "contact": {
+            "id": 45,
+            "name": "João Silva",
+            "email": "joao@empresa.com"
+          },
+          "assignee": {
+            "id": 1,
+            "name": "Agente 1"
+          },
+          "stage_entered_at": "2025-01-16T10:00:00Z",
+          "time_in_stage": 24,
+          "products": [
+            {
+              "id": 1,
+              "name": "Plano Premium",
+              "value": 5000.00
+            }
+          ],
+          "checklist": [
+            {
+              "item": "Validar CNPJ",
+              "completed": true
+            },
+            {
+              "item": "Enviar material",
+              "completed": false
+            }
+          ],
+          "labels": ["urgente", "enterprise"]
+        }
+      ]
+    },
+    "Qualificação": {
+      "count": 8,
+      "total_value": 32000.00,
+      "conversations": [...]
+    }
+  },
+  "total_conversations": 45,
+  "total_value": 125000.00
+}
+```
+
+---
+
+## 📌 Conversas de um Estágio Específico
+
+Liste apenas conversas de um estágio.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/funnels/{funnel_id}/kanban/stage_conversations
+```
+
+### Query Parameters
+
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|-----------|------|-------------|-----------|
+| `stage_name` | string | Sim | Nome do estágio |
+| `page` | integer | Não | Número da página |
+
+### Exemplo
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/funnels/1/kanban/stage_conversations?stage_name=Proposta&page=1' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+---
+
+## 🔄 Mover Conversa Entre Estágios
+
+Mova uma conversa de um estágio para outro.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/funnels/{funnel_id}/kanban/move_conversation
+```
+
+### Body Parameters
+
+| Campo | Tipo | Obrigatório | Descrição |
+|-------|------|-------------|-----------|
+| `conversation_id` | integer | Sim | ID da conversa |
+| `stage_name` | string | Sim | Nome do estágio destino |
+| `notes` | string | Não | Notas sobre a movimentação |
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/funnels/1/kanban/move_conversation' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "conversation_id": 123,
+    "stage_name": "Proposta",
+    "notes": "Cliente solicitou proposta formal"
+  }'
+```
+
+### Resposta
+
+```json
+{
+  "success": true,
+  "conversation_id": 123,
+  "previous_stage": "Qualificação",
+  "current_stage": "Proposta",
+  "time_in_previous_stage": 48,
+  "moved_at": "2025-01-16T14:00:00Z"
+}
+```
+
+---
+
+## ✅ Gerenciar Checklist
+
+### Adicionar Item ao Checklist
+
+#### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/add_checklist_item
+```
+
+#### Body
+
+```json
+{
+  "item": "Enviar proposta comercial"
+}
+```
+
+### Atualizar Item do Checklist
+
+#### Endpoint
+
+```http
+PATCH /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/update_checklist_item
+```
+
+#### Body
+
+```json
+{
+  "index": 0,
+  "completed": true
+}
+```
+
+### Remover Item do Checklist
+
+#### Endpoint
+
+```http
+DELETE /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/remove_checklist_item
+```
+
+#### Body
+
+```json
+{
+  "index": 0
+}
+```
+
+---
+
+## 👥 Gerenciar Agentes no Funil
+
+### Atribuir Agente
+
+#### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/assign_agent
+```
+
+#### Body
+
+```json
+{
+  "agent_id": 2,
+  "role": "collaborator"
+}
+```
+
+**Roles disponíveis:**
+- `owner` - Responsável principal
+- `collaborator` - Colaborador
+- `observer` - Apenas observa
+
+### Remover Agente
+
+#### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/remove_agent
+```
+
+#### Body
+
+```json
+{
+  "agent_id": 2
+}
+```
+
+---
+
+## ⏱️ Gerenciar Timers
+
+### Iniciar Timer
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/start_timer
+```
+
+### Pausar Timer
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/pause_timer
+```
+
+### Resetar Timer
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/funnel_mappings/{mapping_id}/reset_timer
+```
+
+---
+
+## 📈 Métricas e Relatórios
+
+### Obter Métricas do Funil
+
+#### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/funnels/{funnel_id}/metrics
+```
+
+#### Resposta
+
+```json
+{
+  "total_conversations": 45,
+  "total_value": 125000.00,
+  "average_ticket": 2777.78,
+  "conversion_rate": 15.5,
+  "stages_metrics": {
+    "Novo Lead": {
+      "count": 12,
+      "value": 45000.00,
+      "average_time": 24,
+      "conversion_to_next": 66.7
+    },
+    "Qualificação": {
+      "count": 8,
+      "value": 32000.00,
+      "average_time": 48,
+      "conversion_to_next": 62.5
+    },
+    "Proposta": {
+      "count": 5,
+      "value": 28000.00,
+      "average_time": 120,
+      "conversion_to_next": 60.0
+    },
+    "Fechado": {
+      "count": 3,
+      "value": 20000.00,
+      "average_time": 0
+    }
+  },
+  "win_rate": 15.5,
+  "loss_rate": 8.9,
+  "average_deal_cycle": 192
+}
+```
+
+---
+
+## 💡 Exemplos Práticos
+
+### Criar Funil Completo
+
+```javascript
+// Node.js
+const axios = require('axios');
+
+const API_URL = 'https://chat.seudominio.com/api/v1';
+const TOKEN = 'SEU_TOKEN';
+
+async function createFunnelWithStages() {
+  const response = await axios.post(
+    `${API_URL}/accounts/1/funnels`,
+    {
+      name: 'Pipeline de Vendas 2025',
+      description: 'Funil principal para vendas',
+      stages: [
+        {
+          name: 'Novo Lead',
+          order: 0,
+          color: '#3B82F6'
+        },
+        {
+          name: 'Qualificação',
+          order: 1,
+          color: '#8B5CF6'
+        },
+        {
+          name: 'Demo',
+          order: 2,
+          color: '#EC4899'
+        },
+        {
+          name: 'Proposta',
+          order: 3,
+          color: '#F59E0B'
+        },
+        {
+          name: 'Negociação',
+          order: 4,
+          color: '#F97316'
+        },
+        {
+          name: 'Fechado',
+          order: 5,
+          color: '#10B981'
+        },
+        {
+          name: 'Perdido',
+          order: 6,
+          color: '#EF4444'
+        }
+      ]
+    },
+    {
+      headers: {
+        'api_access_token': TOKEN,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  
+  return response.data;
+}
+```
+
+### Mover Múltiplas Conversas
+
+```python
+# Python
+import requests
+
+API_URL = 'https://chat.seudominio.com/api/v1'
+TOKEN = 'SEU_TOKEN'
+
+def move_conversations_to_stage(funnel_id, conversation_ids, stage_name):
+    headers = {
+        'api_access_token': TOKEN,
+        'Content-Type': 'application/json'
+    }
+    
+    results = []
+    for conv_id in conversation_ids:
+        response = requests.post(
+            f'{API_URL}/accounts/1/funnels/{funnel_id}/kanban/move_conversation',
+            json={
+                'conversation_id': conv_id,
+                'stage_name': stage_name
+            },
+            headers=headers
+        )
+        results.append(response.json())
+    
+    return results
+
+# Mover conversas 123, 124, 125 para "Proposta"
+move_conversations_to_stage(1, [123, 124, 125], 'Proposta')
+```
+
+---
+
+## ⚠️ Erros Comuns
+
+### 404 - Funil não encontrado
+
+```json
+{
+  "error": "Funnel not found"
+}
+```
+
+### 422 - Estágio inválido
+
+```json
+{
+  "error": "Stage 'XYZ' does not exist in this funnel"
+}
+```
+
+### 409 - Conversa já está no funil
+
+```json
+{
+  "error": "Conversation is already in a funnel"
+}
+```
+
+---
+
+## 📚 Ver Também
+
+- [Guia de Funis](/pt-br/guia-usuario/funis)
+- [API de Conversas](/pt-br/api-reference/conversas)
+- [API de Produtos](/pt-br/api-reference/produtos)
+- [Webhooks](/pt-br/api-reference/webhooks)
+
+---
+
+<Note>
+**Feature Exclusiva:** Funis são uma customização da Ai Focus e não estão disponíveis no Chatwoot original.
+</Note>
+
+<Warning>
+**Atenção:** Deletar um funil remove todas as conversas vinculadas a ele. Essa ação é irreversível!
+</Warning>
+

@@ -49,13 +49,18 @@
           {
             "group": "📖 Guia do Usuário",
             "pages": [
-              "pt-br/guia-usuario/primeiros-passos"
+              "pt-br/guia-usuario/primeiros-passos",
+              "pt-br/guia-usuario/conversas",
+              "pt-br/guia-usuario/funis"
             ]
           },
           {
             "group": "🔌 API Reference",
             "pages": [
-              "pt-br/api-reference/introducao"
+              "pt-br/api-reference/introducao",
+              "pt-br/api-reference/conversas",
+              "pt-br/api-reference/contatos",
+              "pt-br/api-reference/funis"
             ]
           },
           {
