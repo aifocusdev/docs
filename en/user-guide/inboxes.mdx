@@ -1,0 +1,276 @@
+---
+title: Inboxes & Channels
+description: Configure and manage all support channels (WhatsApp, Email, Instagram, etc.)
+sidebarTitle: Inboxes
+---
+
+# 📥 Inboxes & Channels
+
+Learn how to connect and manage all support channels in Chatwoot: WhatsApp, Instagram, Facebook, Email, website chat, and more!
+
+---
+
+## 📋 What are Inboxes?
+
+**Inbox** is each communication channel where you receive messages from customers:
+
+- 💬 **WhatsApp Business**
+- 📷 **Instagram Direct**
+- 📘 **Facebook Messenger**
+- 📧 **Email (IMAP/SMTP)**
+- 🌐 **Website Widget** (website chat)
+- 💬 **Telegram**
+- 📱 **SMS**
+- ☎️ **Phone** (via integration)
+
+**Each inbox works as a separate "mailbox"**, but all support is centralized in Chatwoot!
+
+---
+
+## ➕ Add New Inbox
+
+### Step by Step
+
+1. In the sidebar, click **"Settings"** → **"Inboxes"**
+2. Click **"+ Add Inbox"**
+3. Choose channel type
+4. Follow specific instructions for each channel
+5. Assign agents to the inbox
+6. Done! Start receiving messages
+
+---
+
+## 💬 WhatsApp
+
+### Integration Options
+
+Chatwoot supports **3 ways** to connect WhatsApp:
+
+<CardGroup cols={3}>
+  <Card title="Evolution API" icon="whatsapp">
+    Most stable and reliable  
+    Multi-device  
+    Ideal for production
+  </Card>
+  <Card title="WAHA" icon="whatsapp">
+    Open-source  
+    Self-hosted  
+    Free
+  </Card>
+  <Card title="UAZ API" icon="whatsapp">
+    Brazilian provider  
+    PT-BR support  
+    Easy setup
+  </Card>
+</CardGroup>
+
+### Configure WhatsApp (Evolution API)
+
+1. **Get API Key** from your Evolution provider
+2. In Chatwoot: **"Add Inbox"** → **"WhatsApp"**
+3. Choose **"Evolution API"**
+4. Fill in:
+   - **Inbox Name**: e.g., "Sales WhatsApp"
+   - **API URL**: Your Evolution server URL
+   - **API Key**: Your authentication key
+5. **Scan QR Code** with WhatsApp
+6. **Assign agents** to inbox
+7. Test by sending a message
+
+### WhatsApp Features
+
+✅ **Send/Receive** text messages  
+✅ **Media**: Images, videos, audios, documents  
+✅ **Templates**: Pre-approved WhatsApp messages  
+✅ **Interactive buttons**: Quick replies  
+✅ **Lists**: Option menus  
+✅ **Location**: Share/receive location  
+✅ **Contacts**: Send vCard
+
+---
+
+## 📷 Instagram Direct
+
+### Connect Instagram
+
+<Note>
+**Requirement**: You need an Instagram Business account linked to a Facebook page.
+</Note>
+
+1. **Add Inbox** → **"Instagram"**
+2. Click **"Connect with Facebook"**
+3. Login to Facebook
+4. Choose the **Facebook Page** connected to Instagram
+5. Authorize permissions
+6. Select Instagram account
+7. Assign agents
+
+### Instagram Features
+
+✅ **Direct Messages**: Handle DMs directly in Chatwoot  
+✅ **Comments**: (Optional) Receive post comments  
+✅ **Stories**: Story replies appear as messages  
+✅ **Media**: Photos, videos, GIFs  
+✅ **Quick Replies**: Send saved responses
+
+---
+
+## 📘 Facebook Messenger
+
+### Connect Facebook
+
+1. **Add Inbox** → **"Facebook Messenger"**
+2. Click **"Connect with Facebook"**
+3. Login
+4. Choose the **Page** you want to connect
+5. Authorize permissions
+6. Assign agents
+
+### Facebook Features
+
+✅ **Page Messages**: Handle messages directly  
+✅ **Comments**: (Optional) Turn comments into conversations  
+✅ **Media**: Share photos, videos, GIFs  
+✅ **Buttons**: Use quick reply buttons
+
+---
+
+## 📧 Email (IMAP/SMTP)
+
+### Configure Email
+
+Turn your email into a Chatwoot inbox!
+
+1. **Add Inbox** → **"Email"**
+2. Fill in information:
+
+**IMAP (Receive):**
+- **Server**: imap.gmail.com (Gmail)
+- **Port**: 993
+- **Email**: your@email.com
+- **Password**: Email password (or App Password)
+
+**SMTP (Send):**
+- **Server**: smtp.gmail.com (Gmail)
+- **Port**: 587
+- **Email**: your@email.com
+- **Password**: Email password
+
+3. **Test connection**
+4. Assign agents
+
+### Common Providers
+
+| Provider | IMAP | IMAP Port | SMTP | SMTP Port |
+|----------|------|-----------|------|-----------|
+| **Gmail** | imap.gmail.com | 993 | smtp.gmail.com | 587 |
+| **Outlook** | outlook.office365.com | 993 | smtp.office365.com | 587 |
+| **Yahoo** | imap.mail.yahoo.com | 993 | smtp.mail.yahoo.com | 587 |
+| **Custom** | your-server.com | 993/143 | your-server.com | 587/465 |
+
+---
+
+## 🌐 Website Widget (Website Chat)
+
+### Install Chat on Website
+
+1. **Add Inbox** → **"Website"**
+2. Give it a name: e.g., "Main Website Chat"
+3. Configure appearance:
+   - **Primary Color**: Your brand color
+   - **Welcome Message**: "Hello! How can I help?"
+   - **Avatar**: Company logo
+4. **Copy installation code**:
+
+```html
+<script>
+(function(d,t) {
+  var BASE_URL="https://chat.yourdomain.com";
+  var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=BASE_URL+"/packs/js/sdk.js";
+  g.defer = true;
+  g.async = true;
+  s.parentNode.insertBefore(g,s);
+  g.onload=function(){
+    window.chatwootSDK.run({
+      websiteToken: 'YOUR_TOKEN_HERE',
+      baseUrl: BASE_URL
+    })
+  }
+})(document,"script");
+</script>
+```
+
+5. **Paste before `</body>`** on your website
+6. Reload site and test!
+
+---
+
+## 💬 Telegram
+
+### Create Telegram Bot
+
+1. On Telegram, talk to **@BotFather**
+2. Send `/newbot`
+3. Choose name and username for bot
+4. Copy the **Token** provided
+
+### Connect to Chatwoot
+
+1. **Add Inbox** → **"Telegram"**
+2. Paste bot **Token**
+3. Give inbox a name
+4. Assign agents
+5. Done! Messages to bot appear in Chatwoot
+
+---
+
+## 📊 Inbox Metrics
+
+Track performance of each channel:
+
+### Available Metrics
+
+- **Total Conversations**: How many conversations per channel
+- **Average Response Time**: Per inbox
+- **Resolution Rate**: % of resolved conversations
+- **Satisfaction (CSAT)**: Average rating per channel
+- **Peak Hours**: When receives most messages
+
+---
+
+## 💡 Tips and Best Practices
+
+### Organization
+
+✅ **Clear names**: "Sales WhatsApp", "Support Email"  
+✅ **One inbox per function**: Separate sales from support  
+✅ **Specific agents**: Assign specialists per channel  
+✅ **Correct hours**: Configure business hours
+
+### Performance
+
+✅ **Auto-assignment**: Use Round Robin or Capacity  
+✅ **Canned Responses**: Create templates for common replies  
+✅ **Labels per channel**: Organize conversations by source
+
+### Customer Experience
+
+✅ **Reply fast**: Configure agent notifications  
+✅ **Personalize welcome**: Warm and helpful message  
+✅ **Out of hours**: Inform when you'll return  
+✅ **Multi-channel**: Offer options to customer
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Conversation Management" icon="messages" href="/en/user-guide/conversations">
+    Learn to manage support
+  </Card>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Automate replies and assignments
+  </Card>
+</CardGroup>
+
