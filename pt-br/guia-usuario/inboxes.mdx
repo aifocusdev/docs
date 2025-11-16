@@ -1,0 +1,460 @@
+---
+title: Inboxes e Canais
+description: Configure e gerencie todos os canais de atendimento (WhatsApp, Email, Instagram, etc.)
+sidebarTitle: Inboxes
+---
+
+# 📥 Inboxes e Canais
+
+Aprenda a conectar e gerenciar todos os canais de atendimento no Chatwoot: WhatsApp, Instagram, Facebook, Email, chat do site e mais!
+
+---
+
+## 📋 O que são Inboxes?
+
+**Inbox** é cada canal de comunicação onde você recebe mensagens dos clientes:
+
+- 💬 **WhatsApp Business**
+- 📷 **Instagram Direct**
+- 📘 **Facebook Messenger**
+- 📧 **Email (IMAP/SMTP)**
+- 🌐 **Website Widget** (chat do site)
+- 💬 **Telegram**
+- 📱 **SMS**
+- ☎️ **Telefone** (via integração)
+
+**Cada inbox funciona como uma "caixa de entrada" separada**, mas todos os atendimentos ficam centralizados no Chatwoot!
+
+---
+
+## ➕ Adicionar Novo Inbox
+
+### Passo a Passo
+
+1. Na sidebar, clique em **"Configurações"** → **"Inboxes"**
+2. Clique em **"+ Adicionar Inbox"**
+3. Escolha o tipo de canal
+4. Siga as instruções específicas de cada canal
+5. Atribua agentes ao inbox
+6. Pronto! Comece a receber mensagens
+
+---
+
+## 💬 WhatsApp
+
+### Opções de Integração
+
+O Chatwoot suporta **3 formas** de conectar WhatsApp:
+
+<CardGroup cols={3}>
+  <Card title="Evolution API" icon="whatsapp">
+    Mais estável e confiável  
+    Multi-dispositivo  
+    Ideal para produção
+  </Card>
+  <Card title="WAHA" icon="whatsapp">
+    Open-source  
+    Auto-hospedado  
+    Gratuito
+  </Card>
+  <Card title="UAZ API" icon="whatsapp">
+    Provider brasileiro  
+    Suporte em PT-BR  
+    Fácil configuração
+  </Card>
+</CardGroup>
+
+### Configurar WhatsApp (Evolution API)
+
+1. **Obtenha API Key** do seu provider Evolution
+2. No Chatwoot: **"Adicionar Inbox"** → **"WhatsApp"**
+3. Escolha **"Evolution API"**
+4. Preencha:
+   - **Nome do Inbox**: Ex: "WhatsApp Vendas"
+   - **URL da API**: URL do seu servidor Evolution
+   - **API Key**: Sua chave de autenticação
+5. **Escanei QR Code** com WhatsApp
+6. **Atribua agentes** ao inbox
+7. Teste enviando mensagem
+
+### Funcionalidades WhatsApp
+
+✅ **Enviar/Receber** mensagens de texto  
+✅ **Mídia**: Imagens, vídeos, áudios, documentos  
+✅ **Templates**: Mensagens pré-aprovadas pelo WhatsApp  
+✅ **Botões interativos**: Respostas rápidas  
+✅ **Listas**: Menus de opções  
+✅ **Localização**: Compartilhar/receber localização  
+✅ **Contatos**: Enviar vCard
+
+---
+
+## 📷 Instagram Direct
+
+### Conectar Instagram
+
+<Note>
+**Requisito**: Você precisa de uma conta Instagram Business vinculada a uma página do Facebook.
+</Note>
+
+1. **Adicionar Inbox** → **"Instagram"**
+2. Clique em **"Conectar com Facebook"**
+3. Faça login no Facebook
+4. Escolha a **Página do Facebook** conectada ao Instagram
+5. Autorize permissões
+6. Selecione a conta Instagram
+7. Atribua agentes
+
+### Funcionalidades Instagram
+
+✅ **Direct Messages**: Atenda DMs direto no Chatwoot  
+✅ **Comentários**: (Opcional) Receba comentários de posts  
+✅ **Stories**: Respostas a stories aparecem como mensagens  
+✅ **Mídia**: Fotos, vídeos, GIFs  
+✅ **Respostas Rápidas**: Envie respostas salvas
+
+---
+
+## 📘 Facebook Messenger
+
+### Conectar Facebook
+
+1. **Adicionar Inbox** → **"Facebook Messenger"**
+2. Clique em **"Conectar com Facebook"**
+3. Faça login
+4. Escolha a **Página** que deseja conectar
+5. Autorize permissões
+6. Atribua agentes
+
+### Funcionalidades Facebook
+
+✅ **Mensagens da Página**: Atenda mensagens direto  
+✅ **Comentários**: (Opcional) Transforme comentários em conversas  
+✅ **Mídia**: Compartilhe fotos, vídeos, GIFs  
+✅ **Botões**: Use botões de resposta rápida
+
+---
+
+## 📧 Email (IMAP/SMTP)
+
+### Configurar Email
+
+Transforme seu email em inbox do Chatwoot!
+
+1. **Adicionar Inbox** → **"Email"**
+2. Preencha informações:
+
+**IMAP (Receber):**
+- **Servidor**: imap.gmail.com (Gmail)
+- **Porta**: 993
+- **Email**: seu@email.com
+- **Senha**: Senha do email (ou App Password)
+
+**SMTP (Enviar):**
+- **Servidor**: smtp.gmail.com (Gmail)
+- **Porta**: 587
+- **Email**: seu@email.com
+- **Senha**: Senha do email
+
+3. **Teste a conexão**
+4. Atribua agentes
+
+### Providers Comuns
+
+| Provider | IMAP | Porta IMAP | SMTP | Porta SMTP |
+|----------|------|------------|------|------------|
+| **Gmail** | imap.gmail.com | 993 | smtp.gmail.com | 587 |
+| **Outlook** | outlook.office365.com | 993 | smtp.office365.com | 587 |
+| **Yahoo** | imap.mail.yahoo.com | 993 | smtp.mail.yahoo.com | 587 |
+| **Custom** | seu-servidor.com | 993/143 | seu-servidor.com | 587/465 |
+
+### Gmail - Habilitar App Password
+
+<Steps>
+  <Step title="Ativar 2FA no Gmail">
+    Configurações → Segurança → Verificação em duas etapas
+  </Step>
+  <Step title="Criar App Password">
+    Senhas de app → Gerar nova senha
+  </Step>
+  <Step title="Usar no Chatwoot">
+    Use a senha gerada (16 caracteres) no lugar da senha normal
+  </Step>
+</Steps>
+
+---
+
+## 🌐 Website Widget (Chat do Site)
+
+### Instalar Chat no Site
+
+1. **Adicionar Inbox** → **"Website"**
+2. Dê um nome: Ex: "Chat do Site Principal"
+3. Configure aparência:
+   - **Cor primária**: Cor da sua marca
+   - **Mensagem de boas-vindas**: "Olá! Como posso ajudar?"
+   - **Avatar**: Logo da empresa
+4. **Copie o código de instalação**:
+
+```html
+<script>
+(function(d,t) {
+  var BASE_URL="https://chat.seudominio.com";
+  var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=BASE_URL+"/packs/js/sdk.js";
+  g.defer = true;
+  g.async = true;
+  s.parentNode.insertBefore(g,s);
+  g.onload=function(){
+    window.chatwootSDK.run({
+      websiteToken: 'SEU_TOKEN_AQUI',
+      baseUrl: BASE_URL
+    })
+  }
+})(document,"script");
+</script>
+```
+
+5. **Cole antes do `</body>`** no seu site
+6. Recarregue o site e teste!
+
+### Personalizar Widget
+
+**Aparência:**
+- Cor do botão e header
+- Avatar do agente
+- Mensagem de boas-vindas
+- Posição (direita/esquerda)
+
+**Comportamento:**
+- Abrir automaticamente após X segundos
+- Mostrar notificação de nova mensagem
+- Pré-preencher informações do visitante
+- Desabilitar anexos (opcional)
+
+**Horário de Atendimento:**
+- Configure mensagem fora do horário
+- Redirecione para email/formulário
+
+---
+
+## 💬 Telegram
+
+### Criar Bot do Telegram
+
+1. No Telegram, fale com **@BotFather**
+2. Envie `/newbot`
+3. Escolha nome e username do bot
+4. Copie o **Token** fornecido
+
+### Conectar ao Chatwoot
+
+1. **Adicionar Inbox** → **"Telegram"**
+2. Cole o **Token** do bot
+3. Dê um nome ao inbox
+4. Atribua agentes
+5. Pronto! Mensagens ao bot aparecem no Chatwoot
+
+---
+
+## ⚙️ Configurações do Inbox
+
+### Atribuição Automática
+
+Configure como conversas são atribuídas aos agentes:
+
+- **Manual**: Agente escolhe pegar conversa
+- **Round Robin**: Distribui igualmente entre agentes
+- **Por Capacidade**: Baseado em número de conversas ativas
+- **Por Habilidade**: (Requer configuração de skills)
+
+### Horário de Atendimento
+
+Defina quando o inbox está ativo:
+
+1. Edite o inbox → **"Horário de Funcionamento"**
+2. Configure:
+   - **Dias da semana**
+   - **Horário de início/fim**
+   - **Fuso horário**
+3. Mensagem fora do horário (opcional)
+
+### Mensagens Automáticas
+
+**Mensagem de Boas-vindas:**
+- Enviada ao cliente no primeiro contato
+- Ex: "Olá! Obrigado por entrar em contato. Como posso ajudar?"
+
+**Mensagem de Ausência:**
+- Quando não há agentes online
+- Ex: "No momento não há agentes disponíveis. Responderemos em breve!"
+
+**Email de Transcrição:**
+- Envie cópia da conversa por email
+- Útil para follow-up
+
+---
+
+## 👥 Gerenciar Agentes do Inbox
+
+### Adicionar Agentes
+
+1. Edite o inbox
+2. Vá em **"Agentes"** ou **"Colaboradores"**
+3. Clique em **"+ Adicionar Agente"**
+4. Selecione agente(s) na lista
+5. Salve
+
+### Remover Agentes
+
+1. Na lista de agentes do inbox
+2. Clique no **"X"** ao lado do nome
+3. Confirme remoção
+
+<Tip>
+**Dica**: Agentes só veem conversas dos inboxes aos quais estão atribuídos!
+</Tip>
+
+---
+
+## 📊 Métricas por Inbox
+
+Acompanhe performance de cada canal:
+
+### Métricas Disponíveis
+
+- **Total de Conversas**: Quantas conversas por canal
+- **Tempo Médio de Resposta**: Por inbox
+- **Taxa de Resolução**: % de conversas resolvidas
+- **Satisfação (CSAT)**: Nota média por canal
+- **Horário de Pico**: Quando recebe mais mensagens
+
+### Visualizar Métricas
+
+1. Vá em **"Relatórios"** → **"Inboxes"**
+2. Escolha o inbox desejado
+3. Filtre por período
+4. Analise gráficos e tabelas
+
+---
+
+## 🔌 Integrações Avançadas
+
+### Webhooks
+
+Receba notificações de eventos em tempo real:
+
+1. Edite o inbox → **"Configurações"** → **"Webhooks"**
+2. Adicione URL do webhook
+3. Escolha eventos:
+   - Nova conversa
+   - Nova mensagem
+   - Conversa atribuída
+   - Conversa resolvida
+4. Salve
+
+### API
+
+Gerencie inboxes programaticamente:
+
+```bash
+# Listar inboxes
+GET /api/v1/accounts/{account_id}/inboxes
+
+# Criar inbox
+POST /api/v1/accounts/{account_id}/inboxes
+
+# Atualizar inbox
+PATCH /api/v1/accounts/{account_id}/inboxes/{inbox_id}
+```
+
+---
+
+## 🛡️ Segurança e Privacidade
+
+### Autenticação de Identidade
+
+Para o widget do site, valide identidade do usuário:
+
+```javascript
+window.chatwootSDK.run({
+  websiteToken: 'SEU_TOKEN',
+  baseUrl: 'https://chat.seudominio.com',
+  user: {
+    identifier: 'user_123',
+    identifier_hash: 'HMAC_HASH_AQUI'
+  }
+})
+```
+
+Isso evita que usuários se passem por outros!
+
+### Dados Sensíveis
+
+<Warning>
+Nunca solicite dados sensíveis (senhas, cartões) via chat. Use links seguros para formulários.
+</Warning>
+
+---
+
+## 💡 Dicas e Boas Práticas
+
+### Organização
+
+✅ **Nomes claros**: "WhatsApp Vendas", "Email Suporte"  
+✅ **Um inbox por função**: Separe vendas de suporte  
+✅ **Agentes específicos**: Atribua especialistas por canal  
+✅ **Horários corretos**: Configure horário de funcionamento
+
+### Performance
+
+✅ **Atribuição automática**: Use Round Robin ou Capacidade  
+✅ **Mensagens prontas**: Crie templates para respostas comuns  
+✅ **Labels por canal**: Organize conversas por origem
+
+### Experiência do Cliente
+
+✅ **Responda rápido**: Configure notificações para agentes  
+✅ **Personalize boas-vindas**: Mensagem calorosa e útil  
+✅ **Fora do horário**: Informe quando retornará  
+✅ **Multi-canal**: Ofereça opções ao cliente
+
+---
+
+## ❓ Perguntas Frequentes
+
+<AccordionGroup>
+  <Accordion title="Posso ter múltiplos WhatsApp na mesma conta?">
+    Sim! Adicione quantos inboxes WhatsApp precisar (vendas, suporte, etc.).
+  </Accordion>
+
+  <Accordion title="Como compartilho histórico entre canais?">
+    Use o sistema de Contatos. Vincule todas as identidades ao mesmo contato!
+  </Accordion>
+
+  <Accordion title="Posso usar mesmo número WhatsApp em múltiplos Chatwoot?">
+    Não. Cada número WhatsApp pode estar conectado a apenas um Chatwoot por vez.
+  </Accordion>
+
+  <Accordion title="Email funciona com Office 365?">
+    Sim! Use os servidores IMAP/SMTP do Office 365 (veja tabela acima).
+  </Accordion>
+
+  <Accordion title="Posso desabilitar um inbox temporariamente?">
+    Sim! Remova todos os agentes ou use horário de funcionamento zerado.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Gestão de Conversas" icon="messages" href="/pt-br/guia-usuario/conversas">
+    Aprenda a gerenciar atendimentos
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Automatize respostas e atribuições
+  </Card>
+</CardGroup>
+
