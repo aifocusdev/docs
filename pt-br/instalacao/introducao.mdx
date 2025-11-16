@@ -1,0 +1,420 @@
+---
+title: Guia de Instalação do Chatwoot
+description: Documentação completa para instalar o Chatwoot customizado da Ai Focus
+sidebarTitle: Introdução
+---
+
+# 🚀 Instalação do Ai Focus Chatwoot
+
+Este guia completo irá ajudá-lo a instalar e configurar o Chatwoot otimizado pela Ai Focus em seu servidor.
+
+---
+
+## 📋 Requisitos de Sistema
+
+### Mínimo Recomendado
+
+| Componente | Mínimo | Recomendado |
+|------------|--------|-------------|
+| **Sistema Operacional** | Ubuntu 20.04 LTS | Ubuntu 22.04 LTS |
+| **CPU** | 2 cores | 4+ cores |
+| **RAM** | 4GB | 8GB+ |
+| **Disco** | 40GB | 80GB SSD |
+| **Acesso** | root ou sudo | root ou sudo |
+
+### Software Necessário
+
+O script de instalação instala automaticamente:
+
+- ✅ **Ruby** 3.3.8 (via rbenv)
+- ✅ **Node.js** 23.x + pnpm
+- ✅ **PostgreSQL** 16 + pgvector
+- ✅ **Redis** 7+
+- ✅ **Nginx** (reverse proxy)
+- ✅ **Let's Encrypt** (SSL)
+
+---
+
+## ⚡ Instalação Rápida (Recomendado)
+
+### Opção 1: Um Único Comando
+
+```bash
+wget https://raw.githubusercontent.com/aifocusdev/cw-N-aifocus/master/install-fixed.sh && sudo bash install-fixed.sh -i
+```
+
+**O que este comando faz:**
+1. ✅ Baixa o script de instalação
+2. ✅ Verifica requisitos do sistema
+3. ✅ Instala todas as dependências
+4. ✅ Configura banco de dados
+5. ✅ Instala e configura Chatwoot
+6. ✅ Configura serviços systemd
+7. ✅ (Opcional) Configura SSL/domínio
+
+**Tempo estimado:** 15-20 minutos
+
+---
+
+## 📝 Instalação Passo a Passo
+
+Se preferir fazer manualmente ou entender cada etapa:
+
+### 1️⃣ Preparar o Servidor
+
+```bash
+# Login como root
+sudo su -
+
+# Atualizar sistema
+apt-get update && apt-get upgrade -y
+
+# Instalar dependências básicas
+apt-get install -y curl wget git build-essential
+```
+
+### 2️⃣ Download do Instalador
+
+```bash
+# Download do script
+wget https://raw.githubusercontent.com/aifocusdev/cw-N-aifocus/master/install-fixed.sh -O /root/install-chatwoot.sh
+
+# Dar permissão de execução
+chmod +x /root/install-chatwoot.sh
+```
+
+### 3️⃣ Executar Instalação
+
+```bash
+# Instalação completa (Web + Worker)
+bash /root/install-chatwoot.sh -i
+```
+
+**Durante a instalação você será perguntado:**
+
+```
+Configure domain and email for SSL (yes/no)? 
+```
+- Digite `yes` se tiver domínio configurado
+- Digite `no` para instalar sem SSL
+
+```
+Install local PostgreSQL and Redis (yes/no)?
+```
+- Digite `yes` para servidor único
+- Digite `no` se usar RDS/ElastiCache externo
+
+---
+
+## 🎯 Tipos de Instalação
+
+### Full Stack (Servidor Único)
+
+Para instalar Web + Worker + Database no mesmo servidor:
+
+```bash
+sudo bash install-fixed.sh -i
+```
+
+### Web-Only (Load Balancer)
+
+Para servidores web em ASG/Load Balancer:
+
+```bash
+sudo bash install-fixed.sh -i --web-only
+```
+
+**Configurações necessárias:**
+- Configure `.env` com RDS e ElastiCache externos
+- Não instale PostgreSQL/Redis local
+
+### Worker-Only (Background Jobs)
+
+Para servidor dedicado a processar jobs:
+
+```bash
+sudo bash install-fixed.sh -i --worker-only
+```
+
+**Configurações necessárias:**
+- Configure `.env` com RDS e ElastiCache
+- Não instale PostgreSQL/Redis local
+
+---
+
+## ✅ Validação da Instalação
+
+Após a instalação, valide se tudo está funcionando:
+
+### Script Automático de Validação
+
+```bash
+# Download do script
+wget https://raw.githubusercontent.com/aifocusdev/cw-N-aifocus/master/validate-installation.sh
+
+# Dar permissão
+chmod +x validate-installation.sh
+
+# Executar validação
+sudo bash validate-installation.sh
+```
+
+**Saída esperada:**
+
+```
+✅ Ruby 3.3.8 installed
+✅ Node.js 23.x installed
+✅ PostgreSQL 16 running
+✅ Redis running
+✅ Chatwoot services active
+✅ API responding on port 3000
+✅ All checks passed!
+```
+
+### Validação Manual
+
+```bash
+# 1. Verificar serviços
+sudo systemctl status chatwoot.target
+
+# 2. Testar API
+curl http://localhost:3000/api
+
+# 3. Ver logs
+sudo cwctl --logs web
+```
+
+---
+
+## 🌐 Configurar Domínio e SSL
+
+### Durante a Instalação
+
+Se você respondeu `yes` para SSL durante instalação, o script configurou automaticamente.
+
+### Após a Instalação
+
+Se não configurou durante instalação:
+
+```bash
+sudo cwctl --ssl
+```
+
+**Pré-requisitos:**
+- DNS do domínio apontando para o IP do servidor
+- Portas 80 e 443 abertas no firewall
+
+**Exemplo de configuração DNS:**
+
+```
+Tipo: A
+Nome: chat (ou @)
+Valor: 192.168.1.100 (seu IP)
+TTL: 3600
+```
+
+---
+
+## 🔧 Comandos Essenciais (cwctl)
+
+O instalador cria uma CLI chamada `cwctl` para gerenciar o Chatwoot:
+
+### Ver Ajuda
+
+```bash
+sudo cwctl --help
+```
+
+### Gerenciamento de Serviços
+
+```bash
+# Restart todos os serviços
+sudo cwctl --restart
+
+# Ver logs web
+sudo cwctl --logs web
+
+# Ver logs worker
+sudo cwctl --logs worker
+
+# Status dos serviços
+sudo systemctl status chatwoot.target
+```
+
+### Console Rails
+
+```bash
+# Abrir console Rails
+sudo cwctl --console
+```
+
+### Upgrade
+
+```bash
+# Upgrade para última versão
+sudo cwctl --upgrade
+```
+
+### Configurar SSL
+
+```bash
+# Configurar SSL/domínio
+sudo cwctl --ssl
+```
+
+---
+
+## 📂 Estrutura de Arquivos
+
+Após instalação, os arquivos estarão em:
+
+```
+/home/chatwoot/chatwoot/              # Aplicação
+├── .env                              # Configurações
+├── app/                              # Código da aplicação
+├── config/                           # Configurações Rails
+├── db/                               # Migrations
+├── public/                           # Assets compilados
+└── storage/                          # Arquivos uploads
+
+/etc/systemd/system/                  # Serviços
+├── chatwoot.target                   # Target principal
+├── chatwoot-web.1.service            # Serviço web
+└── chatwoot-worker.1.service         # Serviço worker
+
+/etc/nginx/sites-enabled/             # Nginx
+└── chatwoot.conf                     # Config Nginx
+
+/usr/local/bin/cwctl                  # CLI gerenciamento
+
+/var/log/chatwoot-setup.log           # Log instalação
+```
+
+---
+
+## 🔐 Primeiro Acesso
+
+### Sem SSL
+
+Acesse via IP:
+
+```
+http://SEU-IP:3000
+```
+
+### Com SSL
+
+Acesse via domínio:
+
+```
+https://chat.seudominio.com
+```
+
+### Criar Conta Admin
+
+1. Na tela inicial, clique em **"Create New Account"**
+2. Preencha os dados:
+   - **Company Name:** Nome da sua empresa
+   - **Your Name:** Seu nome
+   - **Email:** Seu email
+   - **Password:** Senha forte
+3. Clique em **"Create Account"**
+4. Confirme o email (se SMTP configurado)
+
+---
+
+## 🚨 Troubleshooting Comum
+
+### Serviço não inicia
+
+```bash
+# Ver logs detalhados
+sudo journalctl -u chatwoot-web.1.service -n 100
+
+# Verificar erro específico
+sudo cwctl --logs web
+```
+
+### Erro de assets/precompile
+
+```bash
+# Recompilar assets
+sudo -u chatwoot bash -c "cd /home/chatwoot/chatwoot && RAILS_ENV=production bundle exec rake assets:precompile"
+
+# Restart
+sudo systemctl restart chatwoot.target
+```
+
+### Erro de banco de dados
+
+```bash
+# Rodar migrations
+sudo -u chatwoot bash -c "cd /home/chatwoot/chatwoot && RAILS_ENV=production bundle exec rails db:migrate"
+```
+
+### Porta 3000 já em uso
+
+```bash
+# Ver processo usando porta
+sudo lsof -i :3000
+
+# Matar processo
+sudo kill -9 <PID>
+
+# Restart Chatwoot
+sudo systemctl restart chatwoot.target
+```
+
+### SSL não funciona
+
+```bash
+# Verificar DNS
+nslookup chat.seudominio.com
+
+# Reconfigurar SSL
+sudo cwctl --ssl
+
+# Ver logs Nginx
+sudo tail -f /var/log/nginx/error.log
+```
+
+---
+
+## 📊 Checklist Pós-Instalação
+
+- [ ] Serviços ativos (`chatwoot.target`)
+- [ ] API respondendo (`curl localhost:3000/api`)
+- [ ] PostgreSQL rodando
+- [ ] Redis rodando
+- [ ] Nginx configurado (se SSL)
+- [ ] Firewall configurado (80, 443, 3000)
+- [ ] Backup configurado
+- [ ] Conta admin criada
+- [ ] Primeiro inbox configurado
+
+---
+
+## 🔄 Próximos Passos
+
+Após a instalação:
+
+1. 📖 [Configurar primeiro canal de atendimento](/pt-br/configuracao/canais)
+2. 👥 [Adicionar agentes](/pt-br/guia-usuario/gestao-agentes)
+3. ⚙️ [Configurar variáveis de ambiente](/pt-br/configuracao/environment-variables)
+4. 🔐 [Configurar SMTP](/pt-br/configuracao/email)
+5. 💾 [Configurar backup](/pt-br/manutencao/backup)
+
+---
+
+<Note>
+**Dica:** Para instalações em produção, recomendamos:
+- Usar SSL (Let's Encrypt)
+- Configurar backup automático
+- Habilitar monitoramento
+- Usar storage externo (S3)
+</Note>
+
+<Warning>
+**Segurança:** Nunca exponha porta 3000 diretamente. Sempre use Nginx como proxy reverso com SSL.
+</Warning>
+

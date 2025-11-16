@@ -1,0 +1,499 @@
+---
+title: Primeiros Passos no Chatwoot
+description: Guia completo para começar a usar o Chatwoot - do login à primeira conversa
+sidebarTitle: Primeiros Passos
+---
+
+# 🚀 Primeiros Passos no Chatwoot
+
+Bem-vindo ao Chatwoot! Este guia irá ajudá-lo a dar os primeiros passos na plataforma, desde o login até sua primeira conversa.
+
+---
+
+## 1️⃣ Acessando o Chatwoot
+
+### URL de Acesso
+
+Após a instalação, acesse através de:
+
+- **Com SSL:** `https://chat.seudominio.com`
+- **Sem SSL:** `http://SEU-IP:3000`
+
+### Primeiro Acesso
+
+Na tela inicial você verá:
+
+- 🔐 **Login:** Se já tem conta
+- ✨ **Create New Account:** Para criar primeira conta
+
+---
+
+## 2️⃣ Criar Sua Primeira Conta
+
+Clique em **"Create New Account"** e preencha:
+
+<Steps>
+  <Step title="Dados da Empresa">
+    - **Company Name:** Nome da sua empresa (ex: "Ai Focus")
+    - **Company Industry:** Setor da empresa
+    - **Company Size:** Tamanho do time
+  </Step>
+  
+  <Step title="Seus Dados">
+    - **Your Name:** Seu nome completo
+    - **Email:** Seu email profissional
+    - **Password:** Senha forte (mínimo 8 caracteres)
+  </Step>
+  
+  <Step title="Confirmar">
+    - Clique em **"Create Account"**
+    - Confirme seu email (se SMTP configurado)
+    - Faça login
+  </Step>
+</Steps>
+
+---
+
+## 3️⃣ Interface do Chatwoot
+
+### Dashboard Principal
+
+Após login, você verá 3 áreas principais:
+
+```
+┌─────────────────────────────────────────────┐
+│  Sidebar  │   Conversas   │   Detalhes     │
+│           │                │                 │
+│  Início   │  📧 Conversa 1│  👤 Cliente     │
+│  Conversas│  📧 Conversa 2│  📝 Notas       │
+│  Contatos │  📧 Conversa 3│  🏷️ Labels      │
+│  Relatórios│               │  📌 Ações       │
+│  Funis    │               │                 │
+│  Settings │               │                 │
+└─────────────────────────────────────────────┘
+```
+
+### 📌 Sidebar (Menu Principal)
+
+- **🏠 Início:** Dashboard com métricas
+- **💬 Conversas:** Lista de conversas
+- **👥 Contatos:** Gerenciar contatos
+- **📊 Relatórios:** Analytics e métricas
+- **🎯 Funis:** Kanban de vendas
+- **⚙️ Configurações:** Ajustes da conta
+
+### 💬 Lista de Conversas
+
+Mostra todas as conversas com filtros:
+
+- **Status:** Open, Resolved, Pending
+- **Inbox:** Filtrar por canal
+- **Team:** Filtrar por equipe
+- **Label:** Filtrar por etiqueta
+- **Assignee:** Filtrar por agente
+
+### 👤 Painel de Detalhes
+
+Informações do contato e ações:
+
+- Dados do cliente
+- Notas internas
+- Labels
+- Conversas anteriores
+- Custom attributes
+
+---
+
+## 4️⃣ Configurar Primeiro Canal
+
+Antes de receber conversas, configure um canal de atendimento:
+
+### Tipos de Canais Disponíveis
+
+<CardGroup cols={2}>
+  <Card title="WhatsApp" icon="whatsapp">
+    Via Evolution API, WAHA ou UAZ API
+  </Card>
+  <Card title="Instagram" icon="instagram">
+    Direct Messages via Facebook Business
+  </Card>
+  <Card title="Facebook" icon="facebook">
+    Messenger integrado
+  </Card>
+  <Card title="Email" icon="envelope">
+    IMAP/SMTP para suporte via email
+  </Card>
+  <Card title="Website" icon="globe">
+    Widget de chat no seu site
+  </Card>
+  <Card title="Telegram" icon="telegram">
+    Bot do Telegram
+  </Card>
+</CardGroup>
+
+### Criar Primeiro Inbox (Website Widget)
+
+O mais simples para começar é o Website Widget:
+
+<Steps>
+  <Step title="Ir para Settings">
+    Sidebar → **Settings** → **Inboxes**
+  </Step>
+  
+  <Step title="Adicionar Inbox">
+    - Clique em **"Add Inbox"**
+    - Escolha **"Website"**
+    - Clique em **"Create"**
+  </Step>
+  
+  <Step title="Configurar Widget">
+    - **Name:** "Chat do Site"
+    - **Domain:** seusite.com
+    - **Widget Color:** Escolha uma cor
+    - **Welcome Message:** "Olá! Como posso ajudar?"
+    - Clique em **"Create Website Channel"**
+  </Step>
+  
+  <Step title="Adicionar Agentes">
+    - Selecione agentes que atenderão neste canal
+    - Clique em **"Update"**
+  </Step>
+  
+  <Step title="Instalar no Site">
+    - Copie o código JavaScript
+    - Cole antes do `</body>` do seu site
+    - Salve e publique
+  </Step>
+</Steps>
+
+**Código para instalar:**
+
+```html
+<script>
+(function(d,t){
+  var BASE_URL="https://chat.seudominio.com";
+  var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=BASE_URL+"/packs/js/sdk.js";
+  s.parentNode.insertBefore(g,s);
+  g.async=!0;
+  g.onload=function(){
+    window.chatwootSDK.run({
+      websiteToken: 'SEU_TOKEN_AQUI',
+      baseUrl: BASE_URL
+    })
+  }
+})(document,"script");
+</script>
+```
+
+---
+
+## 5️⃣ Sua Primeira Conversa
+
+### Como Receber Conversas
+
+Após configurar um canal:
+
+1. **Aguarde contato:** Cliente envia mensagem
+2. **Notificação:** Você recebe notificação
+3. **Conversa aparece:** Na lista "Open"
+4. **Atenda:** Clique para abrir
+
+### Anatomia de uma Conversa
+
+```
+┌─────────────────────────────────────────────┐
+│  [Cliente] João Silva                       │
+│  ──────────────────────────────────────────│
+│  👤 João: Olá, preciso de ajuda!     10:30 │
+│  👨‍💼 Você: Olá João! Como posso ajudar? 10:31│
+│  👤 João: Quero saber sobre os planos 10:32│
+│  👨‍💼 Você: [digitando...]                   │
+│  ──────────────────────────────────────────│
+│  [Digite sua mensagem aqui...]       [Enviar]│
+└─────────────────────────────────────────────┘
+```
+
+### Enviar Mensagem
+
+1. Clique na conversa
+2. Digite no campo inferior
+3. **Enter** para enviar
+4. **Shift+Enter** para quebra de linha
+
+### Ações Rápidas
+
+- 📎 **Anexar:** Enviar arquivos
+- 😀 **Emoji:** Adicionar emojis
+- 📝 **Canned Response:** Respostas prontas
+- 🏷️ **Label:** Adicionar etiqueta
+- ✅ **Resolve:** Marcar como resolvida
+
+---
+
+## 6️⃣ Gerenciar Conversas
+
+### Status de Conversas
+
+- 🟢 **Open:** Aguardando atendimento
+- ⏳ **Pending:** Aguardando cliente
+- ✅ **Resolved:** Finalizada
+
+### Atribuir Conversa
+
+Para atribuir a um agente:
+
+1. Clique no ícone de **usuário** no topo
+2. Escolha o agente
+3. Ou deixe **Unassigned** para qualquer um pegar
+
+### Adicionar Labels (Etiquetas)
+
+Labels ajudam a organizar:
+
+1. Clique em **"Add Labels"** no painel direito
+2. Digite nome da label ou escolha existente
+3. Exemplos: `urgente`, `vendas`, `suporte`
+
+### Adicionar Notas Internas
+
+Notas privadas visíveis só para equipe:
+
+1. No painel direito, clique em **"Notes"**
+2. Digite nota interna
+3. Clique em **"Add"**
+4. **Cliente NÃO vê estas notas**
+
+---
+
+## 7️⃣ Respostas Prontas (Canned Responses)
+
+Crie respostas pré-programadas para agilizar:
+
+### Criar Canned Response
+
+<Steps>
+  <Step title="Ir para Settings">
+    Settings → **Canned Responses**
+  </Step>
+  
+  <Step title="Adicionar Novo">
+    - Clique em **"Add Canned Response"**
+    - **Short Code:** `boas-vindas`
+    - **Content:** "Olá! Obrigado por entrar em contato..."
+    - Clique em **"Submit"**
+  </Step>
+  
+  <Step title="Usar na Conversa">
+    - Na conversa, digite `/boas-vindas`
+    - Ou clique no ícone de canned response
+    - Escolha da lista
+    - Mensagem é inserida automaticamente
+  </Step>
+</Steps>
+
+### Exemplos Úteis
+
+```
+/boas-vindas
+"Olá! Obrigado por entrar em contato. Como posso ajudar?"
+
+/horario
+"Nosso horário de atendimento é de segunda a sexta, das 9h às 18h."
+
+/aguarde
+"Por favor, aguarde um momento enquanto verifico isso para você."
+```
+
+---
+
+## 8️⃣ Adicionar Mais Agentes
+
+Para adicionar membros à equipe:
+
+<Steps>
+  <Step title="Ir para Settings">
+    Settings → **Agents**
+  </Step>
+  
+  <Step title="Convidar Agente">
+    - Clique em **"Add Agent"**
+    - **Name:** Nome do agente
+    - **Email:** Email do agente
+    - **Role:** Agent ou Administrator
+    - Clique em **"Add Agent"**
+  </Step>
+  
+  <Step title="Agente Recebe Email">
+    - Email com link de confirmação
+    - Agente cria senha
+    - Faz login
+  </Step>
+</Steps>
+
+### Roles (Funções)
+
+- 👨‍💼 **Administrator:** Acesso total
+- 👨‍💻 **Agent:** Atendimento apenas
+- 👀 **Observer:** Apenas visualização (Enterprise)
+
+---
+
+## 9️⃣ Criar Equipes (Teams)
+
+Organize agentes em equipes:
+
+<Steps>
+  <Step title="Ir para Settings">
+    Settings → **Teams**
+  </Step>
+  
+  <Step title="Criar Team">
+    - Clique em **"Create new team"**
+    - **Name:** "Suporte" ou "Vendas"
+    - **Description:** Descrição da equipe
+    - **Auto Assignment:** Ativar/desativar
+    - Clique em **"Create"**
+  </Step>
+  
+  <Step title="Adicionar Membros">
+    - Clique na equipe criada
+    - Tab **"Agents"**
+    - Adicione agentes à equipe
+  </Step>
+  
+  <Step title="Atribuir Inboxes">
+    - Tab **"Inboxes"**
+    - Escolha quais canais esta equipe atende
+  </Step>
+</Steps>
+
+---
+
+## 🔟 Usar Funis (Kanban)
+
+Sistema de gestão de vendas estilo Kanban:
+
+### Acessar Funis
+
+Sidebar → **Funis** (ou **Funnels**)
+
+### Criar Primeiro Funil
+
+<Steps>
+  <Step title="Novo Funil">
+    - Clique em **"Novo Funil"**
+    - **Nome:** "Pipeline de Vendas"
+    - **Descrição:** "Funil principal de vendas"
+  </Step>
+  
+  <Step title="Definir Estágios">
+    - 🆕 Novo Lead
+    - 📞 Em Contato
+    - 💰 Proposta Enviada
+    - ✅ Fechado
+    - ❌ Perdido
+  </Step>
+  
+  <Step title="Salvar">
+    - Clique em **"Criar Funil"**
+  </Step>
+</Steps>
+
+### Usar Funil
+
+1. **Adicionar Conversa:** Arraste conversa para o funil
+2. **Mover Estágio:** Drag & drop entre colunas
+3. **Ver Detalhes:** Clique no card
+
+📖 **[Ver guia completo de Funis](/pt-br/guia-usuario/funis)**
+
+---
+
+## 📊 Dashboard e Métricas
+
+### Acessar Dashboard
+
+Sidebar → **Início** (Home)
+
+### Métricas Disponíveis
+
+- 📈 **Total de Conversas:** Hoje, esta semana, este mês
+- ⏱️ **Tempo Médio de Resposta**
+- ✅ **Taxa de Resolução**
+- 😊 **CSAT Score** (Customer Satisfaction)
+- 👥 **Conversas por Agente**
+
+---
+
+## ⚙️ Configurações Essenciais
+
+### Perfil Pessoal
+
+1. Clique no seu **avatar** (canto inferior esquerdo)
+2. **Profile Settings**
+3. Atualize:
+   - Foto de perfil
+   - Nome de exibição
+   - Email
+   - Senha
+   - Notificações
+
+### Notificações
+
+Configure como quer ser notificado:
+
+- 🔔 **Push Notifications:** Navegador
+- 📧 **Email Notifications:** Email
+- 🔊 **Sound:** Som de notificação
+- 🌙 **Do Not Disturb:** Modo silencioso
+
+### Disponibilidade
+
+Defina seu status:
+
+- 🟢 **Online:** Disponível
+- 🟡 **Busy:** Ocupado
+- ⚫ **Offline:** Indisponível
+
+---
+
+## 🎯 Checklist Primeiros Passos
+
+- [ ] Login realizado
+- [ ] Primeiro inbox configurado
+- [ ] Código do widget instalado (se website)
+- [ ] Primeira conversa atendida
+- [ ] Labels criadas
+- [ ] Canned responses criadas
+- [ ] Equipes configuradas
+- [ ] Agentes adicionados
+- [ ] Funil de vendas criado
+- [ ] Dashboard explorado
+
+---
+
+## 🚀 Próximos Passos
+
+Agora que você já sabe o básico:
+
+1. 📖 [Guia completo de Conversas](/pt-br/guia-usuario/conversas)
+2. 🎯 [Guia completo de Funis](/pt-br/guia-usuario/funis)
+3. 🤖 [Configurar Automações](/pt-br/guia-usuario/automacoes)
+4. 📊 [Explorar Relatórios](/pt-br/guia-usuario/relatorios)
+5. ⚙️ [Configurações Avançadas](/pt-br/configuracao/avancado)
+
+---
+
+<Tip>
+**Dica de Produtividade:** Use atalhos de teclado!
+- `CMD/CTRL + K` - Busca rápida
+- `CMD/CTRL + /` - Lista de atalhos
+- `E` - Resolver conversa
+- `R` - Reabrir conversa
+</Tip>
+
+<Note>
+**Dúvidas?** Acesse nossa [Central de Ajuda](/pt-br/guia-usuario/faq) ou entre em contato com suporte.
+</Note>
+

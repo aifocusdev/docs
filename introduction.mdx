@@ -1,93 +1,229 @@
 ---
-title: Welcome to Chatwoot Developer Docs
-description: Your comprehensive guide to installing, configuring, developing with, and integrating Chatwoot - the open-source customer support platform.
-sidebarTitle: Introduction
+title: Bem-vindo à Documentação Ai Focus Chatwoot
+description: Documentação completa do Chatwoot customizado pela Ai Focus - Plataforma de atendimento ao cliente com IA
+sidebarTitle: Introdução
 ---
 
+# 🚀 Ai Focus Chatwoot - Documentação Completa
 
-## What You'll Find Here
+Bem-vindo à documentação oficial do **Chatwoot customizado pela Ai Focus**. Esta é uma versão otimizada e personalizada da plataforma de código aberto Chatwoot, com melhorias de performance, correções de bugs e integrações exclusivas.
+
+<Note>
+**Idiomas Disponíveis:** Esta documentação está disponível em Português (PT-BR) e Inglês (EN). Use o seletor de idioma no topo da página.
+</Note>
+
+---
+
+## 🎯 Sobre a Ai Focus
+
+A **Ai Focus** é uma empresa especializada em soluções de inteligência artificial e automação para atendimento ao cliente. Desenvolvemos e implementamos plataformas de comunicação omnichannel que integram IA, automação e análise de dados para transformar a experiência do cliente.
+
+**Website:** [aifocus.dev](https://aifocus.dev)
+
+### Nossa Missão
+
+Capacitar empresas a oferecer atendimento excepcional através de tecnologia de ponta, integrando inteligência artificial e automação de forma inteligente e escalável.
+
+---
+
+## ✨ O que é este Chatwoot?
+
+Esta é uma versão **customizada e otimizada** do Chatwoot, uma plataforma open-source de atendimento ao cliente. Nossa versão inclui:
+
+### 🔧 **Melhorias de Performance**
+- ✅ Eliminação de queries N+1 (5-8x mais rápido)
+- ✅ Índices otimizados no banco de dados
+- ✅ Lazy loading de imagens
+- ✅ Cache inteligente de avatares
+- ✅ Eager loading otimizado
+
+### 🐛 **Correções de Bugs**
+- ✅ Filtros de conversas órfãs
+- ✅ Tratamento de contatos deletados
+- ✅ Correção de erros 404/500
+- ✅ Script de limpeza de dados
+
+### 🎨 **Features Customizadas**
+- ✅ Sistema de Funis (Kanban/Pipeline)
+- ✅ Produtos em conversas
+- ✅ Agendamentos
+- ✅ Notas internas
+- ✅ Timers de estágios
+- ✅ Checklists em funis
+
+### 🔌 **Integrações Aprimoradas**
+- ✅ WhatsApp (Evolution API, WAHA, UAZ API)
+- ✅ Instagram Business
+- ✅ Facebook Messenger
+- ✅ Telegram, Email, SMS
+- ✅ Notificame (Notificações)
+- ✅ Linear (Gestão de Issues)
+- ✅ Shopify (E-commerce)
+
+---
+
+## 📚 O que você encontrará nesta documentação
 
 <CardGroup cols={2}>
-  <Card
-    title="Installation & Setup"
-    icon="server"
-    href="/self-hosted"
-  >
-    Deploy Chatwoot on your infrastructure with Docker, Kubernetes, or cloud providers
+  <Card title="Guia de Instalação" icon="server" href="/pt-br/instalacao/introducao">
+    Instale o Chatwoot em seu servidor com nosso script otimizado
   </Card>
-  <Card
-    title="Development Guide"
-    icon="code"
-    href="/contributing-guide"
-  >
-    Contribute to Chatwoot with our development setup, testing guidelines, and best practices
+  <Card title="Guia do Usuário" icon="book" href="/pt-br/guia-usuario/primeiros-passos">
+    Aprenda a usar cada ferramenta passo a passo
   </Card>
-  <Card
-    title="API Reference"
-    icon="square-terminal"
-    href="/api-reference/introduction"
-  >
-    Build powerful integrations with our comprehensive REST APIs
+  <Card title="API Reference" icon="code" href="/pt-br/api-reference/introducao">
+    Documentação completa de todos os endpoints
   </Card>
-  <Card
-    title="Architecture"
-    icon="sitemap"
-    href="/self-hosted/deployment/architecture"
-  >
-    Understand Chatwoot's system architecture and components
+  <Card title="Customizações" icon="wrench" href="/pt-br/customizacoes/introducao">
+    Conheça nossas otimizações e melhorias
   </Card>
 </CardGroup>
 
-## Getting Started Paths
+---
 
-Choose your path based on what you want to accomplish:
+## 🎓 Para quem é esta documentação?
 
-### 🚀 **I want to install Chatwoot**
-Perfect! Head to our [Installation Guide](/self-hosted) to deploy Chatwoot on your preferred platform. We support:
-- Docker containers for quick setup
-- Kubernetes for scalable deployments
-- Major cloud providers (AWS, GCP, Azure)
-- Traditional Linux VMs
+### 👨‍💼 **Gestores e Administradores**
+- Como configurar a plataforma
+- Gerenciar equipes e agentes
+- Configurar canais de atendimento
+- Métricas e relatórios
 
-### 🛠️ **I want to contribute to Chatwoot**
-Check out our [Contributing Guide](/contributing-guide) to:
-- Set up your development environment
-- Understand our coding standards
-- Learn our testing practices
-- Submit your first pull request
+### 👨‍💻 **Desenvolvedores**
+- Instalação e configuração técnica
+- API completa com exemplos
+- Customizações e integrações
+- Troubleshooting avançado
 
-### 🔌 **I want to build integrations**
-Great! Explore our [API Reference](/api-reference/introduction) with three categories of APIs:
-- **Application APIs** - Manage accounts, agents, and conversations
-- **Platform APIs** - Administrative control for installations
-- **Client APIs** - Build custom chat interfaces
+### 👥 **Agentes de Atendimento**
+- Como usar o chat
+- Recursos de produtividade
+- Funis e organização
+- Melhores práticas
 
-### 📚 **I want to understand the architecture**
-Excellent! Our [Architecture Guide](/self-hosted/deployment/architecture) covers:
-- System components and their interactions
-- Database schemas and relationships
-- Scalability considerations
-- Security best practices
-
-## Why Chatwoot?
-
-Chatwoot is built with modern technologies and follows industry best practices:
-
-- **Open Source**: Full transparency and community-driven development
-- **Multi-channel**: Support customers across web, mobile, email, and social platforms
-- **Scalable**: From small teams to enterprise deployments
-- **Extensible**: Rich APIs and webhook system for custom integrations
-- **Modern Stack**: Ruby on Rails backend, Vue.js frontend, PostgreSQL database
-
-## Community & Support
-
-Join our thriving community of developers and users:
-
-- **GitHub**: [github.com/chatwoot/chatwoot](https://github.com/chatwoot/chatwoot)
-- **Community**: [chatwoot.com/community](https://chatwoot.com/community)
-- **Discussions**: [GitHub Discussions](https://github.com/chatwoot/chatwoot/discussions)
-- **Twitter**: [@chatwootapp](https://twitter.com/chatwootapp)
+### 🔧 **DevOps/SysAdmins**
+- Deploy em produção
+- Monitoramento e logs
+- Backup e restore
+- Escalabilidade
 
 ---
 
-Ready to dive in? Choose your path above and let's build something amazing together! 🚀
+## 🚀 Começando Rápido
+
+### Instalação em 1 Comando
+
+```bash
+wget https://raw.githubusercontent.com/aifocusdev/cw-N-aifocus/master/install-fixed.sh && sudo bash install-fixed.sh -i
+```
+
+**Tempo estimado:** 15-20 minutos
+
+### Primeiro Acesso
+
+Após instalar, acesse:
+- **Sem SSL:** `http://SEU-IP:3000`
+- **Com SSL:** `https://chat.seudominio.com`
+
+---
+
+## 📖 Estrutura da Documentação
+
+### 1️⃣ **Instalação**
+- Requisitos de sistema
+- Instalação automática (script)
+- Instalação manual
+- Docker
+- Configuração de domínio e SSL
+- Troubleshooting
+
+### 2️⃣ **Guia do Usuário**
+- Primeiros passos
+- Dashboard e navegação
+- Gestão de conversas
+- Funis (Kanban)
+- Produtos e agendamentos
+- Automações
+- Relatórios
+
+### 3️⃣ **Configuração**
+- Variáveis de ambiente
+- Canais de atendimento
+- Integrações
+- Usuários e permissões
+- Customizações
+
+### 4️⃣ **API Reference**
+- Autenticação
+- Conversas
+- Contatos
+- Mensagens
+- Funis
+- Produtos
+- Agendamentos
+- Webhooks
+
+### 5️⃣ **Customizações Ai Focus**
+- Otimizações de performance
+- Correções de bugs
+- Features exclusivas
+- Scripts e ferramentas
+
+### 6️⃣ **Manutenção**
+- Backup e restore
+- Upgrade de versão
+- Monitoramento
+- Logs e debugging
+
+---
+
+## 🆘 Precisa de Ajuda?
+
+### 📧 Suporte Técnico
+- **Email:** contato@aifocus.dev
+- **Website:** [aifocus.dev](https://aifocus.dev)
+
+### 💬 Comunidade Chatwoot
+- **GitHub:** [github.com/chatwoot/chatwoot](https://github.com/chatwoot/chatwoot)
+- **Discord:** Comunidade oficial Chatwoot
+
+### 🐛 Reportar Bugs
+- **GitHub Issues:** [github.com/aifocusdev/cw-N-aifocus/issues](https://github.com/aifocusdev/cw-N-aifocus/issues)
+
+---
+
+## 🔄 Atualizações
+
+Esta documentação é atualizada continuamente. Para ver as últimas novidades:
+
+- **Changelog:** Ver seção de atualizações
+- **GitHub:** Acompanhe nossos commits
+- **Newsletter:** Inscreva-se no site da Ai Focus
+
+---
+
+## 📜 Licença
+
+O Chatwoot é open-source sob licença MIT. As customizações da Ai Focus seguem a mesma licença.
+
+---
+
+## 🙏 Créditos
+
+- **Chatwoot Team:** Pela plataforma incrível
+- **Ai Focus Team:** Pelas customizações e melhorias
+- **Comunidade:** Por contribuições e feedback
+
+---
+
+<Note>
+**Versão da Documentação:** 1.0.0  
+**Última atualização:** Janeiro 2025  
+**Versão do Chatwoot:** 3.5.0+ (customizado)
+</Note>
+
+Pronto para começar? Escolha sua trilha:
+
+- 🚀 [Instalar agora](/pt-br/instalacao/quick-start)
+- 📖 [Guia do usuário](/pt-br/guia-usuario/primeiros-passos)
+- 💻 [Explorar APIs](/pt-br/api-reference/introducao)

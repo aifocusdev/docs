@@ -1,0 +1,517 @@
+---
+title: API Reference - Ai Focus Chatwoot
+description: Documentação completa de todos os endpoints da API do Chatwoot customizado
+sidebarTitle: Introdução
+---
+
+# 🔌 API Reference - Visão Geral
+
+Documentação completa da API REST do **Chatwoot customizado pela Ai Focus**. Esta API permite integração total com a plataforma para automação, integrações customizadas e desenvolvimento de aplicações.
+
+---
+
+## 🎯 Tipos de APIs
+
+O Chatwoot oferece **3 tipos de APIs** para diferentes casos de uso:
+
+<CardGroup cols={3}>
+  <Card title="Application APIs" icon="laptop">
+    **Para:** Automação e gestão  
+    **Autenticação:** User Access Token  
+    **Uso:** Gerenciar conversas, contatos, agentes
+  </Card>
+  
+  <Card title="Client APIs" icon="mobile">
+    **Para:** Chat widget customizado  
+    **Autenticação:** Inbox Token  
+    **Uso:** Integrar chat em apps/sites
+  </Card>
+  
+  <Card title="Platform APIs" icon="server">
+    **Para:** Multi-tenancy  
+    **Autenticação:** Platform App Token  
+    **Uso:** Gerenciar múltiplas contas
+  </Card>
+</CardGroup>
+
+---
+
+## 🔐 Autenticação
+
+### Application API (Recomendado)
+
+Usada para automações e integrações:
+
+**1. Obter Access Token:**
+
+1. Login no Chatwoot
+2. Vá em **Profile Settings**
+3. Copie o **Access Token**
+
+**2. Usar nas Requisições:**
+
+```bash
+curl -X GET https://chat.seudominio.com/api/v1/accounts/1/conversations \
+  -H "api_access_token: SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json"
+```
+
+**Headers Obrigatórios:**
+
+```
+api_access_token: SEU_ACCESS_TOKEN
+Content-Type: application/json
+```
+
+---
+
+## 🌐 Base URL
+
+Todas as requisições usam a base URL da sua instalação:
+
+```
+https://chat.seudominio.com/api/v1
+```
+
+**Exemplo completo:**
+
+```
+https://chat.seudominio.com/api/v1/accounts/1/conversations
+```
+
+---
+
+## 📊 Estrutura das Respostas
+
+### Sucesso (2xx)
+
+```json
+{
+  "id": 123,
+  "status": "open",
+  "messages": [...]
+}
+```
+
+### Erro (4xx/5xx)
+
+```json
+{
+  "error": "Unauthorized",
+  "message": "Invalid access token"
+}
+```
+
+### Paginação
+
+Respostas com múltiplos itens incluem metadados:
+
+```json
+{
+  "data": [...],
+  "meta": {
+    "current_page": 1,
+    "total_pages": 5,
+    "total_count": 125
+  }
+}
+```
+
+---
+
+## 🔍 Endpoints Principais
+
+### Conversas
+
+Gerenciar conversas e atendimentos:
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/conversations` | Listar conversas |
+| `GET` | `/conversations/:id` | Detalhes de conversa |
+| `POST` | `/conversations` | Criar conversa |
+| `PATCH` | `/conversations/:id` | Atualizar conversa |
+| `POST` | `/conversations/:id/toggle_status` | Resolver/reabrir |
+| `POST` | `/conversations/:id/messages` | Enviar mensagem |
+
+📖 [Ver documentação completa de Conversas](/pt-br/api-reference/conversas)
+
+### Contatos
+
+Gerenciar contatos (clientes):
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/contacts` | Listar contatos |
+| `GET` | `/contacts/:id` | Detalhes do contato |
+| `POST` | `/contacts` | Criar contato |
+| `PATCH` | `/contacts/:id` | Atualizar contato |
+| `DELETE` | `/contacts/:id` | Deletar contato |
+
+📖 [Ver documentação completa de Contatos](/pt-br/api-reference/contatos)
+
+### Mensagens
+
+Enviar e gerenciar mensagens:
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/conversations/:id/messages` | Listar mensagens |
+| `POST` | `/conversations/:id/messages` | Enviar mensagem |
+| `DELETE` | `/conversations/:conv_id/messages/:id` | Deletar mensagem |
+
+📖 [Ver documentação completa de Mensagens](/pt-br/api-reference/mensagens)
+
+### Funis (Customização Ai Focus)
+
+Sistema Kanban/Pipeline:
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/funnels` | Listar funis |
+| `POST` | `/funnels` | Criar funil |
+| `GET` | `/funnels/:id/kanban/conversations` | Conversas do funil |
+| `POST` | `/funnels/:id/kanban/move_conversation` | Mover conversa |
+
+📖 [Ver documentação completa de Funis](/pt-br/api-reference/funis)
+
+### Produtos (Customização Ai Focus)
+
+Produtos vinculados a conversas:
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/conversations/:id/products` | Listar produtos |
+| `POST` | `/conversations/:id/products` | Adicionar produto |
+| `PATCH` | `/conversations/:conv_id/products/:id` | Atualizar produto |
+| `DELETE` | `/conversations/:conv_id/products/:id` | Remover produto |
+
+📖 [Ver documentação completa de Produtos](/pt-br/api-reference/produtos)
+
+### Agendamentos (Customização Ai Focus)
+
+Agendamentos em conversas:
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/conversations/:id/appointments` | Listar agendamentos |
+| `POST` | `/conversations/:id/appointments` | Criar agendamento |
+| `PATCH` | `/conversations/:conv_id/appointments/:id` | Atualizar |
+| `DELETE` | `/conversations/:conv_id/appointments/:id` | Deletar |
+
+📖 [Ver documentação completa de Agendamentos](/pt-br/api-reference/agendamentos)
+
+---
+
+## 📝 Exemplos Práticos
+
+### Listar Conversas Abertas
+
+```bash
+curl -X GET \
+  https://chat.seudominio.com/api/v1/accounts/1/conversations?status=open \
+  -H "api_access_token: SEU_TOKEN" \
+  -H "Content-Type: application/json"
+```
+
+**Resposta:**
+
+```json
+{
+  "data": {
+    "payload": [
+      {
+        "id": 123,
+        "status": "open",
+        "inbox_id": 1,
+        "contact": {
+          "id": 45,
+          "name": "João Silva",
+          "email": "joao@email.com"
+        },
+        "messages": [...]
+      }
+    ],
+    "meta": {
+      "current_page": 1,
+      "all_count": 15,
+      "open_count": 5
+    }
+  }
+}
+```
+
+### Enviar Mensagem
+
+```bash
+curl -X POST \
+  https://chat.seudominio.com/api/v1/accounts/1/conversations/123/messages \
+  -H "api_access_token: SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "Olá! Como posso ajudar?",
+    "message_type": "outgoing",
+    "private": false
+  }'
+```
+
+**Resposta:**
+
+```json
+{
+  "id": 456,
+  "content": "Olá! Como posso ajudar?",
+  "message_type": "outgoing",
+  "created_at": "2025-01-16T10:30:00Z",
+  "sender": {
+    "id": 1,
+    "name": "Agente"
+  }
+}
+```
+
+### Criar Contato
+
+```bash
+curl -X POST \
+  https://chat.seudominio.com/api/v1/accounts/1/contacts \
+  -H "api_access_token: SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Maria Santos",
+    "email": "maria@email.com",
+    "phone_number": "+5511999999999",
+    "custom_attributes": {
+      "cidade": "São Paulo",
+      "interesse": "Plano Premium"
+    }
+  }'
+```
+
+### Mover Conversa no Funil
+
+```bash
+curl -X POST \
+  https://chat.seudominio.com/api/v1/accounts/1/funnels/1/kanban/move_conversation \
+  -H "api_access_token: SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "conversation_id": 123,
+    "stage_name": "Proposta Enviada"
+  }'
+```
+
+---
+
+## 🔄 Rate Limiting
+
+Para evitar sobrecarga, a API tem limites de taxa:
+
+- **Limite:** 100 requisições por minuto
+- **Header de resposta:** `X-RateLimit-Remaining`
+- **Erro 429:** Muitas requisições
+
+**Boas Práticas:**
+- ✅ Use cache quando possível
+- ✅ Implemente retry com backoff exponencial
+- ✅ Agrupe requisições em batch
+
+---
+
+## 🔔 Webhooks
+
+Configure webhooks para receber eventos em tempo real:
+
+### Eventos Disponíveis
+
+- `conversation_created` - Nova conversa
+- `conversation_status_changed` - Status alterado
+- `conversation_updated` - Conversa atualizada
+- `message_created` - Nova mensagem
+- `message_updated` - Mensagem editada
+- `contact_created` - Novo contato
+- `contact_updated` - Contato atualizado
+
+### Configurar Webhook
+
+```bash
+curl -X POST \
+  https://chat.seudominio.com/api/v1/accounts/1/webhooks \
+  -H "api_access_token: SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://seu-sistema.com/webhook/chatwoot",
+    "subscriptions": ["message_created", "conversation_created"]
+  }'
+```
+
+📖 [Ver documentação completa de Webhooks](/pt-br/api-reference/webhooks)
+
+---
+
+## 🛠️ SDKs e Bibliotecas
+
+### Oficial Chatwoot
+
+- **JavaScript/Node.js:** [@chatwoot/client](https://www.npmjs.com/package/@chatwoot/client)
+- **Flutter:** [chatwoot_sdk](https://pub.dev/packages/chatwoot_sdk)
+- **React Native:** [@chatwoot/react-native-widget](https://www.npmjs.com/package/@chatwoot/react-native-widget)
+
+### Exemplos de Integração
+
+```javascript
+// Node.js
+const ChatwootAPI = require('@chatwoot/client');
+
+const client = new ChatwootAPI({
+  apiAccessToken: 'SEU_TOKEN',
+  baseUrl: 'https://chat.seudominio.com'
+});
+
+// Listar conversas
+const conversations = await client.conversations.list({
+  accountId: 1,
+  status: 'open'
+});
+
+// Enviar mensagem
+await client.messages.create({
+  accountId: 1,
+  conversationId: 123,
+  content: 'Olá!',
+  messageType: 'outgoing'
+});
+```
+
+---
+
+## 📚 Coleções Postman
+
+Importe nossa coleção completa no Postman:
+
+<Card title="Download Postman Collection" icon="download" href="/postman/chatwoot-aifocus.json">
+  Coleção com todos os endpoints documentados e exemplos
+</Card>
+
+---
+
+## 🐛 Debugging
+
+### Ver Requisições no Console Rails
+
+```bash
+# Abrir console
+sudo cwctl --console
+
+# Ver última requisição
+Rails.logger.debug(request.body.read)
+```
+
+### Logs de API
+
+```bash
+# Ver logs em tempo real
+sudo cwctl --logs web
+
+# Filtrar por API
+sudo tail -f /home/chatwoot/chatwoot/log/production.log | grep "API"
+```
+
+---
+
+## ⚠️ Erros Comuns
+
+### 401 Unauthorized
+
+**Causa:** Token inválido ou expirado
+
+**Solução:**
+- Verificar se token está correto
+- Gerar novo token em Profile Settings
+
+### 404 Not Found
+
+**Causa:** Recurso não existe ou ID errado
+
+**Solução:**
+- Verificar ID do recurso
+- Confirmar que account_id está correto
+
+### 422 Unprocessable Entity
+
+**Causa:** Dados de entrada inválidos
+
+**Solução:**
+- Verificar campos obrigatórios
+- Validar formato dos dados
+
+### 500 Internal Server Error
+
+**Causa:** Erro no servidor
+
+**Solução:**
+- Ver logs: `sudo cwctl --logs web`
+- Reportar bug se persistir
+
+---
+
+## 🆘 Suporte
+
+Precisa de ajuda com a API?
+
+- 📧 **Email:** contato@aifocus.dev
+- 📖 **Documentação:** Esta página e subseções
+- 🐛 **Bug Report:** [GitHub Issues](https://github.com/aifocusdev/cw-N-aifocus/issues)
+- 💬 **Comunidade:** Discord do Chatwoot
+
+---
+
+## 📖 Índice de Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Conversas" icon="comments" href="/pt-br/api-reference/conversas">
+    Gerenciar conversas e atendimentos
+  </Card>
+  <Card title="Contatos" icon="users" href="/pt-br/api-reference/contatos">
+    CRUD completo de contatos
+  </Card>
+  <Card title="Mensagens" icon="message" href="/pt-br/api-reference/mensagens">
+    Enviar e gerenciar mensagens
+  </Card>
+  <Card title="Funis" icon="columns" href="/pt-br/api-reference/funis">
+    Sistema Kanban/Pipeline
+  </Card>
+  <Card title="Produtos" icon="box" href="/pt-br/api-reference/produtos">
+    Produtos em conversas
+  </Card>
+  <Card title="Agendamentos" icon="calendar" href="/pt-br/api-reference/agendamentos">
+    Agendamentos de reuniões
+  </Card>
+  <Card title="Agentes" icon="user-tie" href="/pt-br/api-reference/agentes">
+    Gerenciar agentes
+  </Card>
+  <Card title="Inboxes" icon="inbox" href="/pt-br/api-reference/inboxes">
+    Gerenciar canais
+  </Card>
+  <Card title="Teams" icon="users-cog" href="/pt-br/api-reference/teams">
+    Gerenciar equipes
+  </Card>
+  <Card title="Labels" icon="tags" href="/pt-br/api-reference/labels">
+    Etiquetas para organização
+  </Card>
+  <Card title="Webhooks" icon="webhook" href="/pt-br/api-reference/webhooks">
+    Eventos em tempo real
+  </Card>
+  <Card title="Relatórios" icon="chart-line" href="/pt-br/api-reference/relatorios">
+    Analytics e métricas
+  </Card>
+</CardGroup>
+
+---
+
+<Note>
+**Versão da API:** v1  
+**Última atualização:** Janeiro 2025  
+**Status:** Estável e em produção
+</Note>
+
