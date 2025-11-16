@@ -1,0 +1,197 @@
+---
+title: Message Campaigns
+description: Send bulk messages to customer segments
+sidebarTitle: Campaigns
+---
+
+# 📢 Message Campaigns
+
+Send proactive messages to your customers in a segmented and personalized way.
+
+---
+
+## 📋 What are Campaigns?
+
+**Campaigns** allow sending messages to multiple contacts simultaneously:
+
+- 📧 **Newsletters**: News and updates
+- 🎉 **Promotions**: Special offers
+- 📣 **Announcements**: New products/services
+- 🎂 **Special dates**: Birthdays, etc.
+- 🔔 **Reminders**: Renewals, appointments
+
+---
+
+## ✨ Features
+
+<CardGroup cols={2}>
+  <Card title="Segmentation" icon="filter">
+    Send to specific audience
+  </Card>
+  <Card title="Personalization" icon="user">
+    Use variables in text
+  </Card>
+  <Card title="Scheduling" icon="calendar">
+    Schedule future sends
+  </Card>
+  <Card title="Metrics" icon="chart-line">
+    Track open rates
+  </Card>
+</CardGroup>
+
+---
+
+## 🚀 Create Campaign
+
+### Step 1: New Campaign
+
+1. Go to **"Campaigns"** → **"New Campaign"**
+2. Choose **type**:
+   - **One-time**: Single send
+   - **Recurring**: Scheduled sends
+
+### Step 2: Configure Audience
+
+**Segment by:**
+- ✅ **Labels**: VIP Customers, Cold Leads
+- ✅ **Inbox**: Only WhatsApp, only Email
+- ✅ **Attributes**: Premium Plan, South Region
+- ✅ **Behavior**: Last purchase > 30 days
+- ✅ **Status**: Active, Inactive
+
+**Example:**
+```
+Audience: VIP WhatsApp customers 
+          who purchased in last 60 days
+          
+Estimate: 234 contacts
+```
+
+### Step 3: Create Message
+
+**Personalize with variables:**
+
+```
+Hello {{name}}! 👋
+
+We have a special offer for you!
+
+{{product}} with 30% off 
+today only! 🎉
+
+Use code: VIP30
+
+Buy now: {{link}}
+
+Best regards,
+{{company}}
+```
+
+**Available variables:**
+- `{{name}}` - Contact name
+- `{{email}}` - Email
+- `{{company}}` - Contact's company name
+- `{{agent}}` - Last agent name
+- Custom: Any custom attribute
+
+### Step 4: Add Media (Optional)
+
+- 🖼️ **Image**: Promotional banner
+- 🎥 **Video**: Product demo
+- 📄 **PDF**: Catalog, ebook
+
+### Step 5: Schedule
+
+**Options:**
+- **Send now**: Immediately
+- **Schedule**: Specific date and time
+- **Best time**: AI chooses best moment
+
+**Example:**
+```
+📅 Schedule for: Jan 15, 2025 at 10:00 AM
+⏰ Timezone: EST
+```
+
+### Step 6: Review and Send
+
+**Final checklist:**
+- ✅ Correct audience?
+- ✅ Text without errors?
+- ✅ Links working?
+- ✅ Variables configured?
+- ✅ Appropriate time?
+
+**Click "Send Campaign"**
+
+---
+
+## 📊 Track Results
+
+### Campaign Metrics
+
+After sending, see:
+
+**Delivery Rate:**
+```
+✅ Delivered: 230/234 (98%)
+❌ Failed: 4 (2%)
+```
+
+**Open Rate:**
+```
+👁️ Opened: 180/230 (78%)
+```
+
+**Response Rate:**
+```
+💬 Responded: 45/180 (25%)
+```
+
+**Conversion Rate:**
+```
+✅ Converted: 12/45 (27%)
+```
+
+**ROI Calculation:**
+```
+💰 Revenue generated: $8,500
+💸 Campaign cost: $200
+📈 ROI: 4,250%
+```
+
+---
+
+## 💡 Best Practices
+
+### Timing
+
+✅ **Business hours**: 9am-6pm on weekdays  
+✅ **Avoid late night**: Respect customer sleep  
+✅ **Test days**: Tuesday and Thursday usually have better rates  
+
+### Frequency
+
+✅ **No spam**: Maximum 2-3 campaigns/month per contact  
+✅ **Respect opt-out**: Who asked to leave, don't send  
+✅ **Segment well**: Relevance > Volume  
+
+### Content
+
+✅ **Be direct**: Clear objective in 2-3 lines  
+✅ **Strong call to action**: "Buy now", "Download free"  
+✅ **Urgency**: "Last units", "Valid until..."  
+✅ **Personalization**: Use name and context  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Automate trigger-based campaigns
+  </Card>
+  <Card title="Reports" icon="chart-bar" href="/en/user-guide/reports">
+    Analyze campaign performance
+  </Card>
+</CardGroup>

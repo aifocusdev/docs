@@ -1,0 +1,229 @@
+---
+title: AI Agents - Captain & Copilot
+description: Configure intelligent assistants to automate and optimize customer support
+sidebarTitle: AI Agents
+---
+
+# 🤖 AI Agents - Captain & Copilot
+
+Learn to use Chatwoot **AI Assistants** to automate responses, qualify leads, and improve agent productivity.
+
+---
+
+## 📋 What are AI Agents?
+
+**AI Agents** are intelligent assistants that can:
+
+- 🤖 **Automatically answer** frequently asked questions
+- 🔍 **Qualify leads** before passing to human agent
+- 📝 **Suggest responses** to agents (Copilot mode)
+- 🌐 **Translate messages** in real-time
+- 📊 **Analyze sentiments** of customers
+- ⏰ **Support 24/7** when team is offline
+
+---
+
+## 🎯 Types of AI Agents
+
+<CardGroup cols={2}>
+  <Card title="Captain (Autopilot)" icon="robot">
+    **Mode:** Fully automatic  
+    **Function:** Responds directly to customer  
+    **Use:** FAQ, qualification, 24/7 support
+  </Card>
+  
+  <Card title="Copilot (Co-pilot)" icon="wand-magic-sparkles">
+    **Mode:** Agent assistant  
+    **Function:** Suggests responses to agents  
+    **Use:** Increase speed and quality
+  </Card>
+</CardGroup>
+
+---
+
+## 🚀 Configure AI Agent
+
+### Step 1: Access Settings
+
+1. Go to **"Settings"** → **"Apps"**
+2. Look for **"OpenAI"** or **"Dialogflow"**
+3. Click **"Configure"**
+
+### Step 2: Connect AI Provider
+
+#### Option A: OpenAI (ChatGPT)
+
+1. Get your **API Key** at [platform.openai.com](https://platform.openai.com)
+2. Paste key in **"API Key"** field
+3. Choose model:
+   - `gpt-4` - Smarter (more expensive)
+   - `gpt-3.5-turbo` - Fast and economical
+4. Click **"Connect"**
+
+#### Option B: Dialogflow (Google)
+
+1. Create project on [Google Cloud](https://cloud.google.com)
+2. Enable **Dialogflow API**
+3. Download JSON credentials file
+4. Upload to Chatwoot
+5. Click **"Connect"**
+
+### Step 3: Configure Behavior
+
+**AI Personality:**
+```
+You are a helpful assistant for [YOUR COMPANY].
+Be polite, professional and objective.
+If you don't know something, transfer to a human agent.
+```
+
+**Rules:**
+- ✅ Answer product questions
+- ✅ Collect contact information
+- ✅ Qualify interest
+- ❌ Don't promise discounts without approval
+- ❌ Don't give complex technical info
+
+### Step 4: Define Operation Mode
+
+#### Captain Mode (Automatic)
+
+1. Enable **"Auto-respond"**
+2. Define when to activate:
+   - ⏰ **After hours**: Only when offline
+   - 🔥 **High demand**: When queue > 10 conversations
+   - 🎯 **Always**: For initial qualification
+3. Define when to transfer:
+   - "I need to speak with a human"
+   - "I want to place an order"
+   - After 3 messages without resolution
+
+#### Copilot Mode (Assistant)
+
+1. Enable **"Suggest responses"**
+2. Configure when to suggest:
+   - 💬 Every customer message
+   - ⏱️ If agent takes > 30 seconds
+   - 🤔 When customer asks question
+3. Agent sees suggestion and decides whether to use
+
+---
+
+## 💬 Captain - Automatic Responses
+
+### How It Works
+
+```
+Customer: What are your business hours?
+🤖 Captain: Hello! Our hours are Monday-Friday, 9am-6pm. 
+           Can I help with anything else?
+
+Customer: How much is the premium plan?
+🤖 Captain: The Premium Plan costs $299/month. 
+           Includes all advanced features.
+           Would you like more details?
+
+Customer: I want to buy
+🤖 Captain: Great! I'll transfer you to a specialist...
+           [Transfers to human agent]
+```
+
+### Knowledge Base
+
+To improve responses, feed AI with:
+
+1. **FAQ**: Frequently asked questions
+2. **Policies**: Shipping, returns, refunds
+3. **Catalog**: Products and prices
+4. **Processes**: How your service works
+
+**How to add:**
+1. Go to **"Settings"** → **"Help Center"**
+2. Create organized articles
+3. AI automatically uses them as reference
+
+---
+
+## ✨ Copilot - Agent Assistance
+
+### How It Works
+
+When customer sends message, agent sees:
+
+```
+┌─────────────────────────────────────────┐
+│ 💬 Customer: How do I cancel?          │
+├─────────────────────────────────────────┤
+│ 💡 AI Suggestion:                       │
+│                                         │
+│ "Hi! To cancel, you can:               │
+│ 1. Access My Account > Subscriptions   │
+│ 2. Click 'Cancel Subscription'         │
+│ 3. Or I can do this for you.           │
+│ Which do you prefer?"                   │
+│                                         │
+│ [✓ Use this response] [✗ Ignore]       │
+└─────────────────────────────────────────┘
+```
+
+**Benefits:**
+- ⚡ Faster responses
+- 📝 Response standardization
+- 🎓 Training for new agents
+- 🌐 Automatic translation suggestions
+
+---
+
+## 📊 AI Metrics
+
+Track AI agents performance:
+
+### AI Dashboard
+
+- **Resolution Rate**: % conversations resolved without human
+- **Response Time**: AI average speed
+- **Satisfaction**: CSAT of AI-handled conversations
+- **Transfers**: How many times needed human
+- **Savings**: Hours saved from team
+
+### Improve Performance
+
+✅ **Update knowledge base**: More content, better results  
+✅ **Analyze transfers**: What couldn't AI answer?  
+✅ **Refine instructions**: Adjust personality and rules  
+✅ **Test regularly**: Ask questions as customer  
+
+---
+
+## 💡 Best Practices
+
+### Transparency
+
+✅ **Identify yourself**: "I'm a virtual assistant"  
+✅ **Be honest**: If don't know, say "let me check"  
+✅ **Human option**: Always offer to speak with person  
+
+### Limits
+
+✅ **Define scope**: What AI can/cannot do  
+✅ **Don't promise**: No financial commitments  
+✅ **Security**: Don't collect sensitive data unnecessarily  
+
+### Continuous Improvement
+
+✅ **Review conversations**: See where AI failed  
+✅ **Update content**: Keep knowledge base current  
+✅ **Test changes**: Before activating for everyone  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Help Center" icon="book" href="/en/user-guide/help-center">
+    Create knowledge base for AI
+  </Card>
+  <Card title="Automations" icon="bolt" href="/en/user-guide/automations">
+    Combine AI with automations
+  </Card>
+</CardGroup>
