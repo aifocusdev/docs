@@ -1,0 +1,232 @@
+---
+title: Products and Appointments
+description: Manage products, values and appointments directly in conversations
+sidebarTitle: Products
+---
+
+# 💰 Products and Appointments
+
+Link **products** and **appointments** directly to conversations, facilitating sales and service tracking.
+
+---
+
+## 💼 Products in Conversations
+
+### What are Products?
+
+Products are items you can link to a conversation to track:
+
+- Products/services of customer interest
+- Commercial proposal values
+- Sold items
+- Sent quotes
+
+### How to Add Products
+
+1. **Open Conversation** you want to add product to
+2. **Right Side Panel** → **"Products"** tab
+3. Click **"Add Product"**
+4. Fill in information:
+   - **Product Name**: Ex: "Premium Plan"
+   - **Value**: Ex: $299.90
+   - **Quantity**: Ex: 1
+   - **Description**: Additional details (optional)
+5. Click **"Save"**
+
+### View Products
+
+All linked products appear:
+- In conversation side panel
+- On Kanban card (if conversation is in funnel)
+- In sales reports
+
+### Edit or Remove Products
+
+- **Edit**: Click product and change information
+- **Remove**: Click trash icon next to product
+
+---
+
+## 📅 Appointments in Conversations
+
+### What are Appointments?
+
+Appointments allow creating commitments linked to conversations:
+
+- Presentation meetings
+- Product demonstrations
+- Scheduled follow-ups
+- Scheduled deliveries
+- Return calls
+
+### How to Create Appointments
+
+1. **Open Conversation**
+2. **Right Side Panel** → **"Appointments"** tab
+3. Click **"New Appointment"**
+4. Fill in:
+   - **Title**: Ex: "Presentation Meeting"
+   - **Date and Time**: When commitment will be
+   - **Duration**: How long (optional)
+   - **Notes**: Important details
+   - **Reminder**: Be notified before (optional)
+5. Click **"Create"**
+
+### Types of Appointments
+
+<Tip>
+**Automatic Appointments**: You can create automations to schedule follow-ups automatically based on rules!
+</Tip>
+
+Examples:
+- **Demo**: Show product to customer
+- **Follow-up**: Return contact after X days
+- **Delivery**: Schedule product delivery
+- **Support**: Schedule technical support
+
+### Manage Appointments
+
+- **View All**: "Appointments" tab in side panel
+- **Edit**: Click appointment to change
+- **Mark as Complete**: After completing commitment
+- **Cancel**: If no longer necessary
+
+### Notifications
+
+You'll receive notifications:
+- ✉️ By email (if configured)
+- 🔔 In Chatwoot panel
+- 📱 Push notification (if enabled)
+
+---
+
+## 🎯 Use Cases
+
+### For Sales
+
+**Scenario**: Customer showed interest in product
+
+1. **Add Product** with estimated value
+2. **Create Appointment** for demonstration
+3. **Move to Funnel** "In Negotiation"
+4. **Track** progress on Kanban
+
+**Result**: Organized sales pipeline with trackable values!
+
+### For Support
+
+**Scenario**: Customer needs technical support
+
+1. **Create Appointment** for technical visit
+2. **Add Product** if there's exchange/repair
+3. **Set Reminder** not to forget
+4. **Mark as Complete** after service
+
+**Result**: Complete service history!
+
+### For E-commerce
+
+**Scenario**: Customer wants to buy multiple products
+
+1. **Add each Product** with values
+2. **Automatic Total** is calculated
+3. **Schedule Delivery** with date and time
+4. **Send Confirmation** to customer
+
+**Result**: Complete order management in Chatwoot!
+
+---
+
+## 📊 Reports and Metrics
+
+### Total Pipeline Value
+
+In Funnels system, you can see:
+- Total value of each stage
+- Sum of all products in funnel
+- Revenue forecast
+- Conversion rate by value
+
+### Future Appointments
+
+View all commitments:
+- Monthly calendar
+- List of upcoming appointments
+- Appointments by agent
+- Appointments by status
+
+### Top-Selling Products
+
+Identify:
+- Which products have most interest
+- Average values per product
+- Average sales time
+- Conversion rates
+
+---
+
+## 🔌 API Integration
+
+Manage products and appointments programmatically:
+
+### Add Product via API
+
+```bash
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/products
+```
+
+```json
+{
+  "product_name": "Premium Plan",
+  "product_value": 299.90,
+  "quantity": 1,
+  "notes": "Customer requested upgrade"
+}
+```
+
+### Create Appointment via API
+
+```bash
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/appointments
+```
+
+```json
+{
+  "title": "Product Demo",
+  "scheduled_at": "2025-01-20T14:00:00Z",
+  "notes": "Customer wants to see advanced features"
+}
+```
+
+📖 **View complete documentation**: [API Reference - Conversation Products](/en/api-reference/introduction)
+
+---
+
+## 💡 Tips and Best Practices
+
+### Products
+
+✅ **Use clear names**: "Premium Plan" instead of "PP"  
+✅ **Always include value**: Facilitates sales reports  
+✅ **Update as negotiation progresses**: Keep values current  
+✅ **Remove irrelevant products**: Keeps history clean
+
+### Appointments
+
+✅ **Be specific in title**: "Demo - Feature X" instead of "Demo"  
+✅ **Set reminders**: Never miss commitment  
+✅ **Add contextual notes**: Helps preparation  
+✅ **Mark as complete**: Maintains organization
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Funnels System" icon="columns" href="/en/user-guide/funnels">
+    Organize products in visual pipeline
+  </Card>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Automate product and appointment creation
+  </Card>
+</CardGroup>
