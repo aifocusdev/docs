@@ -1,0 +1,337 @@
+---
+title: Agentes de IA - Captain & Copilot
+description: Configure assistentes inteligentes para automatizar e otimizar o atendimento
+sidebarTitle: Agentes de IA
+---
+
+# 🤖 Agentes de IA - Captain & Copilot
+
+Aprenda a usar os **Assistentes de IA** do Chatwoot para automatizar respostas, qualificar leads e melhorar a produtividade dos agentes.
+
+---
+
+## 📋 O que são Agentes de IA?
+
+**Agentes de IA** são assistentes inteligentes que podem:
+
+- 🤖 **Responder automaticamente** perguntas frequentes
+- 🔍 **Qualificar leads** antes de passar para agente humano
+- 📝 **Sugerir respostas** para agentes (modo Copilot)
+- 🌐 **Traduzir mensagens** em tempo real
+- 📊 **Analisar sentimentos** dos clientes
+- ⏰ **Atender 24/7** quando equipe está offline
+
+---
+
+## 🎯 Tipos de Agentes de IA
+
+<CardGroup cols={2}>
+  <Card title="Captain (Piloto Automático)" icon="robot">
+    **Modo:** Totalmente automático  
+    **Função:** Responde diretamente o cliente  
+    **Uso:** FAQ, qualificação, atendimento 24/7
+  </Card>
+  
+  <Card title="Copilot (Copiloto)" icon="wand-magic-sparkles">
+    **Modo:** Assistente do agente  
+    **Função:** Sugere respostas aos agentes  
+    **Uso:** Aumentar velocidade e qualidade
+  </Card>
+</CardGroup>
+
+---
+
+## 🚀 Configurar Agente de IA
+
+### Passo 1: Acessar Configurações
+
+1. Vá em **"Configurações"** → **"Aplicativos"**
+2. Procure **"OpenAI"** ou **"Dialogflow"**
+3. Clique em **"Configurar"**
+
+### Passo 2: Conectar Provedor de IA
+
+#### Opção A: OpenAI (ChatGPT)
+
+1. Obtenha sua **API Key** em [platform.openai.com](https://platform.openai.com)
+2. Cole a chave no campo **"API Key"**
+3. Escolha o modelo:
+   - `gpt-4` - Mais inteligente (mais caro)
+   - `gpt-3.5-turbo` - Rápido e econômico
+4. Clique em **"Conectar"**
+
+#### Opção B: Dialogflow (Google)
+
+1. Crie projeto no [Google Cloud](https://cloud.google.com)
+2. Ative **Dialogflow API**
+3. Baixe arquivo de credenciais JSON
+4. Faça upload no Chatwoot
+5. Clique em **"Conectar"**
+
+### Passo 3: Configurar Comportamento
+
+**Personalidade da IA:**
+```
+Você é um assistente prestativo da empresa [SUA EMPRESA].
+Seja educado, profissional e objetivo.
+Se não souber algo, transfira para um agente humano.
+```
+
+**Regras:**
+- ✅ Responder perguntas sobre produtos
+- ✅ Coletar informações de contato
+- ✅ Qualificar interesse
+- ❌ Não prometer descontos sem aprovação
+- ❌ Não dar informações técnicas complexas
+
+### Passo 4: Definir Modo de Operação
+
+#### Modo Captain (Automático)
+
+1. Ative **"Responder automaticamente"**
+2. Defina quando ativar:
+   - ⏰ **Fora do horário**: Só quando offline
+   - 🔥 **Alta demanda**: Quando fila > 10 conversas
+   - 🎯 **Sempre**: Para qualificação inicial
+3. Defina quando transferir:
+   - "Preciso falar com um humano"
+   - "Quero fazer pedido"
+   - Após 3 mensagens sem resolver
+
+#### Modo Copilot (Assistente)
+
+1. Ative **"Sugerir respostas"**
+2. Configure quando sugerir:
+   - 💬 A cada mensagem do cliente
+   - ⏱️ Se agente demorar > 30 segundos
+   - 🤔 Quando cliente fizer pergunta
+3. Agente vê sugestão e decide se usa
+
+---
+
+## 💬 Captain - Respostas Automáticas
+
+### Como Funciona
+
+```
+Cliente: Qual o horário de funcionamento?
+🤖 Captain: Olá! Nosso horário é de segunda a sexta, 9h às 18h. 
+           Posso ajudar em algo mais?
+
+Cliente: Quanto custa o plano premium?
+🤖 Captain: O Plano Premium custa R$ 299/mês. 
+           Inclui todos os recursos avançados.
+           Gostaria de saber mais detalhes?
+
+Cliente: Quero contratar
+🤖 Captain: Ótimo! Vou transferir você para um especialista...
+           [Transfere para agente humano]
+```
+
+### Base de Conhecimento
+
+Para melhorar respostas, alimente a IA com:
+
+1. **FAQ**: Perguntas frequentes
+2. **Políticas**: Envio, troca, devolução
+3. **Catálogo**: Produtos e preços
+4. **Processos**: Como funciona seu serviço
+
+**Como adicionar:**
+1. Vá em **"Configurações"** → **"Central de Ajuda"**
+2. Crie artigos organizados
+3. A IA usa automaticamente como referência
+
+---
+
+## ✨ Copilot - Assistência aos Agentes
+
+### Como Funciona
+
+Quando cliente envia mensagem, agente vê:
+
+```
+┌─────────────────────────────────────────┐
+│ 💬 Cliente: Como faço para cancelar?    │
+├─────────────────────────────────────────┤
+│ 💡 Sugestão da IA:                      │
+│                                         │
+│ "Olá! Para cancelar, você pode:        │
+│ 1. Acessar Minha Conta > Assinaturas   │
+│ 2. Clicar em 'Cancelar Assinatura'     │
+│ 3. Ou eu posso fazer isso por você.    │
+│ Prefere que eu ajude?"                  │
+│                                         │
+│ [✓ Usar esta resposta] [✗ Ignorar]     │
+└─────────────────────────────────────────┘
+```
+
+**Benefícios:**
+- ⚡ Respostas mais rápidas
+- 📝 Padronização de atendimento
+- 🎓 Treinamento de novos agentes
+- 🌐 Sugestão de tradução automática
+
+---
+
+## 🎯 Casos de Uso Práticos
+
+### 1. Qualificação de Leads (Captain)
+
+```
+🤖: Olá! Sou o assistente virtual. Como posso ajudar?
+
+Cliente: Quero saber sobre seus produtos
+
+🤖: Perfeito! Para melhor atendê-lo, me diga:
+   - Qual tipo de produto você procura?
+   - É para uso pessoal ou empresarial?
+   - Tem algum orçamento em mente?
+
+Cliente: Empresarial, para 50 funcionários, até 5k/mês
+
+🤖: Entendido! Nosso Plano Empresarial é ideal para você.
+   Vou transferir para um especialista que vai 
+   preparar uma proposta personalizada!
+   
+[Transfere para agente + passa contexto coletado]
+```
+
+### 2. FAQ Automático (Captain)
+
+```
+Cliente: Vocês aceitam cartão?
+🤖: Sim! Aceitamos todas as bandeiras de cartão 
+   de crédito e débito, além de PIX e boleto.
+
+Cliente: Qual o prazo de entrega?
+🤖: O prazo varia por região:
+   - Capitais: 2-3 dias úteis
+   - Interior: 5-7 dias úteis
+   - Zonas remotas: até 15 dias úteis
+```
+
+### 3. Atendimento Fora do Horário (Captain)
+
+```
+Cliente: [23:30] Preciso de ajuda urgente!
+🤖: Olá! No momento estamos fechados (horário: 9h-18h).
+   Posso ajudar com:
+   • Rastreamento de pedido
+   • Perguntas frequentes
+   • Agendar retorno
+   
+   Ou posso registrar sua mensagem para nossa 
+   equipe responder amanhã às 9h. O que prefere?
+```
+
+### 4. Suporte Multilíngue (Copilot)
+
+```
+Cliente: Hello, do you speak English?
+💡 [IA detecta idioma e sugere ao agente:]
+   "Hi! Yes, I do. How can I help you today?"
+```
+
+---
+
+## 📊 Métricas de IA
+
+Acompanhe performance dos agentes de IA:
+
+### Dashboard de IA
+
+- **Taxa de Resolução**: % conversas resolvidas sem humano
+- **Tempo de Resposta**: Velocidade média da IA
+- **Satisfação**: CSAT de conversas atendidas por IA
+- **Transferências**: Quantas vezes precisou de humano
+- **Economia**: Horas economizadas da equipe
+
+### Melhorar Performance
+
+✅ **Atualize base de conhecimento**: Quanto mais conteúdo, melhor  
+✅ **Analise transferências**: O que a IA não soube responder?  
+✅ **Refine instruções**: Ajuste personalidade e regras  
+✅ **Teste regularmente**: Faça perguntas como cliente  
+
+---
+
+## 🔧 Configurações Avançadas
+
+### Tom de Voz
+
+Personalize como a IA se comunica:
+
+**Formal:**
+```
+Prezado cliente, agradeço seu contato. 
+Como posso auxiliá-lo hoje?
+```
+
+**Casual:**
+```
+E aí! Tudo bem? 😊
+No que posso te ajudar hoje?
+```
+
+**Técnico:**
+```
+Olá. Para melhor diagnóstico, preciso de:
+- Versão do produto
+- Descrição do erro
+- Logs (se disponível)
+```
+
+### Regras de Transferência
+
+Configure quando passar para humano:
+
+1. **Por Palavra-chave**: "gerente", "reclamação", "problema"
+2. **Por Sentimento**: Se cliente está bravo/frustrado
+3. **Por Complexidade**: Se IA não tem certeza da resposta
+4. **Por Tempo**: Após X minutos sem resolver
+5. **Por Solicitação**: Cliente pede explicitamente
+
+### Integrações
+
+A IA pode se conectar a:
+
+- 🗄️ **CRM**: Buscar informações do cliente
+- 📦 **E-commerce**: Consultar pedidos e estoque
+- 📅 **Calendário**: Agendar reuniões
+- 💳 **Pagamento**: Gerar links de pagamento
+
+---
+
+## 💡 Melhores Práticas
+
+### Transparência
+
+✅ **Identifique-se**: "Sou um assistente virtual"  
+✅ **Seja honesto**: Se não sabe, diga "vou verificar"  
+✅ **Opção humana**: Sempre ofereça falar com pessoa  
+
+### Limites
+
+✅ **Defina escopo**: O que IA pode/não pode fazer  
+✅ **Não prometa**: Sem comprometimentos financeiros  
+✅ **Segurança**: Não colete dados sensíveis sem necessidade  
+
+### Melhoria Contínua
+
+✅ **Revise conversas**: Veja onde IA errou  
+✅ **Atualize conteúdo**: Base de conhecimento sempre atual  
+✅ **Teste mudanças**: Antes de ativar para todos  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Central de Ajuda" icon="book" href="/pt-br/guia-usuario/central-ajuda">
+    Crie base de conhecimento para IA
+  </Card>
+  <Card title="Automações" icon="bolt" href="/pt-br/guia-usuario/automacoes">
+    Combine IA com automações
+  </Card>
+</CardGroup>

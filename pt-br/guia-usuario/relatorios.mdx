@@ -1,0 +1,312 @@
+---
+title: Relatórios e Métricas
+description: Acompanhe performance da equipe, CSAT, tempo de resposta e muito mais
+sidebarTitle: Relatórios
+---
+
+# 📊 Relatórios e Métricas
+
+Monitore performance do atendimento, analise dados e tome decisões baseadas em métricas reais.
+
+---
+
+## 📈 Dashboard Principal
+
+Acesse: **"Relatórios"** na sidebar
+
+### Visão Geral
+
+<CardGroup cols={3}>
+  <Card title="Conversas" icon="message">
+    Total de conversas no período
+  </Card>
+  <Card title="Tempo Médio" icon="clock">
+    Tempo médio de primeira resposta
+  </Card>
+  <Card title="CSAT" icon="star">
+    Satisfação do cliente
+  </Card>
+</CardGroup>
+
+---
+
+## 🎯 Métricas Disponíveis
+
+### 1. Conversas
+
+**O que mede:**
+- Total de conversas criadas
+- Conversas resolvidas
+- Taxa de resolução
+- Conversas pendentes
+
+**Filtros:**
+- Por período (hoje, semana, mês, customizado)
+- Por inbox (WhatsApp, Email, etc.)
+- Por agente
+- Por time
+- Por label
+
+**Exemplo:**
+```
+📊 Últimos 7 dias:
+├─ Total de conversas: 450
+├─ Resolvidas: 380 (84%)
+├─ Em aberto: 45 (10%)
+└─ Pendentes: 25 (6%)
+```
+
+---
+
+### 2. Tempo de Primeira Resposta (FRT)
+
+**O que mede:**
+Quanto tempo leva para agente responder primeira mensagem do cliente.
+
+**Objetivo:**
+- 🟢 **Excelente**: < 1 minuto
+- 🟡 **Bom**: 1-5 minutos
+- 🟠 **Regular**: 5-15 minutos
+- 🔴 **Ruim**: > 15 minutos
+
+**Por que importa:**
+Clientes esperam respostas rápidas. FRT baixo = satisfação alta.
+
+---
+
+### 3. Tempo de Resolução
+
+**O que mede:**
+Quanto tempo leva para resolver completamente a conversa.
+
+**Benchmark:**
+- Suporte simples: 10-30 minutos
+- Suporte médio: 1-4 horas
+- Suporte complexo: 1-2 dias
+
+---
+
+### 4. CSAT (Customer Satisfaction Score)
+
+**O que mede:**
+Satisfação do cliente após resolver conversa.
+
+**Como funciona:**
+1. Conversa é marcada como resolvida
+2. Cliente recebe pesquisa: 😞 😐 😊
+3. Cliente avalia (opcional)
+4. Métrica é atualizada
+
+**Cálculo:**
+```
+CSAT = (Avaliações Positivas / Total de Avaliações) × 100
+
+Exemplo:
+80 avaliações positivas ÷ 100 avaliações = 80% CSAT
+```
+
+**Objetivo:**
+- 🟢 **Excelente**: > 90%
+- 🟡 **Bom**: 80-90%
+- 🟠 **Regular**: 70-80%
+- 🔴 **Ruim**: < 70%
+
+---
+
+### 5. Performance por Agente
+
+**Métricas individuais:**
+- Total de conversas atendidas
+- Taxa de resolução
+- Tempo médio de resposta
+- CSAT individual
+- Mensagens enviadas
+
+**Ranking:**
+Veja quem são os melhores agentes em cada métrica.
+
+---
+
+### 6. Performance por Time
+
+Compare times:
+- Vendas vs Suporte
+- Time A vs Time B
+- Turno manhã vs tarde
+
+---
+
+### 7. Performance por Inbox
+
+Analise cada canal:
+- WhatsApp: 200 conversas, CSAT 85%
+- Email: 50 conversas, CSAT 92%
+- Instagram: 100 conversas, CSAT 78%
+
+---
+
+### 8. Labels Mais Usadas
+
+Veja quais etiquetas são mais aplicadas:
+```
+1. #vendas - 150 conversas
+2. #suporte - 120 conversas
+3. #urgente - 80 conversas
+4. #duvida - 60 conversas
+```
+
+---
+
+### 9. Horários de Pico
+
+Identifique quando recebe mais mensagens:
+```
+📊 Picos de Atendimento:
+├─ Segunda 10h-12h: 45 conversas/hora
+├─ Quarta 14h-16h: 52 conversas/hora  
+└─ Sexta 16h-18h: 38 conversas/hora
+```
+
+**Use para:**
+- Escalar equipe nos horários certos
+- Planejar pausas fora dos picos
+
+---
+
+## 📥 Exportar Relatórios
+
+### CSV/Excel
+
+1. Configure filtros desejados
+2. Clique em **"Exportar"**
+3. Escolha formato (CSV ou XLSX)
+4. Download inicia automaticamente
+
+**O que vem no arquivo:**
+- Data e hora
+- ID da conversa
+- Cliente (nome, email)
+- Agente responsável
+- Inbox
+- Status
+- Tempo de resposta
+- Tempo de resolução
+- CSAT
+- Labels
+
+---
+
+## 📧 Relatórios Automáticos por Email
+
+### Configurar Envio Automático
+
+1. Vá em **"Configurações"** → **"Relatórios"**
+2. Ative **"Envio Automático"**
+3. Configure:
+   - **Frequência**: Diário, Semanal, Mensal
+   - **Hora**: 9h, 18h, etc.
+   - **Destinatários**: Emails dos gestores
+   - **Métricas**: Escolha quais incluir
+
+**Exemplo de email:**
+```
+📊 Relatório Semanal - Chatwoot
+
+Período: 10/01 a 16/01/2025
+
+Resumo:
+✅ 450 conversas atendidas (+12% vs semana anterior)
+⏱️ Tempo médio de resposta: 2min 34s
+😊 CSAT: 87%
+🏆 Melhor agente: Maria Silva (95% CSAT)
+
+[Ver relatório completo]
+```
+
+---
+
+## 📊 Relatórios Customizados
+
+### Criar Relatório Personalizado
+
+1. **"Relatórios"** → **"Novo Relatório"**
+2. **Nome**: "Vendas WhatsApp"
+3. **Filtros:**
+   - Inbox: WhatsApp
+   - Label: #vendas
+   - Período: Últimos 30 dias
+4. **Métricas:**
+   - Total de conversas
+   - Taxa de conversão
+   - Valor total (se produtos vinculados)
+5. **Salvar**
+
+**Acesso rápido:**
+Relatório fica salvo para consultar sempre que precisar.
+
+---
+
+## 🎯 Como Usar os Relatórios
+
+### Para Gestores
+
+✅ **Acompanhe diariamente**: Veja dashboard ao iniciar o dia  
+✅ **Identifique problemas**: CSAT caindo? Tempo aumentando?  
+✅ **Reconheça melhores**: Parabenize agentes top performers  
+✅ **Planeje escalação**: Ajuste equipe baseado em demanda  
+
+### Para Agentes
+
+✅ **Veja sua performance**: Compare-se com metas  
+✅ **Identifique melhorias**: Onde pode melhorar?  
+✅ **Celebre conquistas**: CSAT alto? Comemore!  
+
+---
+
+## 💡 Melhores Práticas
+
+### Defina Metas (KPIs)
+
+Estabeleça objetivos claros:
+
+**Exemplo:**
+```
+Metas do Trimestre Q1/2025:
+
+1. Tempo de Primeira Resposta: < 2 minutos
+2. Taxa de Resolução: > 85%
+3. CSAT: > 90%
+4. Conversas por Agente: 50-60/dia
+```
+
+### Acompanhe Tendências
+
+Não olhe apenas números absolutos, veja tendências:
+- CSAT está subindo ou caindo?
+- Demanda aumentou em qual horário?
+- Qual canal cresce mais rápido?
+
+### Aja Baseado em Dados
+
+📉 **CSAT caindo?**
+- Investigue: O que mudou?
+- Treine equipe
+- Revise processos
+
+⏱️ **Tempo de resposta alto?**
+- Contrate mais agentes?
+- Implemente IA para triagem?
+- Otimize processos?
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Agentes" icon="users" href="/pt-br/guia-usuario/agentes">
+    Gerencie sua equipe
+  </Card>
+  <Card title="Times" icon="people-group" href="/pt-br/guia-usuario/times">
+    Organize por departamentos
+  </Card>
+</CardGroup>

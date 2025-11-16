@@ -1,0 +1,386 @@
+---
+title: Distribuição Automática (Agent Assignment)
+description: Configure como conversas são distribuídas automaticamente entre agentes
+sidebarTitle: Agent Assignment
+---
+
+# 🔀 Distribuição Automática de Conversas
+
+Configure regras inteligentes para distribuir conversas automaticamente entre agentes e times.
+
+---
+
+## 📋 O que é Agent Assignment?
+
+**Agent Assignment** é o sistema que decide automaticamente qual agente receberá cada nova conversa.
+
+**Sem assignment:**
+```
+Nova conversa → Fica sem atribuição → Agente precisa pegar manualmente
+```
+
+**Com assignment:**
+```
+Nova conversa → Sistema atribui automaticamente → Agente recebe notificação
+```
+
+---
+
+## 🎯 Métodos de Distribuição
+
+<CardGroup cols={2}>
+  <Card title="Round Robin" icon="rotate">
+    Revezamento igualitário
+  </Card>
+  <Card title="Load Balanced" icon="scale-balanced">
+    Baseado em capacidade
+  </Card>
+  <Card title="Skill-based" icon="star">
+    Por especialização
+  </Card>
+  <Card title="Priority" icon="flag">
+    Por prioridade
+  </Card>
+</CardGroup>
+
+---
+
+## 🔄 Round Robin (Revezamento)
+
+**Como funciona:**
+Distribui igualmente para todos agentes em ordem:
+
+```
+Agentes: Maria, João, Pedro
+
+Conversa 1 → Maria
+Conversa 2 → João  
+Conversa 3 → Pedro
+Conversa 4 → Maria (volta ao início)
+Conversa 5 → João
+```
+
+**Vantagens:**
+- ✅ Distribuição justa
+- ✅ Simples de entender
+- ✅ Todos atendem igual
+
+**Desvantagens:**
+- ❌ Não considera carga atual
+- ❌ Ignora especialização
+
+**Use quando:**
+- Todos agentes têm mesma skill
+- Quer distribuição igualitária
+- Time pequeno
+
+---
+
+## ⚖️ Load Balanced (Balanceamento de Carga)
+
+**Como funciona:**
+Atribui para agente com MENOS conversas abertas:
+
+```
+Estado atual:
+├─ Maria: 3 conversas
+├─ João: 5 conversas
+└─ Pedro: 2 conversas
+
+Nova conversa → Pedro (tem menos)
+
+Depois de atribuir:
+├─ Maria: 3 conversas
+├─ João: 5 conversas
+└─ Pedro: 3 conversas
+
+Próxima conversa → Maria
+```
+
+**Vantagens:**
+- ✅ Distribui baseado em carga real
+- ✅ Previne sobrecarga
+- ✅ Adapta-se dinamicamente
+
+**Use quando:**
+- Times grandes
+- Velocidade de resolução varia
+- Quer prevenir burnout
+
+---
+
+## ⭐ Skill-based (Por Especialização)
+
+**Como funciona:**
+Atribui baseado em skills/especialização:
+
+```
+Agentes:
+├─ Maria: Skill "Vendas" + "Inglês"
+├─ João: Skill "Suporte" + "Técnico"
+└─ Pedro: Skill "Vendas" + "Financeiro"
+
+Cliente: "Preciso de suporte técnico"
+Sistema detecta: Tag #suporte
+→ Atribui para João
+
+Cliente: "I want to buy" (inglês)
+Sistema detecta: Idioma EN + interesse vendas
+→ Atribui para Maria
+```
+
+**Configure skills:**
+1. **"Agentes"** → Selecione agente
+2. **"Skills"** → Adicionar
+3. Exemplos:
+   - Idiomas: Português, Inglês, Espanhol
+   - Produtos: Produto A, Produto B
+   - Expertise: Técnico, Vendas, Financeiro
+
+**Vantagens:**
+- ✅ Cliente fala com especialista
+- ✅ Resolução mais rápida
+- ✅ Maior satisfação
+
+---
+
+## 🎚️ Priority-based (Por Prioridade)
+
+**Como funciona:**
+Clientes VIP ou urgentes vão para melhores agentes:
+
+```
+Prioridade do Cliente:
+├─ VIP → Top performers (Maria, João)
+├─ Alta → Experientes
+├─ Normal → Todos
+└─ Baixa → Novatos (treinamento)
+
+Cliente VIP entra → Maria ou João
+
+Cliente Normal → Qualquer agente disponível
+```
+
+**Como definir prioridade:**
+
+**Por Label:**
+```
+SE cliente tem label "VIP"
+ENTÃO prioridade = Alta
+```
+
+**Por Atributo:**
+```
+SE cliente.plano = "Enterprise"
+ENTÃO prioridade = Alta
+```
+
+**Por Valor:**
+```
+SE cliente.lifetime_value > R$ 10.000
+ENTÃO prioridade = Alta
+```
+
+---
+
+## ⚙️ Configurar Assignment
+
+### Por Inbox
+
+Cada inbox pode ter sua própria regra:
+
+**WhatsApp Vendas:**
+- Método: Skill-based
+- Skill requerida: "Vendas"
+- Fallback: Round Robin
+
+**Email Suporte:**
+- Método: Load Balanced
+- Capacidade máxima: 10/agente
+- Overflow: Criar ticket na fila
+
+**Chat Website:**
+- Método: Priority-based
+- VIP para top 3 agentes
+- Normal para todos
+
+### Por Time
+
+Configure para cada time:
+
+```
+Time Vendas:
+├─ Método: Round Robin
+├─ Agentes: Maria, Pedro, Ana
+└─ Horário: 9h-18h
+
+Time Suporte:
+├─ Método: Load Balanced
+├─ Capacidade: 8 conversas/agente
+└─ Horário: 8h-22h
+```
+
+---
+
+## 🔧 Regras Avançadas
+
+### Capacidade por Agente
+
+Limite conversas simultâneas:
+
+```
+Maria:
+├─ Capacidade: 10 conversas
+├─ Atual: 8 conversas
+└─ Status: Aceitando (2 vagas)
+
+João:
+├─ Capacidade: 10 conversas
+├─ Atual: 10 conversas
+└─ Status: Cheio (0 vagas)
+
+Nova conversa → Maria
+```
+
+### Disponibilidade
+
+Respeita status do agente:
+
+```
+🟢 Online: Recebe normalmente
+🟡 Ausente: Não recebe novas
+🔴 Ocupado: Não recebe novas
+⚫ Offline: Não recebe novas
+```
+
+### Horário de Trabalho
+
+```
+João:
+├─ Horário: Seg-Sex 9h-18h
+├─ Agora: 19h (fora do horário)
+└─ Status: Não recebe conversas
+
+Maria:
+├─ Horário: Seg-Sex 8h-20h  
+├─ Agora: 19h (dentro do horário)
+└─ Status: Recebe conversas
+```
+
+---
+
+## 🎯 Estratégias Combinadas
+
+### Vendas + Suporte
+
+```
+1. Análise inicial (IA):
+   - Detecta intenção
+   - Tag automática
+
+2. Roteamento:
+   SE tag = "vendas"
+      → Time Vendas (Round Robin)
+   
+   SE tag = "suporte"
+      → Time Suporte (Load Balanced)
+
+3. Especialização:
+   SE produto = "Enterprise"
+      → Agentes Senior apenas
+```
+
+### VIP Fast Track
+
+```
+1. Identifica cliente:
+   SE cliente.label = "VIP"
+   
+2. Fila prioritária:
+   → Bypass fila normal
+   
+3. Assignment especial:
+   → Top 3 agentes
+   → Notificação imediata
+   → SLA 1min resposta
+```
+
+---
+
+## 📊 Métricas de Assignment
+
+Monitore eficiência:
+
+### Taxa de Distribuição
+
+```
+📊 Últimos 7 dias:
+
+Conversas recebidas: 500
+├─ Auto-atribuídas: 470 (94%)
+├─ Atribuição manual: 25 (5%)
+└─ Sem atribuição: 5 (1%)
+
+Eficiência: 94% ✅
+```
+
+### Balanceamento
+
+```
+Conversas por agente:
+├─ Maria: 95 (19%)
+├─ João: 98 (19.6%)
+├─ Pedro: 92 (18.4%)
+├─ Ana: 100 (20%)
+└─ Lucas: 115 (23%) ⚠️ Desbalanceado
+
+Desvio padrão: 8.2
+Ideal: < 10
+```
+
+### Tempo até Assignment
+
+```
+⏱️ Tempo médio até atribuir:
+├─ Imediato: 450 conversas (90%)
+├─ < 1min: 35 conversas (7%)
+├─ 1-5min: 12 conversas (2.4%)
+└─ > 5min: 3 conversas (0.6%)
+
+Média geral: 8 segundos ✅
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Planejamento
+
+✅ **Comece simples**: Round Robin primeiro  
+✅ **Monitore métricas**: Veja o que funciona  
+✅ **Ajuste gradualmente**: Melhore com dados  
+
+### Capacidade
+
+✅ **Defina limites realistas**: 8-12 conversas/agente  
+✅ **Respeite horários**: Não force overtime  
+✅ **Buffer para picos**: Reserve capacidade extra  
+
+### Especialização
+
+✅ **Cross-training**: Agentes sabem múltiplas áreas  
+✅ **Backup sempre**: Skill nunca com 1 pessoa só  
+✅ **Documenta processos**: Facilita treinar novos  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Combine assignment com automações
+  </Card>
+  <Card title="Relatórios" icon="chart-line" href="/pt-br/guia-usuario/relatorios">
+    Analise eficiência da distribuição
+  </Card>
+</CardGroup>

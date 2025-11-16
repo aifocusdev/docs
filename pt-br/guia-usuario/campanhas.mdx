@@ -1,0 +1,312 @@
+---
+title: Campanhas de Mensagens
+description: Envie mensagens em massa para segmentos de clientes
+sidebarTitle: Campanhas
+---
+
+# 📢 Campanhas de Mensagens
+
+Envie mensagens proativas para seus clientes de forma segmentada e personalizada.
+
+---
+
+## 📋 O que são Campanhas?
+
+**Campanhas** permitem enviar mensagens para múltiplos contatos simultaneamente:
+
+- 📧 **Newsletters**: Novidades e atualizações
+- 🎉 **Promoções**: Ofertas especiais
+- 📣 **Anúncios**: Novos produtos/serviços
+- 🎂 **Datas especiais**: Aniversários, etc.
+- 🔔 **Lembretes**: Renovações, agendamentos
+
+---
+
+## ✨ Recursos
+
+<CardGroup cols={2}>
+  <Card title="Segmentação" icon="filter">
+    Envie para público específico
+  </Card>
+  <Card title="Personalização" icon="user">
+    Use variáveis no texto
+  </Card>
+  <Card title="Agendamento" icon="calendar">
+    Programe envio futuro
+  </Card>
+  <Card title="Métricas" icon="chart-line">
+    Acompanhe taxas de abertura
+  </Card>
+</CardGroup>
+
+---
+
+## 🚀 Criar Campanha
+
+### Passo 1: Nova Campanha
+
+1. Vá em **"Campanhas"** → **"Nova Campanha"**
+2. Escolha **tipo**:
+   - **Pontual**: Envio único
+   - **Recorrente**: Envios programados
+
+### Passo 2: Configurar Audiência
+
+**Segmente por:**
+- ✅ **Labels**: Clientes VIP, Leads Frios
+- ✅ **Inbox**: Só WhatsApp, só Email
+- ✅ **Atributos**: Plano Premium, Região Sul
+- ✅ **Comportamento**: Última compra > 30 dias
+- ✅ **Status**: Ativos, Inativos
+
+**Exemplo:**
+```
+Audiência: Clientes VIP do WhatsApp 
+           que compraram nos últimos 60 dias
+           
+Estimativa: 234 contatos
+```
+
+### Passo 3: Criar Mensagem
+
+**Personalize com variáveis:**
+
+```
+Olá {{nome}}! 👋
+
+Temos uma oferta especial para você!
+
+{{produto}} com 30% de desconto 
+somente hoje! 🎉
+
+Use o cupom: VIP30
+
+Compre agora: {{link}}
+
+Atenciosamente,
+{{empresa}}
+```
+
+**Variáveis disponíveis:**
+- `{{nome}}` - Nome do contato
+- `{{email}}` - Email
+- `{{empresa}}` - Nome da empresa do contato
+- `{{agente}}` - Nome do último agente
+- Custom: Qualquer atributo personalizado
+
+### Passo 4: Adicionar Mídia (Opcional)
+
+- 🖼️ **Imagem**: Banner promocional
+- 🎥 **Vídeo**: Demonstração de produto
+- 📄 **PDF**: Catálogo, ebook
+
+### Passo 5: Agendar
+
+**Opções:**
+- **Enviar agora**: Imediatamente
+- **Agendar**: Data e hora específica
+- **Melhor horário**: IA escolhe melhor momento
+
+**Exemplo:**
+```
+📅 Agendar para: 15/01/2025 às 10:00
+⏰ Fuso horário: BRT (Brasília)
+```
+
+### Passo 6: Revisar e Enviar
+
+**Checklist final:**
+- ✅ Audiência correta?
+- ✅ Texto sem erros?
+- ✅ Links funcionando?
+- ✅ Variáveis configuradas?
+- ✅ Horário adequado?
+
+**Clique em "Enviar Campanha"**
+
+---
+
+## 📊 Acompanhar Resultados
+
+### Métricas da Campanha
+
+Após envio, veja:
+
+**Taxa de Entrega:**
+```
+✅ Entregues: 230/234 (98%)
+❌ Falhas: 4 (2%)
+```
+
+**Taxa de Abertura:**
+```
+👁️ Abriram: 180/230 (78%)
+```
+
+**Taxa de Resposta:**
+```
+💬 Responderam: 45/180 (25%)
+```
+
+**Taxa de Conversão:**
+```
+✅ Converteram: 12/45 (27%)
+```
+
+**Cálculo ROI:**
+```
+💰 Valor gerado: R$ 8.500
+💸 Custo campanha: R$ 200
+📈 ROI: 4.250%
+```
+
+---
+
+## 🎯 Tipos de Campanhas
+
+### 1. Promoção Relâmpago
+
+**Objetivo:** Vendas rápidas
+
+**Exemplo:**
+```
+🔥 ÚLTIMA CHANCE! 🔥
+
+{{nome}}, restam apenas 3 horas!
+
+50% OFF em todo site 🎉
+
+Use: RELAMPAGO50
+
+Corre: {{link}}
+```
+
+**Segmento:** Clientes que viram produto mas não compraram
+
+---
+
+### 2. Recuperação de Carrinho
+
+**Objetivo:** Converter abandono
+
+**Exemplo:**
+```
+Oi {{nome}}! 👋
+
+Você deixou {{produto}} no carrinho...
+
+Finalize agora e ganhe:
+✅ Frete GRÁTIS
+✅ 10% desconto extra
+
+Link: {{link_carrinho}}
+```
+
+**Segmento:** Carrinhos abandonados há 24h
+
+---
+
+### 3. Aniversário
+
+**Objetivo:** Engajamento e vendas
+
+**Exemplo:**
+```
+🎂 Parabéns, {{nome}}! 🎉
+
+Hoje é seu dia especial!
+
+Presente: 20% OFF em qualquer compra
+
+Cupom: ANIVER{{dia}}{{mes}}
+
+Aproveite: {{link}}
+```
+
+**Segmento:** Aniversariantes do mês
+
+---
+
+### 4. Reativação
+
+**Objetivo:** Recuperar inativos
+
+**Exemplo:**
+```
+{{nome}}, sentimos sua falta! 🥺
+
+Faz tempo que não nos vemos...
+
+Volta com um presente:
+🎁 30% desconto
+🎁 Frete grátis
+🎁 Brinde surpresa
+
+Reative: {{link}}
+```
+
+**Segmento:** Sem compras há > 90 dias
+
+---
+
+### 5. Conteúdo Educativo
+
+**Objetivo:** Nutrição de leads
+
+**Exemplo:**
+```
+📚 {{nome}}, novo conteúdo!
+
+"10 Dicas Para {{interesse}}"
+
+Neste guia você aprende:
+✓ Técnica 1
+✓ Técnica 2
+✓ Técnica 3
+
+Download grátis: {{link}}
+```
+
+**Segmento:** Leads em nutrição
+
+---
+
+## 💡 Melhores Práticas
+
+### Timing
+
+✅ **Horário comercial**: 9h-18h em dias úteis  
+✅ **Evite madrugada**: Respeite sono do cliente  
+✅ **Teste dias**: Terça e Quinta costumam ter melhor taxa  
+
+### Frequência
+
+✅ **Não spam**: Máximo 2-3 campanhas/mês por contato  
+✅ **Respeite opt-out**: Quem pediu para sair, não envie  
+✅ **Segmente bem**: Relevância > Volume  
+
+### Conteúdo
+
+✅ **Seja direto**: Objetivo claro em 2-3 linhas  
+✅ **Call to action forte**: "Compre agora", "Baixe grátis"  
+✅ **Urgência**: "Últimas unidades", "Válido até..."  
+✅ **Personalização**: Use nome e contexto  
+
+### Conformidade
+
+✅ **LGPD**: Só envie para quem deu consentimento  
+✅ **Opt-out**: Sempre ofereça opção de sair  
+✅ **WhatsApp**: Respeite regras do WhatsApp Business  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Automatize campanhas baseadas em triggers
+  </Card>
+  <Card title="Relatórios" icon="chart-bar" href="/pt-br/guia-usuario/relatorios">
+    Analise performance das campanhas
+  </Card>
+</CardGroup>

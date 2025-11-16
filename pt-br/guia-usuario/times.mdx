@@ -1,0 +1,297 @@
+---
+title: Gestão de Times
+description: Organize agentes em departamentos e equipes especializadas
+sidebarTitle: Times
+---
+
+# 👨‍👩‍👧‍👦 Gestão de Times
+
+Organize seus agentes em times por departamento, especialidade ou função.
+
+---
+
+## 📋 O que são Times?
+
+**Times** são grupos de agentes que trabalham juntos:
+
+**Exemplos:**
+- 💼 **Vendas**: Agentes focados em vendas
+- 🛠️ **Suporte Técnico**: Resolução de problemas
+- 📦 **Logística**: Rastreamento e entregas
+- 💰 **Financeiro**: Cobranças e pagamentos
+
+---
+
+## ✨ Benefícios
+
+<CardGroup cols={2}>
+  <Card title="Especialização" icon="bullseye">
+    Cada time domina sua área
+  </Card>
+  <Card title="Organização" icon="sitemap">
+    Conversas vão para time certo
+  </Card>
+  <Card title="Métricas" icon="chart-line">
+    Compare performance entre times
+  </Card>
+  <Card title="Escalabilidade" icon="arrow-up">
+    Cresce conforme empresa cresce
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Time
+
+1. **"Configurações"** → **"Times"**
+2. **"Novo Time"**
+3. Preencha:
+   - **Nome**: "Suporte Técnico"
+   - **Descrição**: "Resolução de problemas técnicos"
+   - **Email**: suporte@empresa.com (opcional)
+4. **Adicionar Agentes**:
+   - Escolha membros do time
+   - Defina líder do time
+5. **Salvar**
+
+---
+
+## 👥 Adicionar Agentes ao Time
+
+### Opção 1: Na criação do time
+Selecione agentes ao criar time
+
+### Opção 2: Depois
+1. Abra o time
+2. **"Adicionar Membro"**
+3. Escolha agente(s)
+4. Salvar
+
+**Agente pode estar em múltiplos times:**
+```
+João Silva:
+├─ Time Vendas
+└─ Time Suporte
+
+Maria Santos:
+└─ Time Suporte
+```
+
+---
+
+## 👔 Líder do Time
+
+Cada time pode ter um **líder**:
+
+**Responsabilidades:**
+- Supervisionar performance do time
+- Distribuir tarefas
+- Revisar métricas
+- Escalar problemas
+
+**Permissões extras:**
+- Ver relatórios detalhados do time
+- Reatribuir conversas dentro do time
+- Configurar automações do time
+
+---
+
+## 🎯 Atribuição por Time
+
+### Atribuir Conversa a Time
+
+```
+Cliente: Preciso de ajuda técnica
+
+Atendente Inicial:
+"Vou transferir para nossa equipe técnica..."
+
+[Atribui para Time: Suporte Técnico]
+
+Sistema:
+✅ Conversa vai para fila do time
+✅ Próximo agente disponível pega
+```
+
+### Auto-atribuição
+
+Configure regras automáticas:
+
+**Exemplo:**
+```
+SE mensagem contém "bug" ou "erro"
+ENTÃO atribuir para Time: Suporte Técnico
+
+SE mensagem contém "preço" ou "comprar"
+ENTÃO atribuir para Time: Vendas
+```
+
+---
+
+## 📊 Métricas por Time
+
+Compare performance:
+
+```
+📊 Últimos 30 dias:
+
+👥 Time Vendas:
+├─ Conversas: 450
+├─ Taxa conversão: 25%
+├─ Ticket médio: R$ 1.200
+└─ CSAT: 88%
+
+🛠️ Time Suporte:
+├─ Conversas: 680
+├─ Taxa resolução: 94%
+├─ Tempo médio: 15min
+└─ CSAT: 92%
+
+💰 Time Financeiro:
+├─ Conversas: 120
+├─ Taxa resolução: 89%
+├─ Tempo médio: 8min
+└─ CSAT: 85%
+```
+
+---
+
+## 🔧 Configurações Avançadas
+
+### Horário por Time
+
+Defina quando cada time está disponível:
+
+**Time Suporte Brasil:**
+```
+Seg-Sex: 8h - 22h (BRT)
+Sáb: 9h - 18h
+Dom: Fechado
+```
+
+**Time Suporte EUA:**
+```
+Mon-Fri: 9am - 6pm (EST)
+Sat-Sun: Closed
+```
+
+### Capacidade
+
+Limite conversas simultâneas por time:
+
+```
+Time Vendas:
+- 5 agentes
+- Capacidade: 10 conversas/agente
+- Total: Até 50 conversas simultâneas
+```
+
+Quando atingir limite:
+- ⚠️ Novas conversas vão para fila
+- 🔔 Líder recebe alerta
+
+---
+
+## 💬 Caixa de Entrada por Time
+
+Cada time pode ter inbox dedicado:
+
+**Exemplo:**
+```
+📥 Inbox WhatsApp Vendas
+└─ Atribuído a: Time Vendas
+
+📥 Inbox Email Suporte
+└─ Atribuído a: Time Suporte
+
+📥 Inbox Chat Website
+└─ Atribuído a: Time Vendas (dias úteis)
+   └─ ou Time Suporte (finais de semana)
+```
+
+---
+
+## 🎓 Treinamento de Time
+
+### Base de Conhecimento Interna
+
+Crie documentação por time:
+
+**Time Suporte:**
+- 📘 Guia de Troubleshooting
+- 🔧 Procedimentos técnicos
+- 📞 Contatos de escalonamento
+
+**Time Vendas:**
+- 💰 Tabela de preços
+- 🎁 Condições de desconto
+- 📊 Scripts de vendas
+
+### Reuniões Regulares
+
+**Diária (Daily):**
+- 15min no início do dia
+- O que fiz ontem
+- O que farei hoje
+- Impedimentos
+
+**Semanal (Review):**
+- Análise de métricas
+- Casos de destaque
+- Melhorias
+
+---
+
+## 🏆 Gamificação entre Times
+
+Crie competições saudáveis:
+
+**Ranking Mensal:**
+```
+🥇 1º Time Suporte - 95% CSAT
+🥈 2º Time Vendas - 88% CSAT
+🥉 3º Time Financeiro - 85% CSAT
+
+Prêmio: Jantar para o time vencedor!
+```
+
+**Desafios:**
+- Menor tempo de primeira resposta
+- Maior taxa de resolução
+- Mais conversas resolvidas
+
+---
+
+## 💡 Melhores Práticas
+
+### Estrutura
+
+✅ **Times pequenos**: 5-10 agentes ideal  
+✅ **Clara divisão**: Cada time tem escopo definido  
+✅ **Liderança**: Sempre tenha um líder  
+✅ **Backup**: Cross-training entre times  
+
+### Comunicação
+
+✅ **Canal interno**: Slack, Teams para time  
+✅ **Reuniões regulares**: Alinhamento constante  
+✅ **Documentação**: Tudo escrito e acessível  
+
+### Performance
+
+✅ **Metas por time**: KPIs específicos  
+✅ **Feedback contínuo**: Elogios e melhorias  
+✅ **Reconhecimento**: Celebre conquistas  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Agent Assignment" icon="shuffle" href="/pt-br/guia-usuario/agent-assignment">
+    Configure distribuição automática
+  </Card>
+  <Card title="Relatórios" icon="chart-bar" href="/pt-br/guia-usuario/relatorios">
+    Analise performance dos times
+  </Card>
+</CardGroup>
