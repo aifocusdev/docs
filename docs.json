@@ -69,6 +69,35 @@
         ]
       },
       {
+        "anchor": "🇺🇸 English (EN)",
+        "icon": "globe",
+        "pages": [
+          {
+            "group": "📖 User Guide",
+            "pages": [
+              "en/user-guide/getting-started",
+              "en/user-guide/inboxes",
+              "en/user-guide/conversations",
+              "en/user-guide/contacts",
+              "en/user-guide/funnels",
+              "en/user-guide/products"
+            ]
+          },
+          {
+            "group": "🔌 API Reference",
+            "pages": [
+              "en/api-reference/introduction"
+            ]
+          },
+          {
+            "group": "⭐ Exclusive Features",
+            "pages": [
+              "en/customizations/introduction"
+            ]
+          }
+        ]
+      },
+      {
         "anchor": "🔌 API Reference (Original)",
         "icon": "square-terminal",
         "pages": [],

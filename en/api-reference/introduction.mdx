@@ -1,0 +1,194 @@
+---
+title: API Reference - Chatwoot
+description: Complete documentation of all Chatwoot API endpoints
+sidebarTitle: Introduction
+---
+
+# 🔌 API Reference - Overview
+
+Complete REST API documentation for **Chatwoot**. This API allows full integration with the platform for automation, custom integrations and application development.
+
+---
+
+## 🎯 Types of APIs
+
+Chatwoot offers **3 types of APIs** for different use cases:
+
+<CardGroup cols={3}>
+  <Card title="Application APIs" icon="laptop">
+    **For:** Automation and management  
+    **Authentication:** User Access Token  
+    **Use:** Manage conversations, contacts, agents
+  </Card>
+  
+  <Card title="Client APIs" icon="mobile">
+    **For:** Custom chat widget  
+    **Authentication:** Inbox Token  
+    **Use:** Integrate chat in apps/sites
+  </Card>
+  
+  <Card title="Platform APIs" icon="server">
+    **For:** Multi-tenancy  
+    **Authentication:** Platform App Token  
+    **Use:** Manage multiple accounts
+  </Card>
+</CardGroup>
+
+---
+
+## 🔐 Authentication
+
+### Application API (Recommended)
+
+Used for automations and integrations:
+
+**1. Get Access Token:**
+
+1. Login to Chatwoot
+2. Go to **Profile Settings**
+3. Copy **Access Token**
+
+**2. Use in Requests:**
+
+```bash
+curl -X GET https://chat.yourdomain.com/api/v1/accounts/1/conversations \
+  -H "api_access_token: YOUR_TOKEN_HERE" \
+  -H "Content-Type: application/json"
+```
+
+**Required Headers:**
+
+```
+api_access_token: YOUR_ACCESS_TOKEN
+Content-Type: application/json
+```
+
+---
+
+## 🌐 Base URL
+
+All requests use your installation's base URL:
+
+```
+https://chat.yourdomain.com/api/v1
+```
+
+**Complete example:**
+
+```
+https://chat.yourdomain.com/api/v1/accounts/1/conversations
+```
+
+---
+
+## 📊 Response Structure
+
+### Success (2xx)
+
+```json
+{
+  "id": 123,
+  "status": "open",
+  "messages": [...]
+}
+```
+
+### Error (4xx/5xx)
+
+```json
+{
+  "error": "Unauthorized",
+  "message": "Invalid access token"
+}
+```
+
+---
+
+## 🚀 Quick Start
+
+### 1. Get Your Access Token
+
+```bash
+# Login → Profile Settings → Copy Access Token
+```
+
+### 2. Test Connection
+
+```bash
+curl -X GET https://chat.yourdomain.com/api/v1/accounts \
+  -H "api_access_token: YOUR_TOKEN"
+```
+
+### 3. List Conversations
+
+```bash
+curl -X GET https://chat.yourdomain.com/api/v1/accounts/1/conversations \
+  -H "api_access_token: YOUR_TOKEN"
+```
+
+---
+
+## 📚 Available Endpoints
+
+### Conversations
+- List, create, update conversations
+- Send messages
+- Manage status and assignments
+- **[Full Documentation](/en/api-reference/conversations)**
+
+### Contacts
+- Manage customer profiles
+- Import/Export
+- Custom attributes
+- **[Full Documentation](/en/api-reference/contacts)**
+
+### Funnels (Custom)
+- Manage funnels and stages
+- Move conversations
+- Checklists and timers
+- **[Full Documentation](/en/api-reference/funnels)**
+
+---
+
+## 💡 Best Practices
+
+### Security
+
+✅ **Never expose tokens**: Don't commit to Git  
+✅ **Use environment variables**: Store tokens securely  
+✅ **Rotate periodically**: Regenerate tokens regularly  
+✅ **HTTPS only**: Always use secure connection
+
+### Performance
+
+✅ **Pagination**: Use for large lists  
+✅ **Filters**: Reduce unnecessary data  
+✅ **Webhooks**: Better than polling  
+✅ **Rate limits**: Respect API limits
+
+---
+
+## 🔗 SDKs and Libraries
+
+### Official
+
+- **JavaScript/Node.js**: Coming soon
+- **Python**: Coming soon
+- **PHP**: Coming soon
+
+### Community
+
+Check GitHub for community contributions!
+
+---
+
+## 📖 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Conversations API" icon="messages" href="/en/api-reference/conversations">
+    Manage interactions programmatically
+  </Card>
+  <Card title="Contacts API" icon="users" href="/en/api-reference/contacts">
+    Manage customer database
+  </Card>
+</CardGroup>
