@@ -41,12 +41,6 @@
         "icon": "globe",
         "pages": [
           {
-            "group": "🚀 Instalação",
-            "pages": [
-              "pt-br/instalacao/introducao"
-            ]
-          },
-          {
             "group": "📖 Guia do Usuário",
             "pages": [
               "pt-br/guia-usuario/primeiros-passos",
@@ -64,7 +58,7 @@
             ]
           },
           {
-            "group": "🔧 Customizações Ai Focus",
+            "group": "⭐ Features Exclusivas Ai Focus",
             "pages": [
               "pt-br/customizacoes/introducao"
             ]
