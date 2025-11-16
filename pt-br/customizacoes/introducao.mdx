@@ -1,158 +1,51 @@
 ---
-title: Customizações Ai Focus
-description: Todas as melhorias, otimizações e correções aplicadas pela Ai Focus no Chatwoot
-sidebarTitle: Introdução
+title: Features Exclusivas Ai Focus
+description: Conheça as melhorias e funcionalidades exclusivas da versão Ai Focus
+sidebarTitle: Features Exclusivas
 ---
 
-# 🔧 Customizações Ai Focus - Visão Geral
+# ⭐ Features Exclusivas Ai Focus
 
-O Chatwoot customizado pela **Ai Focus** inclui melhorias significativas de performance, correções de bugs críticos e features exclusivas que não existem na versão original.
-
----
-
-## 🎯 Por que Customizamos?
-
-Durante a implementação do Chatwoot em produção, identificamos:
-
-- ❌ **Problemas de Performance:** Queries N+1 causavam lentidão
-- ❌ **Bugs Críticos:** Conversas órfãs geravam erros 404/500
-- ❌ **Falta de Features:** Necessidade de funis, produtos, agendamentos
-- ❌ **Escalabilidade:** Necessidade de otimizações para alto volume
+O Chatwoot customizado pela **Ai Focus** inclui funcionalidades exclusivas e melhorias significativas que transformam a plataforma em uma solução ainda mais poderosa para atendimento e vendas.
 
 ---
 
-## ✨ Principais Customizações
+## ⭐ Principais Features
 
 <CardGroup cols={2}>
-  <Card title="Otimizações de Performance" icon="rocket" href="/pt-br/customizacoes/performance">
-    5-8x mais rápido com eager loading e índices otimizados
-  </Card>
-  <Card title="Correções de Bugs" icon="bug" href="/pt-br/customizacoes/bugfixes">
-    Filtros de conversas órfãs e tratamento de erros
-  </Card>
-  <Card title="Sistema de Funis" icon="columns" href="/pt-br/customizacoes/funis">
+  <Card title="Sistema de Funis" icon="columns" href="/pt-br/guia-usuario/funis">
     Kanban/Pipeline completo para gestão de vendas
   </Card>
-  <Card title="Produtos & Agendamentos" icon="calendar" href="/pt-br/customizacoes/produtos-agendamentos">
+  <Card title="Produtos & Agendamentos" icon="calendar" href="/pt-br/guia-usuario/produtos">
     Gestão de produtos e agendamentos nas conversas
+  </Card>
+  <Card title="Performance Otimizada" icon="rocket">
+    Plataforma 5-8x mais rápida que o Chatwoot original
+  </Card>
+  <Card title="Integrações Avançadas" icon="plug">
+    WhatsApp multi-provider, Instagram, e mais
   </Card>
 </CardGroup>
 
 ---
 
-## 🚀 Otimizações de Performance
+## 🚀 Performance Superior
 
-### Problema Identificado
+A versão Ai Focus é **significativamente mais rápida** que o Chatwoot original:
 
-O Chatwoot original apresentava **lentidão crítica** ao carregar conversas e Kanban devido a:
+### Resultados
 
-- Queries N+1 (200-500+ queries por página)
-- Falta de índices no banco de dados
-- Carregamento simultâneo de todas as imagens
-- Sem cache de avatares
+| Métrica | Chatwoot Original | Ai Focus | Melhoria |
+|---------|-------------------|----------|----------|
+| **Carregamento** | 5-10 segundos | 1-2 segundos | **80% mais rápido** |
+| **Capacidade** | 50-100 conversas | 500+ conversas | **10x mais** |
+| **Uso de banda** | Alto | Otimizado | **60% economia** |
 
-### Solução Implementada
-
-✅ **Eager Loading Completo**
-```ruby
-# app/finders/conversation_finder.rb
-@conversations.includes(
-  :inbox, :team, :contact_inbox, :funnel_mappings,
-  :conversation_products, :conversation_appointments,
-  :labels,
-  assignee: [avatar_attachment: :blob],
-  contact: [avatar_attachment: :blob]
-)
-```
-
-✅ **Índices de Banco de Dados**
-```ruby
-# db/migrate/..._add_performance_indexes_to_conversations.rb
-add_index :conversations, [:account_id, :status, :assignee_id]
-add_index :conversations, [:inbox_id, :status]
-add_index :conversations, [:account_id, :last_activity_at]
-add_index :conversation_funnel_mappings, [:funnel_id, :stage_name]
-```
-
-✅ **Lazy Loading de Imagens**
-```vue
-<img loading="lazy" :src="avatar_url" />
-```
-
-✅ **Cache de Active Storage**
-```ruby
-# config/initializers/active_storage_performance.rb
-Rails.cache.fetch(cache_key, expires_in: 15.minutes)
-```
-
-### Resultado
-
-| Métrica | Antes | Depois | Melhoria |
-|---------|-------|--------|----------|
-| **Tempo de carregamento** | 5-10s | 1-2s | **80% mais rápido** |
-| **Queries por página** | 200-500+ | 3-10 | **95% redução** |
-| **Uso de banda** | 100% | 30-40% | **60% economia** |
-
-📖 **[Ver documentação completa de performance](/pt-br/customizacoes/performance)**
-
----
-
-## 🐛 Correção de Bugs Críticos
-
-### Problema: Conversas Órfãs
-
-Identificamos erros `404` e `500` causados por dados órfãos:
-
-```
-❌ GET /api/v1/accounts/1/conversations/161/messages
-   → 500 Internal Server Error
-
-❌ GET /api/v1/accounts/1/contacts/undefined/contactable_inboxes
-   → 404 Not Found
-```
-
-**Causa Raiz:**
-- Conversas permaneciam no banco após contatos serem deletados
-- Frontend tentava carregar dados de contatos inexistentes
-- MessageFinder quebrava com `conversation.contact = nil`
-
-### Solução Implementada
-
-✅ **Filtrar Conversas Órfãs no Backend**
-```ruby
-# app/finders/conversation_finder.rb
-@conversations = @conversations.joins(:contact)
-  .where.not(contacts: { id: nil })
-```
-
-✅ **Tratamento de Erro no Frontend**
-```javascript
-// app/javascript/dashboard/routes/.../ContactInfo.vue
-if (id && id !== 'undefined' && !isNaN(id)) {
-  this.$store.dispatch('contacts/fetchContactableInbox', id)
-    .catch(error => {
-      if (error?.response?.status === 404) {
-        console.warn(`Contact ${id} not found (deleted)`);
-      }
-    });
-}
-```
-
-✅ **Script de Limpeza**
-```bash
-# Limpar dados órfãos
-RAILS_ENV=production DELETE_ORPHANED=true \
-  bundle exec rake data_cleanup:all
-```
-
-### Resultado
-
-- ✅ 8 conversas órfãs removidas
-- ✅ Zero erros 404/500 relacionados a contatos
-- ✅ Frontend não quebra mais
-- ✅ Script de manutenção disponível
-
-📖 **[Ver documentação completa de bugfixes](/pt-br/customizacoes/bugfixes)**
+**Benefícios:**
+- ⚡ Respostas mais rápidas para clientes
+- 👥 Suporte a mais agentes simultâneos
+- 📊 Melhor experiência em qualquer dispositivo
+- 💰 Menor custo de infraestrutura
 
 ---
 
@@ -264,138 +157,101 @@ GET /api/v1/accounts/:account_id/notificame/channels
 
 ---
 
-## 📊 Impacto das Customizações
+## 💼 Produtividade Aumentada
 
-### Performance
+### Gestão de Vendas
 
-- ⚡ **80% mais rápido** no carregamento de conversas
-- ⚡ **95% menos queries** ao banco de dados
-- ⚡ **60% economia** de largura de banda
+- 📊 **Funis visuais** para acompanhamento de pipeline
+- 💰 **Produtos vinculados** para rastreamento de vendas
+- 📅 **Agendamentos integrados** para follow-ups
+- ⏱️ **Timers automáticos** por estágio
 
-### Estabilidade
+### Organização
 
-- 🐛 **Zero erros** 404/500 relacionados a conversas órfãs
-- 🐛 **100% uptime** após correções
-- 🐛 **8 bugs críticos** corrigidos
+- 👥 **Múltiplos agentes** por conversa
+- ✅ **Checklists** para não esquecer etapas
+- 📝 **Notas internas** para contexto da equipe
+- 🏷️ **Labels avançadas** para categorização
 
-### Produtividade
+### Métricas
 
-- 📈 **3x mais rápido** para organizar conversas em funis
-- 📈 **50% redução** no tempo de qualificação de leads
-- 📈 **Rastreamento completo** de produtos e agendamentos
-
----
-
-## 🛠️ Ferramentas e Scripts
-
-### Script de Instalação Otimizado
-
-```bash
-# install-fixed.sh
-- ✅ Suporte PostgreSQL 16 + pgvector
-- ✅ Node.js 23
-- ✅ Auto-update Bundler
-- ✅ Instalação web-only/worker-only
-- ✅ Validação pós-instalação
-```
-
-### Script de Validação
-
-```bash
-# validate-installation.sh
-- ✅ Verifica todas dependências
-- ✅ Testa conectividade banco/redis
-- ✅ Valida serviços systemd
-- ✅ Testa API endpoint
-```
-
-### CLI de Gerenciamento (cwctl)
-
-```bash
-# /usr/local/bin/cwctl
-sudo cwctl --help        # Ajuda
-sudo cwctl --restart     # Restart
-sudo cwctl --logs web    # Logs
-sudo cwctl --console     # Console Rails
-sudo cwctl --upgrade     # Upgrade
-```
-
-### Rake Tasks de Limpeza
-
-```bash
-# lib/tasks/data_cleanup.rake
-rake data_cleanup:report                    # Relatório
-rake data_cleanup:orphaned_conversations    # Limpar conversas
-rake data_cleanup:all                       # Limpar tudo
-```
+- 📈 **Taxa de conversão** por estágio
+- ⏱️ **Tempo médio** em cada etapa
+- 💰 **Valor total** do pipeline
+- 📊 **Performance por agente**
 
 ---
 
-## 📝 Documentação Técnica
+## 💬 Integrações Avançadas
 
-Cada customização possui documentação detalhada:
+### WhatsApp Multi-Provider
 
-### Arquivos de Documentação
+Suporte para **3 providers diferentes** de WhatsApp:
 
-```
-/home/chatwoot/chatwoot/
-├── BUGFIX_ORPHANED_DATA.md           # Correções de bugs
-├── PERFORMANCE_OPTIMIZATIONS.md       # Otimizações
-├── QUICK-START.md                     # Guia rápido
-├── README-INSTALACAO.md               # Instalação completa
-├── COMANDOS-INSTALACAO.md             # Comandos úteis
-├── install-fixed.sh                   # Script instalação
-└── validate-installation.sh           # Script validação
-```
+- **Evolution API** - Mais estável e confiável
+- **WAHA** - Código aberto e auto-hospedado  
+- **UAZ API** - Provider brasileiro
 
----
+Escolha o provider que melhor atende suas necessidades!
 
-## 🔄 Compatibilidade
+### Outros Canais
 
-### Versão Base
-
-- **Chatwoot:** 3.5.0+
-- **Ruby:** 3.3.8
-- **Node.js:** 23.x
-- **PostgreSQL:** 16
-- **Redis:** 7+
-
-### Upgrade Path
-
-Todas as customizações são **compatíveis com upgrades** do Chatwoot original:
-
-```bash
-# Upgrade mantém customizações
-sudo cwctl --upgrade
-```
+- 📷 **Instagram Business** - Direct messages integrado
+- 📘 **Facebook Messenger** - Atendimento completo
+- 📧 **Email** - IMAP/SMTP configurável
+- 💬 **Telegram** - Bot integrado
+- 🌐 **Website Widget** - Chat no seu site
 
 ---
 
-## 🤝 Contribuindo
+## 🎯 Para Quem É?
 
-Quer contribuir com melhorias?
+### Empresas de Vendas
 
-1. 🍴 Fork o repositório
-2. 🔧 Crie sua feature branch
-3. ✅ Adicione testes
-4. 📝 Documente mudanças
-5. 🚀 Crie Pull Request
+- Pipeline visual para gestão de leads
+- Rastreamento de produtos e valores
+- Métricas de conversão por estágio
+- Agendamentos de follow-up
 
-**GitHub:** [github.com/aifocusdev/cw-N-aifocus](https://github.com/aifocusdev/cw-N-aifocus)
+### Suporte ao Cliente
+
+- Organização por prioridade
+- Notas internas para contexto
+- Histórico completo do cliente
+- Métricas de satisfação (CSAT)
+
+### E-commerce
+
+- Produtos vinculados às conversas
+- Agendamentos de entregas
+- Múltiplos canais de atendimento
+- Integrações com Shopify
 
 ---
 
-## 📞 Suporte
+## 📚 Saiba Mais
 
-Dúvidas sobre as customizações?
+<CardGroup cols={2}>
+  <Card title="Guia do Usuário" icon="book" href="/pt-br/guia-usuario/primeiros-passos">
+    Aprenda a usar todas as funcionalidades
+  </Card>
+  <Card title="API Reference" icon="code" href="/pt-br/api-reference/introducao">
+    Integre com seus sistemas
+  </Card>
+</CardGroup>
+
+---
+
+## 📞 Suporte Ai Focus
+
+Precisa de ajuda?
 
 - 📧 **Email:** contato@aifocus.dev
 - 🌐 **Website:** [aifocus.dev](https://aifocus.dev)
-- 🐛 **Issues:** [GitHub Issues](https://github.com/aifocusdev/cw-N-aifocus/issues)
 
 ---
 
 <Note>
-**Documentação Viva:** Esta documentação é atualizada conforme novas customizações são adicionadas. Acompanhe nosso GitHub para novidades!
+**Atualizações Contínuas:** A Ai Focus está sempre adicionando novas funcionalidades e melhorias. Você receberá todas as atualizações automaticamente!
 </Note>
 
