@@ -1,0 +1,182 @@
+---
+title: Bots (Chatbots)
+description: Configure chatbots to automate complex conversations
+sidebarTitle: Bots
+---
+
+# 🤖 Bots (Chatbots)
+
+Configure intelligent chatbots to serve customers 24/7, qualify leads and automate conversation flows.
+
+---
+
+## 📋 What are Bots?
+
+**Bots** are virtual assistants that conduct automated conversations:
+
+**Difference from Automations:**
+- 🤖 **Automations**: 1 action per trigger
+- 💬 **Bots**: Complete conversation with multiple interactions
+
+**Example:**
+```
+Qualification Bot:
+
+1. Bot: "Hello! How can I help?"
+2. Customer: "I want to buy"
+3. Bot: "Great! Which product interests you?"
+4. Customer: "Premium Plan"
+5. Bot: "For how many users?"
+6. Customer: "50"
+7. Bot: "Perfect! Transferring to salesperson..."
+   [Transfers with collected context]
+```
+
+---
+
+## ✨ Types of Bots
+
+<CardGroup cols={2}>
+  <Card title="Greeting Bot" icon="hand-wave">
+    Automatic first message
+  </Card>
+  <Card title="Qualification Bot" icon="clipboard-question">
+    Collects lead information
+  </Card>
+  <Card title="FAQ Bot" icon="circle-question">
+    Answers frequent questions
+  </Card>
+  <Card title="Scheduling Bot" icon="calendar">
+    Books meetings/demos
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Bot
+
+1. **"Settings"** → **"Integrations"** → **"Bots"**
+2. **"Create Bot"**
+3. Choose type:
+   - **Dialogflow** (Google)
+   - **Lex** (Amazon)
+   - **CSML** (Custom Bot Language)
+   - **Webhook** (Your own bot)
+
+---
+
+## 🎯 Greeting Bot
+
+Simple bot that welcomes:
+
+**Configuration:**
+```yaml
+name: "Greeting"
+trigger: "Conversation created"
+active_hours: "24/7" or "9am-6pm"
+
+flow:
+  - message: |
+      Hello! Welcome to {{company}}! 👋
+      
+      I'm here to help.
+      Choose an option:
+      
+      1️⃣ Sales
+      2️⃣ Support
+      3️⃣ Financial
+      4️⃣ Speak with human
+      
+  - wait_for_response
+  
+  - if response == "1" or "sales":
+      transfer_to: "Sales Team"
+      message: "Connecting with sales..."
+      
+  - if response == "2" or "support":
+      transfer_to: "Support Team"
+      message: "Connecting with support..."
+```
+
+---
+
+## 📋 Lead Qualification Bot
+
+Collects information before passing to salesperson:
+
+**Flow:**
+```
+Bot: Hello! Let's get to know you better.
+     What's your full name?
+     
+Customer: John Silva
+
+Bot: Nice to meet you, John! What's your company name?
+
+Customer: Acme Corp
+
+Bot: How many employees at Acme Corp?
+
+Customer: About 50
+
+Bot: Got it! What's your main interest?
+     1️⃣ Basic Plan
+     2️⃣ Premium Plan  
+     3️⃣ Enterprise Plan
+     
+Customer: 3
+
+Bot: Excellent choice! What's your monthly budget?
+
+Customer: Up to $5,000
+
+Bot: Perfect, John! I have all information.
+     I'll connect you with {{sales_agent}}
+     who will prepare a personalized proposal.
+     
+     Summary:
+     • Company: Acme Corp
+     • Employees: 50
+     • Interest: Enterprise
+     • Budget: $5,000/month
+     
+     One moment...
+     
+[Bot transfers to salesperson + passes all collected data]
+```
+
+---
+
+## 💡 Best Practices
+
+### Design
+
+✅ **Be brief**: Short and direct messages  
+✅ **Clear options**: Buttons or numbers  
+✅ **Escape hatch**: Always offer speak with human  
+✅ **Confirm understanding**: "I understood you want X. Correct?"
+
+### Personalization
+
+✅ **Use name**: "Hello {{name}}"  
+✅ **Context**: "I see you're a Premium customer"  
+✅ **Humanize**: Emojis and conversational tone 😊
+
+### Handoff (Transfer)
+
+✅ **Right moment**: Don't force bot if customer frustrated  
+✅ **Pass context**: Agent sees what bot collected  
+✅ **Warn**: "Transferring to {{agent}}..."  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="AI Agents" icon="wand-magic" href="/en/user-guide/ai-agents">
+    Advanced AI (Captain & Copilot)
+  </Card>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Combine bots with automations
+  </Card>
+</CardGroup>

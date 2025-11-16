@@ -100,7 +100,25 @@
               "en/user-guide/conversations",
               "en/user-guide/contacts",
               "en/user-guide/funnels",
-              "en/user-guide/products"
+              "en/user-guide/products",
+              "en/user-guide/ai-agents",
+              "en/user-guide/reports",
+              "en/user-guide/campaigns",
+              "en/user-guide/help-center",
+              "en/user-guide/agents",
+              "en/user-guide/teams",
+              "en/user-guide/agent-assignment",
+              "en/user-guide/labels",
+              "en/user-guide/custom-attributes",
+              "en/user-guide/automations",
+              "en/user-guide/bots",
+              "en/user-guide/macros",
+              "en/user-guide/canned-responses",
+              "en/user-guide/integrations",
+              "en/user-guide/sla",
+              "en/user-guide/security",
+              "en/user-guide/audit-logs",
+              "en/user-guide/custom-roles"
             ]
           },
           {

@@ -1,0 +1,269 @@
+---
+title: Custom Roles
+description: Create custom roles with specific permissions
+sidebarTitle: Custom Roles
+---
+
+# 👔 Custom Roles
+
+Create custom roles with specific permissions for each team function.
+
+---
+
+## 📋 What are Custom Roles?
+
+**Roles** define what each user can/cannot do.
+
+**Default Roles:**
+```
+🔴 Administrator → Full access
+🟡 Agent → Basic access
+```
+
+**Custom Roles:**
+```
+🟢 Sales Supervisor → Permissions specific to sales
+🔵 Technical Lead → Permissions specific to support
+🟣 Financial Analyst → Access only reports
+```
+
+---
+
+## ✨ Why Use Custom Roles?
+
+<CardGroup cols={2}>
+  <Card title="Security" icon="shield">
+    Access only to necessary
+  </Card>
+  <Card title="Organization" icon="sitemap">
+    Clarity of responsibilities
+  </Card>
+  <Card title="Compliance" icon="file-contract">
+    Regulatory requirements
+  </Card>
+  <Card title="Scalability" icon="arrow-up">
+    Easy to add new users
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Custom Role
+
+1. **"Settings"** → **"Custom Roles"**
+2. **"New Role"**
+3. Configure:
+
+**Name:** `Sales Supervisor`  
+**Description:** "Sales team supervisor with reports access"
+
+**Permissions:**
+
+### Conversations
+```
+✅ View all conversations
+✅ Assign conversations
+✅ Reassign conversations
+✅ Close conversations
+❌ Delete conversations
+```
+
+### Contacts
+```
+✅ View contacts
+✅ Edit contacts
+✅ Create contacts
+❌ Delete contacts
+❌ Export contacts
+```
+
+### Reports
+```
+✅ View team reports
+✅ View individual reports
+✅ Export reports
+❌ View financial reports
+```
+
+### Settings
+```
+❌ Modify inboxes
+❌ Add/remove agents
+❌ Change integrations
+❌ Access audit logs
+```
+
+4. **Save**
+
+---
+
+## 🎯 Role Examples
+
+### 1. Sales Supervisor
+
+```
+Purpose: Manage sales team
+
+Permissions:
+✅ View all sales team conversations
+✅ Reassign conversations to other agents
+✅ Access team performance reports
+✅ Create/edit contacts
+✅ Apply labels and tags
+❌ Delete data
+❌ Change system settings
+❌ Export customer data
+```
+
+**Use when:** Sales team leader
+```
+
+---
+
+### 2. Technical Lead
+
+```
+Purpose: Support technical team
+
+Permissions:
+✅ View all support conversations
+✅ Escalate complex issues
+✅ Access technical integrations
+✅ Configure bots and automations
+✅ View SLA metrics
+❌ Access financial reports
+❌ Modify billing settings
+❌ Manage users (except team)
+```
+
+**Use when:** Technical support leader
+```
+
+---
+
+### 3. Financial Analyst
+
+```
+Purpose: Access only reports and metrics
+
+Permissions:
+✅ View all reports
+✅ Export reports (CSV/PDF)
+✅ Access audit logs (read-only)
+✅ View conversation history
+❌ Respond to conversations
+❌ Edit contacts
+❌ Change any settings
+❌ Access integrations
+```
+
+**Use when:** Analyst/controller who needs data
+```
+
+---
+
+### 4. Read-Only Agent
+
+```
+Purpose: View-only access for training
+
+Permissions:
+✅ View conversations (read-only)
+✅ View contacts (read-only)
+✅ View knowledge base
+❌ Respond to conversations
+❌ Edit anything
+❌ Export data
+❌ Access settings
+```
+
+**Use when:** New employee training
+```
+
+---
+
+## 📋 Available Permissions
+
+### Conversations
+```
+├─ View own conversations
+├─ View team conversations
+├─ View all conversations
+├─ Respond to conversations
+├─ Assign conversations
+├─ Reassign conversations
+├─ Change status
+├─ Change priority
+├─ Apply labels
+├─ Close conversations
+└─ Delete conversations
+```
+
+### Contacts
+```
+├─ View contacts
+├─ Create contacts
+├─ Edit contacts
+├─ Delete contacts
+├─ Export contacts
+├─ Import contacts
+└─ Merge contacts
+```
+
+### Reports
+```
+├─ View own reports
+├─ View team reports
+├─ View all reports
+├─ Export reports
+└─ Access audit logs
+```
+
+### Settings
+```
+├─ Manage inboxes
+├─ Manage agents
+├─ Configure integrations
+├─ Configure automations
+├─ Configure SLA
+├─ Manage labels
+├─ Manage teams
+└─ System settings
+```
+
+---
+
+## 💡 Best Practices
+
+### Design
+
+✅ **Principle of least privilege**: Only necessary access  
+✅ **Clear names**: "Sales Supervisor" not "Role3"  
+✅ **Document**: What role is for  
+✅ **Review regularly**: Permissions still appropriate?  
+
+### Management
+
+✅ **Start restrictive**: Add permissions as needed  
+✅ **Test before**: Validate with 1 user  
+✅ **Quarterly audit**: Review who has what  
+✅ **Immediate revocation**: Former employee → disable  
+
+### Compliance
+
+✅ **Document access**: Who approved each role  
+✅ **Audit trail**: Changes to roles logged  
+✅ **Separation of duties**: No one person too much power  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Security" icon="shield" href="/en/user-guide/security">
+    Reinforce platform security
+  </Card>
+  <Card title="Audit Logs" icon="file-lines" href="/en/user-guide/audit-logs">
+    Monitor permission usage
+  </Card>
+</CardGroup>

@@ -1,0 +1,241 @@
+---
+title: SLA (Service Level Agreement)
+description: Define and monitor service level agreements
+sidebarTitle: SLA
+---
+
+# ⏱️ SLA (Service Level Agreement)
+
+Define, monitor and comply with service level commitments to your customers.
+
+---
+
+## 📋 What is SLA?
+
+**SLA** (Service Level Agreement) is the commitment to respond/resolve within a specific time:
+
+**Examples:**
+```
+VIP Customers:
+├─ First response: Up to 5 minutes
+└─ Resolution: Up to 2 hours
+
+Regular Customers:
+├─ First response: Up to 30 minutes
+└─ Resolution: Up to 24 hours
+```
+
+---
+
+## ✨ Why Use SLA?
+
+<CardGroup cols={2}>
+  <Card title="Commitment" icon="handshake">
+    Official promise to customer
+  </Card>
+  <Card title="Prioritization" icon="flag">
+    What to do first
+  </Card>
+  <Card title="Metrics" icon="chart-line">
+    Track compliance
+  </Card>
+  <Card title="Quality" icon="star">
+    Maintain high standard
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Configure SLA
+
+1. **"Settings"** → **"SLA"**
+2. **"New SLA Policy"**
+3. Configure:
+
+**Policy name:** `VIP Customers`
+
+**Conditions (who applies to):**
+```
+├─ Contact has label: #vip OR
+├─ Contact.plan: Enterprise OR
+└─ Conversation.priority: Urgent
+```
+
+**Time Commitments:**
+```
+⏰ First Response Time (FRT):
+   └─ 5 minutes
+
+⏰ Next Response Time (NRT):
+   └─ 15 minutes
+
+⏰ Resolution Time (RT):
+   └─ 2 hours
+```
+
+**Business Hours:**
+```
+🕐 Monday - Friday: 9am - 6pm
+📅 Weekends: Closed
+🎉 Holidays: Respects calendar
+```
+
+4. **Save**
+
+---
+
+## 📊 SLA Types
+
+### FRT - First Response Time
+Time until agent's **first** response:
+
+```
+10:00 - Customer sends message
+10:04 - Agent responds → FRT: 4 minutes ✅
+
+SLA: 5 minutes
+Status: COMPLIANT
+```
+
+---
+
+### NRT - Next Response Time
+Time between **each** subsequent response:
+
+```
+10:00 - Customer asks question
+10:05 - Agent responds (FRT: 5min ✅)
+
+10:10 - Customer asks more
+10:20 - Agent responds (NRT: 10min ✅)
+
+10:25 - Customer asks more
+10:50 - Agent responds (NRT: 25min ⚠️ VIOLATION)
+
+SLA NRT: 15 minutes
+```
+
+---
+
+### RT - Resolution Time
+Time until conversation is **resolved**:
+
+```
+10:00 - Conversation created
+11:45 - Problem solved, conversation resolved
+RT: 1h 45min ✅
+
+SLA: 2 hours
+Status: COMPLIANT
+```
+
+---
+
+## 🚨 Violations and Alerts
+
+### Visual Alerts
+
+SLA close to expiring changes color:
+
+```
+🟢 Green: Still far (>50% time left)
+🟡 Yellow: Warning (20-50% time left)
+🔴 Red: Critical (<20% time left)
+⚫ Black: VIOLATED (time expired)
+```
+
+### Automatic Notifications
+
+Configure alerts:
+
+**50% of time:**
+```
+Send email to: agent@company.com
+Message: "SLA at 50% - prioritize!"
+```
+
+**90% of time:**
+```
+Send email to: manager@company.com  
+Slack: #urgent channel
+Message: "🚨 SLA CRITICAL - immediate attention!"
+```
+
+**Violation:**
+```
+Notify: director@company.com
+Create task: Review why violated
+Log: Audit for analysis
+```
+
+---
+
+## 📈 SLA Reports
+
+### Individual Metrics
+
+```
+Agent: John Silva (Last 30 days)
+
+FRT Compliance: 92% (23/25 conversations)
+├─ Average FRT: 3.5 minutes
+└─ Violations: 2
+
+NRT Compliance: 88% (44/50 responses)
+├─ Average NRT: 12 minutes
+└─ Violations: 6
+
+RT Compliance: 85% (17/20 resolved)
+├─ Average RT: 1h 30min
+└─ Violations: 3
+```
+
+### Team Metrics
+
+```
+Support Team (Last 30 days)
+
+Overall Compliance: 90%
+├─ FRT: 95%
+├─ NRT: 88%
+└─ RT: 87%
+
+Total Violations: 45
+├─ Peak times: 5pm-6pm
+└─ Weekdays: Friday (more violations)
+```
+
+---
+
+## 💡 Best Practices
+
+### Realistic Definition
+
+✅ **Achievable**: Don't promise 1 minute if impossible  
+✅ **Test first**: Pilot for 1 month before official  
+✅ **Consider peak times**: Adjust SLA for high volume  
+
+### Prioritization
+
+✅ **Work on red first**: About to violate → priority  
+✅ **Dedicated queue**: SLA urgents in separate view  
+✅ **Extra resources**: More agents at peak times  
+
+### Continuous Improvement
+
+✅ **Weekly review**: What caused violations?  
+✅ **Identify patterns**: Specific problems → more violations  
+✅ **Optimize processes**: Reduce bottlenecks  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Reports" icon="chart-line" href="/en/user-guide/reports">
+    Analyze SLA in detail
+  </Card>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Automate based on SLA
+  </Card>
+</CardGroup>

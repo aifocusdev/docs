@@ -1,0 +1,221 @@
+---
+title: Custom Attributes
+description: Create custom fields for conversations and contacts
+sidebarTitle: Custom Attributes
+---
+
+# 📝 Custom Attributes
+
+Create custom fields to store business-specific information in conversations and contacts.
+
+---
+
+## 📋 What are Custom Attributes?
+
+**Attributes** are extra data fields you define:
+
+**Difference from Labels:**
+- 🏷️ **Labels**: Simple tags (ex: #vip, #urgent)
+- 📝 **Attributes**: Fields with values (ex: Plan: "Premium", Value: "$500")
+
+---
+
+## ✨ Attribute Types
+
+<CardGroup cols={3}>
+  <Card title="Text" icon="font">
+    Free text
+  </Card>
+  <Card title="Number" icon="hashtag">
+    Numeric values
+  </Card>
+  <Card title="Date" icon="calendar">
+    Dates
+  </Card>
+  <Card title="Link" icon="link">
+    URLs
+  </Card>
+  <Card title="List" icon="list">
+    Predefined options
+  </Card>
+  <Card title="Checkbox" icon="square-check">
+    Yes/No
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Attribute
+
+1. **"Settings"** → **"Custom Attributes"**
+2. Choose scope:
+   - **Contact**: Customer attribute
+   - **Conversation**: Conversation attribute
+3. **"New Attribute"**
+4. Configure:
+
+**Display name:** `Customer Plan`  
+**Key:** `plan` (for API)  
+**Type:** List  
+**Values:** `Free, Basic, Premium, Enterprise`  
+**Description:** "Customer's current plan"
+
+5. **Save**
+
+---
+
+## 📊 Contact Attributes
+
+Store customer information.
+
+### Common Examples
+
+**Segmentation:**
+```
+├─ Plan: Free | Basic | Premium | Enterprise
+├─ Segment: Retail | Wholesale | Corporate
+├─ Source: Google | Facebook | Referral
+└─ Region: North | South | East | West
+```
+
+**Business Data:**
+```
+├─ Lifetime value (LTV): $5,000.00
+├─ Last purchase: Jan 15, 2025
+├─ Registration date: May 1, 2024
+└─ Has discount: Yes/No
+```
+
+**Preferences:**
+```
+├─ Preferred channel: WhatsApp | Email | Phone
+├─ Best time: Morning | Afternoon | Evening
+├─ Language: EN | ES | PT
+└─ Newsletter: Active | Inactive
+```
+
+### How to Fill
+
+**Manually:**
+1. Open contact
+2. **"Attributes"** section
+3. Fill values
+4. Save
+
+**Via API:**
+```bash
+PUT /api/v1/accounts/1/contacts/123
+{
+  "custom_attributes": {
+    "plan": "Premium",
+    "ltv": 5000,
+    "region": "East"
+  }
+}
+```
+
+---
+
+## 💬 Conversation Attributes
+
+Store conversation-specific information.
+
+### Common Examples
+
+**E-commerce:**
+```
+├─ Order number: #12345
+├─ Order value: $299.90
+├─ Delivery status: Shipped
+└─ Tracking code: US123456789
+```
+
+**Support:**
+```
+├─ Problem type: Bug | Question | Feature Request
+├─ Severity: Low | Medium | High | Critical
+├─ Product version: 2.5.1
+└─ Resolved in: 1st interaction | 2nd | 3rd
+```
+
+**Sales:**
+```
+├─ Proposal value: $10,000.00
+├─ Probability: 20% | 50% | 80%
+├─ Follow-up date: Jan 20, 2025
+└─ Competitor: Yes | No
+```
+
+---
+
+## 🤖 Automations with Attributes
+
+### Rules Based on Attributes
+
+**Example 1: Prioritize VIPs**
+```
+IF contact.plan = "Enterprise"
+THEN add label #vip
+AND assign to senior_agent
+AND notify manager
+```
+
+**Example 2: SLA by Value**
+```
+IF conversation.value > $5,000
+THEN max_response_time = 5min
+
+IF conversation.value < $500
+THEN max_response_time = 30min
+```
+
+---
+
+## 📧 Personalization with Attributes
+
+### In Messages
+
+Use attributes in templates:
+
+```
+Hello {{contact.name}}!
+
+We noticed your {{contact.plan}} plan 
+expires on {{contact.expiry_date}}.
+
+Renew with 20% OFF using code: 
+RENEW{{contact.plan}}
+
+Best regards,
+{{agent.name}}
+```
+
+---
+
+## 💡 Best Practices
+
+### Naming
+
+✅ **Snake_case for key**: `registration_date` not `Registration Date`  
+✅ **Friendly display name**: "Registration Date"  
+✅ **Consistency**: Standardize across team  
+
+### Organization
+
+✅ **Don't overdo it**: 10-15 attributes per scope  
+✅ **Use lists**: Better than free text  
+✅ **Validate inputs**: Avoid typing errors  
+✅ **Document**: What each attribute means  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Use attributes in automatic rules
+  </Card>
+  <Card title="API Reference" icon="code" href="/en/api-reference/introduction">
+    Integrate attributes via API
+  </Card>
+</CardGroup>

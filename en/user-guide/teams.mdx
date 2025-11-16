@@ -1,0 +1,163 @@
+---
+title: Team Management  
+description: Organize agents into departments and specialized teams
+sidebarTitle: Teams
+---
+
+# 👨‍👩‍👧‍👦 Team Management
+
+Organize your agents into teams by department, specialty or function.
+
+---
+
+## 📋 What are Teams?
+
+**Teams** are groups of agents working together:
+
+**Examples:**
+- 💼 **Sales**: Sales-focused agents
+- 🛠️ **Technical Support**: Problem resolution
+- 📦 **Logistics**: Tracking and deliveries
+- 💰 **Financial**: Billing and payments
+
+---
+
+## ✨ Benefits
+
+<CardGroup cols={2}>
+  <Card title="Specialization" icon="bullseye">
+    Each team masters their area
+  </Card>
+  <Card title="Organization" icon="sitemap">
+    Conversations go to right team
+  </Card>
+  <Card title="Metrics" icon="chart-line">
+    Compare performance between teams
+  </Card>
+  <Card title="Scalability" icon="arrow-up">
+    Grows as company grows
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Team
+
+1. **"Settings"** → **"Teams"**
+2. **"New Team"**
+3. Fill:
+   - **Name**: "Technical Support"
+   - **Description**: "Technical problem resolution"
+   - **Email**: support@company.com (optional)
+4. **Add Agents**:
+   - Choose team members
+   - Define team leader
+5. **Save**
+
+---
+
+## 👥 Add Agents to Team
+
+### Option 1: When creating team
+Select agents when creating team
+
+### Option 2: After
+1. Open team
+2. **"Add Member"**
+3. Choose agent(s)
+4. Save
+
+**Agent can be in multiple teams:**
+```
+John Silva:
+├─ Sales Team
+└─ Support Team
+
+Mary Santos:
+└─ Support Team
+```
+
+---
+
+## 👔 Team Leader
+
+Each team can have a **leader**:
+
+**Responsibilities:**
+- Supervise team performance
+- Distribute tasks
+- Review metrics
+- Escalate problems
+
+**Extra permissions:**
+- See detailed team reports
+- Reassign conversations within team
+- Configure team automations
+
+---
+
+## 🎯 Assignment by Team
+
+### Assign Conversation to Team
+
+```
+Customer: I need technical help
+
+Initial Agent:
+"I'll transfer you to our technical team..."
+
+[Assigns to Team: Technical Support]
+
+System:
+✅ Conversation goes to team queue
+✅ Next available agent takes it
+```
+
+### Auto-assignment
+
+Configure automatic rules:
+
+**Example:**
+```
+IF message contains "bug" or "error"
+THEN assign to Team: Technical Support
+
+IF message contains "price" or "buy"
+THEN assign to Team: Sales
+```
+
+---
+
+## 💡 Best Practices
+
+### Structure
+
+✅ **Small teams**: 5-10 agents ideal  
+✅ **Clear division**: Each team has defined scope  
+✅ **Leadership**: Always have a leader  
+✅ **Backup**: Cross-training between teams  
+
+### Communication
+
+✅ **Internal channel**: Slack, Teams for team  
+✅ **Regular meetings**: Constant alignment  
+✅ **Documentation**: Everything written and accessible  
+
+### Performance
+
+✅ **Team goals**: Specific KPIs  
+✅ **Continuous feedback**: Praise and improvements  
+✅ **Recognition**: Celebrate achievements  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Agent Assignment" icon="shuffle" href="/en/user-guide/agent-assignment">
+    Configure automatic distribution
+  </Card>
+  <Card title="Reports" icon="chart-bar" href="/en/user-guide/reports">
+    Analyze team performance
+  </Card>
+</CardGroup>

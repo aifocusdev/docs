@@ -1,0 +1,239 @@
+---
+title: Security
+description: Security features and best practices
+sidebarTitle: Security
+---
+
+# 🔒 Security
+
+Keep your data and customer conversations secure.
+
+---
+
+## 🛡️ Security Features
+
+<CardGroup cols={2}>
+  <Card title="2FA" icon="shield-check">
+    Two-factor authentication
+  </Card>
+  <Card title="SSO" icon="right-to-bracket">
+    Single Sign-On
+  </Card>
+  <Card title="Encryption" icon="lock">
+    End-to-end encryption
+  </Card>
+  <Card title="Audit" icon="file-lines">
+    Complete activity logs
+  </Card>
+</CardGroup>
+
+---
+
+## 🔐 Two-Factor Authentication (2FA)
+
+Add extra security layer to login.
+
+### Enable 2FA
+
+1. **Profile** → **Security Settings**
+2. **"Enable 2FA"**
+3. Scan QR code with authenticator app:
+   - Google Authenticator
+   - Authy
+   - Microsoft Authenticator
+4. Enter verification code
+5. **Save recovery codes** (important!)
+
+### Login with 2FA
+
+```
+1. Enter email + password
+2. System requests code
+3. Open authenticator app
+4. Enter 6-digit code
+5. Access granted ✅
+```
+
+**Important:**
+- 🔑 Save recovery codes in safe place
+- 📱 Don't lose phone with authenticator
+- 🔄 Generate new codes if lost
+
+---
+
+## 🎫 Single Sign-On (SSO)
+
+Enterprise login with corporate credentials.
+
+### Supported Providers
+
+```
+✅ Google Workspace
+✅ Microsoft Azure AD
+✅ Okta
+✅ Auth0
+✅ SAML 2.0 (generic)
+```
+
+### Configure SSO
+
+1. **Settings** → **Security** → **SSO**
+2. Choose provider
+3. Configure credentials:
+   - Client ID
+   - Client Secret
+   - Redirect URL
+4. Test with 1 user
+5. Activate for entire organization
+
+### Benefits
+
+```
+✅ One password for all systems
+✅ Automatic provisioning/de-provisioning
+✅ Centralized access control
+✅ Stronger security policies
+```
+
+---
+
+## 🔒 Data Encryption
+
+### In Transit
+
+All communication encrypted with **TLS 1.3**:
+
+```
+Browser ←[HTTPS]→ Chatwoot ←[HTTPS]→ APIs
+       ←[WSS]→             ←[HTTPS]→ Database
+
+🔒 Everything encrypted
+```
+
+### At Rest
+
+Sensitive data encrypted in database:
+
+```
+🔐 Encrypted:
+├─ Customer passwords (bcrypt)
+├─ API tokens
+├─ Integration credentials
+└─ Attachments (AES-256)
+
+📝 Not encrypted (for search/performance):
+├─ Message content
+├─ Contact names
+└─ Metadata
+```
+
+---
+
+## 👥 Access Permissions
+
+### Roles and Permissions
+
+```
+🔴 Administrator:
+└─ Full access to everything
+
+🟡 Agent:
+├─ Access assigned conversations
+├─ View contacts
+└─ No access to settings
+
+🟢 Custom:
+└─ Define specific permissions
+```
+
+### IP Whitelist
+
+Restrict access to specific IPs:
+
+```
+Allow access only from:
+├─ 203.0.113.0/24 (office)
+├─ 198.51.100.5 (VPN)
+└─ Deny all others
+```
+
+---
+
+## 📊 Audit Logs
+
+All actions logged for auditing:
+
+```
+2025-01-15 10:30 - john@company.com
+Action: Exported customer data
+Resource: 500 contacts
+IP: 203.0.113.50
+Status: Success
+
+2025-01-15 11:45 - maria@company.com
+Action: Deleted conversation
+Resource: #12345
+IP: 198.51.100.20
+Status: Success
+```
+
+[See more at Audit](/en/user-guide/audit-logs)
+
+---
+
+## 🚨 Security Best Practices
+
+### Passwords
+
+✅ **Minimum 12 characters**  
+✅ **Lowercase + uppercase + numbers + symbols**  
+✅ **Unique**: Different for each system  
+✅ **Manager**: Use 1Password, Bitwarden  
+✅ **Change**: Every 90 days  
+
+### Access
+
+✅ **Principle of least privilege**: Only necessary access  
+✅ **Review quarterly**: Who has access to what?  
+✅ **Immediate removal**: Former employee → disable immediately  
+✅ **Restrict admin**: 2-3 admins maximum  
+
+### Integrations
+
+✅ **Rotate tokens**: Change API keys every 90 days  
+✅ **Limit scope**: Only necessary permissions  
+✅ **Monitor use**: Suspicious API activity?  
+✅ **Revoke unused**: Old integrations → disable  
+
+### Training
+
+✅ **Phishing awareness**: Recognize suspicious emails  
+✅ **Don't share credentials**: Each their own access  
+✅ **Report incidents**: Suspicious → notify immediately  
+✅ **Secure devices**: Updated, antivirus, locked  
+
+---
+
+## 🔍 Incident Response
+
+### If you suspect security breach:
+
+1. **Isolate** - Disable affected accounts
+2. **Investigate** - Check audit logs
+3. **Notify** - Alert security team
+4. **Remediate** - Fix vulnerability
+5. **Document** - Record everything
+6. **Learn** - How to prevent?
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Audit Logs" icon="file-lines" href="/en/user-guide/audit-logs">
+    Monitor all activities
+  </Card>
+  <Card title="Custom Roles" icon="user-shield" href="/en/user-guide/custom-roles">
+    Configure granular permissions
+  </Card>
+</CardGroup>

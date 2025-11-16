@@ -1,0 +1,258 @@
+---
+title: Audit Logs
+description: Track and audit all activities in the system
+sidebarTitle: Audit Logs
+---
+
+# 📋 Audit Logs
+
+Track and audit all activities in the system for compliance and security.
+
+---
+
+## 📋 What are Audit Logs?
+
+**Audit Logs** are detailed records of all actions:
+
+```
+Who did what, when, where and how
+```
+
+**Example:**
+```
+2025-01-15 14:30:25 UTC
+User: john.silva@company.com
+IP: 203.0.113.45
+Action: EXPORTED_CONTACTS
+Details: 1,500 contacts exported to CSV
+Status: Success
+```
+
+---
+
+## ✨ What is Logged?
+
+<CardGroup cols={2}>
+  <Card title="User Actions" icon="user">
+    Login, logout, changes
+  </Card>
+  <Card title="Data" icon="database">
+    Create, read, update, delete
+  </Card>
+  <Card title="Settings" icon="gear">
+    Configuration changes
+  </Card>
+  <Card title="Integrations" icon="plug">
+    API calls, webhooks
+  </Card>
+</CardGroup>
+
+---
+
+## 🔍 Types of Events
+
+### Authentication Events
+
+```
+✅ LOGIN_SUCCESS
+├─ User: maria@company.com
+├─ IP: 198.51.100.20
+├─ Device: Chrome/Windows
+└─ Time: 2025-01-15 09:00:00
+
+❌ LOGIN_FAILED
+├─ User: hacker@evil.com
+├─ IP: 192.0.2.100
+├─ Reason: Invalid password
+├─ Attempts: 5
+└─ Time: 2025-01-15 03:45:12
+
+🚪 LOGOUT
+└─ User: john@company.com
+```
+
+---
+
+### Data Actions
+
+```
+📝 CONTACT_CREATED
+├─ Who: agent@company.com
+├─ Contact: John Silva (#12345)
+└─ Source: Manual import
+
+✏️ CONTACT_UPDATED
+├─ Who: agent@company.com
+├─ Contact: John Silva (#12345)
+├─ Changed: phone, email, plan
+└─ Before: plan=Free
+└─ After: plan=Premium
+
+🗑️ CONTACT_DELETED
+├─ Who: admin@company.com
+├─ Contact: Maria Santos (#12340)
+├─ Reason: GDPR deletion request
+└─ Permanent: Yes
+```
+
+---
+
+### Configuration Changes
+
+```
+⚙️ SETTINGS_CHANGED
+├─ Who: admin@company.com
+├─ Section: SLA Policies
+├─ Action: Created new policy "VIP"
+└─ Details: FRT=5min, RT=2hours
+
+🔐 PERMISSIONS_CHANGED
+├─ Who: admin@company.com
+├─ User: newagent@company.com
+├─ Action: Promoted to administrator
+└─ Previous role: Agent
+
+🔌 INTEGRATION_ENABLED
+├─ Who: admin@company.com
+├─ Integration: OpenAI
+└─ Configured: API Key, Model GPT-4
+```
+
+---
+
+### Export Activities
+
+```
+📤 DATA_EXPORTED
+├─ Who: manager@company.com
+├─ Type: Contacts CSV
+├─ Records: 5,000 contacts
+├─ Fields: name, email, phone, plan
+├─ IP: 203.0.113.50
+└─ Reason: Monthly report
+
+📤 REPORT_DOWNLOADED
+├─ Who: director@company.com
+├─ Report: Conversations (Jan 2025)
+├─ Format: PDF
+└─ Size: 2.5 MB
+```
+
+---
+
+## 🔎 Search and Filter Logs
+
+### Filters
+
+```
+📅 Period:
+├─ Last 24 hours
+├─ Last 7 days
+├─ Last 30 days
+└─ Custom date range
+
+👤 User:
+└─ john@company.com
+
+🎯 Action Type:
+├─ Authentication
+├─ Data Changes
+├─ Exports
+└─ Settings
+
+🌐 IP Address:
+└─ 203.0.113.0/24
+
+✅ Status:
+├─ Success
+├─ Failed
+└─ Pending
+```
+
+---
+
+## 📊 Audit Reports
+
+### Security Report
+
+```
+Last 30 days:
+
+🔐 Failed Logins: 45
+├─ Same IP (192.0.2.100): 30 attempts
+└─ ⚠️ Action: IP blocked
+
+📤 Data Exports: 12
+├─ Average: 2,500 records/export
+└─ Who: Manager team (authorized)
+
+⚙️ Setting Changes: 8
+├─ Who: 2 administrators
+└─ Reviewed: All compliant
+```
+
+---
+
+## 💡 Best Practices
+
+### Retention
+
+✅ **Keep minimum 90 days**: Legal compliance  
+✅ **Critical logs 1+ year**: Security incidents  
+✅ **Regular backup**: Logs in safe place  
+✅ **Automatic archiving**: Older logs → cold storage  
+
+### Monitoring
+
+✅ **Daily review**: Check suspicious activities  
+✅ **Automated alerts**: Unusual patterns → notification  
+✅ **Periodic audit**: Monthly full review  
+
+### Compliance
+
+✅ **GDPR**: Document data access/exports  
+✅ **SOC 2**: Complete audit trail  
+✅ **ISO 27001**: Security controls  
+✅ **LGPD (Brazil)**: Access and processing records  
+
+---
+
+## 🚨 Suspicious Activity Alerts
+
+### What to Watch For
+
+```
+🚨 Multiple failed logins
+→ Possible brute force attack
+
+🚨 Export of large volumes
+→ Possible data exfiltration
+
+🚨 Access outside business hours
+→ Possible compromise
+
+🚨 Privilege changes
+→ Possible privilege escalation
+
+🚨 Mass deletions
+→ Possible sabotage
+```
+
+**Action:**
+1. Investigate immediately
+2. Block account if suspicious
+3. Notify security team
+4. Document incident
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Security" icon="shield" href="/en/user-guide/security">
+    Improve platform security
+  </Card>
+  <Card title="Custom Roles" icon="user-shield" href="/en/user-guide/custom-roles">
+    Configure granular permissions
+  </Card>
+</CardGroup>

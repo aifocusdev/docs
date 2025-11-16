@@ -1,0 +1,202 @@
+---
+title: Labels (Tags)
+description: Organize and categorize conversations and contacts with custom labels
+sidebarTitle: Labels
+---
+
+# 🏷️ Labels (Tags)
+
+Organize conversations and contacts using colorful and custom labels.
+
+---
+
+## 📋 What are Labels?
+
+**Labels** (or **Tags**) are tags you apply to:
+- 💬 **Conversations**: Categorize support
+- 👥 **Contacts**: Segment customers
+
+**Visual example:**
+```
+Conversation #1234
+├─ 🟢 #sales
+├─ 🔴 #urgent
+└─ 🟡 #product-a
+```
+
+---
+
+## ✨ What Are They For?
+
+<CardGroup cols={2}>
+  <Card title="Organization" icon="folder">
+    Categorize by type, product, priority
+  </Card>
+  <Card title="Filters" icon="filter">
+    Find conversations quickly
+  </Card>
+  <Card title="Reports" icon="chart-bar">
+    Metrics by label
+  </Card>
+  <Card title="Automation" icon="robot">
+    Trigger automations based on labels
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Label
+
+1. **"Settings"** → **"Labels"**
+2. **"New Label"**
+3. Fill:
+   - **Name**: "sales"
+   - **Description**: "Sales conversations"
+   - **Color**: 🟢 Green
+4. **Save**
+
+---
+
+## 🎨 Label Categories
+
+### By Support Type
+
+```
+🟢 #sales - Sales opportunities
+🔵 #support - Technical problems
+🟡 #financial - Billing and payments
+🟣 #question - General questions
+```
+
+### By Priority
+
+```
+🔴 #urgent - Needs immediate attention
+🟠 #high - Important, resolve today
+🟡 #medium - Resolve this week
+🟢 #low - No rush
+```
+
+### By Product/Service
+
+```
+💎 #product-premium
+📦 #product-basic
+⭐ #service-consulting
+🛠️ #service-maintenance
+```
+
+---
+
+## 🔖 Apply Labels
+
+### To Conversations
+
+**Manually:**
+1. Open conversation
+2. Click **"Labels"** in side panel
+3. Select label(s)
+4. Applied instantly
+
+**By Shortcut:**
+```
+Type: #sales
+System suggests labels
+Press Enter
+```
+
+**Multiple labels:**
+```
+Conversation can have several:
+├─ #sales
+├─ #urgent  
+└─ #product-a
+```
+
+---
+
+## 🔍 Filter by Labels
+
+### In Conversation List
+
+```
+Filters:
+├─ Status: Open
+├─ Label: #sales
+└─ Inbox: WhatsApp
+
+Result: 15 conversations
+```
+
+---
+
+## 🤖 Automations with Labels
+
+### Apply Label Automatically
+
+**Rule 1: By Keyword**
+```
+IF message contains "buy" or "price"
+THEN add label #sales
+```
+
+**Rule 2: By Inbox**
+```
+IF conversation from inbox "WhatsApp Support"
+THEN add label #support
+```
+
+### Actions Based on Label
+
+**Rule 1: Prioritize Urgent**
+```
+IF label = #urgent
+THEN assign to senior agent
+AND notify manager
+```
+
+**Rule 2: Route by Type**
+```
+IF label = #support
+THEN assign to Support Team
+
+IF label = #sales
+THEN assign to Sales Team
+```
+
+---
+
+## 💡 Best Practices
+
+### Naming
+
+✅ **Lowercase**: `#sales` not `#Sales`  
+✅ **No spaces**: `#high-priority` not `#high priority`  
+✅ **Descriptive**: `#technical-support` not `#ts`  
+✅ **Consistency**: Define standard and follow  
+
+### Organization
+
+✅ **Limit quantity**: 15-30 labels ideal  
+✅ **Clear categories**: Type, priority, product  
+✅ **Logical colors**: Red=urgent, Green=ok  
+✅ **Documentation**: Official list of labels  
+
+### Usage
+
+✅ **Train team**: Everyone uses same way  
+✅ **Review periodically**: Labels still make sense?  
+✅ **Remove unused**: Labels not used >3 months  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Automate label application
+  </Card>
+  <Card title="Reports" icon="chart-line" href="/en/user-guide/reports">
+    Analyze by label
+  </Card>
+</CardGroup>

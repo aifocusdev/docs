@@ -1,0 +1,233 @@
+---
+title: Canned Responses (Quick Replies)
+description: Create predefined message templates for quick responses
+sidebarTitle: Canned Responses
+---
+
+# 💬 Canned Responses (Quick Replies)
+
+Save time with predefined message templates.
+
+---
+
+## 📋 What are Canned Responses?
+
+**Canned Responses** (or **Quick Replies**) are saved message templates you can insert with shortcuts:
+
+**Before:**
+```
+Agent types for 5th time today:
+"Hello! Thanks for contacting support.
+I'm {{name}}, I'll help you.
+What do you need?"
+```
+
+**After:**
+```
+Agent types: /hello
+System inserts complete message ✅
+```
+
+---
+
+## ✨ Benefits
+
+<CardGroup cols={2}>
+  <Card title="Speed" icon="bolt">
+    Respond in seconds
+  </Card>
+  <Card title="Consistency" icon="check-double">
+    Same message for all
+  </Card>
+  <Card title="Quality" icon="star">
+    Revised, correct messages
+  </Card>
+  <Card title="Training" icon="graduation-cap">
+    New agents respond well
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Canned Response
+
+1. **"Settings"** → **"Canned Responses"**
+2. **"New Canned Response"**
+3. Configure:
+
+**Short code:** `hello`  
+**Content:**
+```
+Hello! Thanks for contacting {{company}}. 👋
+
+I'm {{agent.name}}, I'll help you today.
+
+What do you need?
+```
+
+**Visibility:**
+- 🌍 **Public**: All agents can use
+- 👤 **Private**: Only you use
+- 👥 **Team**: Specific team only
+
+4. **Save**
+
+---
+
+## 🎯 Canned Response Examples
+
+### 1. Greeting
+
+```
+Shortcut: /hello
+
+Message:
+Hello {{contact.name}}! 👋
+I'm {{agent.name}} from {{company}}.
+How can I help you today?
+```
+
+---
+
+### 2. After Hours
+
+```
+Shortcut: /afterhours
+
+Message:
+Hello! We're currently after business hours.
+
+Our hours:
+🕐 Monday - Friday: 9am - 6pm
+📅 Weekends: Closed
+
+Leave your message and we'll respond 
+first thing when we return! 🚀
+```
+
+---
+
+### 3. Order Tracking
+
+```
+Shortcut: /tracking
+
+Message:
+To check your order, I need:
+
+📦 Order number: (ex: #12345)
+📱 Phone on order:
+
+With this information, I'll check and 
+update you on delivery!
+```
+
+---
+
+### 4. Problem Solved
+
+```
+Shortcut: /resolved
+
+Message:
+Perfect! Glad I could help! ✅
+
+Did everything work?
+Need anything else?
+
+If not, I'm closing this conversation.
+But I'm always here if you need!
+
+Best regards,
+{{agent.name}}
+```
+
+---
+
+## 🖱️ Use Canned Response
+
+### Option 1: Shortcut
+```
+In message field, type:
+/hello
+
+System suggests:
+📝 hello - "Hello! Thanks for..."
+
+Press Enter → Text inserted
+```
+
+### Option 2: Menu
+```
+Click "Canned Responses" icon
+Search: "hello"
+Click to insert
+```
+
+---
+
+## 🔧 Variables
+
+Use dynamic variables in templates:
+
+### Agent Variables
+```
+{{agent.name}}         → "John Silva"
+{{agent.email}}        → "john@company.com"
+```
+
+### Contact Variables
+```
+{{contact.name}}       → "Maria Santos"
+{{contact.email}}      → "maria@email.com"
+{{contact.phone}}      → "+1234567890"
+```
+
+### Company Variables
+```
+{{company}}            → Your company name
+{{inbox.name}}         → Inbox name
+```
+
+### Custom Attributes
+```
+{{contact.plan}}       → "Premium"
+{{conversation.order}} → "#12345"
+```
+
+---
+
+## 💡 Best Practices
+
+### Writing
+
+✅ **Friendly tone**: Conversational, human  
+✅ **Clear**: Direct to point  
+✅ **Empathy**: "I understand..." "I'll help..."  
+✅ **Actionable**: Always next step  
+
+### Organization
+
+✅ **Clear shortcut**: `/hello` not `/h1`  
+✅ **By category**: Greeting, after-hours, problems, closing  
+✅ **Update regularly**: Language changes  
+✅ **Train team**: Review new responses  
+
+### Usage
+
+✅ **Personalize**: Adjust template per case  
+✅ **Don't be robotic**: Add personal touch  
+✅ **Combine**: Use multiple per conversation  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Macros" icon="bolt" href="/en/user-guide/macros">
+    Combine messages + actions
+  </Card>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Send responses automatically
+  </Card>
+</CardGroup>

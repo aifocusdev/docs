@@ -1,0 +1,256 @@
+---
+title: Integrations
+description: Connect Chatwoot with other tools and platforms
+sidebarTitle: Integrations
+---
+
+# 🔌 Integrations
+
+Connect Chatwoot with your favorite tools to create a complete ecosystem.
+
+---
+
+## 📋 Available Integrations
+
+<CardGroup cols={2}>
+  <Card title="Webhooks" icon="webhook">
+    Send events to any system
+  </Card>
+  <Card title="App Dashboard" icon="grid">
+    Iframe integrations
+  </Card>
+  <Card title="OpenAI" icon="robot">
+    AI by ChatGPT
+  </Card>
+  <Card title="Dialogflow" icon="comments">
+    Google AI bot
+  </Card>
+  <Card title="Google Translator" icon="language">
+    Automatic translation
+  </Card>
+  <Card title="WooCommerce" icon="shopping-cart">
+    E-commerce integration
+  </Card>
+</CardGroup>
+
+---
+
+## 🔗 Webhooks
+
+Send conversation/message events to your systems.
+
+### Configuration
+
+1. **"Settings"** → **"Integrations"** → **"Webhooks"**
+2. **"Add Webhook"**
+3. Fill:
+
+**URL:** `https://your-system.com/webhook`  
+**Events:**
+- ✅ Message created
+- ✅ Conversation created
+- ✅ Conversation status updated
+
+4. **Save**
+
+### Use Cases
+
+**Send to CRM:**
+```
+Conversation created 
+→ Webhook to Salesforce
+→ Creates new lead
+```
+
+**Notify on Slack:**
+```
+VIP message received
+→ Webhook to Slack
+→ Notifies #sales channel
+```
+
+**Integration with ERP:**
+```
+Order confirmed
+→ Webhook to ERP
+→ Creates sales order
+```
+
+---
+
+## 📊 App Dashboard
+
+Embed external apps in Chatwoot sidebar.
+
+### Configuration
+
+1. **"Settings"** → **"App Dashboard"**
+2. **"New App"**
+3. Fill:
+
+**Name:** `Order System`  
+**URL:** `https://erp.company.com/orders?contact={{contact.id}}`  
+**Description:** "View customer orders"
+
+4. **Configure visibility:**
+   - All conversations
+   - Specific inbox only
+
+5. **Save**
+
+### Use Cases
+
+```
+📦 Order Management → Shows order history
+💰 Financial → Customer invoices  
+📋 CRM → Complete customer data
+📊 Analytics → Real-time metrics
+```
+
+---
+
+## 🤖 OpenAI (ChatGPT)
+
+Integrate ChatGPT AI to assist agents and automate responses.
+
+### Configuration
+
+1. **"Settings"** → **"Integrations"** → **"OpenAI"**
+2. **Add API Key**: Get at platform.openai.com
+3. Configure features:
+
+**Rephrase (Improve text):**
+```
+Agent types: "Hi we can help you with that"
+AI improves: "Hello! We'd be happy to help you with that. 😊"
+```
+
+**Fix Spelling:**
+```
+"Teh problme waz resolvd"
+→ "The problem was resolved"
+```
+
+**Expand:**
+```
+"Will help"
+→ "I'll be happy to help you right now! 
+    What do you need?"
+```
+
+**Shorten:**
+```
+Long message
+→ Concise version, same information
+```
+
+**Change Tone:**
+```
+Formal → Casual
+Casual → Formal
+Neutral → Empathetic
+```
+
+---
+
+## 💬 Dialogflow
+
+Google AI chatbot.
+
+### Configuration
+
+1. Create project in Dialogflow
+2. **"Settings"** → **"Integrations"** → **"Dialogflow"**
+3. Upload credentials (JSON)
+4. Configure bot per inbox
+
+### Use Cases
+
+```
+📞 FAQ Bot → Answers frequent questions
+🎫 Ticket Opening → Collects info before agent
+🗓️ Scheduling → Books meetings automatically
+```
+
+---
+
+## 🌐 Google Translator
+
+Automatic real-time translation.
+
+### Configuration
+
+1. **"Settings"** → **"Integrations"** → **"Google Translator"**
+2. **Add API Key**: Get at Google Cloud Console
+3. Configure target languages
+
+### How it Works
+
+```
+Customer (Spanish): "Necesito ayuda"
+Agent sees (English): "I need help" [Translated]
+
+Agent types (English): "How can I help?"
+Customer receives (Spanish): "¿Cómo puedo ayudarte?" [Translated]
+```
+
+---
+
+## 🛒 WooCommerce
+
+Integrate e-commerce with support.
+
+### Configuration
+
+1. Install plugin on WordPress
+2. **"Settings"** → **"Integrations"** → **"WooCommerce"**
+3. Configure credentials:
+   - Store URL
+   - Consumer Key
+   - Consumer Secret
+
+### Features
+
+**Sidebar in conversation shows:**
+```
+📦 Recent Orders
+├─ Order #12345 - $299.90 - Shipped
+├─ Order #12340 - $150.00 - Delivered
+└─ Order #12320 - $89.90 - Processing
+
+🛒 Abandoned Cart
+└─ Cart #555 - $450.00 - 2 days ago
+
+💰 Lifetime Value (LTV)
+└─ Total spent: $2,500.00
+```
+
+---
+
+## 💡 Best Practices
+
+### Security
+
+✅ **Restrict access**: Only admins configure  
+✅ **Rotate keys**: Change API keys quarterly  
+✅ **Monitor logs**: Spot unusual activity  
+✅ **Use HTTPS**: Always encrypted connections  
+
+### Performance
+
+✅ **Test first**: Staging before production  
+✅ **Monitor**: Check integrations work  
+✅ **Fallback**: What if integration down?  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="code" href="/en/api-reference/introduction">
+    Build custom integrations
+  </Card>
+  <Card title="Webhooks Guide" icon="webhook" href="/en/api-reference/introduction">
+    Deep dive into webhooks
+  </Card>
+</CardGroup>

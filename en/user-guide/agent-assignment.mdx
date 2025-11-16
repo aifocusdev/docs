@@ -1,0 +1,174 @@
+---
+title: Automatic Distribution (Agent Assignment)
+description: Configure how conversations are automatically distributed among agents
+sidebarTitle: Agent Assignment
+---
+
+# 🔀 Automatic Conversation Distribution
+
+Configure intelligent rules to automatically distribute conversations among agents and teams.
+
+---
+
+## 📋 What is Agent Assignment?
+
+**Agent Assignment** is the system that automatically decides which agent receives each new conversation.
+
+**Without assignment:**
+```
+New conversation → Unassigned → Agent must manually take
+```
+
+**With assignment:**
+```
+New conversation → System auto-assigns → Agent receives notification
+```
+
+---
+
+## 🎯 Distribution Methods
+
+<CardGroup cols={2}>
+  <Card title="Round Robin" icon="rotate">
+    Equal rotation
+  </Card>
+  <Card title="Load Balanced" icon="scale-balanced">
+    Based on capacity
+  </Card>
+  <Card title="Skill-based" icon="star">
+    By specialization
+  </Card>
+  <Card title="Priority" icon="flag">
+    By priority
+  </Card>
+</CardGroup>
+
+---
+
+## 🔄 Round Robin (Rotation)
+
+**How it works:**
+Distributes equally to all agents in order:
+
+```
+Agents: Maria, John, Peter
+
+Conversation 1 → Maria
+Conversation 2 → John  
+Conversation 3 → Peter
+Conversation 4 → Maria (back to start)
+Conversation 5 → John
+```
+
+**Advantages:**
+- ✅ Fair distribution
+- ✅ Simple to understand
+- ✅ Everyone serves equally
+
+**Use when:**
+- All agents have same skill
+- Want equal distribution
+- Small team
+
+---
+
+## ⚖️ Load Balanced (Load Balancing)
+
+**How it works:**
+Assigns to agent with FEWER open conversations:
+
+```
+Current state:
+├─ Maria: 3 conversations
+├─ John: 5 conversations
+└─ Peter: 2 conversations
+
+New conversation → Peter (has least)
+
+After assigning:
+├─ Maria: 3 conversations
+├─ John: 5 conversations
+└─ Peter: 3 conversations
+
+Next conversation → Maria
+```
+
+**Advantages:**
+- ✅ Distributes based on real load
+- ✅ Prevents overload
+- ✅ Adapts dynamically
+
+**Use when:**
+- Large teams
+- Resolution speed varies
+- Want to prevent burnout
+
+---
+
+## ⭐ Skill-based (By Specialization)
+
+**How it works:**
+Assigns based on skills/specialization:
+
+```
+Agents:
+├─ Maria: Skill "Sales" + "English"
+├─ John: Skill "Support" + "Technical"
+└─ Peter: Skill "Sales" + "Financial"
+
+Customer: "I need technical support"
+System detects: Tag #support
+→ Assigns to John
+
+Customer: "I want to buy" (English)
+System detects: Language EN + sales interest
+→ Assigns to Maria
+```
+
+**Configure skills:**
+1. **"Agents"** → Select agent
+2. **"Skills"** → Add
+3. Examples:
+   - Languages: Portuguese, English, Spanish
+   - Products: Product A, Product B
+   - Expertise: Technical, Sales, Financial
+
+**Advantages:**
+- ✅ Customer speaks with specialist
+- ✅ Faster resolution
+- ✅ Higher satisfaction
+
+---
+
+## 💡 Best Practices
+
+### Planning
+
+✅ **Start simple**: Round Robin first  
+✅ **Monitor metrics**: See what works  
+✅ **Adjust gradually**: Improve with data  
+
+### Capacity
+
+✅ **Define realistic limits**: 8-12 conversations/agent  
+✅ **Respect schedules**: Don't force overtime  
+✅ **Buffer for peaks**: Reserve extra capacity  
+
+### Specialization
+
+✅ **Cross-training**: Agents know multiple areas  
+✅ **Always backup**: Skill never with 1 person only  
+✅ **Document processes**: Easier to train new ones  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Combine assignment with automations
+  </Card>
+  <Card title="Reports" icon="chart-line" href="/en/user-guide/reports">
+    Analyze distribution efficiency
+  </Card>
+</CardGroup>

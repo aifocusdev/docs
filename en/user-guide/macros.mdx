@@ -1,0 +1,166 @@
+---
+title: Macros
+description: Execute multiple actions with 1 click
+sidebarTitle: Macros
+---
+
+# ⚡ Macros
+
+Execute sets of predefined actions with a single click.
+
+---
+
+## 📋 What are Macros?
+
+**Macros** are shortcuts to execute multiple actions at once:
+
+**Difference from Automations:**
+- 🤖 **Automations**: Execute automatically
+- ⚡ **Macros**: Agent executes manually (1 click)
+
+**Example:**
+```
+Macro: "Resolve and Close"
+
+Actions:
+├─ Send message: "Problem solved! Anything else?"
+├─ Label: #resolved
+├─ Status: Resolved
+├─ Send CSAT survey
+└─ Assign: Nobody
+```
+
+---
+
+## ✨ Why Use Macros?
+
+<CardGroup cols={2}>
+  <Card title="Productivity" icon="rocket">
+    1 click = 5+ actions
+  </Card>
+  <Card title="Standardization" icon="check">
+    Everyone does the same
+  </Card>
+  <Card title="Speed" icon="bolt">
+    Save precious seconds
+  </Card>
+  <Card title="Fewer Errors" icon="shield">
+    Don't forget steps
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Macro
+
+1. **"Settings"** → **"Macros"**
+2. **"New Macro"**
+3. Configure:
+
+**Name:** `Transfer to Technical`
+
+**Visibility:**
+- 🌍 **Global**: All agents see
+- 👤 **Personal**: Only you see
+- 👥 **By Team**: Specific team only
+
+**Actions:**
+```
+1. Add label: #technical-support
+2. Assign to: Technical Team
+3. Send message:
+   "Transferring to technical specialist. 
+    Wait a moment!"
+4. Status: Pending
+```
+
+4. **Save**
+
+---
+
+## 🎯 Macro Examples
+
+### 1. Resolve and Request Feedback
+
+```
+Name: "✅ Resolve + CSAT"
+
+Actions:
+├─ Send: "Did I help? Anything else?"
+├─ Wait response: 2 minutes
+├─ IF customer responds "no": Keep open
+├─ IF customer responds "yes" OR no response:
+│  ├─ Status: Resolved
+│  ├─ Label: #resolved
+│  └─ Send CSAT survey
+```
+
+Use when: Problem is solved
+```
+
+---
+
+### 2. Escalate to Manager
+
+```
+Name: "🚨 Escalate Urgent"
+
+Actions:
+├─ Priority: Urgent
+├─ Label: #escalated
+├─ Assign: Manager
+├─ Internal note: "Customer requested manager - immediate attention"
+├─ Notify: manager@company.com
+└─ Send: "I understand your concern. Our manager 
+         is aware and will contact you shortly."
+```
+
+Use when: Unhappy customer/critical situation
+```
+
+---
+
+## 🖱️ Use Macro
+
+### Inside Conversation
+
+1. Open conversation
+2. Click **"Macros"** (lightning icon ⚡)
+3. Choose macro from list
+4. **Execute**
+
+**Keyboard shortcut:**
+```
+Ctrl/Cmd + M → Opens macro menu
+Type name → Enter to execute
+```
+
+---
+
+## 💡 Best Practices
+
+### Creation
+
+✅ **Clear name**: "Resolve + CSAT" not "Macro 1"  
+✅ **Emoji helps**: Visual identification  
+✅ **Test before**: Make sure it works  
+✅ **Document**: When to use each macro  
+
+### Usage
+
+✅ **Train team**: Everyone knows they exist  
+✅ **Review regularly**: Macros still relevant?  
+✅ **Personalize when needed**: Macro is base, adjust per case  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Canned Responses" icon="message" href="/en/user-guide/canned-responses">
+    Predefined messages
+  </Card>
+  <Card title="Automations" icon="robot" href="/en/user-guide/automations">
+    Execute actions automatically
+  </Card>
+</CardGroup>

@@ -1,0 +1,183 @@
+---
+title: Automations
+description: Create automatic rules to optimize your workflow
+sidebarTitle: Automations
+---
+
+# 🤖 Automations
+
+Automate repetitive actions and create intelligent workflows.
+
+---
+
+## 📋 What are Automations?
+
+**Automations** are "IF this THEN do that" rules:
+
+```
+IF conversation received after hours
+THEN send message "We'll return at 9am" 
+AND add label #after-hours
+```
+
+---
+
+## ✨ What Can You Automate?
+
+<CardGroup cols={2}>
+  <Card title="Assignments" icon="user-plus">
+    Distribute conversations automatically
+  </Card>
+  <Card title="Messages" icon="message">
+    Automatic responses
+  </Card>
+  <Card title="Labels" icon="tag">
+    Apply tags
+  </Card>
+  <Card title="Priorities" icon="flag">
+    Change priority
+  </Card>
+  <Card title="Status" icon="toggle-on">
+    Change conversation status
+  </Card>
+  <Card title="Notifications" icon="bell">
+    Notify agents/managers
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Create Automation
+
+1. **"Settings"** → **"Automations"**
+2. **"New Automation"**
+3. Configure:
+
+### Name
+```
+"After Hours Support"
+```
+
+### Event (Trigger)
+When rule is triggered:
+- 📥 **Conversation created**
+- 💬 **Message created**
+- ✅ **Conversation updated**
+- 👤 **Contact created/updated**
+
+### Conditions (Filters)
+When to apply rule:
+
+```
+IF all conditions are true:
+├─ Current time: Between 6:00 PM and 9:00 AM
+├─ Day of week: Any
+└─ Inbox: WhatsApp Support
+```
+
+### Actions
+What to do:
+
+```
+THEN execute:
+├─ Send message: "Hello! We're after hours..."
+├─ Add label: #after-hours
+└─ Assign to: Nobody (stays in queue)
+```
+
+4. **Activate** and **Save**
+
+---
+
+## 🎯 Practical Examples
+
+### 1. Auto-response After Hours
+
+**Trigger:** Message created  
+**Conditions:**
+```
+├─ Time: 6:00 PM - 9:00 AM OR
+├─ Day: Saturday, Sunday
+└─ Conversation status: Open
+```
+
+**Actions:**
+```
+├─ Send: "Hello! We'll return during business hours 
+│        (Mon-Fri 9am-6pm). Leave your message!"
+├─ Label: #after-hours
+└─ Status: Pending
+```
+
+---
+
+### 2. Prioritize VIPs
+
+**Trigger:** Conversation created  
+**Conditions:**
+```
+├─ Contact has label: #vip OR
+└─ Contact.plan: Enterprise
+```
+
+**Actions:**
+```
+├─ Priority: Urgent
+├─ Label: #high-priority
+├─ Assign: Top 3 agents (round robin)
+└─ Notify: manager@company.com
+```
+
+---
+
+### 3. Routing by Keyword
+
+**Trigger:** Message created  
+**Conditions:**
+```
+├─ Message contains: "buy" OR "price" OR "quote"
+└─ Status: Unassigned
+```
+
+**Actions:**
+```
+├─ Label: #sales
+├─ Assign to: Sales Team
+└─ Send: "I'll connect you with our sales team!"
+```
+
+---
+
+## 💡 Best Practices
+
+### Design
+
+✅ **One responsibility**: Each automation does one thing  
+✅ **Descriptive name**: "VIP - Assign to Senior"  
+✅ **Test first**: Activate in 1 inbox first  
+✅ **Document**: Explain why it exists  
+
+### Performance
+
+✅ **Specific conditions**: Avoid very broad automations  
+✅ **Disable unused**: Remove unused rules  
+✅ **Monitor**: Check logs regularly  
+
+### Maintenance
+
+✅ **Review quarterly**: Rules still make sense?  
+✅ **Optimize**: Combine similar rules  
+✅ **Update**: Processes change, rules too  
+
+---
+
+## 🚀 Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Macros" icon="bolt" href="/en/user-guide/macros">
+    Manual actions with 1 click
+  </Card>
+  <Card title="Bots" icon="robot" href="/en/user-guide/bots">
+    Complex automated conversations
+  </Card>
+</CardGroup>
