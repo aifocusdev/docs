@@ -1,0 +1,390 @@
+---
+title: Gestão de Contatos
+description: Guia completo para gerenciar clientes, histórico e informações personalizadas
+sidebarTitle: Contatos
+---
+
+# 👥 Gestão de Contatos
+
+Aprenda a gerenciar seus clientes no Chatwoot: criar perfis, adicionar informações personalizadas, organizar com labels e acompanhar todo o histórico de interações.
+
+---
+
+## 📋 O que são Contatos?
+
+**Contatos** são os perfis dos seus clientes no Chatwoot. Cada contato pode ter:
+
+- 📧 **Email** e 📱 **Telefone**
+- 💬 **Histórico de conversas** completo
+- 🏷️ **Labels** para organização
+- 📝 **Atributos personalizados** (campos customizados)
+- 📊 **Informações sociais** (se conectado por redes sociais)
+
+---
+
+## ➕ Criar Novo Contato
+
+### Via Interface
+
+1. Na sidebar, clique em **"Contatos"**
+2. Clique no botão **"+ Novo Contato"**
+3. Preencha as informações:
+   - **Nome**: Nome completo do cliente
+   - **Email**: Email principal
+   - **Telefone**: Número com código do país (+55)
+   - **Empresa**: Nome da empresa (opcional)
+   - **Bio**: Descrição ou notas sobre o cliente
+4. Clique em **"Criar Contato"**
+
+### Criação Automática
+
+Contatos são criados **automaticamente** quando:
+- Cliente envia primeira mensagem no chat
+- Email é recebido de novo remetente
+- Mensagem no WhatsApp de número novo
+- Direct no Instagram de perfil novo
+
+---
+
+## 🔍 Buscar Contatos
+
+### Busca Rápida
+
+Na página de Contatos, use a barra de busca para encontrar por:
+- **Nome**: "João Silva"
+- **Email**: "joao@empresa.com"
+- **Telefone**: "+5511987654321"
+- **Empresa**: "Acme Corp"
+
+### Filtros Avançados
+
+Use os filtros para encontrar:
+- **Labels**: Contatos com tag específica
+- **Origem**: Fonte de cadastro (WhatsApp, Email, etc.)
+- **Status**: Ativo, Inativo
+- **Período**: Criados em período específico
+
+---
+
+## 📝 Editar Informações
+
+### Dados Básicos
+
+1. Clique no contato para abrir o perfil
+2. Clique em **"Editar"** ou no ícone de lápis
+3. Altere as informações desejadas
+4. Clique em **"Salvar"**
+
+### Atributos Personalizados
+
+Adicione campos customizados ao perfil:
+
+**Exemplos de atributos:**
+- **Segmento**: Varejo, Atacado, Corporativo
+- **Origem**: Site, Indicação, Rede Social
+- **Plano**: Free, Premium, Enterprise
+- **Última Compra**: Data da última transação
+- **Valor Vitalício**: Total gasto pelo cliente
+
+**Como adicionar:**
+1. No perfil do contato, vá em **"Atributos"**
+2. Clique em **"+ Adicionar Atributo"**
+3. Escolha o atributo (ou crie novo)
+4. Preencha o valor
+5. Salve
+
+---
+
+## 🏷️ Labels (Etiquetas)
+
+Labels ajudam a organizar e categorizar seus contatos.
+
+### Adicionar Labels
+
+1. Abra o perfil do contato
+2. Na seção **"Labels"**, clique em **"+ Adicionar"**
+3. Escolha uma label existente ou crie nova
+4. A label é aplicada instantaneamente
+
+### Exemplos de Labels
+
+- **Por Segmento**: VIP, Lead Frio, Lead Quente
+- **Por Status**: Cliente, Ex-Cliente, Prospect
+- **Por Interesse**: Produto A, Produto B, Serviços
+- **Por Origem**: Facebook, Google, Indicação
+
+### Usar Labels para Filtrar
+
+Na lista de contatos, filtre por labels para:
+- Enviar mensagens em massa
+- Criar automações específicas
+- Gerar relatórios segmentados
+
+---
+
+## 📊 Histórico do Contato
+
+### Visualizar Histórico
+
+No perfil do contato, você vê:
+- 💬 **Todas as conversas** já tidas
+- 📅 **Linha do tempo** de interações
+- 📝 **Notas** adicionadas pela equipe
+- 🔄 **Mudanças** de atribuição/status
+
+### Adicionar Notas
+
+Notas são visíveis apenas para a equipe:
+
+1. No perfil do contato, vá em **"Notas"**
+2. Clique em **"+ Adicionar Nota"**
+3. Digite a informação (ex: "Prefere contato por email")
+4. Salve
+
+**Notas são úteis para:**
+- Registrar preferências do cliente
+- Anotar acordos ou pendências
+- Compartilhar contexto com a equipe
+
+---
+
+## 🔗 Vincular Contato a Inbox
+
+Um contato pode ter **múltiplas identidades** em diferentes canais:
+
+**Exemplo:**
+- Email: joao@email.com
+- WhatsApp: +5511987654321
+- Facebook: @joaosilva
+
+Para vincular identidades:
+
+1. Abra o perfil do contato
+2. Vá em **"Canais"** ou **"Inboxes"**
+3. Clique em **"+ Adicionar Canal"**
+4. Escolha o inbox (WhatsApp, Email, etc.)
+5. Preencha o identificador (número, email, etc.)
+
+**Benefício:** Todo histórico fica centralizado!
+
+---
+
+## 📤 Importar Contatos
+
+### Via CSV
+
+1. Na página de Contatos, clique em **"Importar"**
+2. Baixe o **modelo CSV** (template)
+3. Preencha o CSV com seus dados:
+   - Nome, Email, Telefone, etc.
+4. Faça upload do arquivo
+5. Aguarde processamento
+
+**Campos do CSV:**
+```csv
+name,email,phone_number,company,custom_attributes
+João Silva,joao@email.com,+5511987654321,Acme Corp,"{""segmento"":""varejo""}"
+Maria Santos,maria@email.com,+5521912345678,XYZ Ltda,"{""segmento"":""atacado""}"
+```
+
+### Via API
+
+Para importações automatizadas:
+
+```bash
+POST /api/v1/accounts/{account_id}/contacts
+```
+
+```json
+{
+  "name": "João Silva",
+  "email": "joao@email.com",
+  "phone_number": "+5511987654321",
+  "custom_attributes": {
+    "segmento": "varejo",
+    "origem": "site"
+  }
+}
+```
+
+---
+
+## 📤 Exportar Contatos
+
+### Exportar para CSV
+
+1. Na página de Contatos, clique em **"Exportar"**
+2. Escolha filtros (opcional):
+   - Por label
+   - Por período
+   - Por origem
+3. Clique em **"Exportar CSV"**
+4. Aguarde email com link de download
+
+**Dados exportados:**
+- Informações básicas
+- Atributos personalizados
+- Labels
+- Data de criação/atualização
+
+---
+
+## 🔀 Mesclar Contatos Duplicados
+
+Se você tem contatos duplicados:
+
+1. Selecione os contatos duplicados (use Shift+Click)
+2. Clique em **"Ações"** → **"Mesclar Contatos"**
+3. Escolha qual será o **contato principal**
+4. Confirme a mesclagem
+
+**O que acontece:**
+- Histórico de conversas é unificado
+- Atributos são combinados
+- Labels são mescladas
+- Contato duplicado é removido
+
+---
+
+## 🗑️ Deletar Contato
+
+<Warning>
+**Atenção**: Deletar um contato é **irreversível** e remove todo o histórico de conversas!
+</Warning>
+
+Para deletar:
+
+1. Abra o perfil do contato
+2. Clique em **"..."** (três pontos) → **"Deletar"**
+3. Confirme a ação
+
+**Alternativa:** Em vez de deletar, adicione label "Inativo" ou "Bloqueado"
+
+---
+
+## 🤖 Automações com Contatos
+
+### Criar Regras de Automação
+
+Você pode criar automações baseadas em informações do contato:
+
+**Exemplos:**
+- Se contato tem label "VIP" → Atribuir ao melhor agente
+- Se contato tem atributo "segmento=corporativo" → Adicionar a funil específico
+- Se contato foi criado há 7 dias sem resposta → Enviar follow-up
+
+**Como criar:**
+1. Vá em **"Automações"**
+2. Crie nova regra
+3. Use condições baseadas em contato
+4. Defina ações
+
+---
+
+## 📊 Relatórios de Contatos
+
+### Métricas Disponíveis
+
+- **Total de Contatos**: Crescimento ao longo do tempo
+- **Novos Contatos**: Por período (dia/semana/mês)
+- **Contatos por Origem**: Qual canal traz mais clientes
+- **Contatos por Label**: Distribuição de segmentos
+- **Engajamento**: Contatos ativos vs inativos
+
+### Gerar Relatório
+
+1. Vá em **"Relatórios"** → **"Contatos"**
+2. Escolha período e filtros
+3. Visualize gráficos
+4. Exporte para PDF/CSV se necessário
+
+---
+
+## 💡 Dicas e Boas Práticas
+
+### Organização
+
+✅ **Use Labels consistentemente**: Crie padrão de nomenclatura  
+✅ **Preencha atributos**: Quanto mais informação, melhor  
+✅ **Adicione notas importantes**: Compartilhe contexto com equipe  
+✅ **Limpe duplicados regularmente**: Use mesclagem
+
+### Privacidade
+
+✅ **Respeite LGPD/GDPR**: Não armazene dados sensíveis desnecessários  
+✅ **Permissões de acesso**: Configure quem pode ver/editar contatos  
+✅ **Exporte dados a pedido**: Cliente tem direito aos seus dados
+
+### Produtividade
+
+✅ **Importe em lote**: Use CSV para grandes volumes  
+✅ **Automatize tagging**: Use automações para labels  
+✅ **Integre com CRM**: Sincronize com seu sistema principal
+
+---
+
+## 🔌 Integração via API
+
+Gerencie contatos programaticamente:
+
+### Listar Contatos
+```bash
+GET /api/v1/accounts/{account_id}/contacts
+```
+
+### Criar Contato
+```bash
+POST /api/v1/accounts/{account_id}/contacts
+```
+
+### Atualizar Contato
+```bash
+PATCH /api/v1/accounts/{account_id}/contacts/{contact_id}
+```
+
+### Deletar Contato
+```bash
+DELETE /api/v1/accounts/{account_id}/contacts/{contact_id}
+```
+
+📖 **Ver documentação completa**: [API Reference - Contatos](/pt-br/api-reference/contatos)
+
+---
+
+## ❓ Perguntas Frequentes
+
+<AccordionGroup>
+  <Accordion title="Quantos contatos posso ter?">
+    Não há limite! O Chatwoot suporta milhões de contatos.
+  </Accordion>
+
+  <Accordion title="Posso importar contatos do meu CRM?">
+    Sim! Use importação CSV ou integre via API para sincronização automática.
+  </Accordion>
+
+  <Accordion title="Como removo dados de um contato (LGPD)?">
+    Delete o contato ou use a API para anonimizar dados específicos.
+  </Accordion>
+
+  <Accordion title="Contatos podem ter múltiplos emails/telefones?">
+    Sim! Vincule múltiplas identidades ao mesmo contato em diferentes inboxes.
+  </Accordion>
+
+  <Accordion title="Como evito contatos duplicados?">
+    O Chatwoot tenta identificar automaticamente. Use mesclagem para limpar duplicados.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Gestão de Conversas" icon="messages" href="/pt-br/guia-usuario/conversas">
+    Aprenda a gerenciar interações com contatos
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Automatize ações baseadas em contatos
+  </Card>
+</CardGroup>
+
