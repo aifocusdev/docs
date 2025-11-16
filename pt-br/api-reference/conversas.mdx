@@ -1,0 +1,739 @@
+---
+title: API de Conversas
+description: Documentação completa dos endpoints para gerenciar conversas
+sidebarTitle: Conversas
+---
+
+# 💬 API de Conversas
+
+Endpoints para criar, listar, atualizar e gerenciar conversas.
+
+---
+
+## 🔐 Autenticação
+
+Todos os endpoints requerem autenticação:
+
+```http
+Header: api_access_token: SEU_TOKEN_AQUI
+```
+
+---
+
+## 📋 Listar Conversas
+
+Liste todas as conversas de uma conta com filtros opcionais.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/conversations
+```
+
+### Parâmetros Query
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `status` | string | Filtrar por status: `open`, `resolved`, `pending`, `all` |
+| `assignee_type` | string | Filtrar por atribuição: `me`, `unassigned`, `all` |
+| `inbox_id` | integer | Filtrar por inbox específico |
+| `team_id` | integer | Filtrar por equipe |
+| `labels` | array | Filtrar por labels: `["vendas","urgente"]` |
+| `page` | integer | Número da página (padrão: 1) |
+
+### Exemplo de Requisição
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations?status=open&assignee_type=me&page=1' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "data": {
+    "meta": {
+      "mine_count": 5,
+      "unassigned_count": 12,
+      "assigned_count": 23,
+      "all_count": 40,
+      "current_page": 1
+    },
+    "payload": [
+      {
+        "id": 123,
+        "inbox_id": 1,
+        "status": "open",
+        "assignee": {
+          "id": 1,
+          "name": "João Silva",
+          "avatar_url": "https://..."
+        },
+        "contact": {
+          "id": 45,
+          "name": "Maria Santos",
+          "email": "maria@email.com",
+          "phone_number": "+5511999999999",
+          "avatar_url": "https://..."
+        },
+        "messages": [
+          {
+            "id": 456,
+            "content": "Olá, preciso de ajuda!",
+            "message_type": "incoming",
+            "created_at": "2025-01-16T10:30:00Z",
+            "sender": {
+              "id": 45,
+              "name": "Maria Santos"
+            }
+          }
+        ],
+        "created_at": "2025-01-16T10:30:00Z",
+        "last_activity_at": "2025-01-16T10:35:00Z",
+        "unread_count": 1,
+        "labels": ["vendas", "urgente"],
+        "custom_attributes": {
+          "cidade": "São Paulo",
+          "interesse": "Plano Premium"
+        }
+      }
+    ]
+  }
+}
+```
+
+---
+
+## 🔍 Buscar Conversa por ID
+
+Obtenha detalhes de uma conversa específica.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/conversations/{conversation_id}
+```
+
+### Exemplo de Requisição
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "id": 123,
+  "inbox_id": 1,
+  "status": "open",
+  "assignee": {
+    "id": 1,
+    "name": "João Silva",
+    "email": "joao@empresa.com"
+  },
+  "contact": {
+    "id": 45,
+    "name": "Maria Santos",
+    "email": "maria@email.com",
+    "phone_number": "+5511999999999",
+    "custom_attributes": {
+      "cpf": "123.456.789-00",
+      "empresa": "Empresa XYZ"
+    }
+  },
+  "messages": [...],
+  "labels": ["vendas"],
+  "created_at": "2025-01-16T10:30:00Z",
+  "last_activity_at": "2025-01-16T10:35:00Z"
+}
+```
+
+---
+
+## ✨ Criar Nova Conversa
+
+Crie uma nova conversa para um contato.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations
+```
+
+### Body Parameters
+
+| Campo | Tipo | Obrigatório | Descrição |
+|-------|------|-------------|-----------|
+| `source_id` | string | Sim | ID do contato ou inbox |
+| `inbox_id` | integer | Sim | ID do inbox |
+| `contact_id` | integer | Não | ID do contato (se existir) |
+| `assignee_id` | integer | Não | ID do agente para atribuir |
+| `team_id` | integer | Não | ID da equipe |
+| `message` | object | Não | Primeira mensagem |
+| `status` | string | Não | Status inicial (`open`, `pending`) |
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "inbox_id": 1,
+    "contact_id": 45,
+    "assignee_id": 1,
+    "message": {
+      "content": "Iniciando atendimento proativo",
+      "private": false
+    },
+    "status": "open"
+  }'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "id": 124,
+  "inbox_id": 1,
+  "status": "open",
+  "assignee": {
+    "id": 1,
+    "name": "João Silva"
+  },
+  "contact": {
+    "id": 45,
+    "name": "Maria Santos"
+  },
+  "messages": [
+    {
+      "id": 457,
+      "content": "Iniciando atendimento proativo",
+      "message_type": "outgoing"
+    }
+  ],
+  "created_at": "2025-01-16T11:00:00Z"
+}
+```
+
+---
+
+## 🔄 Atualizar Conversa
+
+Atualize status, atribuição ou custom attributes.
+
+### Endpoint
+
+```http
+PATCH /api/v1/accounts/{account_id}/conversations/{conversation_id}
+```
+
+### Body Parameters
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `status` | string | `open`, `resolved`, `pending` |
+| `assignee_id` | integer | ID do agente (null para desatribuir) |
+| `team_id` | integer | ID da equipe |
+| `custom_attributes` | object | Atributos customizados |
+
+### Exemplo de Requisição
+
+```bash
+curl -X PATCH \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "status": "pending",
+    "assignee_id": 2,
+    "custom_attributes": {
+      "prioridade": "alta",
+      "tipo_atendimento": "suporte"
+    }
+  }'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "id": 123,
+  "status": "pending",
+  "assignee": {
+    "id": 2,
+    "name": "Pedro Costa"
+  },
+  "custom_attributes": {
+    "prioridade": "alta",
+    "tipo_atendimento": "suporte"
+  }
+}
+```
+
+---
+
+## ✅ Resolver Conversa
+
+Marca conversa como resolvida (atalho para atualizar status).
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_status
+```
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123/toggle_status' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json'
+```
+
+**Comportamento:**
+- Se `open` ou `pending` → muda para `resolved`
+- Se `resolved` → muda para `open`
+
+---
+
+## 🏷️ Adicionar Labels
+
+Adicione labels (tags) a uma conversa.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/labels
+```
+
+### Body Parameters
+
+```json
+{
+  "labels": ["vendas", "urgente", "premium"]
+}
+```
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123/labels' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "labels": ["vendas", "urgente"]
+  }'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "payload": {
+    "id": 123,
+    "labels": ["vendas", "urgente"]
+  }
+}
+```
+
+---
+
+## 🔇 Silenciar Conversa
+
+Silencia notificações de uma conversa.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/mute
+```
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123/mute' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+---
+
+## 🔊 Dessilenciar Conversa
+
+Remove silenciamento.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/unmute
+```
+
+---
+
+## 💬 Enviar Mensagem
+
+Envie uma mensagem na conversa.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages
+```
+
+### Body Parameters
+
+| Campo | Tipo | Obrigatório | Descrição |
+|-------|------|-------------|-----------|
+| `content` | string | Sim* | Texto da mensagem |
+| `message_type` | string | Sim | `outgoing` (agente) ou `incoming` (cliente) |
+| `private` | boolean | Não | `true` para nota privada (padrão: false) |
+| `attachments` | array | Não | Array de arquivos |
+
+*Obrigatório se não houver attachments
+
+### Exemplo de Requisição
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123/messages' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "content": "Olá! Como posso ajudar?",
+    "message_type": "outgoing",
+    "private": false
+  }'
+```
+
+### Resposta de Sucesso
+
+```json
+{
+  "id": 458,
+  "content": "Olá! Como posso ajudar?",
+  "message_type": "outgoing",
+  "created_at": "2025-01-16T11:05:00Z",
+  "sender": {
+    "id": 1,
+    "name": "João Silva",
+    "avatar_url": "https://..."
+  },
+  "attachments": []
+}
+```
+
+---
+
+## 📎 Enviar Mensagem com Anexo
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages
+```
+
+### Body (multipart/form-data)
+
+```bash
+curl -X POST \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123/messages' \
+  -H 'api_access_token: SEU_TOKEN' \
+  -F 'content=Segue o documento solicitado' \
+  -F 'message_type=outgoing' \
+  -F 'attachments[]=@/path/to/file.pdf'
+```
+
+---
+
+## 🔍 Buscar Conversas
+
+Busque conversas por texto.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/conversations/search
+```
+
+### Query Parameters
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `q` | string | Termo de busca |
+| `inbox_id` | integer | Filtrar por inbox |
+| `status` | string | Filtrar por status |
+
+### Exemplo
+
+```bash
+curl -X GET \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/search?q=pedido+123' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+---
+
+## 📊 Filtros Avançados
+
+Use o endpoint de filtros para buscas complexas.
+
+### Endpoint
+
+```http
+POST /api/v1/accounts/{account_id}/conversations/filter
+```
+
+### Body Parameters
+
+```json
+{
+  "payload": [
+    {
+      "attribute_key": "status",
+      "filter_operator": "equal_to",
+      "values": ["open"],
+      "query_operator": "and"
+    },
+    {
+      "attribute_key": "assignee_id",
+      "filter_operator": "equal_to",
+      "values": [1],
+      "query_operator": "and"
+    },
+    {
+      "attribute_key": "labels",
+      "filter_operator": "contains",
+      "values": ["vendas"]
+    }
+  ]
+}
+```
+
+### Operadores Disponíveis
+
+| Operador | Descrição |
+|----------|-----------|
+| `equal_to` | Igual a |
+| `not_equal_to` | Diferente de |
+| `contains` | Contém |
+| `does_not_contain` | Não contém |
+| `is_present` | Está presente |
+| `is_not_present` | Não está presente |
+| `is_greater_than` | Maior que |
+| `is_less_than` | Menor que |
+
+---
+
+## 📈 Métricas de Conversas
+
+Obtenha métricas agregadas.
+
+### Endpoint
+
+```http
+GET /api/v1/accounts/{account_id}/conversations/meta
+```
+
+### Resposta
+
+```json
+{
+  "mine_count": 5,
+  "unassigned_count": 12,
+  "assigned_count": 23,
+  "all_count": 40
+}
+```
+
+---
+
+## 🗑️ Deletar Conversa
+
+**⚠️ Ação irreversível!**
+
+### Endpoint
+
+```http
+DELETE /api/v1/accounts/{account_id}/conversations/{conversation_id}
+```
+
+### Exemplo
+
+```bash
+curl -X DELETE \
+  'https://chat.seudominio.com/api/v1/accounts/1/conversations/123' \
+  -H 'api_access_token: SEU_TOKEN'
+```
+
+---
+
+## 🔄 Webhooks
+
+Receba notificações em tempo real:
+
+### Eventos Disponíveis
+
+- `conversation_created` - Nova conversa criada
+- `conversation_updated` - Conversa atualizada
+- `conversation_status_changed` - Status mudou
+- `message_created` - Nova mensagem
+
+### Payload do Webhook
+
+```json
+{
+  "event": "conversation_created",
+  "id": 123,
+  "conversation": {
+    "id": 123,
+    "status": "open",
+    "contact": {...},
+    "messages": [...]
+  },
+  "account": {
+    "id": 1,
+    "name": "Ai Focus"
+  }
+}
+```
+
+📖 [Ver documentação completa de Webhooks](/pt-br/api-reference/webhooks)
+
+---
+
+## 💡 Exemplos Práticos
+
+### Criar Conversa e Enviar Primeira Mensagem
+
+```javascript
+// Node.js
+const axios = require('axios');
+
+const API_URL = 'https://chat.seudominio.com/api/v1';
+const TOKEN = 'SEU_TOKEN';
+
+async function createConversation() {
+  const response = await axios.post(
+    `${API_URL}/accounts/1/conversations`,
+    {
+      inbox_id: 1,
+      contact_id: 45,
+      message: {
+        content: 'Olá! Iniciando atendimento proativo.',
+        private: false
+      }
+    },
+    {
+      headers: {
+        'api_access_token': TOKEN,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  
+  return response.data;
+}
+```
+
+### Listar Conversas Abertas do Dia
+
+```python
+# Python
+import requests
+from datetime import datetime, timedelta
+
+API_URL = 'https://chat.seudominio.com/api/v1'
+TOKEN = 'SEU_TOKEN'
+
+def get_today_conversations():
+    headers = {
+        'api_access_token': TOKEN,
+        'Content-Type': 'application/json'
+    }
+    
+    response = requests.post(
+        f'{API_URL}/accounts/1/conversations/filter',
+        json={
+            'payload': [
+                {
+                    'attribute_key': 'status',
+                    'filter_operator': 'equal_to',
+                    'values': ['open']
+                },
+                {
+                    'attribute_key': 'created_at',
+                    'filter_operator': 'is_greater_than',
+                    'values': [datetime.now().strftime('%Y-%m-%d')]
+                }
+            ]
+        },
+        headers=headers
+    )
+    
+    return response.json()
+```
+
+---
+
+## ⚠️ Erros Comuns
+
+### 401 Unauthorized
+
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+**Solução:** Verificar token de acesso
+
+### 404 Not Found
+
+```json
+{
+  "error": "Resource not found"
+}
+```
+
+**Solução:** Verificar IDs de account e conversation
+
+### 422 Unprocessable Entity
+
+```json
+{
+  "message": "Inbox must exist"
+}
+```
+
+**Solução:** Verificar campos obrigatórios
+
+---
+
+## 📚 Ver Também
+
+- [API de Mensagens](/pt-br/api-reference/mensagens)
+- [API de Contatos](/pt-br/api-reference/contatos)
+- [API de Funis](/pt-br/api-reference/funis)
+- [Webhooks](/pt-br/api-reference/webhooks)
+
+---
+
+<Note>
+**Rate Limit:** 100 requisições por minuto. Use cache quando possível.
+</Note>
+
+<Warning>
+**Segurança:** Nunca exponha seu `api_access_token` em código frontend. Use apenas em backend.
+</Warning>
+

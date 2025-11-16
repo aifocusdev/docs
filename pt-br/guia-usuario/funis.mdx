@@ -1,0 +1,572 @@
+---
+title: Guia Completo de Funis (Kanban)
+description: Aprenda a usar o sistema de Funis para gestão de vendas e qualificação de leads
+sidebarTitle: Funis (Kanban)
+---
+
+# 🎯 Sistema de Funis - Guia Completo
+
+O **Sistema de Funis** é uma feature exclusiva da versão Ai Focus que transforma o Chatwoot em uma poderosa ferramenta de gestão de vendas estilo Kanban.
+
+---
+
+## 📋 O que são Funis?
+
+Funis (ou Pipelines) são fluxos visuais que organizam conversas em **estágios**, permitindo acompanhar a jornada do cliente desde o primeiro contato até o fechamento.
+
+**Exemplo de Funil de Vendas:**
+
+```
+🆕 Novo Lead  →  📞 Em Contato  →  💰 Proposta  →  ✅ Fechado
+                                              ↘  ❌ Perdido
+```
+
+### Por que usar Funis?
+
+- ✅ **Visualização clara** do pipeline de vendas
+- ✅ **Organização** de conversas por estágio
+- ✅ **Acompanhamento** de tempo em cada etapa
+- ✅ **Gestão de equipe** com múltiplos agentes
+- ✅ **Checklists** para não esquecer nenhuma etapa
+- ✅ **Métricas** de conversão por estágio
+
+---
+
+## 🚀 Acessar Funis
+
+### Via Sidebar
+
+1. Na sidebar esquerda, clique em **"Funis"** ou **"Funnels"**
+2. Você verá a lista de funis disponíveis
+
+### Via Conversa
+
+Dentro de uma conversa, você pode:
+1. Clicar no ícone de **Funil** no topo
+2. Adicionar a conversa a um funil
+
+---
+
+## 📝 Criar Seu Primeiro Funil
+
+<Steps>
+  <Step title="Acessar Tela de Funis">
+    Sidebar → **Funis** → Botão **"Novo Funil"**
+  </Step>
+  
+  <Step title="Configurar Funil">
+    **Nome:** Digite um nome descritivo
+    ```
+    Exemplo: "Pipeline de Vendas B2B"
+    ```
+    
+    **Descrição:** Opcional, descreva o propósito
+    ```
+    Exemplo: "Funil para qualificação de leads corporativos"
+    ```
+  </Step>
+  
+  <Step title="Definir Estágios">
+    Adicione os estágios do seu processo:
+    
+    **Exemplo para Vendas:**
+    - 🆕 **Novo Lead** - Primeiro contato
+    - 🔍 **Qualificação** - Avaliar fit
+    - 📞 **Apresentação** - Demo/reunião
+    - 💰 **Proposta** - Proposta enviada
+    - 🤝 **Negociação** - Ajustes finais
+    - ✅ **Fechado** - Cliente conquistado
+    - ❌ **Perdido** - Não converteu
+    
+    **Exemplo para Suporte:**
+    - 🆘 **Novo Ticket** - Ticket aberto
+    - 🔍 **Em Análise** - Investigando
+    - 🔧 **Em Resolução** - Trabalhando
+    - ✅ **Resolvido** - Finalizado
+  </Step>
+  
+  <Step title="Configurações Avançadas">
+    **Auto-assignment:** Atribuir automaticamente a agentes
+    
+    **Time limits:** Definir tempo máximo por estágio
+    
+    **Required fields:** Campos obrigatórios por etapa
+  </Step>
+  
+  <Step title="Salvar">
+    Clique em **"Criar Funil"**
+  </Step>
+</Steps>
+
+---
+
+## 🎨 Interface do Kanban
+
+### Visão Geral
+
+```
+┌────────────────────────────────────────────────────────┐
+│  Pipeline de Vendas B2B              [Filtros] [+Novo] │
+├──────────────┬──────────────┬──────────────┬───────────┤
+│ 🆕 Novo Lead │ 🔍 Qualific. │ 📞 Apresent. │ 💰 Proposta│
+│   (12)       │   (8)        │   (5)        │   (3)     │
+├──────────────┼──────────────┼──────────────┼───────────┤
+│ ┌──────────┐ │ ┌──────────┐ │ ┌──────────┐ │┌─────────┐│
+│ │ 👤 João  │ │ │ 👤 Maria │ │ │ 👤 Pedro │ ││👤 Lucas ││
+│ │ Empresa X│ │ │ Corp Y   │ │ │ Tech Z   │ ││Start W  ││
+│ │ 2h atrás │ │ │ 1d atrás │ │ │ 3d atrás │ ││5d atrás ││
+│ └──────────┘ │ └──────────┘ │ └──────────┘ │└─────────┘│
+│              │              │              │           │
+│ ┌──────────┐ │ ┌──────────┐ │              │           │
+│ │ 👤 Ana   │ │ │ 👤 Carlos│ │              │           │
+│ └──────────┘ │ └──────────┘ │              │           │
+└──────────────┴──────────────┴──────────────┴───────────┘
+```
+
+### Elementos do Card
+
+Cada card mostra:
+- 👤 **Avatar do cliente**
+- 📧 **Nome do contato**
+- 🏢 **Empresa** (se preenchido)
+- ⏱️ **Tempo neste estágio**
+- 🏷️ **Labels** (tags coloridas)
+- 👥 **Agentes atribuídos**
+- ✅ **Progresso do checklist**
+
+---
+
+## 🎯 Adicionar Conversa ao Funil
+
+### Método 1: Arrastar e Soltar
+
+1. Abra a tela de Funis
+2. Na lista de conversas (lado esquerdo), arraste uma conversa
+3. Solte no estágio desejado
+
+### Método 2: Dentro da Conversa
+
+1. Abra a conversa
+2. Clique no ícone **Funil** no topo
+3. Selecione o funil
+4. Escolha o estágio inicial
+5. Clique em **"Adicionar"**
+
+### Método 3: Via API
+
+```bash
+POST /api/v1/accounts/1/conversations/123/funnel_mappings
+{
+  "funnel_id": 1,
+  "stage_name": "Novo Lead"
+}
+```
+
+---
+
+## 🔄 Mover Entre Estágios
+
+### Drag & Drop
+
+**Mais rápido e intuitivo:**
+
+1. Clique e segure o card
+2. Arraste para o novo estágio
+3. Solte no estágio desejado
+4. ✅ Movimento registrado automaticamente
+
+### Via Clique
+
+1. Clique no card para abrir detalhes
+2. No topo, clique no **nome do estágio atual**
+3. Selecione novo estágio
+4. Confirme
+
+### Histórico de Movimentação
+
+O sistema registra:
+- ⏱️ **Tempo em cada estágio**
+- 👤 **Quem moveu** o card
+- 📅 **Quando** foi movido
+- 📝 **Comentários** da movimentação
+
+---
+
+## ✅ Checklists em Estágios
+
+Cada estágio pode ter um checklist de tarefas obrigatórias:
+
+### Criar Checklist
+
+<Steps>
+  <Step title="Abrir Card">
+    Clique no card da conversa
+  </Step>
+  
+  <Step title="Ver Checklist">
+    Na lateral direita, seção **"Checklist"**
+  </Step>
+  
+  <Step title="Adicionar Item">
+    Digite tarefa e pressione Enter:
+    ```
+    ✅ Validar CNPJ
+    ✅ Enviar material
+    ✅ Agendar reunião
+    ✅ Enviar proposta
+    ```
+  </Step>
+  
+  <Step title="Marcar Concluído">
+    Clique no checkbox quando finalizar
+  </Step>
+</Steps>
+
+### Exemplo de Checklist por Estágio
+
+**Estágio: Qualificação**
+- ✅ Confirmar CNPJ/CPF
+- ✅ Validar orçamento disponível
+- ✅ Identificar decisor
+- ✅ Entender dor/necessidade
+
+**Estágio: Proposta**
+- ✅ Enviar proposta comercial
+- ✅ Explicar condições
+- ✅ Definir prazo de resposta
+- ✅ Agendar follow-up
+
+---
+
+## ⏱️ Timers de Estágio
+
+Cada conversa tem um **timer automático** por estágio:
+
+### Funcionalidades
+
+- ⏰ **Timer automático** inicia ao entrar no estágio
+- ⏸️ **Pausar timer** quando conversa fica em espera
+- ▶️ **Retomar timer** ao voltar ao atendimento
+- 🔄 **Reset timer** ao mover para outro estágio
+- 📊 **Métricas** de tempo médio por estágio
+
+### Usar Timer
+
+```javascript
+// Via interface
+Card → Aba "Timer" → Iniciar/Pausar/Reset
+
+// Via API
+POST /api/v1/accounts/1/conversations/123/funnel_mappings/1/start_timer
+POST /api/v1/accounts/1/conversations/123/funnel_mappings/1/pause_timer
+POST /api/v1/accounts/1/conversations/123/funnel_mappings/1/reset_timer
+```
+
+### Alertas de Tempo
+
+Configure alertas quando uma conversa passa muito tempo em um estágio:
+
+```
+Exemplo:
+- Novo Lead > 24h = Alerta amarelo
+- Novo Lead > 48h = Alerta vermelho
+- Proposta > 7 dias = Notificar gestor
+```
+
+---
+
+## 👥 Múltiplos Agentes por Conversa
+
+Diferente de conversas normais (1 agente), no funil você pode ter **vários agentes** trabalhando juntos:
+
+### Adicionar Agente
+
+1. Abra o card no funil
+2. Seção **"Agentes"**
+3. Clique em **"+ Adicionar Agente"**
+4. Selecione da lista
+5. Defina papel (opcional):
+   - 👤 **Responsável** - Dono da conversa
+   - 🤝 **Colaborador** - Ajuda pontual
+   - 👀 **Observador** - Apenas acompanha
+
+### Notificações
+
+Todos os agentes atribuídos recebem:
+- 📧 Notificações de novos comentários
+- 🔔 Alertas de movimentação
+- ⏰ Lembretes de follow-up
+
+---
+
+## 🏷️ Produtos no Funil
+
+Vincule produtos às conversas do funil:
+
+### Adicionar Produto
+
+1. Abra card da conversa
+2. Aba **"Produtos"**
+3. Clique em **"+ Adicionar Produto"**
+4. Preencha:
+   - **Nome:** Nome do produto/serviço
+   - **Valor:** R$ 1.500,00
+   - **Quantidade:** 2
+   - **Notas:** Observações
+
+### Valor Total do Pipeline
+
+O funil calcula automaticamente:
+- 💰 **Valor total** por estágio
+- 📊 **Ticket médio**
+- 🎯 **Meta de fechamento**
+
+**Exemplo:**
+
+```
+Estágio: Proposta
+├─ Conversa #1: R$ 5.000,00
+├─ Conversa #2: R$ 12.000,00
+└─ Conversa #3: R$ 8.500,00
+   Total: R$ 25.500,00
+```
+
+---
+
+## 📅 Agendamentos
+
+Agende reuniões e follow-ups:
+
+### Criar Agendamento
+
+1. Card da conversa → Aba **"Agendamentos"**
+2. Clique em **"+ Novo Agendamento"**
+3. Preencha:
+   - **Título:** "Reunião de Apresentação"
+   - **Data/Hora:** 2025-01-20 às 14:00
+   - **Duração:** 60 minutos
+   - **Notas:** Link da reunião, pauta, etc.
+
+### Notificações
+
+- 🔔 **1 hora antes:** Notificação no app
+- 📧 **30 minutos antes:** Email de lembrete
+- 📱 **Push:** Se habilitado
+
+---
+
+## 📊 Métricas e Relatórios
+
+### Métricas Disponíveis
+
+**Por Funil:**
+- 📈 Total de conversas
+- ⏱️ Tempo médio por estágio
+- 🎯 Taxa de conversão por etapa
+- 💰 Valor total do pipeline
+- 📊 Ticket médio
+
+**Por Agente:**
+- 👤 Conversas por agente
+- ⚡ Velocidade de movimentação
+- ✅ Taxa de conversão individual
+- 💰 Valor gerado
+
+### Acessar Relatórios
+
+```
+Funis → Selecionar Funil → Aba "Relatórios"
+```
+
+### Exemplo de Conversão
+
+```
+🆕 Novo Lead (100)          100%
+   ↓ 80% conversão
+🔍 Qualificação (80)         80%
+   ↓ 62% conversão
+📞 Apresentação (50)         50%
+   ↓ 60% conversão
+💰 Proposta (30)             30%
+   ↓ 50% conversão
+✅ Fechado (15)              15%  ← Taxa final
+
+Taxa de conversão total: 15%
+Ticket médio: R$ 8.500,00
+Valor total fechado: R$ 127.500,00
+```
+
+---
+
+## 🎨 Filtros e Busca
+
+### Filtrar Cards
+
+Na tela do Kanban:
+
+- 🏷️ **Por Label:** Mostrar apenas com label específica
+- 👤 **Por Agente:** Filtrar por responsável
+- 📅 **Por Data:** Últimos X dias
+- 💰 **Por Valor:** Faixa de ticket
+- ⏱️ **Por Tempo:** Conversas paradas há X dias
+
+### Buscar Conversa
+
+Use a busca no topo:
+```
+🔍 Buscar por nome, empresa, email, telefone...
+```
+
+---
+
+## 🔔 Automações com Funis
+
+### Triggers Disponíveis
+
+Crie automações baseadas em movimentações:
+
+**Exemplo 1: Notificar quando entrar em "Proposta"**
+```
+Trigger: Conversa movida para "Proposta"
+Ação: Enviar email para gestor
+```
+
+**Exemplo 2: Adicionar label ao fechar**
+```
+Trigger: Conversa movida para "Fechado"
+Ação: Adicionar label "cliente-ativo"
+```
+
+**Exemplo 3: Alerta de tempo**
+```
+Trigger: Conversa há mais de 48h em "Novo Lead"
+Ação: Notificar agente + Adicionar label "urgente"
+```
+
+📖 [Ver guia de Automações](/pt-br/guia-usuario/automacoes)
+
+---
+
+## 📋 Templates de Funis
+
+### Funis Pré-Configurados
+
+Use templates prontos:
+
+**1. Vendas B2B**
+```
+🆕 Novo Lead → 🔍 Qualificação → 📞 Demo → 💰 Proposta → ✅ Fechado
+```
+
+**2. Vendas B2C**
+```
+🆕 Interesse → 📞 Contato → 🛒 Carrinho → 💳 Pagamento → ✅ Entregue
+```
+
+**3. Suporte Técnico**
+```
+🆘 Ticket → 🔍 Triagem → 🔧 Resolução → ✅ Resolvido
+```
+
+**4. Onboarding**
+```
+👋 Boas-vindas → 📚 Treinamento → 🎯 Ativação → ✅ Ativo
+```
+
+### Criar a Partir de Template
+
+```
+Funis → "Novo Funil" → "Usar Template" → Escolher template
+```
+
+---
+
+## 💡 Boas Práticas
+
+### ✅ Do's (Fazer)
+
+- ✅ **Defina estágios claros** com critérios objetivos
+- ✅ **Use checklists** para garantir qualidade
+- ✅ **Acompanhe timers** para identificar gargalos
+- ✅ **Revise semanalmente** conversas paradas
+- ✅ **Treine a equipe** nos processos
+- ✅ **Use labels** para categorização adicional
+
+### ❌ Don'ts (Evitar)
+
+- ❌ **Muitos estágios** (máximo 7-8)
+- ❌ **Estágios vagos** sem critérios claros
+- ❌ **Esquecer de mover** cards regularmente
+- ❌ **Ignorar conversas** paradas por muito tempo
+- ❌ **Pular estágios** sem motivo
+- ❌ **Não documentar** motivos de perda
+
+---
+
+## 🔧 Troubleshooting
+
+### Card não aparece no funil
+
+**Causa:** Conversa não foi adicionada ao funil
+
+**Solução:**
+1. Abra a conversa
+2. Clique no ícone de funil
+3. Adicione ao funil desejado
+
+### Não consigo arrastar o card
+
+**Causa:** Permissões insuficientes
+
+**Solução:**
+- Verificar se você tem permissão de editar conversas
+- Verificar se não está em modo "somente leitura"
+
+### Timer não para ao pausar
+
+**Causa:** Bug conhecido em versões antigas
+
+**Solução:**
+- Atualizar para versão mais recente
+- Usar botão "Reset timer" e iniciar novamente
+
+---
+
+## 🚀 Atalhos de Teclado
+
+Aumente sua produtividade:
+
+```
+F          - Abrir lista de Funis
+K          - Abrir Kanban
+←/→        - Navegar entre estágios
+↑/↓        - Navegar entre cards
+Enter      - Abrir card selecionado
+E          - Editar card
+M          - Mover para outro estágio
+A          - Adicionar agente
+L          - Adicionar label
+Esc        - Fechar modal
+```
+
+---
+
+## 📖 Próximos Passos
+
+Agora que você domina os Funis:
+
+1. 🤖 [Configurar Automações](/pt-br/guia-usuario/automacoes)
+2. 📊 [Explorar Relatórios Avançados](/pt-br/guia-usuario/relatorios)
+3. 🔌 [Integrar via API](/pt-br/api-reference/funis)
+4. 👥 [Gerenciar Equipes](/pt-br/guia-usuario/equipes)
+
+---
+
+<Tip>
+**Dica Pro:** Use funis separados para vendas e suporte. Isso mantém os processos organizados e facilita relatórios específicos.
+</Tip>
+
+<Warning>
+**Atenção:** Não delete estágios que têm conversas. Mova todas as conversas antes de remover um estágio.
+</Warning>
+

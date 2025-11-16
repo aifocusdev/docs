@@ -1,0 +1,693 @@
+---
+title: Gestão de Conversas
+description: Guia completo para gerenciar conversas, enviar mensagens e organizar atendimentos
+sidebarTitle: Conversas
+---
+
+# 💬 Gestão de Conversas - Guia Completo
+
+Aprenda tudo sobre gerenciar conversas no Chatwoot: desde receber o primeiro contato até finalizar o atendimento com excelência.
+
+---
+
+## 📋 O que são Conversas?
+
+**Conversas** são threads de mensagens entre sua equipe e os clientes. Cada conversa tem:
+
+- 👤 **Um contato** (cliente)
+- 📧 **Mensagens** trocadas
+- 📱 **Canal** (WhatsApp, Email, etc.)
+- 👨‍💼 **Agente** responsável (opcional)
+- 🏷️ **Labels** para organização
+- 📊 **Status** (Open/Pending/Resolved)
+
+---
+
+## 🎯 Interface de Conversas
+
+### Visão Geral
+
+```
+┌────────────────────────────────────────────────────────────┐
+│ Sidebar │    Lista de Conversas    │   Conversa Ativa      │
+├─────────┼─────────────────────────┼───────────────────────┤
+│         │ 🔍 Buscar...            │ 👤 João Silva         │
+│ Início  │ ═════════════════════   │ 📱 WhatsApp           │
+│ Convers.│ ┌─────────────────────┐ │ ──────────────────── │
+│ Contatos│ │ 👤 João Silva       │ │ 👤 10:30             │
+│ Reports │ │ 📱 WhatsApp         │ │ Olá, preciso de     │
+│ Funis   │ │ "Olá, preciso..."   │ │ ajuda com meu       │
+│ Settings│ │ 2min atrás     [1]  │ │ pedido!             │
+│         │ └─────────────────────┘ │ ──────────────────── │
+│         │ ┌─────────────────────┐ │ 👨‍💼 10:31            │
+│         │ │ 👤 Maria Santos     │ │ Olá João! Claro,    │
+│         │ │ 📧 Email            │ │ vou te ajudar...    │
+│         │ │ "Gostaria de..."    │ │ ──────────────────── │
+│         │ │ 1h atrás            │ │ [Digite mensagem]   │
+└─────────┴─────────────────────────┴───────────────────────┘
+```
+
+---
+
+## 📬 Receber Conversas
+
+### Como Chega uma Nova Conversa
+
+1. **Cliente envia mensagem** por qualquer canal
+2. **Notificação** aparece (som + badge)
+3. **Conversa aparece** na lista "Open"
+4. **Auto-assignment** (se configurado) ou manual
+
+### Tipos de Notificação
+
+- 🔔 **In-app:** Badge vermelho com contador
+- 🔊 **Som:** Notificação sonora
+- 📧 **Email:** Se habilitado nas configurações
+- 📱 **Push:** Mobile app
+
+---
+
+## 🎨 Status de Conversas
+
+### 🟢 Open (Aberta)
+
+- Conversa **ativa** aguardando atendimento
+- Cliente **esperando** resposta
+- **Prioridade** de atendimento
+
+**Quando usar:**
+- Cliente enviou nova mensagem
+- Conversa foi reaberta
+- Aguardando resposta da equipe
+
+### ⏳ Pending (Pendente)
+
+- Conversa **aguardando** resposta do cliente
+- Equipe já respondeu
+- **Fora da fila** de atendimento ativo
+
+**Quando usar:**
+- Você perguntou algo e aguarda resposta
+- Cliente pediu para aguardar
+- Enviou informações e aguarda feedback
+
+### ✅ Resolved (Resolvida)
+
+- Atendimento **finalizado**
+- Problema **resolvido**
+- Conversa **arquivada**
+
+**Quando usar:**
+- Cliente confirmou resolução
+- Pedido/ticket foi concluído
+- Não há mais pendências
+
+---
+
+## 📝 Enviar Mensagens
+
+### Texto Simples
+
+1. Clique na conversa
+2. Digite no campo inferior
+3. **Enter** para enviar
+4. **Shift+Enter** para quebra de linha
+
+### Formatação
+
+Use markdown para formatar:
+
+```
+*negrito* ou **negrito**
+_itálico_ ou __itálico__
+~riscado~
+`código`
+```
+
+**Resultado:**
+- **negrito**
+- *itálico*
+- ~~riscado~~
+- `código`
+
+### 📎 Anexar Arquivos
+
+Tipos suportados:
+- 📄 **Documentos:** PDF, DOC, XLS, etc.
+- 🖼️ **Imagens:** JPG, PNG, GIF
+- 🎥 **Vídeos:** MP4, MOV
+- 🎵 **Áudio:** MP3, WAV
+- 📦 **Outros:** ZIP, RAR
+
+**Limites:**
+- **Tamanho máximo:** 40MB por arquivo
+- **WhatsApp:** 16MB (limitação do WhatsApp)
+
+**Como anexar:**
+1. Clique no ícone 📎
+2. Selecione arquivo
+3. Aguarde upload
+4. Envie
+
+### 😀 Emojis
+
+Adicione emojis às mensagens:
+
+1. Clique no ícone 😀
+2. Escolha emoji
+3. Ou digite `:smile:` `:heart:` `:rocket:`
+
+### 🎨 GIFs
+
+Envie GIFs animados:
+
+1. Clique em GIF
+2. Busque por palavra-chave
+3. Clique para enviar
+
+---
+
+## 📋 Respostas Prontas (Canned Responses)
+
+Economize tempo com respostas pré-programadas:
+
+### Usar Canned Response
+
+**Método 1: Atalho**
+```
+Digite / no campo de mensagem
+/boas-vindas
+/horario
+/preco
+```
+
+**Método 2: Menu**
+1. Clique no ícone **💬** (respostas prontas)
+2. Escolha da lista
+3. Mensagem é inserida automaticamente
+4. Edite se necessário
+5. Envie
+
+### Criar Nova Canned Response
+
+<Steps>
+  <Step title="Acessar Settings">
+    Settings → **Canned Responses**
+  </Step>
+  
+  <Step title="Nova Resposta">
+    Clique em **"Add Canned Response"**
+  </Step>
+  
+  <Step title="Configurar">
+    **Short Code:** `horario` (atalho)  
+    **Content:**
+    ```
+    Nosso horário de atendimento é:
+    Segunda a Sexta: 9h às 18h
+    Sábado: 9h às 13h
+    ```
+  </Step>
+  
+  <Step title="Salvar">
+    Clique em **"Submit"**
+  </Step>
+</Steps>
+
+### Variáveis Dinâmicas
+
+Use variáveis para personalizar:
+
+```
+Olá {{contact.name}}!
+
+Obrigado por entrar em contato com a {{account.name}}.
+
+Atenciosamente,
+{{agent.name}}
+```
+
+**Variáveis disponíveis:**
+- `{{contact.name}}` - Nome do contato
+- `{{contact.email}}` - Email do contato
+- `{{agent.name}}` - Nome do agente
+- `{{account.name}}` - Nome da empresa
+
+---
+
+## 👤 Atribuir Conversas
+
+### Auto-Assignment
+
+Configure atribuição automática:
+
+**Settings → Inboxes → [Seu Inbox] → Colaborators**
+
+Opções:
+- ✅ **Ativo:** Distribui automaticamente
+- 🎲 **Round-robin:** Revezamento
+- 💼 **Capacity-based:** Baseado em carga
+
+### Atribuição Manual
+
+<Steps>
+  <Step title="Abrir Conversa">
+    Clique na conversa
+  </Step>
+  
+  <Step title="Atribuir Agente">
+    No topo → Clique em **"Assigned Agent"**
+  </Step>
+  
+  <Step title="Escolher">
+    - Selecione agente da lista
+    - Ou deixe **"Unassigned"**
+  </Step>
+</Steps>
+
+### Atribuir a Si Mesmo
+
+Atalho rápido:
+
+```
+Conversa → Botão "Assign to me"
+```
+
+---
+
+## 🏷️ Labels (Etiquetas)
+
+Organize conversas com labels coloridas:
+
+### Adicionar Label
+
+<Steps>
+  <Step title="Dentro da Conversa">
+    Painel direito → **"Conversation Labels"**
+  </Step>
+  
+  <Step title="Criar ou Escolher">
+    - Digite nova label ou
+    - Escolha existente da lista
+  </Step>
+  
+  <Step title="Aplicar">
+    Clique para adicionar
+  </Step>
+</Steps>
+
+### Exemplos de Labels
+
+**Por Urgência:**
+- 🔴 `urgente`
+- 🟡 `media`
+- 🟢 `baixa`
+
+**Por Tipo:**
+- 💰 `vendas`
+- 🔧 `suporte`
+- 📦 `entrega`
+- 💳 `financeiro`
+
+**Por Status:**
+- ⏳ `aguardando-cliente`
+- ✅ `pronto-para-fechar`
+- 🎁 `upsell`
+
+---
+
+## 📝 Notas Internas
+
+Adicione notas privadas (cliente **NÃO vê**):
+
+### Criar Nota
+
+<Steps>
+  <Step title="Painel Direito">
+    **"Conversation Notes"** ou **"Private Notes"**
+  </Step>
+  
+  <Step title="Escrever Nota">
+    ```
+    Exemplo:
+    Cliente confirmou interesse no plano Premium.
+    Orçamento aprovado: R$ 10.000/mês
+    Decisor: João (CEO)
+    Próximo passo: Enviar contrato
+    ```
+  </Step>
+  
+  <Step title="Salvar">
+    Clique em **"Add Note"**
+  </Step>
+</Steps>
+
+### Quando Usar Notas
+
+- ✅ Informações **confidenciais**
+- ✅ Contexto para **outros agentes**
+- ✅ Histórico de **ações tomadas**
+- ✅ Lembretes **internos**
+
+---
+
+## 🔍 Buscar e Filtrar
+
+### Busca Rápida
+
+No topo da lista de conversas:
+
+```
+🔍 Digite: nome, email, telefone, mensagem...
+```
+
+### Filtros Avançados
+
+Combine múltiplos filtros:
+
+**Por Status:**
+- Open / Pending / Resolved
+
+**Por Inbox:**
+- WhatsApp / Email / Website
+
+**Por Team:**
+- Vendas / Suporte / Sucesso
+
+**Por Assignee:**
+- Atribuídas a mim / Unassigned / Específico
+
+**Por Label:**
+- urgente / vendas / suporte
+
+**Por Date Range:**
+- Hoje / Esta semana / Últimos 30 dias
+
+---
+
+## 📊 Prioridade
+
+Marque conversas importantes:
+
+### Níveis de Prioridade
+
+- 🔴 **Urgent:** Atender imediatamente
+- 🟡 **High:** Atender em breve
+- 🟢 **Medium:** Atender no dia
+- ⚫ **Low:** Sem pressa
+
+### Definir Prioridade
+
+```
+Conversa → Ícone de prioridade → Escolher nível
+```
+
+### Auto-Priorização
+
+Configure regras:
+
+```
+SE label = "urgente"
+ENTÃO prioridade = Urgent
+
+SE tempo_espera > 2 horas
+ENTÃO prioridade = High
+```
+
+---
+
+## 💬 Mensagens Privadas
+
+Converse com sua equipe **dentro** da conversa:
+
+### Enviar Mensagem Privada
+
+1. No campo de mensagem, clique em **"Private"**
+2. Digite mensagem
+3. Envie
+
+**Aparece como:**
+```
+🔒 [Privado] Você para @maria:
+Você pode me ajudar com este cliente?
+Ele está pedindo desconto especial.
+```
+
+### Mencionar Agente
+
+Use @ para mencionar:
+
+```
+@maria você pode verificar o estoque?
+@joao cliente perguntou sobre aquele caso
+```
+
+Agente mencionado recebe **notificação**.
+
+---
+
+## ⏱️ SLA e Tempo de Resposta
+
+### Métricas Importantes
+
+- **First Response Time:** Tempo até primeira resposta
+- **Average Response Time:** Tempo médio de resposta
+- **Resolution Time:** Tempo até resolver
+
+### Ver Métricas
+
+```
+Conversa → Aba "Activity" → Ver tempos
+```
+
+### Alertas de SLA
+
+Configure alertas:
+
+```
+Settings → SLA Policies → Nova Política
+
+Nome: "Resposta Urgente"
+Condição: Label = "urgente"
+Target: Primeira resposta em 15 minutos
+Ação: Notificar gestor se não atender
+```
+
+---
+
+## 🔄 Reabrir Conversas
+
+Cliente respondeu uma conversa resolvida?
+
+### Reabertura Automática
+
+- ✅ Cliente envia nova mensagem
+- ✅ Conversa volta para "Open"
+- ✅ Agente original é notificado
+
+### Reabertura Manual
+
+1. Vá em "Resolved"
+2. Abra a conversa
+3. Clique em **"Reopen"**
+
+---
+
+## 🔇 Silenciar Conversas
+
+Não quer notificações de uma conversa específica?
+
+### Silenciar
+
+```
+Conversa → Menu (•••) → Mute
+```
+
+**Efeito:**
+- ❌ Sem notificações
+- ❌ Sem som
+- ✅ Conversa continua aparecendo na lista
+
+### Dessilenciar
+
+```
+Conversa → Menu (•••) → Unmute
+```
+
+---
+
+## 📱 Multi-Canal
+
+Uma conversa pode ter mensagens de **diferentes canais**:
+
+**Exemplo:**
+```
+👤 Cliente enviou no WhatsApp
+📧 Você respondeu por Email
+💬 Cliente respondeu no Website Chat
+```
+
+**Todas as mensagens** aparecem na mesma thread!
+
+---
+
+## 🤖 Integrações na Conversa
+
+### Captain (IA Assistant)
+
+Assistente com IA para ajudar no atendimento:
+
+```
+Conversa → Ícone 🤖 → Perguntar ao Captain
+
+"Como resolver este problema?"
+"Resumir esta conversa"
+"Sugerir próxima ação"
+```
+
+### Tradução
+
+Traduza mensagens automaticamente:
+
+```
+Mensagem → Menu (•••) → Translate
+
+Idiomas disponíveis: 50+
+```
+
+---
+
+## 📋 Custom Attributes
+
+Adicione campos personalizados ao contato:
+
+### Ver/Editar Attributes
+
+```
+Painel Direito → "Contact Attributes"
+
+Campos customizados:
+- CPF/CNPJ
+- Empresa
+- Cargo
+- Cidade
+- Orçamento
+- Interesse
+```
+
+### Criar Custom Attribute
+
+```
+Settings → Custom Attributes → New Attribute
+
+Name: "Orçamento"
+Type: Number
+Display Name: "Orçamento Disponível"
+```
+
+---
+
+## 🎯 Ações Rápidas
+
+### Atalhos de Teclado
+
+```
+CMD/CTRL + K   - Busca rápida
+E              - Resolver conversa
+R              - Reabrir conversa
+A              - Atribuir a mim
+M              - Silenciar/Dessilenciar
+L              - Adicionar label
+/              - Canned responses
+@              - Mencionar agente
+```
+
+### Ações em Massa
+
+Selecione múltiplas conversas:
+
+1. **Shift + Clique** para selecionar
+2. Ações disponíveis:
+   - ✅ Resolver todas
+   - 👤 Atribuir em lote
+   - 🏷️ Adicionar label
+   - 📦 Mover para inbox
+
+---
+
+## 🔧 Troubleshooting
+
+### Mensagem não envia
+
+**Possíveis causas:**
+- ❌ Sem conexão com internet
+- ❌ Canal offline (WhatsApp desconectado)
+- ❌ Arquivo muito grande
+
+**Solução:**
+1. Verificar conexão
+2. Ver status do canal em Settings → Inboxes
+3. Reduzir tamanho do arquivo
+
+### Notificações não aparecem
+
+**Solução:**
+1. Settings → Profile → Notifications
+2. Ativar notificações desejadas
+3. Verificar permissões do navegador
+
+### Conversa sumiu
+
+**Possível:**
+- Está em outro status (Pending/Resolved)
+- Filtro ativo está escondendo
+- Foi atribuída a outro agente
+
+**Solução:**
+- Limpar filtros
+- Buscar por nome/email
+- Ver em "All Conversations"
+
+---
+
+## 💡 Boas Práticas
+
+### ✅ Do's
+
+- ✅ **Responda rápido** (dentro do SLA)
+- ✅ **Use labels** para organizar
+- ✅ **Adicione notas** para contexto
+- ✅ **Resolva** quando finalizar
+- ✅ **Personalize** mensagens
+- ✅ **Use canned responses** para agilizar
+
+### ❌ Don'ts
+
+- ❌ **Deixar sem resposta** por muito tempo
+- ❌ **Esquecer de atribuir** conversas
+- ❌ **Não usar labels** (fica desorganizado)
+- ❌ **Resolver sem confirmar** com cliente
+- ❌ **Copiar/colar** sem personalizar
+- ❌ **Ignorar** conversas pendentes
+
+---
+
+## 📖 Próximos Passos
+
+Domine outros aspectos:
+
+1. 🎯 [Sistema de Funis](/pt-br/guia-usuario/funis)
+2. 🤖 [Automações](/pt-br/guia-usuario/automacoes)
+3. 📊 [Relatórios](/pt-br/guia-usuario/relatorios)
+4. ⚙️ [Configurações Avançadas](/pt-br/configuracao/avancado)
+
+---
+
+<Tip>
+**Dica Pro:** Use múltiplas labels em uma conversa para categorização completa. Exemplo: `vendas` + `urgente` + `enterprise`
+</Tip>
+
+<Warning>
+**Atenção:** Mensagens privadas são visíveis para todos os agentes da conta. Não coloque informações ultra-confidenciais.
+</Warning>
+
