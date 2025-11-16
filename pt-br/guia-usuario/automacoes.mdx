@@ -1,0 +1,409 @@
+---
+title: Automações
+description: Crie regras automáticas para otimizar seu fluxo de trabalho
+sidebarTitle: Automações
+---
+
+# 🤖 Automações
+
+Automatize ações repetitivas e crie fluxos inteligentes de trabalho.
+
+---
+
+## 📋 O que são Automações?
+
+**Automações** são regras do tipo "SE isso ENTÃO faça aquilo":
+
+```
+SE conversa recebida fora do horário
+ENTÃO enviar mensagem "Retornamos às 9h" 
+E adicionar label #fora-horario
+```
+
+---
+
+## ✨ O que Você Pode Automatizar?
+
+<CardGroup cols={2}>
+  <Card title="Atribuições" icon="user-plus">
+    Distribuir conversas automaticamente
+  </Card>
+  <Card title="Mensagens" icon="message">
+    Respostas automáticas
+  </Card>
+  <Card title="Labels" icon="tag">
+    Aplicar etiquetas
+  </Card>
+  <Card title="Prioridades" icon="flag">
+    Mudar prioridade
+  </Card>
+  <Card title="Status" icon="toggle-on">
+    Alterar status conversa
+  </Card>
+  <Card title="Notificações" icon="bell">
+    Avisar agentes/gestores
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Automação
+
+1. **"Configurações"** → **"Automações"**
+2. **"Nova Automação"**
+3. Configure:
+
+### Nome
+```
+"Atendimento Fora do Horário"
+```
+
+### Evento (Trigger)
+Quando a regra é acionada:
+- 📥 **Conversa criada**
+- 💬 **Mensagem criada**
+- ✅ **Conversa atualizada**
+- 👤 **Contato criado/atualizado**
+
+### Condições (Filtros)
+Quando aplicar a regra:
+
+```
+SE todas condições são verdadeiras:
+├─ Hora atual: Entre 18:00 e 09:00
+├─ Dia da semana: Qualquer
+└─ Inbox: WhatsApp Suporte
+```
+
+### Ações
+O que fazer:
+
+```
+ENTÃO executar:
+├─ Enviar mensagem: "Olá! Estamos fora do horário..."
+├─ Adicionar label: #fora-horario
+└─ Atribuir para: Ninguém (fica na fila)
+```
+
+4. **Ativar** e **Salvar**
+
+---
+
+## 🎯 Exemplos Práticos
+
+### 1. Resposta Automática Fora do Horário
+
+**Trigger:** Mensagem criada  
+**Condições:**
+```
+├─ Hora: 18:00 - 09:00 OU
+├─ Dia: Sábado, Domingo
+└─ Status conversa: Aberto
+```
+
+**Ações:**
+```
+├─ Enviar: "Olá! Retornamos em horário comercial 
+│          (Seg-Sex 9h-18h). Deixe sua mensagem!"
+├─ Label: #fora-horario
+└─ Status: Pendente
+```
+
+---
+
+### 2. Priorizar VIPs
+
+**Trigger:** Conversa criada  
+**Condições:**
+```
+├─ Contato tem label: #vip OU
+└─ Contato.plano: Enterprise
+```
+
+**Ações:**
+```
+├─ Prioridade: Urgente
+├─ Label: #prioridade-alta
+├─ Atribuir: Top 3 agentes (round robin)
+└─ Notificar: gerente@empresa.com
+```
+
+---
+
+### 3. Roteamento por Palavra-chave
+
+**Trigger:** Mensagem criada  
+**Condições:**
+```
+├─ Mensagem contém: "comprar" OU "preço" OU "orçamento"
+└─ Status: Sem atribuição
+```
+
+**Ações:**
+```
+├─ Label: #vendas
+├─ Atribuir para: Time Vendas
+└─ Enviar: "Vou conectar você com nosso time de vendas!"
+```
+
+---
+
+### 4. Qualificação de Leads
+
+**Trigger:** Conversa criada  
+**Condições:**
+```
+├─ Inbox: WhatsApp ou Web Widget
+└─ Contato.plano: Não definido
+```
+
+**Ações:**
+```
+Enviar mensagem:
+"Olá! Para melhor atendê-lo, me conte:
+1. Seu nome completo
+2. Nome da empresa
+3. Como podemos ajudar?"
+
+Label: #qualificacao
+Atribuir: Bot ou Agente Junior
+```
+
+---
+
+### 5. Follow-up Automático
+
+**Trigger:** Conversa atualizada  
+**Condições:**
+```
+├─ Status mudou para: Pendente
+├─ Label: #aguardando-cliente
+└─ Última atividade: > 24 horas
+```
+
+**Ações:**
+```
+Enviar: "Oi! Ainda precisa de ajuda? Estou por aqui!"
+```
+
+---
+
+### 6. Escalonamento
+
+**Trigger:** Conversa atualizada  
+**Condições:**
+```
+├─ Tempo sem resposta: > 30 minutos
+├─ Status: Aberto
+└─ Prioridade: Alta ou Urgente
+```
+
+**Ações:**
+```
+├─ Notificar: supervisor@empresa.com
+├─ Label: #escalado
+└─ Mensagem interna: "@supervisor Conversa sem resposta há 30min"
+```
+
+---
+
+### 7. Feedback Automático (CSAT)
+
+**Trigger:** Conversa atualizada  
+**Condições:**
+```
+├─ Status mudou para: Resolvido
+└─ Label NÃO É: #sem-feedback
+```
+
+**Ações:**
+```
+Enviar pesquisa CSAT:
+"Como foi sua experiência? 
+😞 Ruim  😐 Ok  😊 Ótima"
+```
+
+---
+
+### 8. Limpar Conversas Antigas
+
+**Trigger:** Executado diariamente (scheduled)  
+**Condições:**
+```
+├─ Status: Resolvido
+├─ Última atividade: > 30 dias
+```
+
+**Ações:**
+```
+Status: Fechado
+Arquivar: Sim
+```
+
+---
+
+## 🔧 Condições Avançadas
+
+### Operadores Lógicos
+
+**E (AND):**
+```
+Condição 1 E Condição 2 E Condição 3
+(todas precisam ser verdadeiras)
+```
+
+**OU (OR):**
+```
+Condição 1 OU Condição 2
+(pelo menos uma precisa ser verdadeira)
+```
+
+**NÃO (NOT):**
+```
+Label NÃO É #resolvido
+```
+
+### Tipos de Condições
+
+**Comparação de Texto:**
+```
+├─ Mensagem contém: "ajuda"
+├─ Mensagem começa com: "Olá"
+├─ Mensagem termina com: "?"
+└─ Mensagem é exatamente: "sim"
+```
+
+**Comparação Numérica:**
+```
+├─ Contato.ltv > 5000
+├─ Conversa.valor >= 1000
+├─ Tempo sem resposta < 10 minutos
+```
+
+**Comparação de Data:**
+```
+├─ Contato.cadastro > 01/01/2024
+├─ Conversa.criada em: Hoje
+├─ Hora atual: Entre 09:00 e 18:00
+```
+
+**Status/Estado:**
+```
+├─ Status conversa: Aberto | Pendente | Resolvido
+├─ Status contato: Online | Offline
+├─ Agente disponível: Sim | Não
+```
+
+---
+
+## 📊 Monitorar Automações
+
+### Logs
+
+Veja histórico de execuções:
+
+```
+📋 Automação: "Fora do Horário"
+
+Últimas execuções:
+├─ 16/01 20:35 - ✅ Executada (Conv #1234)
+├─ 16/01 21:10 - ✅ Executada (Conv #1238)
+├─ 16/01 22:45 - ⏭️ Pulada (condição não atendida)
+└─ 17/01 07:20 - ✅ Executada (Conv #1245)
+
+Total hoje: 15 execuções
+Taxa sucesso: 100%
+```
+
+### Métricas
+
+```
+📊 Performance de Automações:
+
+Automação mais usada:
+"Fora do Horário" - 450 exec/mês
+
+Mais efetiva (redução manual):
+"Roteamento Keywords" - 85% auto-resolvida
+
+Precisa ajuste:
+"Qualificação Leads" - Taxa erro 12%
+```
+
+---
+
+## ⚠️ Cuidados e Limitações
+
+### Evite Loops
+
+❌ **Errado:**
+```
+Automação A: 
+SE label = #vendas ENTÃO label = #suporte
+
+Automação B:
+SE label = #suporte ENTÃO label = #vendas
+
+Resultado: Loop infinito! 🔄
+```
+
+✅ **Correto:**
+```
+Adicione condição extra:
+SE label = #vendas E label NÃO É #processado
+ENTÃO label = #suporte E label = #processado
+```
+
+### Ordem de Execução
+
+Automações executam em ordem de criação. Se tiver conflito:
+
+```
+1. Automação A: Status = Pendente
+2. Automação B: Status = Resolvido
+
+Resultado: Status final = Resolvido
+```
+
+**Solução:** Combine em uma regra ou use prioridades.
+
+### Limite de Ações
+
+- Máximo 10 ações por automação
+- Se precisar mais, crie automações encadeadas
+
+---
+
+## 💡 Melhores Práticas
+
+### Design
+
+✅ **Uma responsabilidade**: Cada automação faz uma coisa  
+✅ **Nome descritivo**: "VIP - Atribuir para Senior"  
+✅ **Teste antes**: Ative em 1 inbox primeiro  
+✅ **Documente**: Explique por que existe  
+
+### Performance
+
+✅ **Condições específicas**: Evite automações muito amplas  
+✅ **Desative unused**: Remova regras não usadas  
+✅ **Monitore**: Verifique logs regularmente  
+
+### Manutenção
+
+✅ **Revise trimestral**: Regras ainda fazem sentido?  
+✅ **Otimize**: Combine regras similares  
+✅ **Atualize**: Processos mudam, regras também  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Macros" icon="bolt" href="/pt-br/guia-usuario/macros">
+    Ações manuais com 1 clique
+  </Card>
+  <Card title="Bots" icon="robot" href="/pt-br/guia-usuario/bots">
+    Conversas automatizadas complexas
+  </Card>
+</CardGroup>

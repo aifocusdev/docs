@@ -1,0 +1,454 @@
+---
+title: Respostas Rápidas (Canned Responses)
+description: Crie mensagens predefinidas para responder mais rápido
+sidebarTitle: Respostas Rápidas
+---
+
+# 💬 Respostas Rápidas (Canned Responses)
+
+Crie bibliotecas de mensagens prontas para responder clientes rapidamente sem digitar tudo sempre.
+
+---
+
+## 📋 O que são Respostas Rápidas?
+
+**Respostas Rápidas** (Canned Responses) são mensagens salvas que você pode inserir com atalho:
+
+```
+Cliente: Qual o horário de funcionamento?
+
+Agente digita: /horario
+
+Sistema insere:
+"Olá! Nosso horário de atendimento é:
+Segunda a Sexta: 9h às 18h
+Sábado: 9h às 13h
+Domingo: Fechado"
+```
+
+---
+
+## ✨ Benefícios
+
+<CardGroup cols={2}>
+  <Card title="Velocidade" icon="rocket">
+    Responda 10x mais rápido
+  </Card>
+  <Card title="Consistência" icon="check-double">
+    Mesma mensagem, sempre
+  </Card>
+  <Card title="Qualidade" icon="star">
+    Mensagens revisadas e aprovadas
+  </Card>
+  <Card title="Onboarding" icon="graduation-cap">
+    Novos agentes já sabem o que dizer
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Resposta Rápida
+
+1. **"Configurações"** → **"Respostas Rápidas"**
+2. **"Nova Resposta"**
+3. Preencha:
+
+**Atalho (Short Code):**
+```
+/horario
+```
+
+**Conteúdo:**
+```
+Olá! Nosso horário de atendimento é:
+📅 Segunda a Sexta: 9h às 18h
+📅 Sábado: 9h às 13h
+🔒 Domingo: Fechado
+
+Posso ajudar em algo mais?
+```
+
+**Visibilidade:**
+- 🌍 **Pública**: Todos agentes
+- 👤 **Privada**: Só você
+- 👥 **Por Time**: Time específico
+
+4. **Salvar**
+
+---
+
+## 🎯 Exemplos de Respostas Rápidas
+
+### Saudações
+
+**`/oi`**
+```
+Olá! Bem-vindo(a)! 👋
+Meu nome é {{agente.nome}}.
+Como posso ajudá-lo(a) hoje?
+```
+
+**`/boasvindas`**
+```
+Seja bem-vindo(a) à {{empresa}}! 
+
+Estamos aqui para ajudar no que precisar.
+Fique à vontade para perguntar! 😊
+```
+
+---
+
+### Informações Comuns
+
+**`/horario`**
+```
+📅 Horário de Atendimento:
+Segunda a Sexta: 9h - 18h
+Sábado: 9h - 13h  
+Domingo: Fechado
+
+Fora do horário? Deixe sua mensagem e 
+retornaremos em breve!
+```
+
+**`/entrega`**
+```
+📦 Prazos de Entrega:
+• Capitais: 2-3 dias úteis
+• Interior: 5-7 dias úteis
+• Regiões remotas: até 15 dias úteis
+
+📧 Você receberá código de rastreamento por email!
+```
+
+**`/pagamento`**
+```
+💳 Formas de Pagamento:
+✓ Cartão de crédito (até 12x)
+✓ Cartão de débito
+✓ PIX (5% desconto)
+✓ Boleto bancário
+
+Todas as bandeiras aceitas! 
+```
+
+---
+
+### Solicitações
+
+**`/aguarde`**
+```
+Obrigado pela informação! 
+Vou verificar isso para você.
+Aguarde um momento, por favor... ⏳
+```
+
+**`/verificando`**
+```
+Estou verificando em nosso sistema...
+Isso levará cerca de 1-2 minutos.
+Agradeço sua paciência! 🙏
+```
+
+**`/preciso-info`**
+```
+Para melhor ajudá-lo(a), preciso de:
+1. Número do pedido
+2. Email cadastrado
+3. Descrição detalhada do problema
+
+Pode me enviar?
+```
+
+---
+
+### Transferências
+
+**`/tranf-tecnico`**
+```
+Entendo! Vou transferir você para nossa 
+equipe técnica especializada.
+
+Eles vão poder ajudar melhor com isso.
+Aguarde um momento... 🔄
+```
+
+**`/tranf-vendas`**
+```
+Vou conectar você com nosso time de vendas 
+que poderá ajudar com preços e propostas.
+
+Aguarde um instante! 💼
+```
+
+---
+
+### Despedidas
+
+**`/resolvido`**
+```
+Fico feliz em ter ajudado! 😊
+
+Se precisar de algo mais, estou por aqui!
+Tenha um ótimo dia! ✨
+```
+
+**`/tchau`**
+```
+Foi um prazer atender você!
+
+Qualquer dúvida, só chamar.
+Até logo! 👋
+```
+
+---
+
+### Políticas
+
+**`/troca`**
+```
+📋 Política de Trocas e Devoluções:
+
+• Prazo: 30 dias após recebimento
+• Produto sem uso e na embalagem original
+• Nota fiscal necessária
+
+Como proceder:
+1. Informe número do pedido
+2. Envie fotos do produto
+3. Nós enviamos código de postagem
+
+Sem custo para você!
+```
+
+**`/cancelamento`**
+```
+📋 Política de Cancelamento:
+
+✓ Cancele a qualquer momento
+✓ Sem multa ou taxa
+✓ Reembolso em até 7 dias úteis
+✓ Valor proporcional ao tempo usado
+
+Podemos saber o motivo? Talvez possamos 
+ajudar antes do cancelamento.
+```
+
+---
+
+## 💡 Usar Variáveis
+
+Personalize mensagens automaticamente:
+
+### Variáveis Disponíveis
+
+**Do Agente:**
+```
+{{agente.nome}} - Nome do agente
+{{agente.email}} - Email do agente
+```
+
+**Do Contato:**
+```
+{{contato.nome}} - Nome do cliente
+{{contato.email}} - Email do cliente
+{{contato.telefone}} - Telefone
+```
+
+**Da Empresa:**
+```
+{{empresa}} - Nome da empresa
+```
+
+**Customizadas:**
+```
+{{contato.plano}} - Atributo personalizado
+{{contato.cidade}} - Atributo personalizado
+```
+
+### Exemplo com Variáveis
+
+**`/oi-personalizado`**
+```
+Olá, {{contato.nome}}! 👋
+
+Prazer em falar com você!
+Sou {{agente.nome}} do time {{empresa}}.
+
+Vejo aqui que você é cliente {{contato.plano}}.
+Como posso ajudá-lo(a) hoje?
+```
+
+**Resultado real:**
+```
+Olá, João Silva! 👋
+
+Prazer em falar com você!
+Sou Maria Santos do time Acme Corp.
+
+Vejo aqui que você é cliente Premium.
+Como posso ajudá-lo(a) hoje?
+```
+
+---
+
+## 🖱️ Usar Resposta Rápida
+
+### Método 1: Atalho (Mais Rápido)
+
+```
+1. Na caixa de mensagem, digite: /
+2. Sistema mostra lista de respostas
+3. Continue digitando para filtrar: /hora
+4. Pressione Enter ou clique
+5. Mensagem é inserida
+6. (Opcional) Edite antes de enviar
+7. Envie!
+```
+
+### Método 2: Menu
+
+```
+1. Clique no ícone ⚡ próximo à caixa de mensagem
+2. Busque ou navegue pelas respostas
+3. Clique na desejada
+```
+
+### Método 3: Busca
+
+```
+1. Digite / + buscar
+2. Ex: "/entrega"
+3. Filtro instantâneo
+```
+
+---
+
+## 📂 Organizar Respostas Rápidas
+
+### Por Prefixo
+
+```
+Saudações:
+├─ /oi
+├─ /boasvindas
+└─ /bomdia
+
+Informações:
+├─ /horario
+├─ /entrega
+└─ /pagamento
+
+Transferências:
+├─ /tranf-tecnico
+├─ /tranf-vendas
+└─ /tranf-financeiro
+
+Despedidas:
+├─ /resolvido
+├─ /tchau
+└─ /atelogo
+```
+
+### Por Time
+
+**Suporte Técnico:**
+- `/reset-senha`
+- `/erro-login`
+- `/atualizar-app`
+
+**Vendas:**
+- `/proposta`
+- `/demo`
+- `/desconto`
+
+**Financeiro:**
+- `/boleto`
+- `/fatura`
+- `/atraso`
+
+---
+
+## 📊 Métricas
+
+### Mais Usadas
+
+```
+📊 Top 5 - Janeiro 2025:
+
+1. /horario - 450 usos
+2. /aguarde - 380 usos
+3. /entrega - 320 usos
+4. /resolvido - 290 usos
+5. /pagamento - 210 usos
+
+Total de usos: 2.340
+Tempo economizado: ~19 horas
+```
+
+### Nunca Usadas
+
+```
+⚠️ Respostas sem uso (>30 dias):
+
+- /antiga-politica (criada há 6 meses)
+- /promo-natal (fora de época)
+- /teste (era teste mesmo)
+
+Sugestão: Arquivar ou deletar
+```
+
+---
+
+## 💬 Diferenças
+
+| Recurso | Respostas Rápidas | Macros | Automações |
+|---------|-------------------|---------|------------|
+| **Trigger** | Manual (agente) | Manual (agente) | Automático |
+| **Uso** | Inserir texto | Múltiplas ações | Regras condicionais |
+| **Exemplo** | Mensagem pronta | "Resolver + Label" | "Fora horário → msg" |
+| **Quando** | Resposta comum | Fluxo repetitivo | Trigger automático |
+
+**Use todos juntos:**
+```
+1. Automação detecta "fora horário"
+2. Envia resposta rápida /fora-horario
+3. Aplica macro "Fora Horário" (label + status)
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Conteúdo
+
+✅ **Tom consistente**: Mantenha brand voice  
+✅ **Revise ortografia**: Sem erros!  
+✅ **Emojis com moderação**: 😊 Sim, mas não exagere 😍💯🔥  
+✅ **Personalize**: Use variáveis
+
+### Organização
+
+✅ **Atalhos curtos**: `/oi` não `/mensagem-saudacao-inicial`  
+✅ **Atalhos óbvios**: `/horario` não `/h392`  
+✅ **Sem duplicatas**: Uma resposta por propósito  
+✅ **Mantenha atualizado**: Políticas mudam
+
+### Governança
+
+✅ **Aprovação**: Gerente aprova novas respostas  
+✅ **Treinamento**: Mostre respostas para novos agentes  
+✅ **Revisão trimestral**: O que ainda é relevante?
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Macros" icon="bolt" href="/pt-br/guia-usuario/macros">
+    Ações complexas com 1 clique
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Respostas automáticas
+  </Card>
+</CardGroup>

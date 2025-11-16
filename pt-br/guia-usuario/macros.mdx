@@ -1,0 +1,403 @@
+---
+title: Macros
+description: Execute múltiplas ações com 1 clique
+sidebarTitle: Macros
+---
+
+# ⚡ Macros
+
+Execute conjuntos de ações predefinidas com um único clique.
+
+---
+
+## 📋 O que são Macros?
+
+**Macros** são atalhos para executar várias ações de uma vez:
+
+**Diferença de Automações:**
+- 🤖 **Automações**: Executam automaticamente
+- ⚡ **Macros**: Agente executa manualmente (1 clique)
+
+**Exemplo:**
+```
+Macro: "Resolver e Fechar"
+
+Ações:
+├─ Enviar mensagem: "Problema resolvido! Algo mais?"
+├─ Label: #resolvido
+├─ Status: Resolvido
+├─ Enviar pesquisa CSAT
+└─ Atribuir: Ninguém
+```
+
+---
+
+## ✨ Por que Usar Macros?
+
+<CardGroup cols={2}>
+  <Card title="Produtividade" icon="rocket">
+    1 clique = 5+ ações
+  </Card>
+  <Card title="Padronização" icon="check">
+    Todos fazem igual
+  </Card>
+  <Card title="Rapidez" icon="bolt">
+    Economize segundos preciosos
+  </Card>
+  <Card title="Menos Erros" icon="shield">
+    Não esquece passos
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Macro
+
+1. **"Configurações"** → **"Macros"**
+2. **"Nova Macro"**
+3. Configure:
+
+**Nome:** `Transferir para Técnico`
+
+**Visibilidade:**
+- 🌍 **Global**: Todos agentes veem
+- 👤 **Pessoal**: Só você vê
+- 👥 **Por Time**: Só time específico
+
+**Ações:**
+```
+1. Adicionar label: #suporte-tecnico
+2. Atribuir para: Time Técnico
+3. Enviar mensagem:
+   "Transferindo para especialista técnico. 
+    Aguarde um momento!"
+4. Status: Pendente
+```
+
+4. **Salvar**
+
+---
+
+## 🎯 Exemplos de Macros
+
+### 1. Resolver e Pedir Feedback
+
+```
+Nome: "✅ Resolver + CSAT"
+
+Ações:
+├─ Enviar: "Consegui ajudar? Algo mais?"
+├─ Aguardar resposta: 2 minutos
+├─ SE cliente responde "não": Manter aberto
+├─ SE cliente responde "sim" OU sem resposta:
+│  ├─ Status: Resolvido
+│  ├─ Label: #resolvido
+│  └─ Enviar pesquisa CSAT
+```
+
+Use quando: Problema está resolvido
+```
+
+---
+
+### 2. Escalar para Gerente
+
+```
+Nome: "🚨 Escalar Urgente"
+
+Ações:
+├─ Prioridade: Urgente
+├─ Label: #escalado
+├─ Atribuir: Gerente
+├─ Nota interna: "Cliente solicitou gerente - atenção imediata"
+├─ Notificar: gerente@empresa.com
+└─ Enviar: "Entendo sua preocupação. Nosso gerente 
+           já está ciente e entrará em contato em breve."
+```
+
+Use quando: Cliente insatisfeito/situação crítica
+```
+
+---
+
+### 3. Informar Prazo de Entrega
+
+```
+Nome: "📦 Prazo Entrega"
+
+Ações:
+├─ Enviar mensagem:
+│  "Prazos de entrega:
+│   • Capitais: 2-3 dias úteis
+│   • Interior: 5-7 dias úteis
+│   • Rastreamento: Você receberá por email"
+├─ Label: #logistica
+└─ Status: Pendente (aguardando confirmação)
+```
+
+Use quando: Cliente pergunta sobre entrega
+```
+
+---
+
+### 4. Solicitar Informações
+
+```
+Nome: "ℹ️ Coletar Dados"
+
+Ações:
+├─ Enviar:
+│  "Para melhor atendê-lo, preciso de:
+│   1. Número do pedido
+│   2. Email cadastrado
+│   3. Descrição do problema"
+├─ Label: #aguardando-info
+├─ Status: Pendente
+└─ Nota interna: "Solicitei: pedido, email, descrição"
+```
+
+Use quando: Precisa mais informações
+```
+
+---
+
+### 5. Oferecer Upgrade
+
+```
+Nome: "⭐ Oferta Upgrade"
+
+Ações:
+├─ Label: #upsell
+├─ Enviar:
+│  "Notei que você usa plano {{contato.plano}}.
+│   
+│   Oferta especial para você:
+│   Upgrade para Premium com 30% OFF! 🎉
+│   
+│   Benefícios:
+│   ✓ Recurso X
+│   ✓ Recurso Y  
+│   ✓ Suporte prioritário
+│   
+│   Interesse?"
+└─ Criar tarefa follow-up: 2 dias
+```
+
+Use quando: Cliente seria bom fit para plano maior
+```
+
+---
+
+### 6. Política de Cancelamento
+
+```
+Nome: "❌ Info Cancelamento"
+
+Ações:
+├─ Label: #cancelamento
+├─ Atribuir: Time Retenção
+├─ Enviar:
+│  "Política de Cancelamento:
+│   • Cancele a qualquer momento
+│   • Sem multa rescisória
+│   • Reembolso proporcional
+│   • Dados disponíveis por 30 dias
+│   
+│   Posso saber o motivo? Talvez possamos ajudar!"
+└─ Nota: "Cliente solicitou cancelamento"
+```
+
+Use quando: Cliente quer cancelar
+```
+
+---
+
+## 🖱️ Usar Macro
+
+### Dentro da Conversa
+
+1. Abra conversa
+2. Clique em **"Macros"** (ícone raio ⚡)
+3. Escolha macro da lista
+4. **Executar**
+
+**Atalho de teclado:**
+```
+Ctrl/Cmd + M → Abre menu de macros
+Digite nome → Enter para executar
+```
+
+### Busca Rápida
+
+```
+Digite na busca: "resolver"
+
+Sugestões:
+├─ ✅ Resolver + CSAT
+├─ ✅ Resolver sem Feedback
+└─ ✅ Resolver e Arquivar
+```
+
+---
+
+## 📂 Organizar Macros
+
+### Por Categorias
+
+Use emojis ou prefixos:
+
+**Resolução:**
+```
+├─ ✅ Resolver + CSAT
+├─ ✅ Resolver sem Feedback
+└─ ✅ Resolver e Arquivar
+```
+
+**Transferência:**
+```
+├─ 🔄 Transferir Técnico
+├─ 🔄 Transferir Vendas
+└─ 🔄 Transferir Financeiro
+```
+
+**Informações:**
+```
+├─ ℹ️ Prazo Entrega
+├─ ℹ️ Formas Pagamento
+└─ ℹ️ Política Devolução
+```
+
+### Por Time
+
+Macros específicas por time:
+
+**Time Suporte:**
+- Troubleshooting Passos
+- Escalar para L2
+- Reset de Senha
+
+**Time Vendas:**
+- Enviar Proposta
+- Agendar Demo
+- Follow-up Pós-Reunião
+
+**Time Financeiro:**
+- Verificar Pagamento
+- Gerar Boleto
+- Política de Atraso
+
+---
+
+## ⚙️ Ações Disponíveis
+
+### Mensagens
+- ✉️ Enviar mensagem
+- 📎 Enviar mensagem com anexo
+- 📋 Enviar resposta pronta específica
+
+### Status & Atribuição
+- 🔄 Mudar status (Aberto/Pendente/Resolvido)
+- 👤 Atribuir agente
+- 👥 Atribuir time
+- ❌ Remover atribuição
+
+### Organização
+- 🏷️ Adicionar label
+- 🗑️ Remover label
+- ⭐ Mudar prioridade
+- 📂 Mover para inbox
+
+### Notificações
+- 📧 Enviar email
+- 💬 Adicionar nota interna
+- 🔔 Notificar agente/gerente
+- 📱 Enviar notificação push
+
+### Extras
+- ⏰ Criar follow-up agendado
+- 📊 Enviar pesquisa CSAT
+- 📎 Adicionar atributo customizado
+
+---
+
+## 📊 Métricas de Macros
+
+### Uso
+
+```
+📊 Macros Mais Usadas - Janeiro:
+
+1. ✅ Resolver + CSAT: 450 usos
+2. 🔄 Transferir Técnico: 230 usos
+3. ℹ️ Prazo Entrega: 180 usos
+4. 📦 Info Rastreamento: 150 usos
+5. ⭐ Oferta Upgrade: 95 usos
+```
+
+### Tempo Economizado
+
+```
+⏱️ Economia de Tempo:
+
+Sem macro:
+├─ Abrir resposta pronta: 5s
+├─ Adicionar label: 3s
+├─ Mudar status: 2s
+├─ Atribuir: 3s
+└─ Total: 13 segundos
+
+Com macro: 1 clique = 2 segundos
+
+Economia por uso: 11 segundos
+Total mês: 450 usos × 11s = 1,4 horas economizadas!
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Criação
+
+✅ **Nome claro**: "Resolver + CSAT" não "Macro 1"  
+✅ **Emoji ajuda**: Identificação visual rápida  
+✅ **Teste antes**: Certifique que funciona  
+✅ **Documente**: Quando usar cada macro  
+
+### Uso
+
+✅ **Treine equipe**: Todos saibam que existem  
+✅ **Revise regularmente**: Macros ainda relevantes?  
+✅ **Personalize quando necessário**: Macro é base, ajuste conforme caso  
+
+### Manutenção
+
+✅ **Arquive obsoletas**: Não delete, arquive  
+✅ **Atualize mensagens**: Mantén com brand voice atual  
+✅ **Otimize**: Combine macros similares  
+
+---
+
+## 🚨 Cuidados
+
+### Não Abuse
+
+❌ **Evite respostas robóticas**: Cliente percebe se é automático demais  
+✅ **Use como base**: Edite mensagem antes de enviar quando apropriado
+
+### Contexto
+
+❌ **Macro errada**: Cliente reclamando → Macro "Tudo resolvido?"  
+✅ **Leia antes**: Entenda situação, depois use macro apropriada
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Respostas Rápidas" icon="message" href="/pt-br/guia-usuario/respostas-rapidas">
+    Mensagens predefinidas
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Execute ações automaticamente
+  </Card>
+</CardGroup>

@@ -1,0 +1,407 @@
+---
+title: Etiquetas (Labels)
+description: Organize e categorize conversas e contatos com etiquetas personalizadas
+sidebarTitle: Etiquetas
+---
+
+# 🏷️ Etiquetas (Labels)
+
+Organize conversas e contatos usando etiquetas coloridas e personalizadas.
+
+---
+
+## 📋 O que são Etiquetas?
+
+**Etiquetas** (ou **Labels**) são tags que você aplica em:
+- 💬 **Conversas**: Categorizar atendimentos
+- 👥 **Contatos**: Segmentar clientes
+
+**Exemplo visual:**
+```
+Conversa #1234
+├─ 🟢 #vendas
+├─ 🔴 #urgente
+└─ 🟡 #produto-a
+```
+
+---
+
+## ✨ Para que Servem?
+
+<CardGroup cols={2}>
+  <Card title="Organização" icon="folder">
+    Categorize por tipo, produto, prioridade
+  </Card>
+  <Card title="Filtros" icon="filter">
+    Encontre conversas rapidamente
+  </Card>
+  <Card title="Relatórios" icon="chart-bar">
+    Métricas por etiqueta
+  </Card>
+  <Card title="Automação" icon="robot">
+    Trigger automações baseadas em labels
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Etiqueta
+
+1. **"Configurações"** → **"Etiquetas"**
+2. **"Nova Etiqueta"**
+3. Preencha:
+   - **Nome**: "vendas"
+   - **Descrição**: "Conversas de vendas"
+   - **Cor**: 🟢 Verde
+4. **Salvar**
+
+---
+
+## 🎨 Categorias de Etiquetas
+
+### Por Tipo de Atendimento
+
+```
+🟢 #vendas - Oportunidades de venda
+🔵 #suporte - Problemas técnicos
+🟡 #financeiro - Cobranças e pagamentos
+🟣 #duvida - Perguntas gerais
+```
+
+### Por Prioridade
+
+```
+🔴 #urgente - Precisa atenção imediata
+🟠 #alta - Importante, resolver hoje
+🟡 #media - Resolver esta semana
+🟢 #baixa - Sem pressa
+```
+
+### Por Produto/Serviço
+
+```
+💎 #produto-premium
+📦 #produto-basico
+⭐ #servico-consultoria
+🛠️ #servico-manutencao
+```
+
+### Por Status
+
+```
+⏳ #aguardando-cliente - Esperando resposta
+📧 #aguardando-interno - Dep. outro time
+✅ #resolvido - Problema solucionado
+❌ #nao-resolvido - Não conseguimos resolver
+```
+
+### Por Origem
+
+```
+🌐 #site - Via chat do website
+📱 #whatsapp - Via WhatsApp
+📧 #email - Via email
+📷 #instagram - Via Instagram
+```
+
+### Por Segmento
+
+```
+👔 #b2b - Business to Business
+👤 #b2c - Business to Consumer
+🏢 #corporativo - Grandes empresas
+🏪 #varejo - Pequenos negócios
+```
+
+---
+
+## 🔖 Aplicar Etiquetas
+
+### Em Conversas
+
+**Manualmente:**
+1. Abra a conversa
+2. Clique em **"Labels"** no painel lateral
+3. Selecione etiqueta(s)
+4. Aplicado instantaneamente
+
+**Por Atalho:**
+```
+Digite: #vendas
+Sistema sugere etiquetas
+Pressione Enter
+```
+
+**Múltiplas etiquetas:**
+```
+Conversa pode ter várias:
+├─ #vendas
+├─ #urgente  
+└─ #produto-a
+```
+
+### Em Contatos
+
+1. Abra perfil do contato
+2. Seção **"Labels"**
+3. Adicione etiquetas
+4. Contato fica categorizado
+
+**Exemplo:**
+```
+Cliente: João Silva
+Labels:
+├─ #vip
+├─ #b2b
+└─ #ativo
+```
+
+---
+
+## 🔍 Filtrar por Etiquetas
+
+### Na Lista de Conversas
+
+```
+Filtros:
+├─ Status: Aberto
+├─ Label: #vendas
+└─ Inbox: WhatsApp
+
+Resultado: 15 conversas
+```
+
+### Em Relatórios
+
+```
+📊 Relatório:
+Período: Últimos 30 dias
+Filtro: Label = #suporte
+
+Total: 340 conversas
+CSAT: 89%
+Tempo médio: 25min
+```
+
+---
+
+## 🤖 Automações com Etiquetas
+
+### Aplicar Label Automaticamente
+
+**Regra 1: Por Palavra-chave**
+```
+SE mensagem contém "comprar" ou "preço"
+ENTÃO adicionar label #vendas
+```
+
+**Regra 2: Por Inbox**
+```
+SE conversa vem do inbox "WhatsApp Suporte"
+ENTÃO adicionar label #suporte
+```
+
+**Regra 3: Por Horário**
+```
+SE conversa criada fora do horário (18h-9h)
+ENTÃO adicionar label #fora-horario
+```
+
+### Ações Baseadas em Label
+
+**Regra 1: Priorizar Urgentes**
+```
+SE label = #urgente
+ENTÃO atribuir para agente senior
+E notificar gerente
+```
+
+**Regra 2: Rotear por Tipo**
+```
+SE label = #suporte
+ENTÃO atribuir para Time Suporte
+
+SE label = #vendas
+ENTÃO atribuir para Time Vendas
+```
+
+**Regra 3: SLA por Label**
+```
+SE label = #vip
+ENTÃO tempo máximo resposta = 5min
+
+SE label = #normal
+ENTÃO tempo máximo resposta = 30min
+```
+
+---
+
+## 📊 Relatórios por Etiqueta
+
+### Performance por Label
+
+```
+📊 Top Labels - Janeiro 2025:
+
+🟢 #vendas
+├─ 450 conversas
+├─ Taxa conversão: 28%
+├─ Ticket médio: R$ 1.200
+└─ CSAT: 88%
+
+🔵 #suporte
+├─ 680 conversas
+├─ Taxa resolução: 92%
+├─ Tempo médio: 18min
+└─ CSAT: 91%
+
+🟡 #financeiro
+├─ 120 conversas
+├─ Taxa resolução: 94%
+├─ Tempo médio: 12min
+└─ CSAT: 86%
+```
+
+### Tendências
+
+```
+📈 Crescimento mês a mês:
+
+#suporte: +15% 📈
+#vendas: +8% 📈
+#financeiro: -5% 📉
+#duvida: +22% 📈
+```
+
+**Insights:**
+- Suporte crescendo → Considerar contratar?
+- Dúvidas +22% → Melhorar FAQ?
+
+---
+
+## 🎯 Casos de Uso
+
+### E-commerce
+
+```
+Labels por estágio:
+├─ #pre-venda (dúvidas produto)
+├─ #venda (processando pedido)
+├─ #pos-venda (rastreamento)
+├─ #troca (solicitação devolução)
+└─ #reclamacao (problemas)
+
+Automação:
+#pre-venda → Time Vendas
+#pos-venda → Time Logística
+#reclamacao → Gerente (notificação)
+```
+
+### SaaS
+
+```
+Labels por tipo:
+├─ #bug (problema técnico)
+├─ #feature (pedido novo recurso)
+├─ #duvida (como usar)
+├─ #cancelamento (quer cancelar)
+└─ #upsell (upgrade plano)
+
+Roteamento:
+#bug → Devs
+#feature → Product Manager
+#cancelamento → Retenção
+```
+
+### Agência
+
+```
+Labels por projeto:
+├─ #projeto-a
+├─ #projeto-b
+├─ #projeto-c
+
+Labels por fase:
+├─ #briefing
+├─ #execucao
+├─ #revisao
+├─ #entrega
+
+Filtro combinado:
+#projeto-a + #revisao = 3 conversas
+```
+
+---
+
+## 🔧 Gerenciar Etiquetas
+
+### Editar
+
+1. **"Configurações"** → **"Etiquetas"**
+2. Clique na etiqueta
+3. Altere nome, cor ou descrição
+4. Salvar
+
+**Efeito:**
+Todas conversas com essa label são atualizadas.
+
+### Excluir
+
+<Warning>
+**Atenção:** Ao excluir label, ela é removida de TODAS conversas e contatos.
+</Warning>
+
+1. Clique na etiqueta
+2. **"Excluir"**
+3. Confirme
+
+**Alternativa:** Ao invés de excluir, arquive labels antigas.
+
+### Mesclar (Merge)
+
+Se criou labels duplicadas:
+
+```
+Tem: #venda e #vendas
+
+Mesclar:
+1. Renomear #venda para #vendas
+2. Sistema migra automaticamente
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Nomenclatura
+
+✅ **Minúsculas**: `#vendas` não `#Vendas`  
+✅ **Sem espaços**: `#alta-prioridade` não `#alta prioridade`  
+✅ **Descritivas**: `#suporte-tecnico` não `#st`  
+✅ **Consistência**: Defina padrão e siga  
+
+### Organização
+
+✅ **Limite quantidade**: 15-30 labels ideal  
+✅ **Categorias claras**: Tipo, prioridade, produto  
+✅ **Cores lógicas**: Vermelho=urgente, Verde=ok  
+✅ **Documentação**: Lista oficial de labels  
+
+### Uso
+
+✅ **Treine equipe**: Todos usam igual  
+✅ **Revise periodicamente**: Labels ainda fazem sentido?  
+✅ **Remova unused**: Labels não usadas há >3 meses  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Automatize aplicação de labels
+  </Card>
+  <Card title="Relatórios" icon="chart-line" href="/pt-br/guia-usuario/relatorios">
+    Analise por etiqueta
+  </Card>
+</CardGroup>

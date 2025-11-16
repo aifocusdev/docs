@@ -1,0 +1,425 @@
+---
+title: Atributos Personalizados
+description: Crie campos customizados para conversas e contatos
+sidebarTitle: Atributos Personalizados
+---
+
+# 📝 Atributos Personalizados (Custom Attributes)
+
+Crie campos personalizados para armazenar informações específicas do seu negócio em conversas e contatos.
+
+---
+
+## 📋 O que são Atributos Personalizados?
+
+**Atributos** são campos de dados extras que você define:
+
+**Diferença de Labels:**
+- 🏷️ **Labels**: Tags simples (ex: #vip, #urgente)
+- 📝 **Atributos**: Campos com valores (ex: Plano: "Premium", Valor: "R$ 500")
+
+---
+
+## ✨ Tipos de Atributos
+
+<CardGroup cols={3}>
+  <Card title="Texto" icon="font">
+    Texto livre
+  </Card>
+  <Card title="Número" icon="hashtag">
+    Valores numéricos
+  </Card>
+  <Card title="Data" icon="calendar">
+    Datas
+  </Card>
+  <Card title="Link" icon="link">
+    URLs
+  </Card>
+  <Card title="Lista" icon="list">
+    Opções predefinidas
+  </Card>
+  <Card title="Checkbox" icon="square-check">
+    Sim/Não
+  </Card>
+</CardGroup>
+
+---
+
+## 🆕 Criar Atributo
+
+1. **"Configurações"** → **"Atributos Personalizados"**
+2. Escolha escopo:
+   - **Contato**: Atributo do cliente
+   - **Conversa**: Atributo da conversa
+3. **"Novo Atributo"**
+4. Configure:
+
+**Nome da exibição:** `Plano do Cliente`  
+**Chave (key):** `plano` (para API)  
+**Tipo:** Lista  
+**Valores:** `Free, Basic, Premium, Enterprise`  
+**Descrição:** "Plano atual do cliente"
+
+5. **Salvar**
+
+---
+
+## 📊 Atributos de Contato
+
+Armazenam informações do cliente.
+
+### Exemplos Comuns
+
+**Segmentação:**
+```
+├─ Plano: Free | Basic | Premium | Enterprise
+├─ Segmento: Varejo | Atacado | Corporativo
+├─ Origem: Google | Facebook | Indicação
+└─ Região: Norte | Sul | Sudeste | etc
+```
+
+**Dados de Negócio:**
+```
+├─ Valor vitalício (LTV): R$ 5.000,00
+├─ Última compra: 15/01/2025
+├─ Data de cadastro: 01/05/2024
+└─ Tem desconto: Sim/Não
+```
+
+**Preferências:**
+```
+├─ Canal preferido: WhatsApp | Email | Telefone
+├─ Melhor horário: Manhã | Tarde | Noite
+├─ Idioma: PT | EN | ES
+└─ Newsletter: Ativo | Inativo
+```
+
+### Como Preencher
+
+**Manualmente:**
+1. Abra contato
+2. Seção **"Atributos"**
+3. Preencha valores
+4. Salvar
+
+**Via API:**
+```bash
+PUT /api/v1/accounts/1/contacts/123
+{
+  "custom_attributes": {
+    "plano": "Premium",
+    "ltv": 5000,
+    "regiao": "Sudeste"
+  }
+}
+```
+
+**Via Integração:**
+Automático quando sincronizado com CRM, e-commerce, etc.
+
+---
+
+## 💬 Atributos de Conversa
+
+Armazenam informações específicas daquela conversa.
+
+### Exemplos Comuns
+
+**E-commerce:**
+```
+├─ Número do pedido: #12345
+├─ Valor do pedido: R$ 299,90
+├─ Status entrega: Enviado
+└─ Código rastreio: BR123456789
+```
+
+**Suporte:**
+```
+├─ Tipo problema: Bug | Dúvida | Feature Request
+├─ Severidade: Baixa | Média | Alta | Crítica
+├─ Versão produto: 2.5.1
+└─ Resolvido em: 1ª interação | 2ª | 3ª
+```
+
+**Vendas:**
+```
+├─ Valor proposta: R$ 10.000,00
+├─ Probabilidade: 20% | 50% | 80%
+├─ Data follow-up: 20/01/2025
+└─ Concorrente: Sim | Não
+```
+
+---
+
+## 🔍 Filtrar e Buscar
+
+### Filtrar Contatos
+
+```
+Filtros:
+├─ Atributo: Plano = "Premium"
+├─ Atributo: Região = "Sudeste"
+└─ Label: #ativo
+
+Resultado: 85 contatos Premium do Sudeste ativos
+```
+
+### Filtrar Conversas
+
+```
+Filtros:
+├─ Atributo: Valor > R$ 1.000
+├─ Status: Aberto
+└─ Inbox: WhatsApp
+
+Resultado: 12 conversas WhatsApp abertas com valor >R$1k
+```
+
+---
+
+## 🤖 Automações com Atributos
+
+### Regras Baseadas em Atributos
+
+**Exemplo 1: Priorizar VIPs**
+```
+SE contato.plano = "Enterprise"
+ENTÃO adicionar label #vip
+E atribuir para agente_senior
+E notificar gerente
+```
+
+**Exemplo 2: SLA por Valor**
+```
+SE conversa.valor > R$ 5.000
+ENTÃO tempo_resposta_max = 5min
+
+SE conversa.valor < R$ 500
+ENTÃO tempo_resposta_max = 30min
+```
+
+**Exemplo 3: Roteamento por Região**
+```
+SE contato.regiao = "Sul"
+ENTÃO atribuir para Time_Sul
+
+SE contato.regiao = "Nordeste"
+ENTÃO atribuir para Time_Nordeste
+```
+
+### Preencher Automaticamente
+
+```
+Quando conversa criada:
+SE inbox = "WhatsApp Vendas"
+ENTÃO conversa.tipo = "Vendas"
+E conversa.prioridade = "Alta"
+```
+
+---
+
+## 📧 Personalização com Atributos
+
+### Em Mensagens
+
+Use atributos em templates:
+
+```
+Olá {{contato.nome}}!
+
+Notamos que seu plano {{contato.plano}} 
+vence em {{contato.data_vencimento}}.
+
+Renove com 20% OFF usando cupom: 
+RENOVA{{contato.plano}}
+
+Atenciosamente,
+{{agente.nome}}
+```
+
+### Em Campanhas
+
+Segmente por atributos:
+
+```
+Campanha: Upgrade Premium
+
+Audiência:
+├─ contato.plano = "Basic"
+├─ contato.ltv > R$ 1.000
+└─ contato.cadastro < 90 dias
+
+Mensagem personalizada com atributos:
+"Oi {{nome}}, vimos que você usa nosso plano 
+{{plano}} há {{dias_cadastro}} dias..."
+```
+
+---
+
+## 📊 Relatórios com Atributos
+
+### Agrupar por Atributo
+
+```
+📊 Conversas por Plano:
+
+Premium: 150 conversas (30%)
+Basic: 200 conversas (40%)
+Free: 150 conversas (30%)
+
+Insights:
+- Premium tem menos conversas mas 
+  maior valor médio (R$ 2.500)
+- Free tem mais conversas mas menor 
+  valor (R$ 150)
+```
+
+### Performance por Segmento
+
+```
+📈 CSAT por Segmento:
+
+Corporativo: 92% 🟢
+Varejo: 88% 🟡
+Atacado: 85% 🟠
+
+Ação: Melhorar atendimento Atacado
+```
+
+---
+
+## 🔗 Integração com APIs
+
+### Enviar Atributos
+
+**Criar contato com atributos:**
+```bash
+POST /api/v1/accounts/1/contacts
+{
+  "name": "João Silva",
+  "email": "joao@empresa.com",
+  "custom_attributes": {
+    "plano": "Premium",
+    "empresa": "Acme Corp",
+    "funcionarios": 50,
+    "ltv": 15000,
+    "data_cadastro": "2024-01-15"
+  }
+}
+```
+
+**Atualizar atributos:**
+```bash
+PUT /api/v1/accounts/1/contacts/123
+{
+  "custom_attributes": {
+    "plano": "Enterprise",
+    "ltv": 25000
+  }
+}
+```
+
+### Buscar por Atributos
+
+```bash
+GET /api/v1/accounts/1/contacts?
+  filter=plano:Premium,regiao:Sudeste
+```
+
+---
+
+## 🎯 Casos de Uso
+
+### E-commerce
+
+```
+Atributos de Contato:
+├─ Cliente desde: [data]
+├─ Total compras: [número]
+├─ Ticket médio: [valor]
+├─ Categoria favorita: [texto]
+└─ Última compra: [data]
+
+Atributos de Conversa:
+├─ Pedido #: [texto]
+├─ Valor pedido: [número]
+├─ Status: [lista]
+├─ Rastreio: [link]
+└─ Produto ID: [texto]
+
+Automação:
+SE total_compras > 10 
+  → Label #vip
+  → Desconto 15%
+```
+
+### SaaS
+
+```
+Atributos de Contato:
+├─ Plano: [lista]
+├─ Usuários: [número]
+├─ MRR: [valor]
+├─ Data renovação: [data]
+└─ Churn risk: [%]
+
+Automação:
+SE churn_risk > 70%
+  → Atribuir para Retenção
+  → Oferecer desconto
+SE data_renovacao < 7 dias
+  → Enviar lembrete
+```
+
+### Imobiliária
+
+```
+Atributos de Contato:
+├─ Interesse: Compra | Locação
+├─ Orçamento: [valor]
+├─ Região preferida: [lista]
+├─ Quartos desejados: [número]
+└─ Tem imóvel para vender: [checkbox]
+
+Atributos de Conversa:
+├─ Imóvel mostrado: [link]
+├─ Data visita: [data]
+├─ Feedback: [texto]
+└─ Proposta valor: [número]
+```
+
+---
+
+## 💡 Melhores Práticas
+
+### Nomenclatura
+
+✅ **Snake_case para key**: `data_cadastro` não `Data Cadastro`  
+✅ **Display name amigável**: "Data de Cadastro"  
+✅ **Consistência**: Padronize em toda equipe  
+
+### Organização
+
+✅ **Não exagere**: 10-15 atributos por escopo  
+✅ **Use listas**: Melhor que texto livre  
+✅ **Valide inputs**: Evite erros de digitação  
+✅ **Documente**: O que cada atributo significa  
+
+### Performance
+
+✅ **Indexe**: Atributos usados em filtros  
+✅ **Cache**: Dados acessados frequentemente  
+✅ **Limpe**: Remova atributos não usados  
+
+---
+
+## 🚀 Próximos Passos
+
+<CardGroup cols={2}>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Use atributos em regras automáticas
+  </Card>
+  <Card title="API Reference" icon="code" href="/pt-br/api-reference/introducao">
+    Integre atributos via API
+  </Card>
+</CardGroup>
