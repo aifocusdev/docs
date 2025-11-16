@@ -131,6 +131,17 @@
               "CSAT Survey Page"
             ],
             "openapi": "https://raw.githubusercontent.com/chatwoot/chatwoot/develop/swagger/tag_groups/other_swagger.json"
+          },
+          {
+            "group": "🌟 Ai Focus Custom APIs",
+            "description": "Endpoints exclusivos da versão Ai Focus - Funis, Produtos, Agendamentos",
+            "includeTags": [
+              "Funnels",
+              "Conversation Products",
+              "Conversation Appointments",
+              "Conversation Notes"
+            ],
+            "openapi": "https://raw.githubusercontent.com/Ai-Focus-Company/docs/main/swagger/aifocus_custom_swagger.json"
           }
         ]
       }

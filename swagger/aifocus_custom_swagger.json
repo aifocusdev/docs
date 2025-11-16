@@ -1,0 +1,478 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ai Focus Chatwoot - Custom Endpoints",
+    "description": "Endpoints customizados exclusivos da versão Ai Focus",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://your-chatwoot.aifocus.dev/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Funnels",
+      "description": "Sistema de Funis (Kanban/Pipeline) para gestão de vendas"
+    },
+    {
+      "name": "Conversation Products",
+      "description": "Produtos vinculados a conversas"
+    },
+    {
+      "name": "Conversation Appointments",
+      "description": "Agendamentos em conversas"
+    },
+    {
+      "name": "Conversation Notes",
+      "description": "Notas internas em conversas"
+    }
+  ],
+  "paths": {
+    "/accounts/{account_id}/funnels": {
+      "get": {
+        "tags": ["Funnels"],
+        "summary": "Listar Funis",
+        "description": "Lista todos os funis da conta",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de funis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Funnel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Funnels"],
+        "summary": "Criar Funil",
+        "description": "Cria um novo funil",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Pipeline de Vendas"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Funil principal de vendas"
+                  },
+                  "stages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "order": {
+                          "type": "integer"
+                        },
+                        "color": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Funil criado"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/funnels/{funnel_id}/kanban/conversations": {
+      "get": {
+        "tags": ["Funnels"],
+        "summary": "Listar Conversas do Funil (Kanban)",
+        "description": "Lista todas as conversas organizadas por estágio",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "funnel_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Conversas por estágio"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/funnels/{funnel_id}/kanban/move_conversation": {
+      "post": {
+        "tags": ["Funnels"],
+        "summary": "Mover Conversa Entre Estágios",
+        "description": "Move uma conversa de um estágio para outro",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "funnel_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "conversation_id": {
+                    "type": "integer"
+                  },
+                  "stage_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conversa movida com sucesso"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/conversations/{conversation_id}/products": {
+      "get": {
+        "tags": ["Conversation Products"],
+        "summary": "Listar Produtos da Conversa",
+        "description": "Lista todos os produtos vinculados a uma conversa",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Conversation Products"],
+        "summary": "Adicionar Produto",
+        "description": "Adiciona um produto à conversa",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_name": {
+                    "type": "string",
+                    "example": "Plano Premium"
+                  },
+                  "product_value": {
+                    "type": "number",
+                    "example": 299.90
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produto adicionado"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/conversations/{conversation_id}/appointments": {
+      "get": {
+        "tags": ["Conversation Appointments"],
+        "summary": "Listar Agendamentos",
+        "description": "Lista todos os agendamentos de uma conversa",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de agendamentos"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Conversation Appointments"],
+        "summary": "Criar Agendamento",
+        "description": "Cria um novo agendamento na conversa",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Reunião de Apresentação"
+                  },
+                  "scheduled_at": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2025-01-20T14:00:00Z"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Agendamento criado"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/conversations/{conversation_id}/notes": {
+      "get": {
+        "tags": ["Conversation Notes"],
+        "summary": "Listar Notas Internas",
+        "description": "Lista todas as notas internas de uma conversa",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de notas"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Conversation Notes"],
+        "summary": "Adicionar Nota Interna",
+        "description": "Adiciona uma nota interna à conversa (cliente não vê)",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "example": "Cliente demonstrou interesse em upgrade"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Nota adicionada"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Funnel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_access_token": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api_access_token"
+      }
+    }
+  },
+  "security": [
+    {
+      "api_access_token": []
+    }
+  ]
+}
+
