@@ -1,0 +1,279 @@
+---
+title: Produtos e Agendamentos
+description: Gerencie produtos, valores e agendamentos diretamente nas conversas
+sidebarTitle: Produtos
+---
+
+# 💰 Produtos e Agendamentos
+
+Uma das features exclusivas da versão Ai Focus é a capacidade de vincular **produtos** e **agendamentos** diretamente às conversas, facilitando o acompanhamento de vendas e serviços.
+
+---
+
+## 💼 Produtos nas Conversas
+
+### O que são Produtos?
+
+Produtos são itens que você pode vincular a uma conversa para rastrear:
+
+- Produtos/serviços de interesse do cliente
+- Valores de propostas comerciais
+- Itens vendidos
+- Orçamentos enviados
+
+### Como Adicionar Produtos
+
+1. **Abra a Conversa** que deseja adicionar um produto
+2. **Painel Lateral Direito** → Aba **"Produtos"**
+3. Clique em **"Adicionar Produto"**
+4. Preencha as informações:
+   - **Nome do Produto**: Ex: "Plano Premium"
+   - **Valor**: Ex: R$ 299,90
+   - **Quantidade**: Ex: 1
+   - **Descrição**: Detalhes adicionais (opcional)
+5. Clique em **"Salvar"**
+
+### Visualizar Produtos
+
+Todos os produtos vinculados aparecem:
+- No painel lateral da conversa
+- No card do Kanban (se a conversa estiver em um funil)
+- Nos relatórios de vendas
+
+### Editar ou Remover Produtos
+
+- **Editar**: Clique no produto e altere as informações
+- **Remover**: Clique no ícone de lixeira ao lado do produto
+
+---
+
+## 📅 Agendamentos nas Conversas
+
+### O que são Agendamentos?
+
+Agendamentos permitem criar compromissos vinculados a conversas:
+
+- Reuniões de apresentação
+- Demonstrações de produto
+- Follow-ups programados
+- Entregas agendadas
+- Ligações de retorno
+
+### Como Criar Agendamentos
+
+1. **Abra a Conversa**
+2. **Painel Lateral Direito** → Aba **"Agendamentos"**
+3. Clique em **"Novo Agendamento"**
+4. Preencha:
+   - **Título**: Ex: "Reunião de Apresentação"
+   - **Data e Hora**: Quando será o compromisso
+   - **Duração**: Quanto tempo (opcional)
+   - **Notas**: Detalhes importantes
+   - **Lembrete**: Ser notificado antes (opcional)
+5. Clique em **"Criar"**
+
+### Tipos de Agendamentos
+
+<Tip>
+**Agendamentos Automáticos**: Você pode criar automações para agendar follow-ups automaticamente baseado em regras!
+</Tip>
+
+Exemplos:
+- **Demonstração**: Mostrar produto ao cliente
+- **Follow-up**: Retornar contato após X dias
+- **Entrega**: Agendar entrega de produto
+- **Suporte**: Agendar atendimento técnico
+
+### Gerenciar Agendamentos
+
+- **Ver Todos**: Aba "Agendamentos" no painel lateral
+- **Editar**: Clique no agendamento para alterar
+- **Marcar como Concluído**: Após realizar o compromisso
+- **Cancelar**: Se não for mais necessário
+
+### Notificações
+
+Você receberá notificações:
+- ✉️ Por email (se configurado)
+- 🔔 No painel do Chatwoot
+- 📱 Notificação push (se habilitada)
+
+---
+
+## 🎯 Casos de Uso
+
+### Para Vendas
+
+**Cenário**: Cliente demonstrou interesse em um produto
+
+1. **Adicione o Produto** com valor estimado
+2. **Crie Agendamento** para demonstração
+3. **Mova para Funil** "Em Negociação"
+4. **Acompanhe** o progresso no Kanban
+
+**Resultado**: Pipeline de vendas organizado com valores rastreáveis!
+
+### Para Suporte
+
+**Cenário**: Cliente precisa de atendimento técnico
+
+1. **Crie Agendamento** para visita técnica
+2. **Adicione Produto** se houver troca/reparo
+3. **Configure Lembrete** para não esquecer
+4. **Marque como Concluído** após atendimento
+
+**Resultado**: Histórico completo de atendimentos!
+
+### Para E-commerce
+
+**Cenário**: Cliente quer comprar múltiplos produtos
+
+1. **Adicione cada Produto** com valores
+2. **Total Automático** é calculado
+3. **Agende Entrega** com data e horário
+4. **Envie Confirmação** ao cliente
+
+**Resultado**: Gestão completa de pedidos no Chatwoot!
+
+---
+
+## 📊 Relatórios e Métricas
+
+### Valor Total do Pipeline
+
+No sistema de Funis, você pode ver:
+- Valor total de cada estágio
+- Soma de todos os produtos no funil
+- Previsão de faturamento
+- Taxa de conversão por valor
+
+### Agendamentos Futuros
+
+Visualize todos os compromissos:
+- Calendário mensal
+- Lista de próximos agendamentos
+- Agendamentos por agente
+- Agendamentos por status
+
+### Produtos Mais Vendidos
+
+Identifique:
+- Quais produtos têm mais interesse
+- Valores médios por produto
+- Tempo médio de venda
+- Taxas de conversão
+
+---
+
+## 🔌 Integração via API
+
+Você pode automatizar produtos e agendamentos via API:
+
+### Adicionar Produto via API
+
+```bash
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/products
+```
+
+```json
+{
+  "product_name": "Plano Premium",
+  "product_value": 299.90,
+  "quantity": 1,
+  "notes": "Cliente solicitou upgrade"
+}
+```
+
+### Criar Agendamento via API
+
+```bash
+POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/appointments
+```
+
+```json
+{
+  "title": "Demonstração Produto",
+  "scheduled_at": "2025-01-20T14:00:00Z",
+  "notes": "Cliente quer ver funcionalidades avançadas"
+}
+```
+
+📖 **Ver documentação completa**: [API Reference - Conversation Products](/pt-br/api-reference/introducao)
+
+---
+
+## 💡 Dicas e Boas Práticas
+
+### Produtos
+
+✅ **Use nomes claros**: "Plano Premium" em vez de "PP"  
+✅ **Sempre inclua valor**: Facilita relatórios de vendas  
+✅ **Atualize conforme negociação**: Mantenha valores atualizados  
+✅ **Remova produtos não relevantes**: Mantém histórico limpo
+
+### Agendamentos
+
+✅ **Seja específico no título**: "Demo - Feature X" em vez de "Demo"  
+✅ **Configure lembretes**: Nunca perca um compromisso  
+✅ **Adicione notas contextuais**: Ajuda a preparação  
+✅ **Marque como concluído**: Mantém organização
+
+### Integrações
+
+✅ **Sincronize com calendário**: Google Calendar, Outlook  
+✅ **Automatize com Zapier**: Criar produtos automaticamente  
+✅ **Use webhooks**: Notifique sistemas externos  
+✅ **API para CRM**: Sincronize com seu CRM
+
+---
+
+## 📱 Acesso Mobile
+
+Produtos e agendamentos estão disponíveis no app mobile do Chatwoot:
+
+- 📱 Visualize produtos na conversa
+- 📅 Veja próximos agendamentos
+- ✅ Marque como concluído em campo
+- 🔔 Receba notificações de lembretes
+
+---
+
+## ❓ Perguntas Frequentes
+
+<AccordionGroup>
+  <Accordion title="Posso adicionar múltiplos produtos na mesma conversa?">
+    Sim! Você pode adicionar quantos produtos quiser em uma conversa. O valor total será calculado automaticamente.
+  </Accordion>
+
+  <Accordion title="Os agendamentos aparecem em calendário externo?">
+    Sim, se você configurar integração com Google Calendar ou Outlook, os agendamentos serão sincronizados.
+  </Accordion>
+
+  <Accordion title="Posso criar produtos sem valor?">
+    Sim, o campo de valor é opcional. Mas recomendamos preencher para ter métricas de vendas.
+  </Accordion>
+
+  <Accordion title="Clientes veem os produtos que adiciono?">
+    Não, produtos e agendamentos são internos. O cliente não vê essas informações.
+  </Accordion>
+
+  <Accordion title="Posso exportar relatório de produtos?">
+    Sim! Vá em Relatórios → Produtos e exporte para CSV ou PDF.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 🚀 Próximos Passos
+
+Agora que você sabe usar Produtos e Agendamentos, explore:
+
+<CardGroup cols={2}>
+  <Card title="Sistema de Funis" icon="columns" href="/pt-br/guia-usuario/funis">
+    Organize produtos em pipeline visual
+  </Card>
+  <Card title="Automações" icon="robot" href="/pt-br/guia-usuario/automacoes">
+    Automatize criação de produtos e agendamentos
+  </Card>
+</CardGroup>
+
